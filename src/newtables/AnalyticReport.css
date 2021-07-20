@@ -1,0 +1,19 @@
+.AnalyticReportCard {
+  width: auto;
+  height: auto;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  background: rgb(255, 255, 255);
+  border: 1.5px solid rgba(2, 3, 10, 0.603);
+  border-radius: 0.08cm;
+  padding: 2%;
+}
+.Analyticblock1 {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+.buttonposition {
+  position: relative;
+  margin-left: 3rem;
+}

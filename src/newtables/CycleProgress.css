@@ -1,0 +1,28 @@
+.CycleProgress1 {
+  display: inline-flex;
+  border: 1.5px solid grey;
+  border-radius: 0.08cm;
+  padding: 0.1rem;
+  align-items:center;
+  align-content:center;
+  justify-content: center;
+}
+.CycleProgress2 {
+  display: inline-flex;
+  border: 1.5px solid grey;
+  border-radius: 0.08cm;
+  gap: 10rem;
+  padding: 0.1rem;
+  margin-left:0.10rem;
+}
+.CycleProgress3 {
+  display: inline-block;
+  flex-direction: row;
+  padding: 0.2em;
+  min-height: 10rem;
+}
+.CycleCard {
+  display: flex;
+  width:auto;
+  min-width:300rem;
+}

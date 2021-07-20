@@ -1,7 +1,7 @@
 {
-  "name": "volt-react-dashboard",
+  "name": "denau",
   "description": "Volt React is a free and open source admin dashboard template powered by React.js and Bootstrap 5",
-  "author": "Themesberg",
+  "author": "Grant Marthinus",
   "keywords": [
     "bootstrap 5",
     "react",
@@ -29,10 +29,13 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@material-ui/core": "^4.12.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@themesberg/react-bootstrap": "^1.4.1",
+    "axios": "^0.21.1",
+    "axios-hooks": "^2.6.3",
     "bootstrap": "5.0.0-beta1",
     "chartist": "^0.11.4",
     "chartist-plugin-tooltips-updated": "^0.1.4",

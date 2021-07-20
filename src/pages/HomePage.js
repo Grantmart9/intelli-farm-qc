@@ -1,53 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
-
-// pages
-import Presentation from "./Presentation";
-import Upgrade from "./Upgrade";
 import DashboardOverview from "./dashboard/DashboardOverview";
-import Transactions from "./Transactions";
-import Settings from "./Settings";
-import BootstrapTables from "./tables/BootstrapTables";
-import Signin from "./examples/Signin";
-import Signup from "./examples/Signup";
-import ForgotPassword from "./examples/ForgotPassword";
-import ResetPassword from "./examples/ResetPassword";
-import Lock from "./examples/Lock";
-import NotFoundPage from "./examples/NotFound";
-import ServerError from "./examples/ServerError";
-
-// documentation pages
-import DocsOverview from "./documentation/DocsOverview";
-import DocsDownload from "./documentation/DocsDownload";
-import DocsQuickStart from "./documentation/DocsQuickStart";
-import DocsLicense from "./documentation/DocsLicense";
-import DocsFolderStructure from "./documentation/DocsFolderStructure";
-import DocsBuild from "./documentation/DocsBuild";
-import DocsChangelog from "./documentation/DocsChangelog";
-
-// components
+import useAxios from 'axios-hooks';
+import Preloader from '../components/Preloader';
 import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Preloader from "../components/Preloader";
-
-import Accordion from "./components/Accordion";
-import Alerts from "./components/Alerts";
-import Badges from "./components/Badges";
-import Breadcrumbs from "./components/Breadcrumbs";
-import Buttons from "./components/Buttons";
-import Forms from "./components/Forms";
-import Modals from "./components/Modals";
-import Navs from "./components/Navs";
-import Navbars from "./components/Navbars";
-import Pagination from "./components/Pagination";
-import Popovers from "./components/Popovers";
-import Progress from "./components/Progress";
-import Tables from "./components/Tables";
-import Tabs from "./components/Tabs";
-import Tooltips from "./components/Tooltips";
-import Toasts from "./components/Toasts";
+import Navbar from "../components/Navbar";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -63,7 +22,34 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
 };
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
+
   const [loaded, setLoaded] = useState(false);
+
+  const [{ data: appLayout, loading, error }] = useAxios(
+    "https://lodicon-test-api.herokuapp.com/api/v1/denau/get_app_layout"
+  );
+
+  const getNavItems = (layout) => {
+    const topItems = [];
+    const botItems = [];
+
+    let ClientName = layout.company_name;
+
+    const farmItems = Object.entries(layout.farms).map(([farmName, pages]) => ({
+      title: farmName,
+      action: {
+        type: "accordion",
+        items: Object.entries(pages).map(([pageName, path]) => ({
+          title: pageName,
+          action: {
+            type: "link",
+            path: path
+          }
+        }))
+      }
+    }))
+    return [topItems, farmItems, botItems].flat();
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
@@ -81,11 +67,14 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     localStorage.setItem('settingsVisible', !showSettings);
   }
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
   return (
     <Route {...rest} render={props => (
       <>
         <Preloader show={loaded ? false : true} />
-        <Sidebar />
+        <Sidebar items={getNavItems(appLayout)} />
 
         <main className="content">
           <Navbar />
@@ -98,51 +87,39 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   );
 };
 
+/*
+localhost:3000/denau/dashboard/overview
+*/
+
+// Take an object containing all the routes with their paths and prefix the paths with the client id.
+const prefixRoutes = (prefix, routes) => Object.entries(routes)
+  .map(([name, { path }]) => ({ [name]: { path: `${prefix}${path}` } }))
+  .reduce(Object.assign, {});
+
+const RouteInner = () => {
+  const { clientId } = useParams();
+  const routes = prefixRoutes(`/${clientId}`, Routes);
+  console.log(routes);
+  return (
+    <Switch>
+      <Route
+        exact
+        path={routes.Default}>
+        <Redirect to={routes.DashboardOverview.path}/>
+      </Route>
+      <RouteWithSidebar
+        exact
+        path={routes.DashboardOverview.path}
+        component={DashboardOverview}
+      />
+      <Route exact path={routes.NotFound.path} component={() => <p>Not Found</p>}/>
+      <Redirect to={routes.NotFound.path} />
+    </Switch>
+  )
+}
+
 export default () => (
   <Switch>
-    <RouteWithLoader exact path={Routes.Presentation.path} component={Presentation} />
-    <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
-    <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
-    <RouteWithLoader exact path={Routes.ForgotPassword.path} component={ForgotPassword} />
-    <RouteWithLoader exact path={Routes.ResetPassword.path} component={ResetPassword} />
-    <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
-    <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
-    <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
-
-    {/* pages */}
-    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
-    <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
-    <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
-    <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
-    <RouteWithSidebar exact path={Routes.BootstrapTables.path} component={BootstrapTables} />
-
-    {/* components */}
-    <RouteWithSidebar exact path={Routes.Accordions.path} component={Accordion} />
-    <RouteWithSidebar exact path={Routes.Alerts.path} component={Alerts} />
-    <RouteWithSidebar exact path={Routes.Badges.path} component={Badges} />
-    <RouteWithSidebar exact path={Routes.Breadcrumbs.path} component={Breadcrumbs} />
-    <RouteWithSidebar exact path={Routes.Buttons.path} component={Buttons} />
-    <RouteWithSidebar exact path={Routes.Forms.path} component={Forms} />
-    <RouteWithSidebar exact path={Routes.Modals.path} component={Modals} />
-    <RouteWithSidebar exact path={Routes.Navs.path} component={Navs} />
-    <RouteWithSidebar exact path={Routes.Navbars.path} component={Navbars} />
-    <RouteWithSidebar exact path={Routes.Pagination.path} component={Pagination} />
-    <RouteWithSidebar exact path={Routes.Popovers.path} component={Popovers} />
-    <RouteWithSidebar exact path={Routes.Progress.path} component={Progress} />
-    <RouteWithSidebar exact path={Routes.Tables.path} component={Tables} />
-    <RouteWithSidebar exact path={Routes.Tabs.path} component={Tabs} />
-    <RouteWithSidebar exact path={Routes.Tooltips.path} component={Tooltips} />
-    <RouteWithSidebar exact path={Routes.Toasts.path} component={Toasts} />
-
-    {/* documentation */}
-    <RouteWithSidebar exact path={Routes.DocsOverview.path} component={DocsOverview} />
-    <RouteWithSidebar exact path={Routes.DocsDownload.path} component={DocsDownload} />
-    <RouteWithSidebar exact path={Routes.DocsQuickStart.path} component={DocsQuickStart} />
-    <RouteWithSidebar exact path={Routes.DocsLicense.path} component={DocsLicense} />
-    <RouteWithSidebar exact path={Routes.DocsFolderStructure.path} component={DocsFolderStructure} />
-    <RouteWithSidebar exact path={Routes.DocsBuild.path} component={DocsBuild} />
-    <RouteWithSidebar exact path={Routes.DocsChangelog.path} component={DocsChangelog} />
-
-    <Redirect to={Routes.NotFound.path} />
+    <Route path={'/:clientId'} component={RouteInner}/>
   </Switch>
 );

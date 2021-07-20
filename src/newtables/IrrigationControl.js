@@ -35,7 +35,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-export default () => {
+const IrrigationControl = () => {
   function createData(StartTime, EndTime, RunTime, Status) {
     return { StartTime, EndTime, RunTime, Status };
   }
@@ -44,8 +44,8 @@ export default () => {
     createData("2021-04-08 12:00", "2021-04-08 13:20", "80 Minutes", "Running"),
   ];
   return (
-    <div style={{display:'block',marginLeft:'10rem'}}>
-      <h1 style={{display:'flex',alignItems:'center',alignContent:'center',justifyContent:'center'}}>Irrigation Control</h1>
+    <form>
+      <h1>Irrigation Control</h1>
       <div class="icons">
         <g class="icons2">
           <FontAwesomeIcon icon={faRedo} />
@@ -85,6 +85,7 @@ export default () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </form>
   );
 };
+export default IrrigationControl;
