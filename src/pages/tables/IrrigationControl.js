@@ -58,48 +58,59 @@ const IrrigationControl = () => {
   ];
 
   return (
-    <form>
-      <h1>Irrigation Control</h1>
-      <div class="icons">
-        <g class="icons2">
-          <FontAwesomeIcon icon={faRedo} />
-        </g>
-        <g class="icons2">
-          <FontAwesomeIcon icon={faPlay} />
-        </g>
-        <g class="icons2">
-          <FontAwesomeIcon icon={faPause} />
-        </g>
-        <g class="icons2">
-          <FontAwesomeIcon icon={faEdit} />
-        </g>
-        <g class="icons2">
-          <FontAwesomeIcon icon={faSave} />
-        </g>
-      </div>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <StyledTableRow>
-              <StyledTableCell>Start Time</StyledTableCell>
-              <StyledTableCell>End Time</StyledTableCell>
-              <StyledTableCell>Run Time</StyledTableCell>
-              <StyledTableCell>Status</StyledTableCell>
-            </StyledTableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell>{row.StartTime}</StyledTableCell>
-                <StyledTableCell>{row.EndTime}</StyledTableCell>
-                <StyledTableCell>{row.RunTime}</StyledTableCell>
-                <StyledTableCell>{row.Status}</StyledTableCell>
+    <>
+      <h1
+        style={{
+          display: "flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        Irrigation Control
+      </h1>
+      <div style={{ display: "block", marginLeft: "10rem" }}>
+        <div class="icons">
+          <g class="icons2">
+            <FontAwesomeIcon icon={faRedo} />
+          </g>
+          <g class="icons2">
+            <FontAwesomeIcon icon={faPlay} />
+          </g>
+          <g class="icons2">
+            <FontAwesomeIcon icon={faPause} />
+          </g>
+          <g class="icons2">
+            <FontAwesomeIcon icon={faEdit} />
+          </g>
+          <g class="icons2">
+            <FontAwesomeIcon icon={faSave} />
+          </g>
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Start Time</StyledTableCell>
+                <StyledTableCell>End Time</StyledTableCell>
+                <StyledTableCell>Run Time</StyledTableCell>
+                <StyledTableCell>Status</StyledTableCell>
               </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </form>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell>{row.StartTime}</StyledTableCell>
+                  <StyledTableCell>{row.EndTime}</StyledTableCell>
+                  <StyledTableCell>{row.RunTime}</StyledTableCell>
+                  <StyledTableCell>{row.Status}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
   );
 };
 export default IrrigationControl;

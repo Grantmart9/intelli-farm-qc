@@ -4,14 +4,10 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBoxOpen, faChartPie, faCog, faFileAlt, faHandHoldingUsd, faSignOutAlt, faTable, faTimes, faSeedling } from "@fortawesome/free-solid-svg-icons";
+import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import { Routes } from "../routes";
-import ThemesbergLogo from "../assets/img/themesberg.svg";
-import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
-import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 
 export default (props = {}) => {
   const { title, items } = props;
@@ -94,7 +90,6 @@ export default (props = {}) => {
           as={Link}
           to={Routes.DashboardOverview.path}
         >
-          <Image src={ReactHero} className="navbar-brand-light" />
         </Navbar.Brand>
         <Navbar.Toggle
           as={Button}
@@ -117,7 +112,7 @@ export default (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div
+              <Button
                 style={{
                   display: "flex",
                   alignContent: "center",
@@ -126,9 +121,9 @@ export default (props = {}) => {
                   gap:'3rem',
                 }}
               >
-                <FontAwesomeIcon icon={faSeedling} />
+                <FontAwesomeIcon style={{display:'flex',alignItems:'center',alignContent:'center',justifyContent:'center'}} icon={faSeedling} />
                 {title}
-              </div>
+              </Button>
               {navItems}
               <Button
                 style={{

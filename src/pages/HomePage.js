@@ -10,6 +10,8 @@ import Navbar from "../components/Navbar";
 import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
+import IrrigationSchedule from "./tables/IrrigationSchedule";
+import Dashboard from "./tables/Dashboard";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -24,64 +26,30 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   );
 };
 
-/*
-  {
-    company_name: "Denau"
-    farms: {
-      "1232351243515314": {
-        farm_name: "Clementine",
-        pages: [
-            "irrigation"
-        ]
-    }
-  }
-*/
-
-/*
-{
-    "company_name": "Denau",
-    "farms": {
-        "Rheebokskraal Clementine": {
-            "backwash": "2147483552/backwash",
-            "dashboard": "2147483552/dashboard",
-            "fertilizer": "2147483552/fertilizer",
-            "irrigation": "2147483552/irrigation",
-            "name": "Rheebokskraal Clementine",
-            "notifications": "2147483552/notifications",
-            "pumps": "2147483552/pumps",
-            "schedule": "2147483552/schedule",
-            "settings": "2147483552/settings"
-        },
-        "Rheebokskraal Nadorcott&Suurlemoen&Orri": {
-            "backwash": "2147483551/backwash",
-            "dashboard": "2147483551/dashboard",
-            "fertilizer": "2147483551/fertilizer",
-            "irrigation": "2147483551/irrigation",
-            "name": "Rheebokskraal Nadorcott&Suurlemoen&Orri",
-            "notifications": "2147483551/notifications",
-            "pumps": "2147483551/pumps",
-            "schedule": "2147483551/schedule",
-            "settings": "2147483551/settings"
-        }
-    }
-}
-
-*/
-
 const farm_pages = {
-  irrigation: { 
+  irrigation: {
     name: "Irrigation Control",
     path: "/irrigation",
     page: IrrigationControl
   },
-  fertilizer: { 
+  fertilizer: {
     name: "Fertilizer",
     path: "/fertilizer",
     page: Fertilizer
+  },
+  schedule: {
+    name: "Schedule",
+    path: "/schedule",
+    page: IrrigationSchedule
+  },
+  dashboard: {
+    name: "Dashboard",
+    path: "/dashboard",
+    page: Dashboard
   }
 };
 
-const FarmRoutes = ({ prefix }) => 
+const FarmRoutes = ({ prefix }) =>
   <>
     {
       Object.values(farm_pages).map((page, i) =>

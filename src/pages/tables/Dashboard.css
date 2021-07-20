@@ -1,0 +1,28 @@
+.DigitalInputs {
+  flex-direction: row;
+  display: flex;
+  gap: 1rem;
+}
+.DigitalInputs2 {
+  flex-direction: row;
+  display: flex;
+  gap: 10rem;
+  margin-left: 3rem;
+}
+.DigitalInputs3 {
+  flex-direction: row;
+  display: flex;
+  gap: 10rem;
+}
+.DigitalInputs4 {
+  flex-direction: row;
+  display: flex;
+  gap: 15rem;
+  margin-bottom: 4rem;
+}
+.DigitalInputs5 {
+  flex-direction: column;
+  display:inline-grid;
+  gap: 15rem;
+  margin-bottom: 4rem;
+}

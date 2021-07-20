@@ -31,7 +31,7 @@ const StyledTableRow = withStyles((theme) => ({
 const Fertilizer = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(
-    `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/fertlizer`
+    `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/fertilizer`
   );
 
   if (loading) return <p>Loading...</p>;
@@ -51,33 +51,44 @@ const Fertilizer = () => {
   ];
 
   return (
-    <form>
-      <h1>Fertilizer</h1>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <StyledTableRow>
-              <StyledTableCell>Fertilizer</StyledTableCell>
-              <StyledTableCell>Requested Level</StyledTableCell>
-              <StyledTableCell>Current Total</StyledTableCell>
-              <StyledTableCell>Flow Rate</StyledTableCell>
-            </StyledTableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell>{row.RequestedLevel}</StyledTableCell>
-                <StyledTableCell>{row.CurrentTotal}</StyledTableCell>
-                <StyledTableCell>{row.FlowRate}</StyledTableCell>
+    <div>
+      <h1
+        style={{
+          display: "flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        Fertilizer
+      </h1>
+      <div style={{ display: "flex", marginLeft: "10rem" }}>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Fertilizer</StyledTableCell>
+                <StyledTableCell>Requested Level</StyledTableCell>
+                <StyledTableCell>Current Total</StyledTableCell>
+                <StyledTableCell>Flow Rate</StyledTableCell>
               </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </form>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell>{row.RequestedLevel}</StyledTableCell>
+                  <StyledTableCell>{row.CurrentTotal}</StyledTableCell>
+                  <StyledTableCell>{row.FlowRate}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </div>
   );
 };
 export default Fertilizer;
