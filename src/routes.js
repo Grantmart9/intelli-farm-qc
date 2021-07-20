@@ -1,7 +1,7 @@
 
 export const Routes = {
   // page//
-  DashboardOverview: { path: "/dashboard/overview" },
-  Default: { path: "/" },
+  DashboardOverview: { path: "" },
   AlarmTable: { path: "/newtables/AlarmTable" },
+  NotFound: { path: "/notfound" }
 };

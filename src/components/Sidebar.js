@@ -14,7 +14,7 @@ import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 
 export default (props = {}) => {
-  const { items } = props;
+  const { title, items } = props;
   const location = useLocation();
   const { pathname } = location;
   const [show, setShow] = useState(false);
@@ -127,7 +127,7 @@ export default (props = {}) => {
                 }}
               >
                 <FontAwesomeIcon icon={faSeedling} />
-                Denau
+                {title}
               </div>
               {navItems}
               <Button

@@ -7,6 +7,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
+import useAxios from "axios-hooks";
+import { useParams } from "react-router-dom";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -27,6 +29,16 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const Fertilizer = () => {
+  const { farmId } = useParams();
+  const [{ data, loading, error }] = useAxios(
+    `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/fertlizer`
+  );
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
+  console.log(data);
+
   function createData(name, RequestedLevel, CurrentTotal, FlowRate) {
     return { name, RequestedLevel, CurrentTotal, FlowRate };
   }

@@ -1,4 +1,6 @@
 import React from "react";
+import useAxios from 'axios-hooks';
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -35,7 +37,18 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
+
 const IrrigationControl = () => {
+  const { farmId } = useParams();
+  const [{ data, loading, error }] = useAxios(
+    `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/irrigation`
+  );
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
+  console.log(data);
+
   function createData(StartTime, EndTime, RunTime, Status) {
     return { StartTime, EndTime, RunTime, Status };
   }
@@ -43,6 +56,7 @@ const IrrigationControl = () => {
   const rows = [
     createData("2021-04-08 12:00", "2021-04-08 13:20", "80 Minutes", "Running"),
   ];
+
   return (
     <form>
       <h1>Irrigation Control</h1>
