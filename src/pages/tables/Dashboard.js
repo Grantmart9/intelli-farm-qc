@@ -38,6 +38,7 @@ const Dashboard = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
+          fontWeight: "bold",
         }}
       >
         Dashboard

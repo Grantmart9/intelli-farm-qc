@@ -65,6 +65,7 @@ const IrrigationControl = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
+          fontWeight: "bold",
         }}
       >
         Irrigation Control

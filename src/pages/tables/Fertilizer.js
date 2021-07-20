@@ -58,6 +58,7 @@ const Fertilizer = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
+          fontWeight:"bold",
         }}
       >
         Fertilizer
