@@ -135,7 +135,17 @@ const IrrigationSchedule = () => {
 
   return (
     <div>
-      <h1 style={{ display: "flex", alignItems:'center',alignContent:'center',justifyContent:'center',fontWeight:"bold", }}>
+      <h1
+        style={{
+          display: "flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          fontFamily: "Times New Roman",
+          color: "rgb(38, 55, 140)",
+        }}
+      >
         Irrigation Schedule
       </h1>
       <div style={{ display: "flex", marginLeft: "10rem" }}>

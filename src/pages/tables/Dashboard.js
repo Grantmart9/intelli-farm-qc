@@ -1,128 +1,78 @@
 import React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { DataGrid } from "@material-ui/data-grid";
-import useAxios from "axios-hooks";
-import { useParams } from "react-router-dom";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import {withStyles} from "@material-ui/core/styles";
 import './Dashboard.css';
 
-const rows = [
-  {
-    id: 1,
-    Channel: "Input:1",
-    Status: "OFF",
-    Alarm: "TRUE",
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5,
   },
-  {
-    id: 2,
-    Channel: "Input:2",
-    Status: "ON",
-    Alarm: "TRUE",
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
   },
-];
+  bar: {
+    borderRadius: 5,
+    backgroundColor: "#05ab24",
+  },
+}))(LinearProgress);
 
-const Dashboard = () => {
-    const { farmId } = useParams();
-    const [{ data, loading, error }] = useAxios(
-      `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/dashboard`
-    );
+const CycleProgress = () => {
+  const title2 = {
+    color: "black",
+    fontFamily: "Times New Roman",
+    fontWeight: 600,
+    fontSize: "1.4rem",
+  };
+  const title = {
+    color: "black",
+    fontFamily: "Times New Roman",
+    fontWeight: 400,
+    fontSize: "1rem",
+  };
+  const title3 = {
+    color: "black",
+    fontFamily: "Times New Roman",
+    fontWeight: 500,
+    fontSize: "0.8rem",
+  };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error!</p>;
-
-    console.log(data);
   return (
-    <>
-      <h1
-        style={{
-          display: "flex",
-          alignItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
-          fontWeight: "bold",
-        }}
-      >
-        Dashboard
-      </h1>
-      <div style={{ display: "block", marginLeft: "10rem" }}>
-        <div className="DigitalInputs2">
-          <h1 style={{ color: "black" }}>Analog Input</h1>
-          <h1 style={{ color: "black" }}>RTD Input</h1>
-          <h1 style={{ color: "black" }}>Analog Output</h1>
-        </div>
-        <div className="DigitalInputs4">
-          <CircularProgress
-            size={`${10}%`}
-            value={15}
-            thickness={10}
-            variant="static"
-            color="secondary"
-          />
-          <CircularProgress
-            size={`${10}%`}
-            value={30}
-            thickness={10}
-            variant="static"
-            color="primary"
-          />
-          <CircularProgress
-            size={`${10}%`}
-            value={80}
-            thickness={10}
-            variant="static"
-            color="primary"
-          />
-        </div>
-        <div className="DigitalInputs5">
-          <div style={{ height: 250, width: 500 }}>
-            <DataGrid
-              columns={[
-                {
-                  field: "id",
-                },
-                {
-                  field: "Channel",
-                  width: 1,
-                  flex: 1,
-                },
-                {
-                  field: "Status",
-                  flex: 1,
-                },
-                {
-                  field: "Alarm",
-                  flex: 1,
-                },
-              ]}
-              rows={rows}
-            />
+    <form>
+      <div className="CycleCard">
+        <div className="CycleProgress1">
+          <div className="CycleProgress4">
+            <h1 style={title}>Irrigation</h1>
+            <h4 style={title2}>Cycle Progress</h4>
+            <BorderLinearProgress variant="determinate" value={45} />
           </div>
         </div>
-        <div style={{ height: 250, width: 500 }}>
-          <DataGrid
-            columns={[
-              {
-                field: "id",
-              },
-              {
-                field: "Channel",
-                width: 1,
-                flex: 1,
-              },
-              {
-                field: "Status",
-                flex: 1,
-              },
-              {
-                field: "Alarm",
-                flex: 1,
-              },
-            ]}
-            rows={rows}
-          />
+        <div className="CycleProgress2">
+          <div className="CycleProgress3">
+            <h1 style={title}>Irrigation Time Left</h1>
+            <h2 style={title2}>00H45M left</h2>
+          </div>
+          <div className="CycleProgress3">
+            <h1 style={title}>EC Average</h1>
+            <h2 style={title2}>2.93 mS</h2>
+            <h1 style={title3}>0.07 mS Below Target</h1>
+          </div>
+          <div className="CycleProgress3">
+            <h1 style={title}>Water Pump</h1>
+            <h2 style={title2}>ON</h2>
+            <h1 style={title3}>15 m3/H</h1>
+          </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
+export const Dashboard = ()=> {
 
-export default Dashboard;
+  return (
+    <div style={{marginLeft:'10rem',marginTop:'2rem'}}>
+      <CycleProgress/>
+    </div>
+  );
+};

@@ -58,7 +58,9 @@ const Fertilizer = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontWeight:"bold",
+          fontWeight: "bold",
+          fontFamily: "Times New Roman",
+          color: "rgb(38, 55, 140)",
         }}
       >
         Fertilizer

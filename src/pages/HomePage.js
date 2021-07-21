@@ -11,7 +11,7 @@ import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
 import IrrigationSchedule from "./tables/IrrigationSchedule";
-import Dashboard from "./tables/Dashboard";
+import {Dashboard} from "./tables/Dashboard";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);

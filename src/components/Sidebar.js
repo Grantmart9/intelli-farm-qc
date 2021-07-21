@@ -89,8 +89,7 @@ export default (props = {}) => {
           className="me-lg-5"
           as={Link}
           to={Routes.DashboardOverview.path}
-        >
-        </Navbar.Brand>
+        ></Navbar.Brand>
         <Navbar.Toggle
           as={Button}
           aria-controls="main-navbar"
@@ -118,10 +117,11 @@ export default (props = {}) => {
                   alignContent: "center",
                   justifyContent: "center",
                   fontSize: "3rem",
-                  gap:'3rem',
+                  fontFamily:'Times New Roman',
+                  gap: "1rem",
                 }}
               >
-                <FontAwesomeIcon style={{display:'flex',alignItems:'center',alignContent:'center',justifyContent:'center'}} icon={faSeedling} />
+                <FontAwesomeIcon icon={faSeedling} style={{marginTop:'0.2rem'}} />
                 {title}
               </Button>
               {navItems}

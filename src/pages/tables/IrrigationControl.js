@@ -66,6 +66,8 @@ const IrrigationControl = () => {
           alignContent: "center",
           justifyContent: "center",
           fontWeight: "bold",
+          fontFamily: "Times New Roman",
+          color: "rgb(38, 55, 140)",
         }}
       >
         Irrigation Control
