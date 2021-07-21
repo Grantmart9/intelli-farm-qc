@@ -61,13 +61,13 @@ export default (props = {}) => {
     );
   };
 
-  const toNavItem = (item) => {
+  const toNavItem = (item, i) => {
     switch(item.action.type) {
       case "link":
-        return <NavItem title={item.title} link={item.action.path} image={item.image}/>
+        return <NavItem key={i} title={item.title} link={item.action.path} image={item.image}/>
       case "accordion":
         return (
-          <CollapsableNavItem title={item.title} eventKey={item.title} image={item.image}>
+          <CollapsableNavItem key={i} title={item.title} eventKey={item.title} image={item.image}>
           { item.action.items.map(toNavItem) }
           </CollapsableNavItem>
         );
@@ -100,7 +100,7 @@ export default (props = {}) => {
       </Navbar>
       <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
         <SimpleBar
-          style={{ width: "420px" }}
+          {...{}/* style={{ width: "420px" }} */}
           className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}
         >
           <div className="sidebar-inner px-4 pt-3">

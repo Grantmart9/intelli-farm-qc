@@ -2,15 +2,15 @@
 import React from 'react';
 import { Image } from '@themesberg/react-bootstrap';
 
-import ReactLogo from "../assets/img/technologies/react-logo-transparent.svg";
+import LodiconLogo from "../assets/img/lodicon-logo.svg";
 
 export default (props) => {
 
-  const { show } = props;
+  const { loading } = props;
 
   return (
-    <div className={`preloader bg-soft flex-column justify-content-center align-items-center ${show ? "" : "show"}`}>
-      <Image className="loader-element animate__animated animate__jackInTheBox" src={ReactLogo} height={40} />
+    <div className="preloader flex flex-col place-items-center absolute inset-0">
+      <Image className="loader-element place-self-center" src={LodiconLogo} height={40} />
     </div>
   );
 };

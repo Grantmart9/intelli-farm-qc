@@ -12,19 +12,7 @@ import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
 import IrrigationSchedule from "./tables/IrrigationSchedule";
 import {Dashboard} from "./tables/Dashboard";
-
-const RouteWithLoader = ({ component: Component, ...rest }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <Route {...rest} render={props => ( <> <Preloader show={loaded ? false : true} /> <Component {...props} /> </> ) } />
-  );
-};
+import { API_URL } from '../api';
 
 const farm_pages = {
   irrigation: {
@@ -86,24 +74,16 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
 
-  const [loaded, setLoaded] = useState(false);
-
   const [{ data: appLayout, loading, error }] = useAxios(
-    "https://lodicon-test-api.herokuapp.com/api/v1/denau/get_app_layout"
+    `${API_URL}/${clientId}/get_app_layout`
   );
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
 
   return (
     <Route {...rest} render={props => (
-      <>
-        <Preloader show={loaded ? false : true} />
+      <div style={{"--sidenav-width": "400px"}} className="absolute inset-0">
         <Sidebar title={appLayout.company_name} items={getNavItems(prefix, appLayout)} />
 
         <main className="content">
@@ -111,7 +91,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <Component {...props} />
           <Footer />
         </main>
-      </>
+      </div>
     )}
     />
   );

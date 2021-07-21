@@ -1,31 +1,13 @@
 .preloader {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
     z-index: 9999;
-    @include transition(height .3s);
 
     .loader-element {
-
-        @include transition(spin .3s linear infinite);
-        -webkit-animation:spin 3s linear infinite;
-        -moz-animation:spin 3s linear infinite;
-        animation:spin 3s linear infinite;
-    }
-
-    &.show {
-        height: 0;
-
-        .loader-element {
-            display: none !important;
-        }
+        place-self: center;
+        height: 100px;
+        width: auto;
+        @include transition(blink 1.5s cubic-beizer(0, 0, 1, 1) infinite);
+        animation:blink 1.5s cubic-bezier(0, 0, 1, 1) infinite;
     }
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@keyframes blink { 50% { opacity: 0.5 }; }

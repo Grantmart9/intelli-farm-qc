@@ -9,6 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
+import Preloader from "../../components/Preloader";
+import { API_URL } from "../../api";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -31,10 +33,10 @@ const StyledTableRow = withStyles((theme) => ({
 const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(
-    `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/schedule`
+    `${API_URL}/${farmId}/schedule`
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
 
   function createData(
