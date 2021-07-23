@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+import { faSeedling,faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
@@ -100,7 +100,9 @@ export default (props = {}) => {
       </Navbar>
       <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
         <SimpleBar
-          {...{}/* style={{ width: "420px" }} */}
+          {
+            ...{} /* style={{ width: "420px" }} */
+          }
           className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}
         >
           <div className="sidebar-inner px-4 pt-3">
@@ -117,11 +119,11 @@ export default (props = {}) => {
                   alignContent: "center",
                   justifyContent: "center",
                   fontSize: "3rem",
-                  fontFamily:'Times New Roman',
+                  fontFamily: "Times New Roman",
                   gap: "1rem",
                 }}
               >
-                <FontAwesomeIcon icon={faSeedling} style={{marginTop:'0.2rem'}} />
+                <FontAwesomeIcon icon={faLeaf} />
                 {title}
               </Button>
               {navItems}

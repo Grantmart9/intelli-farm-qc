@@ -3,154 +3,102 @@ import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
+import { Image, Table } from "@themesberg/react-bootstrap";
+
+/*
+[
+  {
+    ec_setpoint: 2138,
+    end_time: "2021-07-02T14:33:00",
+    fertilizer: [
+      {
+        ec_setpoint: 842,
+        flow_rate: 1.255,
+        name: "A-Tank",
+      }
+    ],
+    name: "Eureka",
+    order: 1,
+    run_time: 169,
+    sql_index: 19,
+    start_time: "2021-07-02T11:44:00",
+  }
+];
+*/
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(
 
-    `${API_URL}/${farmId}/schedule`
+    `${API_URL}/-${farmId}/schedule`
   );
   if (loading) return <h1 style={{display:'flex',alignItem:'center',alignContent:"center",justifyContent:'center'}}>Loading...</h1>;
 
   if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
 
-  function createData(
-    name,
-    Number,
-    Block,
-    MoistureLevel,
-    RunTime,
-    Fertilizer,
-    FertA,
-    FertB,
-    FertC,
-    FertD,
-    FertE
-  ) {
-    return {
-      name,
-      Number,
-      Block,
-      MoistureLevel,
-      RunTime,
-      Fertilizer,
-      FertA,
-      FertB,
-      FertC,
-      FertD,
-      FertE,
-    };
-  }
-    const FarmNames = Object.keys(data).map(function (key) {
-      const farm = data[key].name;
+  const FertilizerRow = ({fertilizer}) => 
+    <tr>
+      <td className="border-0">{fertilizer.name}</td>
+      <td className="border-0 fw-bold">{fertilizer.ec_setpoint}</td>
+      <td className="border-0 fw-bold">{fertilizer.flow_rate}</td>
+    </tr>;
 
-      return (
-        <div
-          style={{
-            border: "1.5px solid #242540",
-            borderRadius: "0.1cm",
-            padding: "1rem",
-            boxShadow: "3px 3px #5b5c75",
-            marginTop: "1rem",
-          }}
-        >
-          <h3
-            style={{
-              display: "flex",
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "center",
-              background: "#bbbcbf",
-              color: "#43464d",
-              fontWeight: "bold",
-              border: "1px solid #bbbcbf",
-              borderRadius: "0.09cm",
-            }}
-          >
-            {farm}
-          </h3>
-          <Table>
-            <thead className="thead-light">
-              <tr>
-                <th className="border-0">Start Time</th>
-                <th className="border-0">End Time</th>
-                <th className="border-0">EC Setpoint</th>
-                <th className="border-0">Run Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border-0">
-                  <a
-                    href="#Unites States"
-                    className="d-flex align-items-center"
-                  >
-                    <div>
-                      <span className="border-0 fw-bold">
-                        {data[key].start_time}
-                      </span>
-                    </div>
-                  </a>
-                </td>
-                <td className="border-0 fw-bold">{data[key].end_time}</td>
-                <td className="border-0 fw-bold">123</td>
-                <td className="border-0">
-                  <span className="fw-bold">{data[key].run_time} min</span>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <Table>
-            <thead className="thead-light">
-              <tr>
-                <th className="border-0">Name</th>
-                <th className="border-0">EC Setpoint</th>
-                <th className="border-0">Flow Rate</th>
-                <th className="border-0">Flow Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border-0"></td>
-                <td className="border-0 fw-bold">Tank</td>
-                <td className="border-0 fw-bold">{data[key].end_time}</td>
-                <td className="fw-bold">{data[key].run_time} min</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      );
-    },);
+  const FertilizerTable = ({fertilizers}) =>
+      <Table>
+        <thead className="thead-light">
+          <tr>
+            <th className="border-0">Name</th>
+            <th className="border-0">EC Setpoint</th>
+            <th className="border-0">Flow Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          { fertilizers.map((fertilizer, key) => <FertilizerRow key={key} fertilizer={fertilizer}/>) }
+        </tbody>
+      </Table>;
+
+  const SectionRow = ({section}) => 
+    <div
+      style={{
+        border: "1.5px solid #242540",
+        borderRadius: "0.1cm",
+        padding: "1rem",
+        boxShadow: "3px 3px #5b5c75",
+        marginTop: "1rem",
+      }}
+    >
+      <h3
+        class="flex align-items-center align-content-center justify-content-center">
+        style={{
+          background: "#bbbcbf",
+          color: "#43464d",
+          fontWeight: "bold",
+          border: "1px solid #bbbcbf",
+          borderRadius: "0.09cm",
+        }}
+      >
+        {section.name}
+      </h3>
+    </div>;
+    
   return (
     <div style={{ marginLeft: "10rem", marginTop: "2rem" }}>
       <h2
-        style={{
-          display: "flex",
-          alignItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
-      >
+        class="flex align-items-center align-content-center justify-content-center">
         Irrigation Schedule
       </h2>
       <div
+        class="flex align-items-center align-content-center justify-content-center"
         style={{
-          alignItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
           background: "white",
           border: "1px solid black",
           borderRadius: "0.09cm",
           padding: "1rem",
-        }}
-      >
+        }}>
         <h3
+          class="flex align-items-center align-content-center justify-content-center"
           style={{
-            display: "flex",
-            alignItems: "center",
-            alignContent: "center",
-            justifyContent: "center",
             background: "#b6b9bf",
             color: "#43464d",
             border: "1px solid #5b5c75",
@@ -159,7 +107,7 @@ export const IrrigationSchedule = () => {
         >
           Rheebokskraal Nadorcott & Suurlemoen & Orri
         </h3>
-        {FarmNames}
+        { data.map((section, key) => <SectionRow key={key} section={section}/>) }
       </div>
     </div>
   );
