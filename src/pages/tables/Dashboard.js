@@ -10,6 +10,7 @@ import { toArray, fromArray } from 'fp-ts/lib/Set';
 import { eqString } from 'fp-ts/lib/Eq';
 import { ordString } from 'fp-ts/lib/Ord';
 import moment from 'moment';
+
 import LinearProgress from "@material-ui/core/LinearProgress";
 import {withStyles} from "@material-ui/core/styles";
 import './Dashboard.css';
@@ -36,7 +37,6 @@ const IrrigationProgress = ({ data }) =>
     <h4>Cycle Progress</h4>
     <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
   </div>
-
 
 const IrrigationTimeLeft = ({data}) =>
   <div>
@@ -209,7 +209,6 @@ export const Dashboard = () => {
   if (loading) return <Preloader/>
   if (error) return "Error";
   
-
   return (
     <div className="m-4">
       <div className="grid grid-cols-5 p-2">

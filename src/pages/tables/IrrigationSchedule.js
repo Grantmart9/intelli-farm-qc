@@ -1,40 +1,16 @@
 import React from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { withStyles } from "@material-ui/core/styles";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-const IrrigationSchedule = () => {
+export const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(
+
     `${API_URL}/${farmId}/schedule`
   );
+  if (loading) return <h1 style={{display:'flex',alignItem:'center',alignContent:"center",justifyContent:'center'}}>Loading...</h1>;
 
   if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
@@ -66,127 +42,125 @@ const IrrigationSchedule = () => {
       FertE,
     };
   }
+    const FarmNames = Object.keys(data).map(function (key) {
+      const farm = data[key].name;
 
-  const rows = [
-    createData(
-      "1",
-      "Block A",
-      "98.1 %",
-      "16 Minutes",
-      "65 L",
-      "60 %",
-      "20 %",
-      "5 %",
-      "15 %",
-      "2 %",
-      "6 %"
-    ),
-    createData(
-      "2",
-      "Block B",
-      "98.1 %",
-      "16 Minutes",
-      "65 L",
-      "60 %",
-      "20 %",
-      "5 %",
-      "15 %",
-      "2 %",
-      "6 %"
-    ),
-    createData(
-      "3",
-      "Block C",
-      "98.1 %",
-      "16 Minutes",
-      "65 L",
-      "60 %",
-      "20 %",
-      "5 %",
-      "15 %",
-      "2 %",
-      "6 %"
-    ),
-    createData(
-      "4",
-      "Block D",
-      "98.1 %",
-      "16 Minutes",
-      "65 L",
-      "60 %",
-      "20 %",
-      "5 %",
-      "15 %",
-      "2 %",
-      "6 %"
-    ),
-    createData(
-      "5",
-      "Block E",
-      "98.1 %",
-      "16 Minutes",
-      "65 L",
-      "60 %",
-      "20 %",
-      "5 %",
-      "15 %",
-      "2 %",
-      "6 %"
-    ),
-  ];
-
+      return (
+        <div
+          style={{
+            border: "1.5px solid #242540",
+            borderRadius: "0.1cm",
+            padding: "1rem",
+            boxShadow: "3px 3px #5b5c75",
+            marginTop: "1rem",
+          }}
+        >
+          <h3
+            style={{
+              display: "flex",
+              alignItems: "center",
+              alignContent: "center",
+              justifyContent: "center",
+              background: "#bbbcbf",
+              color: "#43464d",
+              fontWeight: "bold",
+              border: "1px solid #bbbcbf",
+              borderRadius: "0.09cm",
+            }}
+          >
+            {farm}
+          </h3>
+          <Table>
+            <thead className="thead-light">
+              <tr>
+                <th className="border-0">Start Time</th>
+                <th className="border-0">End Time</th>
+                <th className="border-0">EC Setpoint</th>
+                <th className="border-0">Run Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-0">
+                  <a
+                    href="#Unites States"
+                    className="d-flex align-items-center"
+                  >
+                    <div>
+                      <span className="border-0 fw-bold">
+                        {data[key].start_time}
+                      </span>
+                    </div>
+                  </a>
+                </td>
+                <td className="border-0 fw-bold">{data[key].end_time}</td>
+                <td className="border-0 fw-bold">123</td>
+                <td className="border-0">
+                  <span className="fw-bold">{data[key].run_time} min</span>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+          <Table>
+            <thead className="thead-light">
+              <tr>
+                <th className="border-0">Name</th>
+                <th className="border-0">EC Setpoint</th>
+                <th className="border-0">Flow Rate</th>
+                <th className="border-0">Flow Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-0"></td>
+                <td className="border-0 fw-bold">Tank</td>
+                <td className="border-0 fw-bold">{data[key].end_time}</td>
+                <td className="fw-bold">{data[key].run_time} min</td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
+      );
+    },);
   return (
-    <div>
-      <h1
+    <div style={{ marginLeft: "10rem", marginTop: "2rem" }}>
+      <h2
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontWeight: "bold",
-          fontFamily: "Times New Roman",
-          color: "rgb(38, 55, 140)",
         }}
       >
         Irrigation Schedule
-      </h1>
-      <div style={{ display: "flex", marginLeft: "10rem" }}>
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>#</StyledTableCell>
-                <StyledTableCell>Block</StyledTableCell>
-                <StyledTableCell>Moisture Level</StyledTableCell>
-                <StyledTableCell>Run Time</StyledTableCell>
-                <StyledTableCell>Fertilizer</StyledTableCell>
-                <StyledTableCell>Fert A</StyledTableCell>
-                <StyledTableCell>Fert B</StyledTableCell>
-                <StyledTableCell>Fert C</StyledTableCell>
-                <StyledTableCell>Fert D</StyledTableCell>
-                <StyledTableCell>Fert E</StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell>{row.Number}</StyledTableCell>
-                  <StyledTableCell>{row.Block}</StyledTableCell>
-                  <StyledTableCell>{row.MoistureLevel}</StyledTableCell>
-                  <StyledTableCell>{row.RunTime}</StyledTableCell>
-                  <StyledTableCell>{row.Fertilizer}</StyledTableCell>
-                  <StyledTableCell>{row.FertA}</StyledTableCell>
-                  <StyledTableCell>{row.FertB}</StyledTableCell>
-                  <StyledTableCell>{row.FertC}</StyledTableCell>
-                  <StyledTableCell>{row.FertD}</StyledTableCell>
-                  <StyledTableCell>{row.FertE}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      </h2>
+      <div
+        style={{
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          background: "white",
+          border: "1px solid black",
+          borderRadius: "0.09cm",
+          padding: "1rem",
+        }}
+      >
+        <h3
+          style={{
+            display: "flex",
+            alignItems: "center",
+            alignContent: "center",
+            justifyContent: "center",
+            background: "#b6b9bf",
+            color: "#43464d",
+            border: "1px solid #5b5c75",
+            borderRadius: "0.09cm",
+          }}
+        >
+          Rheebokskraal Nadorcott & Suurlemoen & Orri
+        </h3>
+        {FarmNames}
       </div>
     </div>
   );
 };
-export default IrrigationSchedule;

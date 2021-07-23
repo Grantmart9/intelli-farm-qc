@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
-import IrrigationSchedule from "./tables/IrrigationSchedule";
+import {IrrigationSchedule} from "./tables/IrrigationSchedule";
 import {Dashboard} from "./tables/Dashboard";
 import { API_URL } from '../api';
 
@@ -44,7 +44,6 @@ const FarmRoutes = ({ prefix }) =>
         <RouteWithSidebar key={i} exact path={`${prefix}/:farmId${page.path}`} component={page.page} />)
     }
   </>
-
 
 const getNavItems = (prefix, layout) => {
   const topItems = [];
@@ -96,12 +95,6 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     />
   );
 };
-
-/*
-localhost:3000/denau/dashboard/overview
-*/
-
-// Take an object containing all the routes with their paths and prefix the paths with the client id.
 const prefixRoutes = (prefix, routes) => Object.entries(routes)
   .map(([name, { path }]) => ({ [name]: { path: `${prefix}${path}` } }))
   .reduce((acc, obj) => Object.assign(acc, obj), {});
