@@ -74,7 +74,7 @@ const IrrigationControl = () => {
       >
         Irrigation Control
       </h1>
-      <div style={{ display: "block", marginLeft: "10rem" }}>
+      <div>
         <div class="icons">
           <g class="icons2">
             <FontAwesomeIcon icon={faRedo} />

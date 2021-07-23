@@ -3,28 +3,10 @@ import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
-import { Image, Table } from "@themesberg/react-bootstrap";
-
-/*
-[
-  {
-    ec_setpoint: 2138,
-    end_time: "2021-07-02T14:33:00",
-    fertilizer: [
-      {
-        ec_setpoint: 842,
-        flow_rate: 1.255,
-        name: "A-Tank",
-      }
-    ],
-    name: "Eureka",
-    order: 1,
-    run_time: 169,
-    sql_index: 19,
-    start_time: "2021-07-02T11:44:00",
-  }
-];
-*/
+import { Table } from "@themesberg/react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "@themesberg/react-bootstrap";
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
@@ -32,12 +14,12 @@ export const IrrigationSchedule = () => {
 
     `${API_URL}/-${farmId}/schedule`
   );
-  if (loading) return <h1 style={{display:'flex',alignItem:'center',alignContent:"center",justifyContent:'center'}}>Loading...</h1>;
+  if (loading) return <h1>Loading...</h1>;
 
   if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
 
-  const SectionTable = ({section}) =>
+  const SectionTable = ({ section }) => (
     <Table>
       <thead className="thead-light">
         <tr>
@@ -57,19 +39,36 @@ export const IrrigationSchedule = () => {
           <td className="border-0">{section.end_time}</td>
         </tr>
       </tbody>
-    </Table>;
+    </Table>
+  );
 
-  const FertilizerRow = ({fertilizer}) => 
+  const FertilizerRow = ({ fertilizer }) => (
     <tr>
-      <td className="border-0">{fertilizer.name}</td>
+      <td className="border-0">
+        <h4>{fertilizer.name}</h4>
+      </td>
       <td className="border-0 fw-bold">{fertilizer.ec_setpoint}</td>
       <td className="border-0 fw-bold">{fertilizer.flow_rate}</td>
-    </tr>;
+    </tr>
+  );
 
-  const FertilizerTable = ({fertilizers}) =>
+  const FertilizerTable = ({ fertilizers }) => (
     <>
       <h3
-        class="flex align-items-center align-content-center justify-content-center">
+        style={{
+          background: "#b6b9bf",
+          color: "#43464d",
+          border: "1px solid #5b5c75",
+          borderRadius: "0.09cm",
+          height: "3rem",
+          padding: "0.5rem",
+          fontWeight: "bold",
+          display:"flex",
+          justifyContent:"center",
+          alignContent:"center",
+          alignItems:"center",
+        }}
+      >
         Fertilizer
       </h3>
       <Table>
@@ -81,12 +80,15 @@ export const IrrigationSchedule = () => {
           </tr>
         </thead>
         <tbody>
-          {fertilizers.map((fertilizer, key) => <FertilizerRow key={key} fertilizer={fertilizer} />)}
+          {fertilizers.map((fertilizer, key) => (
+            <FertilizerRow key={key} fertilizer={fertilizer} />
+          ))}
         </tbody>
       </Table>
-    </>;
+    </>
+  );
 
-  const SectionRow = ({ section }) =>
+  const SectionRow = ({ section }) => (
     <div
       class="w-full"
       style={{
@@ -104,18 +106,42 @@ export const IrrigationSchedule = () => {
           color: "#43464d",
           fontWeight: "bold",
           border: "1px solid #bbbcbf",
-          borderRadius: "0.09cm"
-        }}>
-        {section.name}
+          borderRadius: "0.09cm",
+        }}
+      >
+        <h3
+          style={{
+            background: "#b6b9bf",
+            color: "#43464d",
+            height: "3rem",
+            padding: "0.5rem",
+            fontWeight: "bold",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {section.name}
+        </h3>
       </h3>
       <SectionTable section={section} />
       <FertilizerTable fertilizers={section.fertilizer} />
-    </div>;
-    
+    </div>
+  );
   return (
     <div>
       <h2
-        class="flex align-items-center align-content-center justify-content-center">
+        style={{
+          display: "flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          fontSize: "2rem",
+          fontFamily: "Times New Roman",
+          padding:"1rem",
+        }}
+      >
         Irrigation Schedule
       </h2>
       <div
@@ -125,19 +151,14 @@ export const IrrigationSchedule = () => {
           border: "1px solid black",
           borderRadius: "0.09cm",
           padding: "1rem",
-        }}>
-        <h3
-          class="flex align-items-center align-content-center justify-content-center"
-          style={{
-            background: "#b6b9bf",
-            color: "#43464d",
-            border: "1px solid #5b5c75",
-            borderRadius: "0.09cm",
-          }}
-        >
-          Rheebokskraal Nadorcott & Suurlemoen & Orri
-        </h3>
-        { data.map((section, key) => <SectionRow key={key} section={section}/>) }
+        }}
+      >
+        <Button variant="light" className="m-0">
+          <FontAwesomeIcon icon={faSave} /> Save
+        </Button>
+        {data.map((section, key) => (
+          <SectionRow key={key} section={section} />
+        ))}
       </div>
     </div>
   );

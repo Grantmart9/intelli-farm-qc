@@ -31,32 +31,42 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-const IrrigationProgress = ({ data }) => 
-  <div>
+const IrrigationProgress = ({ data }) => (
+  <div style={{padding:"1.5rem"}}>
     <h1>Irrigation</h1>
-    <h4>Cycle Progress</h4>
+    <h4 style={{ fontWeight: "bold",fontSize:"1.5rem" }}>Cycle Progress</h4>
+    <div style={{marginTop:"1rem"}}>
     <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
   </div>
-
-const IrrigationTimeLeft = ({data}) =>
-  <div>
-    <h1 className=".text-lg">Irrigation Time Left</h1>
-    <h2>{data.irrigation_time_left}min left</h2>
   </div>
+);
 
-const IrrigationEC = ({ data }) =>
-  <div>
+const IrrigationTimeLeft = ({ data }) => (
+  <div style={{ padding: "1.5rem",alignItems:"center",alignContent:"center",justifyContent:"center" }}>
+    <h1 className=".text-lg">Irrigation Time Left</h1>
+    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+      {data.irrigation_time_left}min left
+    </h2>
+  </div>
+);
+
+const IrrigationEC = ({ data }) => (
+  <div style={{ padding: "1.5rem" }}>
     <h1>EC Average</h1>
-    <h2>2.93 mS</h2>
+    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>2.93 mS</h2>
     <h1>0.07 mS Below Target</h1>
   </div>
+);
 
-const Pump = ({ pump }) =>
-  <div>
+const Pump = ({ pump }) => (
+  <div style={{ padding: "1.5rem" }}>
     <h1>Water Pump</h1>
-    <h2>Status: {pump.status}</h2>
-    <h2>Flow: {pump.main_flow}</h2>
+    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+      Status: {pump.status}
+    </h2>
+    <h2>{pump.main_flow}</h2>
   </div>
+);
 
 export const HomeFlowFertilizerBarChart = ({
   data,
@@ -202,15 +212,22 @@ export const Dashboard = () => {
   const [{ data, loading, error }, refetch] 
     = useAxios(`${API_URL}/${farmId}/dashboard`);
 
-  // useInterval(() => {
-  //   refetch();
-  // }, CHART_UPDATE_INTERVAL);
-
   if (loading) return <Preloader/>
   if (error) return "Error";
-  
   return (
     <div className="m-4">
+      <h2
+        style={{
+          display: "flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          fontSize: "2rem",
+          fontFamily: "Times New Roman",
+        }}
+      >
+        Dashboard
+      </h2>
       <div className="grid grid-cols-5 p-2">
         <div className="col-span-2 bg-white rounded shadow-md m-4">
           <IrrigationProgress data={data.irrigation_data} />
@@ -221,10 +238,11 @@ export const Dashboard = () => {
         <div className="col-span-1 bg-white rounded shadow-md m-4">
           <IrrigationEC data={data.irrigation_data} />
         </div>
-        {data.irrigation_data.pump_data.map((pump, i) =>
+        {data.irrigation_data.pump_data.map((pump, i) => (
           <div className="col-span-1 bg-white rounded shadow-md m-4">
             <Pump key={i} pump={pump} />
-          </div>)}
+          </div>
+        ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
         {data.water_usage.map((waterUsageData, i) => (
