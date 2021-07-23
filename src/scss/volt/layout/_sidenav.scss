@@ -222,7 +222,7 @@
 	@include transition(all .3s);
 
 	@include media-breakpoint-up(md) {
-		margin-left: 260px;
+		margin-left: var(--sidenav-width);
 	}
 }
 

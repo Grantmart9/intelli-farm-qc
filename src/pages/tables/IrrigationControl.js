@@ -18,6 +18,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import "./IrrigationControl.css";
 import { withStyles } from "@material-ui/core/styles";
+import Preloader from "../../components/Preloader";
+import { API_URL } from "../../api";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -44,7 +46,7 @@ const IrrigationControl = () => {
     `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/irrigation`
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Preloader/>;
   if (error) return <p>Error!</p>;
 
   console.log(data);

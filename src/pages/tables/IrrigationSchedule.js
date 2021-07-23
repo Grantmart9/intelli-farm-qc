@@ -1,17 +1,47 @@
 import React from "react";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
-import { Table } from "@themesberg/react-bootstrap";
+import Preloader from "../../components/Preloader";
+import { API_URL } from "../../api";
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(
-    `https://lodicon-test-api.herokuapp.com/api/v1/-2147483551/schedule`
+
+    `${API_URL}/${farmId}/schedule`
   );
   if (loading) return <h1 style={{display:'flex',alignItem:'center',alignContent:"center",justifyContent:'center'}}>Loading...</h1>;
 
-  if (error) return <p>Error fetching data!</p>;
+  if (loading) return <Preloader/>;
+  if (error) return <p>Error!</p>;
 
+  function createData(
+    name,
+    Number,
+    Block,
+    MoistureLevel,
+    RunTime,
+    Fertilizer,
+    FertA,
+    FertB,
+    FertC,
+    FertD,
+    FertE
+  ) {
+    return {
+      name,
+      Number,
+      Block,
+      MoistureLevel,
+      RunTime,
+      Fertilizer,
+      FertA,
+      FertB,
+      FertC,
+      FertD,
+      FertE,
+    };
+  }
     const FarmNames = Object.keys(data).map(function (key) {
       const farm = data[key].name;
 
