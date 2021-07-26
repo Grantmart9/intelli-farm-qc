@@ -4,42 +4,69 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import { Table } from "@themesberg/react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "@themesberg/react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import { DataGrid } from "@material-ui/data-grid";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 250,
+  },
+}));
 
 export const IrrigationSchedule = () => {
-  const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(
+  const classes = useStyles();
 
-    `${API_URL}/-${farmId}/schedule`
-  );
+  const { farmId } = useParams();
+  const [{ data, loading, error }] = useAxios(`${API_URL}/-${farmId}/schedule`);
   if (loading) return <h1>Loading...</h1>;
 
-  if (loading) return <Preloader/>;
-  if (error) return <p>Error!</p>;
+  if (loading) return <Preloader />;
+  if (error)
+    return (
+      <p>
+        <FontAwesomeIcon icon={faExclamation} />
+      </p>
+    );
+
+  const sectionColumns = [
+    {
+      field: "name",
+      headerName: "Name",
+      type: "string"
+    },
+    {
+      field: "ec_setpoint",
+      headerName: "EC Setpoint",
+      type: "number"
+    },
+    {
+      field: "run_time",
+      headerName: "Run time",
+      type: "number"
+    },
+    {
+      field: "start_time",
+      headerName: "Start time",
+      type: "dateTime"
+    },
+    {
+      field: "end_time",
+      headerName: "End time",
+      type: "dateTime"
+    }
+  ].map(column => ({...column, editable: true}));
 
   const SectionTable = ({ section }) => (
-    <Table>
-      <thead className="thead-light">
-        <tr>
-          <th className="border-0">Name</th>
-          <th className="border-0">EC Setpoint</th>
-          <th className="border-0">Runtime</th>
-          <th className="border-0">Start time</th>
-          <th className="border-0">End time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="border-0">{section.name}</td>
-          <td className="border-0">{section.ec_setpoint}</td>
-          <td className="border-0">{section.run_time}</td>
-          <td className="border-0">{section.start_time}</td>
-          <td className="border-0">{section.end_time}</td>
-        </tr>
-      </tbody>
-    </Table>
+    <DataGrid rows={[section]} columns={sectionColumns} onEditCellChangeCommited={(...args) => console.log("DataGrid callback", ...a)}/>
   );
 
   const FertilizerRow = ({ fertilizer }) => (
@@ -63,10 +90,10 @@ export const IrrigationSchedule = () => {
           height: "3rem",
           padding: "0.5rem",
           fontWeight: "bold",
-          display:"flex",
-          justifyContent:"center",
-          alignContent:"center",
-          alignItems:"center",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
         }}
       >
         Fertilizer
@@ -139,7 +166,7 @@ export const IrrigationSchedule = () => {
           justifyContent: "center",
           fontSize: "2rem",
           fontFamily: "Times New Roman",
-          padding:"1rem",
+          padding: "1rem",
         }}
       >
         Irrigation Schedule
@@ -153,9 +180,15 @@ export const IrrigationSchedule = () => {
           padding: "1rem",
         }}
       >
-        <Button variant="light" className="m-0">
-          <FontAwesomeIcon icon={faSave} /> Save
-        </Button>
+        <OverlayTrigger
+          placement="bottom"
+          trigger={["hover", "focus"]}
+          overlay={<Tooltip>Save All settings</Tooltip>}
+        >
+          <Button className="m-0">
+            <FontAwesomeIcon icon={faSave} /> Save
+          </Button>
+        </OverlayTrigger>
         {data.map((section, key) => (
           <SectionRow key={key} section={section} />
         ))}

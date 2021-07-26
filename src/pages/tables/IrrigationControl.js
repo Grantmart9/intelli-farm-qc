@@ -1,5 +1,5 @@
 import React from "react";
-import useAxios from 'axios-hooks';
+import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,37 +7,14 @@ import {
   faPause,
   faEdit,
   faRedo,
-  faSave,
+  faSave,faExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import "./IrrigationControl.css";
 import { withStyles } from "@material-ui/core/styles";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
+import { Table } from "@themesberg/react-bootstrap";
+import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 
 
 const IrrigationControl = () => {
@@ -46,74 +23,135 @@ const IrrigationControl = () => {
     `https://lodicon-test-api.herokuapp.com/api/v1/${farmId}/irrigation`
   );
 
-  if (loading) return <Preloader/>;
-  if (error) return <p>Error!</p>;
+  if (loading) return <Preloader />;
+  if (error) return <p><FontAwesomeIcon icon={faExclamation}/></p>;
 
   console.log(data);
 
-  function createData(StartTime, EndTime, RunTime, Status) {
-    return { StartTime, EndTime, RunTime, Status };
-  }
-
-  const rows = [
-    createData("2021-04-08 12:00", "2021-04-08 13:20", "80 Minutes", "Running"),
-  ];
-
   return (
     <>
-      <h1
+      <h2
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontWeight: "bold",
+          fontSize: "2rem",
           fontFamily: "Times New Roman",
-          color: "rgb(38, 55, 140)",
         }}
       >
         Irrigation Control
-      </h1>
-      <div>
-        <div class="icons">
-          <g class="icons2">
-            <FontAwesomeIcon icon={faRedo} />
-          </g>
-          <g class="icons2">
-            <FontAwesomeIcon icon={faPlay} />
-          </g>
-          <g class="icons2">
-            <FontAwesomeIcon icon={faPause} />
-          </g>
-          <g class="icons2">
-            <FontAwesomeIcon icon={faEdit} />
-          </g>
-          <g class="icons2">
-            <FontAwesomeIcon icon={faSave} />
-          </g>
+      </h2>
+      <div
+        style={{
+          display: "block",
+          background: "transparent",
+          color: "#43464d",
+          border: "1px solid #5b5c75",
+          borderRadius: "0.09cm",
+          padding: "0.5rem",
+          boxShadow: "3px 3px grey",
+        }}
+      >
+        <div
+          style={{
+            display: "inline-block",
+            marginBottom: "1rem",
+            background: "#b6b9bf",
+            border: "1px solid black",
+            padding: "0.5rem",
+            borderRadius: "0.2cm",
+          }}
+        >
+          <span style={{ marginRight: "1rem" }}>
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Start</Tooltip>}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faPlay} />
+              </Button>
+            </OverlayTrigger>
+          </span>
+          <span style={{ marginRight: "1rem" }}>
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Pause</Tooltip>}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faPause} />
+              </Button>
+            </OverlayTrigger>
+          </span>
+          <span style={{ marginRight: "1rem" }}>
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Edit</Tooltip>}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faEdit} />
+              </Button>
+            </OverlayTrigger>
+          </span>
+          <span style={{ marginRight: "1rem" }}>
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Refresh</Tooltip>}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faRedo} />
+              </Button>
+            </OverlayTrigger>
+          </span>
+          <OverlayTrigger
+            placement="bottom"
+            trigger={["hover", "focus"]}
+            overlay={<Tooltip>Save</Tooltip>}
+          >
+            <Button>
+              <FontAwesomeIcon icon={faSave} />
+            </Button>
+          </OverlayTrigger>
         </div>
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Start Time</StyledTableCell>
-                <StyledTableCell>End Time</StyledTableCell>
-                <StyledTableCell>Run Time</StyledTableCell>
-                <StyledTableCell>Status</StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell>{row.StartTime}</StyledTableCell>
-                  <StyledTableCell>{row.EndTime}</StyledTableCell>
-                  <StyledTableCell>{row.RunTime}</StyledTableCell>
-                  <StyledTableCell>{row.Status}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Table>
+          <thead className="thead-light">
+            <tr>
+              <th
+                className="border-0"
+                style={{ background: "#b6b9bf"}}
+              >
+                Start Time
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                End Time
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Run Time
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border-0 fw-bold">2021-04-08 12:00</td>
+              <td className="border-0 fw-bold">2021-04-08 13:20</td>
+              <td className="border-0 fw-bold">80 Minutes</td>
+              <td className="border-0 fw-bold">Running</td>
+            </tr>
+            <tr>
+              <td className="border-0 fw-bold">2021-04-08 12:00</td>
+              <td className="border-0 fw-bold">2021-04-08 13:20</td>
+              <td className="border-0 fw-bold">80 Minutes</td>
+              <td className="border-0 fw-bold">Running</td>
+            </tr>
+          </tbody>
+        </Table>
       </div>
     </>
   );

@@ -4,6 +4,8 @@ import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 
 const Fertilizer = () => {
@@ -13,7 +15,11 @@ const Fertilizer = () => {
   );
 
   if (loading) return <Preloader/>;
-  if (error) return <p>Error!</p>;
+  if (error) return (
+    <p>
+      <FontAwesomeIcon icon={faExclamation} />
+    </p>
+  );
 
   console.log(data);
 
@@ -31,49 +37,69 @@ const Fertilizer = () => {
       >
         Fertilizer
       </h2>
-      <Table>
-        <thead className="thead-light">
-          <tr>
-            <th className="border-0">Fertilizer</th>
-            <th className="border-0">Requested Level</th>
-            <th className="border-0">Current Level</th>
-            <th className="border-0">Flow Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border-0 fw-bold">Fertilizer A</td>
-            <td className="border-0 fw-bold">160 l</td>
-            <td className="border-0 fw-bold">16 l</td>
-            <td className="border-0 fw-bold">123 m3/h</td>
-          </tr>
-          <tr>
-            <td className="border-0 fw-bold">Fertilizer A</td>
-            <td className="border-0 fw-bold">160 l</td>
-            <td className="border-0 fw-bold">16 l</td>
-            <td className="border-0 fw-bold">123 m3/h</td>
-          </tr>
-          <tr>
-            <td className="border-0 fw-bold">Fertilizer A</td>
-            <td className="border-0 fw-bold">160 l</td>
-            <td className="border-0 fw-bold">16 l</td>
-            <td className="border-0 fw-bold">123 m3/h</td>
-          </tr>
-          <tr>
-            <td className="border-0 fw-bold">Fertilizer A</td>
-            <td className="border-0 fw-bold">160 l</td>
-            <td className="border-0 fw-bold">16 l</td>
-            <td className="border-0 fw-bold">123 m3/h</td>
-          </tr>
-          <tr>
-            <td className="border-0 fw-bold">Fertilizer A</td>
-            <td className="border-0 fw-bold">160 l</td>
-            <td className="border-0 fw-bold">16 l</td>
-            <td className="border-0 fw-bold">123 m3/h</td>
-          </tr>
-        </tbody>
-      </Table>
-      </>
+      <div
+        style={{
+          display: "block",
+          background: "transparent",
+          color: "#43464d",
+          border: "1px solid #5b5c75",
+          borderRadius: "0.09cm",
+          padding: "0.5rem",
+          boxShadow: "3px 3px grey",
+        }}
+      >
+        <Table>
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Fertilizer
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Requested Level
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Current Level
+              </th>
+              <th className="border-0" style={{ background: "#b6b9bf" }}>
+                Flow Rate
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border-0 fw-bold">Fertilizer A</td>
+              <td className="border-0 fw-bold">160 l</td>
+              <td className="border-0 fw-bold">16 l</td>
+              <td className="border-0 fw-bold">123 m3/h</td>
+            </tr>
+            <tr>
+              <td className="border-0 fw-bold">Fertilizer A</td>
+              <td className="border-0 fw-bold">160 l</td>
+              <td className="border-0 fw-bold">16 l</td>
+              <td className="border-0 fw-bold">123 m3/h</td>
+            </tr>
+            <tr>
+              <td className="border-0 fw-bold">Fertilizer A</td>
+              <td className="border-0 fw-bold">160 l</td>
+              <td className="border-0 fw-bold">16 l</td>
+              <td className="border-0 fw-bold">123 m3/h</td>
+            </tr>
+            <tr>
+              <td className="border-0 fw-bold">Fertilizer A</td>
+              <td className="border-0 fw-bold">160 l</td>
+              <td className="border-0 fw-bold">16 l</td>
+              <td className="border-0 fw-bold">123 m3/h</td>
+            </tr>
+            <tr>
+              <td className="border-0 fw-bold">Fertilizer A</td>
+              <td className="border-0 fw-bold">160 l</td>
+              <td className="border-0 fw-bold">16 l</td>
+              <td className="border-0 fw-bold">123 m3/h</td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
+    </>
   );
 };
 export default Fertilizer;
