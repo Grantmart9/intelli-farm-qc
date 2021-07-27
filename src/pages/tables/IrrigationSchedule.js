@@ -3,7 +3,6 @@ import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
-import { Table } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
@@ -50,17 +49,20 @@ const sectionColumns = [
   }
 ].map(column => ({ ...column, flex: 1, editable: true }));
 
-const SectionTable = ({ id, section, onChange = null }) => {
-  const handleEditCellChangeCommited = useCallback(({ field, props: { value } }) => {
+const SectionTable = ({ section, onChange = null }) => {
+  const id = section.sql_index;
+  const handleEditCellChangeCommited = useCallback(e => {
+    const { field } = e;
+    const value = (e.props || e).value;
     const editedSection = { ...section, [field]: value }
     if (onChange) {
-      onChange(editedSection, id);
+      onChange(editedSection);
     }
   }, [section, onChange])
 
   return (
     <div className="flex">
-      <DataGrid hideFooter={true} autoHeight rows={[{ id: 0, ...section }]} columns={sectionColumns}
+      <DataGrid hideFooter={true} autoHeight rows={[{ id, ...section }]} columns={sectionColumns}
         onEditCellChangeCommitted={handleEditCellChangeCommited} />
     </div>
   )
@@ -84,14 +86,14 @@ const fertilizerColumns = [
   },
 ].map(column => ({ ...column, flex: 1, editable: true }));
 
-const FertilizerTable = ({ id: sectionId, section, onChange = null }) => {
+const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
-  const handleEditCellChangeCommited = useCallback(({ id: fertilizerId, field, props: { value } }) => {
-    const editedFertilizer = { ...fertilizers[fertilizerId], [field]: value };
-    const editedFertilizers = [...fertilizers.slice(0, fertilizerId), editedFertilizer, ...fertilizers.slice(fertilizerId + 1)];
+  const handleEditCellChangeCommited = useCallback(({ id, field, props: { value } }) => {
+    const editedFertilizer = { ...fertilizers[id], [field]: value };
+    const editedFertilizers = [...fertilizers.slice(0, id), editedFertilizer, ...fertilizers.slice(id + 1)];
     const editedSection = { ...section, fertilizer: editedFertilizers };
     if (onChange) {
-      onChange(editedSection, sectionId);
+      onChange(editedSection);
     }
   }, [section, onChange]);
   return (
@@ -121,7 +123,7 @@ const FertilizerTable = ({ id: sectionId, section, onChange = null }) => {
   );
 };
 
-const SectionRow = ({ id, section, onChange = null }) => (
+const SectionRow = ({ section, onChange = null }) => (
   <div
     className="w-full"
     style={{
@@ -133,7 +135,7 @@ const SectionRow = ({ id, section, onChange = null }) => (
     }}
   >
     <h3
-      class="flex align-items-center align-content-center justify-content-center"
+      className="flex align-items-center align-content-center justify-content-center"
       style={{
         background: "#bbbcbf",
         color: "#43464d",
@@ -158,8 +160,8 @@ const SectionRow = ({ id, section, onChange = null }) => (
         {section.name}
       </h3>
     </h3>
-    <SectionTable id={id} section={section} onChange={onChange} />
-    <FertilizerTable id={id} section={section} onChange={onChange} />
+    <SectionTable section={section} onChange={onChange} />
+    <FertilizerTable section={section} onChange={onChange} />
   </div>
 );
 
@@ -168,6 +170,7 @@ export const IrrigationSchedule = () => {
 
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(`${API_URL}/-${farmId}/schedule`);
+  const [dirty, setDirty] = useState(false);
   const [schedule, setSchedule] = useState();
   useEffect(() => {
     if(data) {
@@ -175,7 +178,7 @@ export const IrrigationSchedule = () => {
     }
   }, [data]);
 
-  const [{ loading: posting }, postSchedule] = useAxios(
+  const [_, postSchedule] = useAxios(
     {
       url: `${API_URL}/-${farmId}/schedule`,
       method: 'POST',
@@ -201,9 +204,24 @@ export const IrrigationSchedule = () => {
       section.sql_index == editedSection.sql_index 
       ? editedSection
       : section);
-    await postSchedule({ data: editedSchedule });
+    setDirty(true);
     setSchedule(editedSchedule);
-  }
+  };
+
+  const showMessage = (msg) => {
+    console.log(msg) // Leave it at this for now
+  };
+
+  const handleSave = async () => {
+    try {
+      showMessage("Saving...");
+      await postSchedule({ data: schedule });
+      setDirty(false);
+    } catch (e) {
+      showMessage("Failed to save");
+    }
+  };
+
   return (
     <div>
       <h2
@@ -220,7 +238,7 @@ export const IrrigationSchedule = () => {
         Irrigation Schedule
       </h2>
       <div
-        class="flex flex-col align-items-center align-content-center justify-content-center"
+        className="flex flex-col align-items-center align-content-center justify-content-center"
         style={{
           background: "white",
           border: "1px solid black",
@@ -233,7 +251,7 @@ export const IrrigationSchedule = () => {
           trigger={["hover", "focus"]}
           overlay={<Tooltip>Save All settings</Tooltip>}
         >
-          <Button className="m-0">
+          <Button className="m-0" onClick={handleSave} disabled={!dirty}>
             <FontAwesomeIcon icon={faSave} /> Save
           </Button>
         </OverlayTrigger>
@@ -241,7 +259,7 @@ export const IrrigationSchedule = () => {
         {
           schedule.map((section, i) => {
             return (
-              <SectionRow key={i} id={section.sql_index} section={section} onChange={handleChange} />
+              <SectionRow key={i} section={section} onChange={handleChange} />
             );
           })
         }
