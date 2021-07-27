@@ -30,7 +30,8 @@ const sectionColumns = [
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
-    type: "number"
+    type: "number", 
+    editable: true
   },
   {
     field: "run_time",
@@ -40,14 +41,16 @@ const sectionColumns = [
   {
     field: "start_time",
     headerName: "Start time",
-    type: "dateTime"
+    type: "string", 
+    editable: true
   },
   {
     field: "end_time",
     headerName: "End time",
-    type: "dateTime"
+    type: "string", 
+    editable: true
   }
-].map(column => ({ ...column, flex: 1, editable: true }));
+].map(column => ({ ...column, flex: 1 }));
 
 const SectionTable = ({ section, onChange = null }) => {
   const id = section.sql_index;
@@ -77,12 +80,14 @@ const fertilizerColumns = [
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
-    type: "number"
+    type: "number", 
+    editable: true
   },
   {
     field: "flow_rate",
     headerName: "Flow rate",
-    type: "number"
+    type: "number", 
+    editable: true
   },
 ].map(column => ({ ...column, flex: 1, editable: true }));
 
