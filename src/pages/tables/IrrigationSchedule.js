@@ -6,8 +6,12 @@ import { API_URL } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
+import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
+import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
+import MomentUtils from "@material-ui/pickers/adapter/moment";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,6 +24,29 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
 }));
+
+const DateTimeEditInputCell = (props) => {
+  const {id, field, value, api} = props;
+  console.log(props);
+  const dateFormat = "YYYY-MM-DD HH:mm";
+  const handleChange = useCallback((editedValue) => {
+    api.setEditCellValue({id, field, value: moment(editedValue).format(dateFormat)})
+  }, [id, field]);
+  return (
+    <LocalizationProvider 
+      dateAdapter={MomentUtils}
+      dateFormat={dateFormat}>
+      <div className="flex flex-col justify-content-center">
+        <DateTimePicker 
+          renderInput={props => <TextField {...props} variant="outlined" margin="none" helperText=""></TextField>}
+          inputFormat={dateFormat}
+          value={new Date(value)}
+          onChange={handleChange}
+        />
+      </div>
+    </LocalizationProvider>
+  );
+}
 
 const sectionColumns = [
   {
@@ -42,21 +69,21 @@ const sectionColumns = [
     field: "start_time",
     headerName: "Start time",
     type: "string", 
+    renderEditCell: DateTimeEditInputCell,
     editable: true
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string", 
+    renderEditCell: DateTimeEditInputCell,
     editable: true
   }
 ].map(column => ({ ...column, flex: 1 }));
 
 const SectionTable = ({ section, onChange = null }) => {
   const id = section.sql_index;
-  const handleEditCellChangeCommited = useCallback(e => {
-    const { field } = e;
-    const value = (e.props || e).value;
+  const handleEditCellChangeCommited = useCallback(({field, value}) => {
     const editedSection = { ...section, [field]: value }
     if (onChange) {
       onChange(editedSection);
