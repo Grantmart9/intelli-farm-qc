@@ -10,12 +10,10 @@ import {
   faSave,faExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import "./IrrigationControl.css";
-import { withStyles } from "@material-ui/core/styles";
 import Preloader from "../../components/Preloader";
-import { API_URL } from "../../api";
 import { Table } from "@themesberg/react-bootstrap";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
-
+import { AppName } from "./IrrigationSchedule";
 
 const IrrigationControl = () => {
   const { farmId } = useParams();
@@ -30,18 +28,30 @@ const IrrigationControl = () => {
 
   return (
     <>
-      <h2
+      <AppName />
+      <div
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontSize: "2rem",
-          fontFamily: "Times New Roman",
+          padding: "0.5rem",
         }}
       >
-        Irrigation Control
-      </h2>
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontFamily: "Times New Roman",
+            padding: "0.5rem",
+            background: "#406a79",
+            color: "white",
+            border: "1px 1px solid #406a79",
+            borderRadius: "0.2cm",
+          }}
+        >
+          Irrigation Control
+        </h2>
+      </div>
       <div
         style={{
           display: "block",
@@ -69,7 +79,7 @@ const IrrigationControl = () => {
               trigger={["hover", "focus"]}
               overlay={<Tooltip>Start</Tooltip>}
             >
-              <Button>
+              <Button style={{ backgroundColor: "#406a79" }}>
                 <FontAwesomeIcon icon={faPlay} />
               </Button>
             </OverlayTrigger>
@@ -80,7 +90,7 @@ const IrrigationControl = () => {
               trigger={["hover", "focus"]}
               overlay={<Tooltip>Pause</Tooltip>}
             >
-              <Button>
+              <Button style={{ backgroundColor: "#406a79" }}>
                 <FontAwesomeIcon icon={faPause} />
               </Button>
             </OverlayTrigger>
@@ -91,7 +101,7 @@ const IrrigationControl = () => {
               trigger={["hover", "focus"]}
               overlay={<Tooltip>Edit</Tooltip>}
             >
-              <Button>
+              <Button style={{ backgroundColor: "#406a79" }}>
                 <FontAwesomeIcon icon={faEdit} />
               </Button>
             </OverlayTrigger>
@@ -102,7 +112,7 @@ const IrrigationControl = () => {
               trigger={["hover", "focus"]}
               overlay={<Tooltip>Refresh</Tooltip>}
             >
-              <Button>
+              <Button style={{ backgroundColor: "#406a79" }}>
                 <FontAwesomeIcon icon={faRedo} />
               </Button>
             </OverlayTrigger>
@@ -112,7 +122,7 @@ const IrrigationControl = () => {
             trigger={["hover", "focus"]}
             overlay={<Tooltip>Save</Tooltip>}
           >
-            <Button>
+            <Button style={{ backgroundColor: "#406a79" }}>
               <FontAwesomeIcon icon={faSave} />
             </Button>
           </OverlayTrigger>
@@ -120,19 +130,16 @@ const IrrigationControl = () => {
         <Table>
           <thead className="thead-light">
             <tr>
-              <th
-                className="border-0"
-                style={{ background: "#b6b9bf"}}
-              >
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Start Time
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 End Time
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Run Time
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Status
               </th>
             </tr>
