@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
 
 const DateTimeEditInputCell = (props) => {
   const {id, field, value, api} = props;
-  console.log(props);
   const dateFormat = "YYYY-MM-DD HH:mm";
-  const handleChange = useCallback((editedValue) => {
-    api.setEditCellValue({id, field, value: moment(editedValue).format(dateFormat)})
+  const handleChange = useCallback((editedDate) => {
+    const editedValue = moment(editedDate).format(dateFormat)
+    api.setEditCellValue({id, field, value: editedValue})
   }, [id, field]);
   return (
     <LocalizationProvider 
@@ -69,7 +69,7 @@ const sectionColumns = [
     field: "start_time",
     headerName: "Start time",
     type: "string", 
-    renderEditCell: DateTimeEditInputCell,
+    renderEditCell: (props) => <DateTimeEditInputCell {...props}/>,
     editable: true
   },
   {
@@ -83,7 +83,8 @@ const sectionColumns = [
 
 const SectionTable = ({ section, onChange = null }) => {
   const id = section.sql_index;
-  const handleEditCellChangeCommited = useCallback(({field, value}) => {
+  const handleEditCellChangeCommited = useCallback(e => {
+    const {field, props: {value}} = e;
     const editedSection = { ...section, [field]: value }
     if (onChange) {
       onChange(editedSection);
@@ -92,7 +93,8 @@ const SectionTable = ({ section, onChange = null }) => {
 
   return (
     <div className="flex">
-      <DataGrid hideFooter={true} autoHeight rows={[{ id, ...section }]} columns={sectionColumns}
+      <DataGrid
+        hideFooter={true} autoHeight rows={[{ id, ...section }]} columns={sectionColumns}
         onEditCellChangeCommitted={handleEditCellChangeCommited} />
     </div>
   )
@@ -120,7 +122,8 @@ const fertilizerColumns = [
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
-  const handleEditCellChangeCommited = useCallback(({ id, field, props: { value } }) => {
+  const handleEditCellChangeCommited = useCallback(e => {
+    const {id, field, props: {value} } = e;
     const editedFertilizer = { ...fertilizers[id], [field]: value };
     const editedFertilizers = [...fertilizers.slice(0, id), editedFertilizer, ...fertilizers.slice(id + 1)];
     const editedSection = { ...section, fertilizer: editedFertilizers };
@@ -147,7 +150,8 @@ const FertilizerTable = ({ section, onChange = null }) => {
       >
         Fertilizer
       </h3>
-      <DataGrid hideFooter={true} autoHeight
+      <DataGrid
+        hideFooter={true} autoHeight
         rows={fertilizers.map((fertilizer, id) => ({ id: id, ...fertilizer }))}
         columns={fertilizerColumns}
         onEditCellChangeCommitted={handleEditCellChangeCommited} />
@@ -166,7 +170,7 @@ const SectionRow = ({ section, onChange = null }) => (
       marginTop: "1rem",
     }}
   >
-    <h3
+    <div
       className="flex align-items-center align-content-center justify-content-center"
       style={{
         background: "#bbbcbf",
@@ -191,7 +195,7 @@ const SectionRow = ({ section, onChange = null }) => (
       >
         {section.name}
       </h3>
-    </h3>
+    </div>
     <SectionTable section={section} onChange={onChange} />
     <FertilizerTable section={section} onChange={onChange} />
   </div>
@@ -231,7 +235,7 @@ export const IrrigationSchedule = () => {
       </p>
     );
 
-  const handleChange = async (editedSection, id) => {
+  const handleChange = async (editedSection) => {
     const editedSchedule = schedule.map(section => 
       section.sql_index == editedSection.sql_index 
       ? editedSection
