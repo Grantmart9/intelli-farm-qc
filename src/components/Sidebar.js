@@ -9,6 +9,7 @@ import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesb
 import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
 
+
 export default (props = {}) => {
   const { title, items } = props;
   const location = useLocation();
@@ -117,16 +118,19 @@ export default (props = {}) => {
                 style={{
                   display: "flex",
                   alignContent: "center",
+                  backgroundColor: "#406a79",
                   justifyContent: "center",
-                  fontSize: "3rem",
+                  alignItems:"center",
+                  fontSize: "2.5rem",
                   fontFamily: "Times New Roman",
-                  gap: "1rem",
+                  gap: "0.5rem",
+                  padding:"0.5rem",
                 }}
               >
-                <FontAwesomeIcon icon={faLeaf} />
+                <FontAwesomeIcon style={{padding:"0.5rem"}}icon={faLeaf} />
                 {title}
               </Button>
-              {navItems}
+              <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
               <Button
                 style={{
                   display: "flex",
@@ -134,6 +138,7 @@ export default (props = {}) => {
                   alignContent: "center",
                   justifyContent: "center",
                   marginTop: "1rem",
+                  backgroundColor: "#406a79",
                 }}
               >
                 Logout

@@ -6,6 +6,7 @@ import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { AppName } from "./IrrigationSchedule";
 
 
 const Fertilizer = () => {
@@ -25,18 +26,31 @@ const Fertilizer = () => {
 
   return (
     <>
-      <h2
+      <AppName />
+      <div
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontSize: "2rem",
-          fontFamily: "Times New Roman",
+          padding: "0.5rem",
         }}
       >
-        Fertilizer
-      </h2>
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontFamily: "Times New Roman",
+            padding: "0.5rem",
+            background: "#406a79",
+            color: "white",
+            border: "1px 1px solid #406a79",
+            borderRadius: "0.2cm",
+            marginTop: "1rem",
+          }}
+        >
+          Fertilizer
+        </h2>
+      </div>
       <div
         style={{
           display: "block",
@@ -51,16 +65,16 @@ const Fertilizer = () => {
         <Table>
           <thead className="thead-light">
             <tr>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Fertilizer
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Requested Level
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Current Level
               </th>
-              <th className="border-0" style={{ background: "#b6b9bf" }}>
+              <th className="border-0" style={{ background: "#8fc99a" }}>
                 Flow Rate
               </th>
             </tr>

@@ -15,6 +15,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import {withStyles} from "@material-ui/core/styles";
 import './Dashboard.css';
 import { API_URL } from "../../api";
+import {AppName} from "./IrrigationSchedule";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -215,51 +216,64 @@ export const Dashboard = () => {
   if (loading) return <Preloader/>
   if (error) return "Error";
   return (
-    <div className="m-4">
-      <h2
+    <div>
+      <AppName />
+      <div
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontSize: "2rem",
-          fontFamily: "Times New Roman",
+          padding: "0.5rem",
         }}
       >
-        Dashboard
-      </h2>
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontFamily: "Times New Roman",
+            padding: "0.5rem",
+            background: "#406a79",
+            color: "white",
+            border: "1px 1px solid #406a79",
+            borderRadius: "0.2cm",
+            marginTop:"1rem",
+          }}
+        >
+          Irrigation Schedule
+        </h2>
+      </div>
       <div className="grid grid-cols-5 p-2">
-        <div className="col-span-2 bg-white rounded shadow-md m-4">
+        <div className="col-span-2 bg-green-200 rounded shadow-md m-4">
           <IrrigationProgress data={data.irrigation_data} />
         </div>
-        <div className="col-span-1 bg-white rounded shadow-md m-4">
+        <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
           <IrrigationTimeLeft data={data.irrigation_data} />
         </div>
-        <div className="col-span-1 bg-white rounded shadow-md m-4">
+        <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
           <IrrigationEC data={data.irrigation_data} />
         </div>
         {data.irrigation_data.pump_data.map((pump, i) => (
-          <div className="col-span-1 bg-white rounded shadow-md m-4">
+          <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
             <Pump key={i} pump={pump} />
           </div>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
         {data.water_usage.map((waterUsageData, i) => (
-          <div className="bg-white rounded shadow-md m-2 pt-4" key={i}>
+          <div className="bg-green-200 rounded shadow-md m-2 pt-4" key={i}>
             <HomeFlowWaterUsage data={waterUsageData} />
           </div>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-5">
-        <div className="col-span-3 bg-white rounded shadow-md m-4">
+        <div className="col-span-3 bg-green-200 rounded shadow-md m-4">
           <div className="w-full h-full">
             <HomeFlowFertilizerBarChart
               data={data.fertilizer_usage.bar_graph}
             />
           </div>
         </div>
-        <div className="col-span-2 bg-white rounded shadow-md flex-grow m-4 flex align-items">
+        <div className="col-span-2 bg-green-200 rounded shadow-md flex-grow m-4 flex align-items">
           <div className="w-full">
             <HomeFlowFertilizerPieChart
               data={data.fertilizer_usage.pie_chart}
