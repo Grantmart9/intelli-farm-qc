@@ -79,7 +79,7 @@
     "node-sass": "^6.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "BROWSER=none craco start",
     "build": "craco build",
     "build-local": "PUBLIC_URL=./ craco build",
     "test": "craco test",
