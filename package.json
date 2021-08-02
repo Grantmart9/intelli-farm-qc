@@ -49,6 +49,7 @@
     "axios-hooks": "^2.6.3",
     "bootstrap": "5.0.2",
     "fp-ts": "^2.10.5",
+    "git": "^0.1.5",
     "i": "^0.3.6",
     "install": "^0.13.0",
     "moment": "^2.29.1",
@@ -65,7 +66,8 @@
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.1",
     "simplebar-react": "^2.3.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "yarn": "^1.22.11"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

@@ -7,23 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 import { TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 250,
-  },
-}));
+import {AppName} from "./Dashboard";
 
 const DateTimeEditInputCell = (props) => {
   const {id, field, value, api} = props;
@@ -31,7 +19,8 @@ const DateTimeEditInputCell = (props) => {
   const handleChange = useCallback((editedDate) => {
     const editedValue = moment(editedDate).format(dateFormat)
     api.setEditCellValue({id, field, value: editedValue})
-  }, [id, field]);
+  }, [id, field,api]);
+
   return (
     <LocalizationProvider 
       dateAdapter={MomentUtils}
@@ -131,17 +120,20 @@ const FertilizerTable = ({ section, onChange = null }) => {
       onChange(editedSection);
     }
   }, [section, onChange]);
+
   return (
     <>
       <h3
         style={{
-          background: "#b6b9bf",
-          color: "#43464d",
-          border: "1px solid #5b5c75",
+          background: "#e0dcdc",
+          color: "#4a5073",
+          border: "1px solid #e0dcdc",
           borderRadius: "0.09cm",
           height: "3rem",
           padding: "0.5rem",
           fontWeight: "bold",
+          fontFamily:"'Rubik', sans-serif",
+          fontSize:"1.rem",
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
@@ -173,20 +165,22 @@ const SectionRow = ({ section, onChange = null }) => (
     <div
       className="flex align-items-center align-content-center justify-content-center"
       style={{
-        background: "#bbbcbf",
-        color: "#43464d",
+        background: "#e0dcdc",
+        color: "#4a5073",
         fontWeight: "bold",
-        border: "1px solid #bbbcbf",
+        border: "1px solid #e0dcdc",
         borderRadius: "0.09cm",
       }}
     >
       <h3
         style={{
-          background: "#b6b9bf",
-          color: "#43464d",
+          background: "#e0dcdc",
+          color: "#4a5073",
           height: "3rem",
           padding: "0.5rem",
           fontWeight: "bold",
+          fontFamily:"'Rubik', sans-serif",
+          fontSize:"1.2rem",
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
@@ -202,8 +196,6 @@ const SectionRow = ({ section, onChange = null }) => (
 );
 
 export const IrrigationSchedule = () => {
-  const classes = useStyles();
-
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(`${API_URL}/-${farmId}/schedule`);
   const [dirty, setDirty] = useState(false);
@@ -237,7 +229,7 @@ export const IrrigationSchedule = () => {
 
   const handleChange = async (editedSection) => {
     const editedSchedule = schedule.map(section => 
-      section.sql_index == editedSection.sql_index 
+      section.sql_index === editedSection.sql_index 
       ? editedSection
       : section);
     setDirty(true);
@@ -259,27 +251,31 @@ export const IrrigationSchedule = () => {
   };
 
   return (
-    <div>
-      <h2
+    <div style={{backgroundColor:"#cad3de"}}>
+      <AppName />
+      <div
         style={{
           display: "flex",
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          fontSize: "2rem",
-          fontFamily: "Times New Roman",
-          padding: "1rem",
+          padding:"0.5rem"
         }}
       >
-        Irrigation Schedule
-      </h2>
+      </div>
+      <div style={{marginTop:"5rem"}}>
       <div
         className="flex flex-col align-items-center align-content-center justify-content-center"
         style={{
+          dislay:"flex",
           background: "white",
-          border: "1px solid black",
+          border: "1px solid white",
           borderRadius: "0.09cm",
           padding: "1rem",
+          fontFamily:"'Rubik', sans-serif",
+          fontSize:"1.2rem",
+          marginLeft:"1rem",
+          color:"#4a5073",
         }}
       >
         <OverlayTrigger
@@ -291,16 +287,15 @@ export const IrrigationSchedule = () => {
             <FontAwesomeIcon icon={faSave} /> Save
           </Button>
         </OverlayTrigger>
-        
         {
           schedule.map((section, i) => {
             return (
               <SectionRow key={i} section={section} onChange={handleChange} />
             );
           })
-        }
-        
+        }  
       </div>
+    </div>
     </div>
   );
 };

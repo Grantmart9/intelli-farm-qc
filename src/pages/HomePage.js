@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
 import useAxios from 'axios-hooks';
@@ -12,6 +12,7 @@ import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
 import {IrrigationSchedule} from "./tables/IrrigationSchedule";
 import {Dashboard} from "./tables/Dashboard";
+import {Settings} from "./tables/Settings";
 import { API_URL } from '../api';
 
 const farm_pages = {
@@ -34,6 +35,11 @@ const farm_pages = {
     name: "Dashboard",
     path: "/dashboard",
     page: Dashboard
+  },
+  settings: {
+    name: "Settings",
+    path: "/settings",
+    page: Settings
   }
 };
 

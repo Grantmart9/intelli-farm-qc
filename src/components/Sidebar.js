@@ -4,8 +4,8 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSeedling,faLeaf } from "@fortawesome/free-solid-svg-icons";
-import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
+import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
 
@@ -118,13 +118,15 @@ export default (props = {}) => {
                 style={{
                   display: "flex",
                   alignContent: "center",
-                  backgroundColor: "#406a79",
+                  backgroundColor: "#293354",
                   justifyContent: "center",
                   alignItems:"center",
                   fontSize: "2.5rem",
-                  fontFamily: "Times New Roman",
+                  fontWeight:"bold",
+                  fontFamily: "'Noto Sans JP', sans-serif",
                   gap: "0.5rem",
                   padding:"0.5rem",
+                  marginBottom:"3.5rem",
                 }}
               >
                 <FontAwesomeIcon style={{padding:"0.5rem"}}icon={faLeaf} />
@@ -138,7 +140,7 @@ export default (props = {}) => {
                   alignContent: "center",
                   justifyContent: "center",
                   marginTop: "1rem",
-                  backgroundColor: "#406a79",
+                  backgroundColor: "#293354",
                 }}
               >
                 Logout

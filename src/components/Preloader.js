@@ -1,16 +1,23 @@
 
 import React from 'react';
-import { Image } from '@themesberg/react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import LodiconLogo from "../assets/img/lodicon-logo.svg";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(5),
+    },
+  },
+}));
 
 export default (props) => {
 
-  const { loading } = props;
-
+  const classes = useStyles();
   return (
-    <div className="preloader flex flex-col place-items-center absolute inset-0">
-      <Image className="loader-element place-self-center" src={LodiconLogo} height={40} />
+    <div style={{display:"flex",marginTop:"100px", minHeight:"600px",alignItems:"center",alignContent:"center",justifyContent:"center"}}>
+      <div><CircularProgress color={'primary'} size={200} style={{'color': 'gray'}}/></div>
     </div>
   );
 };

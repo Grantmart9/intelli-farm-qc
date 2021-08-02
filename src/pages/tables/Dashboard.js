@@ -1,49 +1,80 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
-import Preloader from '../../components/Preloader';
+import Preloader from "../../components/Preloader";
 
-import ApexChart from 'react-apexcharts';
-import { pipe } from 'fp-ts/lib/function';
-import { map } from 'fp-ts/lib/Array';
-import { toArray, fromArray } from 'fp-ts/lib/Set';
-import { eqString } from 'fp-ts/lib/Eq';
-import { ordString } from 'fp-ts/lib/Ord';
-import moment from 'moment';
+import ApexChart from "react-apexcharts";
+import { pipe } from "fp-ts/lib/function";
+import { map } from "fp-ts/lib/Array";
+import { toArray, fromArray } from "fp-ts/lib/Set";
+import { eqString } from "fp-ts/lib/Eq";
+import { ordString } from "fp-ts/lib/Ord";
+import moment from "moment";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
-import {withStyles} from "@material-ui/core/styles";
-import './Dashboard.css';
+import { withStyles } from "@material-ui/core/styles";
+import "./Dashboard.css";
 import { API_URL } from "../../api";
-import {AppName} from "./IrrigationSchedule";
+import drop from "./drop.svg";
+
+export const AppName = () => {
+  return (
+    <div>
+      <div
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+          fontFamily: "'Noto Sans JP', sans-serif",
+          fontSize: "3rem",
+          backgroundColor: "#293354",
+          color: "white",
+          width:"90%",
+          border: "1px 1px solid #184ea3",
+          position:"fixed",
+        }}
+      >
+        Intelli-Farm <img src={drop} width={"50rem"} alt={drop} />
+      </div>
+    </div>
+  );
+};
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 5,
+    borderRadius: 5
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700]
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#05ab24",
-  },
+    backgroundColor: "#05ab24"
+  }
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
-  <div style={{padding:"1.5rem"}}>
+  <div style={{ padding: "1.5rem" }}>
     <h1>Irrigation</h1>
-    <h4 style={{ fontWeight: "bold",fontSize:"1.5rem" }}>Cycle Progress</h4>
-    <div style={{marginTop:"1rem"}}>
-    <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
-  </div>
+    <h4 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>Cycle Progress</h4>
+    <div style={{ marginTop: "1rem" }}>
+      <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
+    </div>
   </div>
 );
 
 const IrrigationTimeLeft = ({ data }) => (
-  <div style={{ padding: "1.5rem",alignItems:"center",alignContent:"center",justifyContent:"center" }}>
+  <div
+    style={{
+      padding: "1.5rem",
+      alignItems: "center",
+      alignContent: "center",
+      justifyContent: "center"
+    }}
+  >
     <h1 className=".text-lg">Irrigation Time Left</h1>
     <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
       {data.irrigation_time_left}min left
@@ -69,9 +100,7 @@ const Pump = ({ pump }) => (
   </div>
 );
 
-export const HomeFlowFertilizerBarChart = ({
-  data,
-}) => {
+export const HomeFlowFertilizerBarChart = ({ data }) => {
   const today = useMemo(() => new Date(), []);
   const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
     const date = new Date(today);
@@ -80,7 +109,7 @@ export const HomeFlowFertilizerBarChart = ({
   });
 
   const days = dates.map(
-    (date) => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()]
+    (date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
   );
 
   const seriesNames = pipe(
@@ -99,7 +128,7 @@ export const HomeFlowFertilizerBarChart = ({
           dayUsage.name === seriesName
       );
       return dayUsage ? dayUsage.value : 0;
-    }),
+    })
   }));
 
   return (
@@ -110,40 +139,40 @@ export const HomeFlowFertilizerBarChart = ({
       options={{
         chart: {
           toolbar: {
-            show: false,
-          },
+            show: false
+          }
         },
         tooltip: {
           x: {
             formatter: (_, { dataPointIndex }) => {
               const date = moment(dates[dataPointIndex]).format(
-                'YYYY-MM-DD ddd'
+                "YYYY-MM-DD ddd"
               );
               return date;
-            },
+            }
           },
           y: {
             formatter: (y, { dataPointIndex }) => {
               const unit = data[dataPointIndex].unit;
               return `${y} ${unit}`;
-            },
-          },
+            }
+          }
         },
         xaxis: {
-          categories: days,
+          categories: days
         },
         plotOptions: {
           bar: {
-            endingShape: 'rounded',
-            columnWidth: '55%',
-          },
+            endingShape: "rounded",
+            columnWidth: "55%"
+          }
         },
         dataLabels: {
-          enabled: false,
+          enabled: false
         },
         title: {
-          text: 'Fertilizer usage',
-        },
+          text: "Fertilizer usage"
+        }
       }}
     />
   );
@@ -162,8 +191,8 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: 'bottom',
-        },
+          position: "bottom"
+        }
       }}
     />
   );
@@ -176,33 +205,33 @@ export const HomeFlowWaterUsage = ({ data }) => {
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
-        },
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
+        }
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true,
-          },
+            enabled: true
+          }
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            },
-          },
+            }
+          }
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
         },
         subtitle: {
           text: data.name,
-          offsetX: 30,
+          offsetX: 30
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30,
-        },
+          offsetX: 30
+        }
       }}
     />
   );
@@ -210,13 +239,12 @@ export const HomeFlowWaterUsage = ({ data }) => {
 
 export const Dashboard = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] 
-    = useAxios(`${API_URL}/${farmId}/dashboard`);
+  const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/dashboard`);
 
-  if (loading) return <Preloader/>
+  if (loading) return <Preloader />;
   if (error) return "Error";
   return (
-    <div>
+    <div style={{ display: "block",backgroundColor:"#cad3de" }}>
       <AppName />
       <div
         style={{
@@ -226,60 +254,47 @@ export const Dashboard = () => {
           justifyContent: "center",
           padding: "0.5rem",
         }}
-      >
-        <h2
-          style={{
-            fontSize: "2rem",
-            fontFamily: "Times New Roman",
-            padding: "0.5rem",
-            background: "#406a79",
-            color: "white",
-            border: "1px 1px solid #406a79",
-            borderRadius: "0.2cm",
-            marginTop:"1rem",
-          }}
-        >
-          Irrigation Schedule
-        </h2>
-      </div>
-      <div className="grid grid-cols-5 p-2">
-        <div className="col-span-2 bg-green-200 rounded shadow-md m-4">
+      ></div>
+      <div style={{marginTop:"5rem"}}>
+      <div className="grid grid-cols-5 p-0">
+        <div className="col-span-2 bg-gray-400 rounded shadow-md m-4">
           <IrrigationProgress data={data.irrigation_data} />
         </div>
-        <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
+        <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
           <IrrigationTimeLeft data={data.irrigation_data} />
         </div>
-        <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
+        <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
           <IrrigationEC data={data.irrigation_data} />
         </div>
         {data.irrigation_data.pump_data.map((pump, i) => (
-          <div className="col-span-1 bg-green-200 rounded shadow-md m-4">
+          <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
             <Pump key={i} pump={pump} />
           </div>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
         {data.water_usage.map((waterUsageData, i) => (
-          <div className="bg-green-200 rounded shadow-md m-2 pt-4" key={i}>
+          <div className="bg-gray-400  rounded shadow-md m-3 pt-4" key={i}>
             <HomeFlowWaterUsage data={waterUsageData} />
           </div>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-5">
-        <div className="col-span-3 bg-green-200 rounded shadow-md m-4">
+        <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
           <div className="w-full h-full">
             <HomeFlowFertilizerBarChart
               data={data.fertilizer_usage.bar_graph}
             />
           </div>
         </div>
-        <div className="col-span-2 bg-green-200 rounded shadow-md flex-grow m-4 flex align-items">
+        <div className="col-span-2 bg-gray-400  rounded shadow-md flex-grow m-4 flex align-items">
           <div className="w-full">
             <HomeFlowFertilizerPieChart
               data={data.fertilizer_usage.pie_chart}
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
