@@ -42,6 +42,7 @@
     "@nivo/pie": "^0.73.0",
     "@nivo/tooltip": "^0.73.0",
     "@react-hook/media-query": "^1.1.1",
+    "@react-hook/resize-observer": "^1.2.2",
     "@themesberg/react-bootstrap": "^1.4.1",
     "apexcharts": "^3.27.2",
     "autoprefixer": "^9",
@@ -67,6 +68,7 @@
     "react-transition-group": "^4.4.1",
     "simplebar-react": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "victory": "^35.9.3",
     "yarn": "^1.22.11"
   },
   "devDependencies": {
