@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
-
 import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
@@ -144,22 +143,21 @@ export const Dashboard = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          padding: "0.5rem",
         }}
       ></div>
       <div style={{ marginTop: "5rem" }}>
-        <div className="grid grid-cols-1 lg:grid-cols-5 p-4 gap-4">
-          <div className="bg-gray-400  rounded shadow-md">
+        <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
+          <div className="bg-gray-400 rounded shadow-md">
             <IrrigationProgress data={data.irrigation_data} />
           </div>
-          <div className="bg-gray-400  rounded shadow-md">
+          <div className="bg-gray-400 rounded shadow-md">
             <IrrigationTimeLeft data={data.irrigation_data} />
           </div>
-          <div className="bg-gray-400  rounded shadow-md">
+          <div className="bg-gray-400 rounded shadow-md">
             <IrrigationEC data={data.irrigation_data} />
           </div>
           {data.irrigation_data.pump_data.map((pump, i) => (
-            <div className="bg-gray-400  rounded shadow-md">
+            <div className="bg-gray-400 rounded shadow-md">
               <Pump key={i} pump={pump} />
             </div>
           ))}
