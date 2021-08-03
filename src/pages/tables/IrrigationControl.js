@@ -12,17 +12,16 @@ import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 const EquipmentStatus = ({ data }) => {
   return (
     <div>
+      <div className="shadow-md">
       <div
         style={{
+          border:"1px 1px solid black",
           display: "flex",
-          border: "2px 2px solid black",
-          borderRadius: "0.09cm",
-          background: "#dfe2e8",
+          background: "#e1e3e8",
           padding: "1rem",
           fontFamiliy: "Times New Roman",
           fontWeight: "bold",
           gap: "3rem",
-          boxShadow: "2px 2px #aeb3bd"
         }}
       ><div style={{ padding: "1rem" }}>
           <FontAwesomeIcon
@@ -35,6 +34,7 @@ const EquipmentStatus = ({ data }) => {
           <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>{data.real_time_flow}</h2>
           <h4 style={{ color: "red", fontSize: "0.8rem" }}>{data.alarm}</h4>
         </div>
+      </div>
       </div>
     </div>
   );

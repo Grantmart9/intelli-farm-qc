@@ -155,9 +155,9 @@ const FertilizerTable = ({ section, onChange = null }) => {
 
 const SectionRow = ({ section, onChange = null }) => (
   <div
-    className="w-full"
+    className="w-full p-1"
     style={{
-      border: "1.5px solid #242540",
+      border: "1.5px solid #99a9c4",
       borderRadius: "0.1cm",
       padding: "1rem",
       boxShadow: "3px 3px #5b5c75",
@@ -265,9 +265,9 @@ export const IrrigationSchedule = () => {
         }}
       >
       </div>
-      <div style={{marginTop:"5rem"}}>
+      <div className="p-1" style={{marginTop:"5rem"}}>
       <div
-        className="flex flex-col align-items-center align-content-center justify-content-center"
+        className="flex flex-col align-items-center align-content-center justify-content-center p-1"
         style={{
           dislay:"flex",
           background: "white",

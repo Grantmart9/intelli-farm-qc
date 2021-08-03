@@ -69,6 +69,11 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
         title: {
           text: "Field Valve History",
           offsetX: 30,
+          offsetY: 10,
+          style: {
+            fontSize:  '12x',
+            fontWeight:  'bold',
+          },
         },
       }}
     />

@@ -74,11 +74,12 @@ export const BrushChart = ({data}) => {
           fill: "steelblue"
         }
       }
-    }
+    },
   };
 
   return (
     <div className="w-full h-full" ref={setTarget}>
+      <h1  style={{marginLeft:"2.5rem",fontWeight:"bold",fontSize:"18px"}}>Main Valve History</h1>
         <VictoryChart
           theme={theme}
           height={300}
