@@ -24,7 +24,6 @@
 
 	.nav-item {
 		border: $border-width solid transparent;
-		background-color: #293354;
 		&.active {
 			& > .nav-link {
 				color: $light;
@@ -188,6 +187,7 @@
 
 	.accordion-body {
 		padding: .5rem 0 0 0;
+		background-color:#2f3853;
 	}
 
 	.accordion-collapse{
