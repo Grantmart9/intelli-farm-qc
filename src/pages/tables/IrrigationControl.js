@@ -7,6 +7,7 @@ import { AppName } from "./Dashboard";
 import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
+import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 
 const EquipmentStatus = ({ data }) => {
   return (
@@ -75,8 +76,8 @@ const IrrigationControl = () => {
           <div className="w-full h-full">
             <AxiosSpinner
               callHook={use => use(`${API_URL}/${farmId}/irrigation_3`)}
-              renderData={({data}) => data.map(
-                irrigation_valve => <EquipmentStatus data={irrigation_valve} />)} />
+              renderData={({data}) => <HomeFlowFertilizerBarChart data={data}/>} />
+
           </div>
           <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
             <div style={{ backgroundColor: "#dfe2e8" }}>
