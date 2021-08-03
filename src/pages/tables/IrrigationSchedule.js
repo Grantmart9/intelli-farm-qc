@@ -119,7 +119,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
     if (onChange) {
       onChange(editedSection);
     }
-  }, [section, onChange]);
+  }, [section, fertilizers, onChange]);
 
   return (
     <>
@@ -208,7 +208,7 @@ export const IrrigationSchedule = () => {
     }
   }, [data]);
 
-  const [_, postSchedule] = useAxios(
+  const [, postSchedule] = useAxios(
     {
       url: `${API_URL}/-${farmId}/schedule`,
       method: 'POST',

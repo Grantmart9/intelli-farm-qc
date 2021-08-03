@@ -10,9 +10,9 @@ import Navbar from "../components/Navbar";
 import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from './tables/Fertilizer';
-import {IrrigationSchedule} from "./tables/IrrigationSchedule";
-import {Dashboard} from "./tables/Dashboard";
-import {Settings} from "./tables/Settings";
+import { IrrigationSchedule } from "./tables/IrrigationSchedule";
+import { Dashboard } from "./tables/Dashboard";
+import { Settings } from "./tables/Settings";
 import { API_URL } from '../api';
 
 const farm_pages = {
@@ -83,12 +83,12 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     `${API_URL}/${clientId}/get_app_layout`
   );
 
-  if (loading) return <Preloader/>;
+  if (loading) return <Preloader />;
   if (error) return <p>Error!</p>;
 
   return (
     <Route {...rest} render={props => (
-      <div style={{"--sidenav-width": "400px"}} className="absolute inset-0">
+      <div style={{ "--sidenav-width": "400px" }} className="absolute inset-0">
         <Sidebar title={appLayout.company_name} items={getNavItems(prefix, appLayout)} />
 
         <main className="content">
@@ -117,15 +117,17 @@ const RouteInner = () => {
         path={routes.DashboardOverview.path}
         component={DashboardOverview}
       />
-      <Route exact path={routes.NotFound.path} component={() => <p>Not Found</p>}/>
-      <FarmRoutes prefix={prefix}/>
+      <Route exact path={routes.NotFound.path} component={() => <p>Not Found</p>} />
+      <FarmRoutes prefix={prefix} />
       <Redirect to={routes.NotFound.path} />
     </Switch>
   )
 }
 
-export default () => (
+const HomePage = () => (
   <Switch>
-    <Route path="/:clientId" component={RouteInner}/>
+    <Route path="/:clientId" component={RouteInner} />
   </Switch>
 );
+
+export default HomePage;

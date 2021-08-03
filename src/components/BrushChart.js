@@ -3,7 +3,6 @@ import { createContainer, VictoryAxis, VictoryBar, VictoryBrushContainer, Victor
 
 import useResizeObserver from '@react-hook/resize-observer';
 import moment from 'moment';
-import Preloader from './Preloader';
 
 const formatDate = date => moment(date).format('YYYY-MM-DD HH:mm');
 

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
 
 
-export default (props = {}) => {
+const Sidebar = (props = {}) => {
   const { title, items } = props;
   const location = useLocation();
   const { pathname } = location;
@@ -152,3 +152,4 @@ export default (props = {}) => {
     </>
   );
 };
+export default Sidebar;
