@@ -4,22 +4,22 @@ import Preloader from "./Preloader";
 
 const RenderErrorLogger = ({error, refetch}) => {
   useEffect((error) => console.error(error), [error]);
-  return <>{error}</>;
+  return <>{error.toString()}</>;
 }
 
 export const AxiosSpinner =
   ({
-    renderData,
+    renderData: RenderData,
     callHook,
-    renderError = RenderErrorLogger,
-    renderLoader = Preloader,
+    renderError: RenderError = RenderErrorLogger,
+    renderLoader: RenderLoader = Preloader,
   }) => {
     const [{ data, loading, error }, refetch] = callHook(useAxios);
     if (error) {
-      return <renderError {...{ error, refetch }} />;
+      return <RenderError {...{ error, refetch }} />;
     }
     if (loading) {
-      return <renderLoader/>;
+      return <RenderLoader/>;
     }
-    return <renderData {...{ data, refetch }}/>;
+    return <RenderData {...{ data, refetch }}/>;
   };
