@@ -22,7 +22,7 @@ const Sidebar = (props = {}) => {
 
     return (
       <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
-        <Accordion.Item eventKey={eventKey}>
+        <Accordion.Item className="border-0" eventKey={eventKey}>
           <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center">
             <span>
               <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span>
@@ -131,7 +131,7 @@ const Sidebar = (props = {}) => {
                 <FontAwesomeIcon style={{padding:"0.5rem"}}icon={faLeaf} />
                 {title}
               </Button>
-              <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
+              <div className="" ><div style={{ fontFamily: "Times New Roman" }}>{navItems}</div></div>
               <Button
                 style={{
                   display: "flex",

@@ -1,5 +1,4 @@
 import React from "react";
-import { Table } from "@themesberg/react-bootstrap";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
@@ -26,7 +25,6 @@ const Fertilizer = () => {
   return (
     <div style={{ backgroundColor: "#cad3de"}}>
       <AppName />
-        <h1>In progress</h1>
     </div>
   );
 };
