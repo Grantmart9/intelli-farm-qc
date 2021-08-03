@@ -23,7 +23,7 @@
 	}
 
 	.nav-item {
-		border: $border-width solid #293354;
+		border: $border-width solid transparent;
 		background-color: #293354;
 		&.active {
 			& > .nav-link {
