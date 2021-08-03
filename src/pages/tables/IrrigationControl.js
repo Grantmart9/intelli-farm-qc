@@ -51,10 +51,9 @@ const IrrigationControl = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          padding: "0.5rem"
+          padding: "0.5rem",
         }}
-      >
-      </div>
+      ></div>
       <div style={{ marginTop: "5rem" }}>
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div
@@ -67,29 +66,38 @@ const IrrigationControl = () => {
             }}
           >
             <AxiosSpinner
-              callHook={use => use(`${API_URL}/${farmId}/irrigation_1`)}
-              renderData={({data}) => data.map(
-                irrigation_valve => <EquipmentStatus data={irrigation_valve} />)} />
+              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
+              renderData={({ data }) =>
+                data.map((irrigation_valve) => (
+                  <EquipmentStatus data={irrigation_valve} />
+                ))
+              }
+            />
           </div>
         </div>
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div className="w-full h-full">
             <AxiosSpinner
-              callHook={use => use(`${API_URL}/${farmId}/irrigation_3`)}
-              renderData={({data}) => <HomeFlowFertilizerBarChart data={data}/>} />
-
+              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
+              renderData={({ data }) => (
+                <HomeFlowFertilizerBarChart data={data} />
+              )}
+            />
           </div>
-          <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
-            <div style={{ backgroundColor: "#dfe2e8" }}>
-              <AxiosSpinner
-                callHook={use => use(`${API_URL}/${farmId}/irrigation_2`)}
-                renderData={({data}) =>
-                  <BrushChart
-                    data={data.map(
-                      ({ datetime, y, ...rest }) => ({ ...rest, x: new Date(datetime), y: Number(y)}))} />}
-              />
-            </div>
-          </div>
+        </div>
+        <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
+            <AxiosSpinner
+              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
+              renderData={({ data }) => (
+                <BrushChart
+                  data={data.map(({ datetime, y, ...rest }) => ({
+                    ...rest,
+                    x: new Date(datetime),
+                    y: Number(y),
+                  }))}
+                />
+              )}
+            />
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@ import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-
 import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
 
-
 const Sidebar = (props = {}) => {
   const { title, items } = props;
   const location = useLocation();
