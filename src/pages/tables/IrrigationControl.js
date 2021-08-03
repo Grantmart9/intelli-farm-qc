@@ -74,7 +74,7 @@ const IrrigationControl = () => {
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div className="w-full h-full">
             <AxiosSpinner
-              callHook={use => use(`${API_URL}/${farmId}/irrigation_1`)}
+              callHook={use => use(`${API_URL}/${farmId}/irrigation_2`)}
               renderData={data => data.map(
                 irrigation_valve => <EquipmentStatus data={irrigation_valve} />)} />
           </div>
