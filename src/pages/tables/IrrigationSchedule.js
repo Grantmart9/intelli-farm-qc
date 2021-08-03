@@ -125,15 +125,15 @@ const FertilizerTable = ({ section, onChange = null }) => {
     <>
       <h3
         style={{
-          background: "#e0dcdc",
+          background: "#99a9c4",
           color: "#4a5073",
-          border: "1px solid #e0dcdc",
+          border: "1px solid #99a9c4",
           borderRadius: "0.09cm",
           height: "3rem",
           padding: "0.5rem",
           fontWeight: "bold",
-          fontFamily:"'Rubik', sans-serif",
-          fontSize:"1.rem",
+          fontFamily: "'Rubik', sans-serif",
+          fontSize: "1.rem",
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
@@ -143,10 +143,12 @@ const FertilizerTable = ({ section, onChange = null }) => {
         Fertilizer
       </h3>
       <DataGrid
-        hideFooter={true} autoHeight
+        hideFooter={true}
+        autoHeight
         rows={fertilizers.map((fertilizer, id) => ({ id: id, ...fertilizer }))}
         columns={fertilizerColumns}
-        onEditCellChangeCommitted={handleEditCellChangeCommited} />
+        onEditCellChangeCommitted={handleEditCellChangeCommited}
+      />
     </>
   );
 };
@@ -165,7 +167,7 @@ const SectionRow = ({ section, onChange = null }) => (
     <div
       className="flex align-items-center align-content-center justify-content-center"
       style={{
-        background: "#e0dcdc",
+        background: "#99a9c4",
         color: "#4a5073",
         fontWeight: "bold",
         border: "1px solid #e0dcdc",
@@ -174,13 +176,13 @@ const SectionRow = ({ section, onChange = null }) => (
     >
       <h3
         style={{
-          background: "#e0dcdc",
+          background: "#99a9c4",
           color: "#4a5073",
           height: "3rem",
           padding: "0.5rem",
           fontWeight: "bold",
-          fontFamily:"'Rubik', sans-serif",
-          fontSize:"1.2rem",
+          fontFamily: "'Rubik', sans-serif",
+          fontSize: "1.2rem",
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
