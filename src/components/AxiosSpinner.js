@@ -1,26 +1,25 @@
+import useAxios from 'axios-hooks';
 import React, { useEffect } from 'react';
-import { Preloader } from "./Preloader";
+import Preloader from "./Preloader";
 
-const renderErrorLogger = (error, refetch) => {
+const RenderErrorLogger = ({error, refetch}) => {
   useEffect((error) => console.error(error), [error]);
-  return <>error</>;
+  return <>{error}</>;
 }
-
-const renderPreloader = () => <Preloader />;
 
 export const AxiosSpinner =
   ({
     renderData,
-    useHook,
-    renderError = renderErrorLogger,
-    renderLoader = renderPreloader,
+    callHook,
+    renderError = RenderErrorLogger,
+    renderLoader = Preloader,
   }) => {
-    const [{ data, loading, error }, refetch] = useHook();
+    const [{ data, loading, error }, refetch] = callHook(useAxios);
     if (error) {
-      return renderError(error, refetch);
+      return <renderError {...{ error, refetch }} />;
     }
     if (loading) {
-      return renderLoader();
+      return <renderLoader/>;
     }
-    return renderData(data, refetch)
-  }
+    return <renderData {...{ data, refetch }}/>;
+  };

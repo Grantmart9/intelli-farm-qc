@@ -67,7 +67,7 @@ const IrrigationControl = () => {
             }}
           >
             <AxiosSpinner
-              useHook={() => useAxios(`${API_URL}/${farmId}/irrigation_1`)}
+              callHook={use => use(`${API_URL}/${farmId}/irrigation_1`)}
               renderData={data => data.map(
                 irrigation_valve => <EquipmentStatus data={irrigation_valve} />)} />
           </div>
@@ -75,14 +75,14 @@ const IrrigationControl = () => {
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div className="w-full h-full">
             <AxiosSpinner
-              useHook={() => useAxios(`${API_URL}/${farmId}/irrigation_1`)}
+              callHook={use => use(`${API_URL}/${farmId}/irrigation_1`)}
               renderData={data => data.map(
                 irrigation_valve => <EquipmentStatus data={irrigation_valve} />)} />
           </div>
           <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
             <div style={{ backgroundColor: "#dfe2e8" }}>
               <AxiosSpinner
-                useHook={() => useAxios(`${API_URL}/${farmId}/irrigation_3`)}
+                callHook={use => use(`${API_URL}/${farmId}/irrigation_3`)}
                 renderData={data =>
                   <BrushChart
                     data={data.map(
