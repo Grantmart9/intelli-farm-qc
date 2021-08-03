@@ -5,7 +5,8 @@ import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import { AppName } from "./Dashboard";
+import { AppName } from "./AppName";
+import PageError from "./PageError.svg";
 
 const Fertilizer = () => {
   const { farmId } = useParams();
@@ -25,6 +26,7 @@ const Fertilizer = () => {
   return (
     <div style={{ backgroundColor: "#cad3de"}}>
       <AppName />
+      <img src={PageError} alt={PageError}/>
     </div>
   );
 };

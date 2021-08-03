@@ -11,7 +11,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import {AppName} from "./Dashboard";
+import {AppName} from "./AppName";
 
 const DateTimeEditInputCell = (props) => {
   const {id, field, value, api} = props;
