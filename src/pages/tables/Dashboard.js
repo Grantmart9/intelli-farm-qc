@@ -4,18 +4,12 @@ import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 
 import ApexChart from "react-apexcharts";
-import { pipe } from "fp-ts/lib/function";
-import { map } from "fp-ts/lib/Array";
-import { toArray, fromArray } from "fp-ts/lib/Set";
-import { eqString } from "fp-ts/lib/Eq";
-import { ordString } from "fp-ts/lib/Ord";
-import moment from "moment";
-
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import "./Dashboard.css";
 import { API_URL } from "../../api";
 import drop from "./drop.svg";
+import {HomeFlowFertilizerBarChart} from './HomeFlowFertilizerBarChart';
 
 export const AppName = () => {
   return (
@@ -100,84 +94,6 @@ const Pump = ({ pump }) => (
   </div>
 );
 
-export const HomeFlowFertilizerBarChart = ({ data }) => {
-  const today = useMemo(() => new Date(), []);
-  const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
-    const date = new Date(today);
-    date.setDate(date.getDate() + d);
-    return date;
-  });
-
-  const days = dates.map(
-    (date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
-  );
-
-  const seriesNames = pipe(
-    data,
-    map(({ name }) => name),
-    fromArray(eqString),
-    toArray(ordString)
-  );
-
-  const series = seriesNames.map((seriesName) => ({
-    name: seriesName,
-    data: dates.map((date) => {
-      const dayUsage = data.find(
-        (dayUsage) =>
-          new Date(dayUsage.date).getDay() === date.getDay() &&
-          dayUsage.name === seriesName
-      );
-      return dayUsage ? dayUsage.value : 0;
-    })
-  }));
-
-  return (
-    <ApexChart
-      type="bar"
-      height={300}
-      series={series}
-      options={{
-        chart: {
-          toolbar: {
-            show: false
-          }
-        },
-        tooltip: {
-          x: {
-            formatter: (_, { dataPointIndex }) => {
-              const date = moment(dates[dataPointIndex]).format(
-                "YYYY-MM-DD ddd"
-              );
-              return date;
-            }
-          },
-          y: {
-            formatter: (y, { dataPointIndex }) => {
-              const unit = data[dataPointIndex].unit;
-              return `${y} ${unit}`;
-            }
-          }
-        },
-        xaxis: {
-          categories: days
-        },
-        plotOptions: {
-          bar: {
-            endingShape: "rounded",
-            columnWidth: "55%"
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        title: {
-          text: "Fertilizer usage"
-        }
-      }}
-    />
-  );
-};
-
 export const HomeFlowFertilizerPieChart = ({ data }) => {
   const series = data.map(({ ratio }) => ratio);
   const labels = data.map(({ name }) => name);
@@ -244,7 +160,7 @@ export const Dashboard = () => {
   if (loading) return <Preloader />;
   if (error) return "Error";
   return (
-    <div style={{ display: "block",backgroundColor:"#cad3de" }}>
+    <div style={{ display: "block", backgroundColor: "#cad3de" }}>
       <AppName />
       <div
         style={{
@@ -255,46 +171,46 @@ export const Dashboard = () => {
           padding: "0.5rem",
         }}
       ></div>
-      <div style={{marginTop:"5rem"}}>
-      <div className="grid grid-cols-5 p-0">
-        <div className="col-span-2 bg-gray-400 rounded shadow-md m-4">
-          <IrrigationProgress data={data.irrigation_data} />
-        </div>
-        <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
-          <IrrigationTimeLeft data={data.irrigation_data} />
-        </div>
-        <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
-          <IrrigationEC data={data.irrigation_data} />
-        </div>
-        {data.irrigation_data.pump_data.map((pump, i) => (
-          <div className="col-span-1 bg-gray-400  rounded shadow-md m-4">
-            <Pump key={i} pump={pump} />
+      <div style={{ marginTop: "5rem" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-5 p-4 gap-4">
+          <div className="bg-gray-400  rounded shadow-md">
+            <IrrigationProgress data={data.irrigation_data} />
           </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
-        {data.water_usage.map((waterUsageData, i) => (
-          <div className="bg-gray-400  rounded shadow-md m-3 pt-4" key={i}>
-            <HomeFlowWaterUsage data={waterUsageData} />
+          <div className="bg-gray-400  rounded shadow-md">
+            <IrrigationTimeLeft data={data.irrigation_data} />
           </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-5">
-        <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
-          <div className="w-full h-full">
-            <HomeFlowFertilizerBarChart
-              data={data.fertilizer_usage.bar_graph}
-            />
+          <div className="bg-gray-400  rounded shadow-md">
+            <IrrigationEC data={data.irrigation_data} />
+          </div>
+          {data.irrigation_data.pump_data.map((pump, i) => (
+            <div className="bg-gray-400  rounded shadow-md">
+              <Pump key={i} pump={pump} />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+          {data.water_usage.map((waterUsageData, i) => (
+            <div className="bg-gray-400  rounded shadow-md m-3 pt-4" key={i}>
+              <HomeFlowWaterUsage data={waterUsageData} />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-5">
+          <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
+            <div className="w-full h-full">
+              <HomeFlowFertilizerBarChart
+                data={data.fertilizer_usage.bar_graph}
+              />
+            </div>
+          </div>
+          <div className="col-span-2 bg-gray-400  rounded shadow-md flex-grow m-4 flex align-items">
+            <div className="w-full">
+              <HomeFlowFertilizerPieChart
+                data={data.fertilizer_usage.pie_chart}
+              />
+            </div>
           </div>
         </div>
-        <div className="col-span-2 bg-gray-400  rounded shadow-md flex-grow m-4 flex align-items">
-          <div className="w-full">
-            <HomeFlowFertilizerPieChart
-              data={data.fertilizer_usage.pie_chart}
-            />
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   );
