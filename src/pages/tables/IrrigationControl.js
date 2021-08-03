@@ -99,7 +99,7 @@ const IrrigationControl = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(10rem, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(15rem, 1fr))",
           gridGap: "1rem",
           marginTop:"1rem",
           padding:"0.8rem",
