@@ -166,6 +166,7 @@
 	position: relative;
 	overflow-y: hidden;
 	.accordion-button{
+		background-color: #30393f;
 		&::after {
 			background:"none";
 			content: '\f054';
@@ -186,11 +187,12 @@
 
 	.accordion {
 		padding-top: .25rem;
-		
+		background-color:#2f3853;
 	}
 
 	.accordion-body {
 		padding: .5rem 0 0 0;
+		background-color:#2f3853;
 	}
 
 	.accordion-collapse{
