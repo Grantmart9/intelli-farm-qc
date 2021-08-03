@@ -1,11 +1,7 @@
 import React, { useMemo } from "react";
 import ApexChart from "react-apexcharts";
-import { pipe } from "fp-ts/lib/function";
-import { map } from "fp-ts/lib/Array";
-import { toArray, fromArray } from "fp-ts/lib/Set";
-import { eqString } from "fp-ts/lib/Eq";
-import { ordString } from "fp-ts/lib/Ord";
 import moment from "moment";
+
 export const HomeFlowFertilizerBarChart = ({ data }) => {
   const today = useMemo(() => new Date(), []);
   const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
@@ -18,13 +14,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
     (date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
   );
 
-  const seriesNames = pipe(
-    data,
-    map(({ name }) => name),
-    fromArray(eqString),
-    toArray(ordString)
-  );
-
+  const seriesNames = Array.from(new Set(data.map(({name}) => name)))
   const series = seriesNames.map((seriesName) => ({
     name: seriesName,
     data: dates.map((date) => {
