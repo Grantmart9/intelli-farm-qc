@@ -13,6 +13,9 @@ import Fertilizer from './tables/Fertilizer';
 import { IrrigationSchedule } from "./tables/IrrigationSchedule";
 import { Dashboard } from "./tables/Dashboard";
 import { Settings } from "./tables/Settings";
+import { Backwash } from "./tables/Backwash";
+import { Notifications } from "./tables/Notifications";
+import {Pumps} from './tables/Pumps';
 import { API_URL } from '../api';
 
 const farm_pages = {
@@ -40,6 +43,21 @@ const farm_pages = {
     name: "Settings",
     path: "/settings",
     page: Settings
+  },
+  backwash: {
+    name: "Backwash",
+    path: "/backwash",
+    page: Backwash
+  },
+  notifications: {
+    name: "Notifications",
+    path: "/notifications",
+    page: Notifications
+  },
+  pumps: {
+    name: "Pumps",
+    path: "/pumps",
+    page: Pumps
   }
 };
 
