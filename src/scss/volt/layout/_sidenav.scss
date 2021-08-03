@@ -173,7 +173,6 @@
 			width:.5rem;
 		}
 		&:not(.collapsed) {
-			background-color:#2f3853;
 			&::after{
 				transform: rotate(90deg);
     			transition: all .4s ease;
