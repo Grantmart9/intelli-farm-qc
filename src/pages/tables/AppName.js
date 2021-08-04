@@ -1,5 +1,5 @@
 import React from "react";
-import drop from "./drop.svg";
+import Logo from './Logo.png';
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,9 +25,10 @@ export const AppName = () => {
               backgroundColor: "#293354",
               color: "white",
               width: "100%",
+              padding:"0.5rem",
             }}
           >
-            <em>intelli</em>-Farm <img src={drop} width={"50rem"} alt={drop} />
+            <img width={300} src={Logo} alt={Logo}/>
           </div>
         </AppBar>
       </div>

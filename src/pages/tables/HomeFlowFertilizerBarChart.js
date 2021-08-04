@@ -71,7 +71,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
           offsetX: 30,
           offsetY: 10,
           style: {
-            fontSize:  '12x',
+            fontSize:  '17px',
             fontWeight:  'bold',
           },
         },

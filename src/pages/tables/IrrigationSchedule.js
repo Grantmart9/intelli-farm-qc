@@ -295,7 +295,7 @@ export const IrrigationSchedule = () => {
               <SectionRow key={i} section={section} onChange={handleChange} />
             );
           })
-        }  
+        }
       </div>
     </div>
     </div>

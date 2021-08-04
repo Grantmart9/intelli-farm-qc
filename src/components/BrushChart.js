@@ -79,11 +79,20 @@ export const BrushChart = ({data}) => {
 
   return (
     <div className="w-full h-full" ref={setTarget}>
-      <h1
+      <div
         style={{ marginLeft: "2.5rem", fontWeight: "bold", fontSize: "17px" }}
       >
-        Main Valve History
-      </h1>
+        <text
+          style={{
+            display: "inline-flex",
+            color: "#373738",
+            marginTop: "0.5rem",
+            marginBottom: "0.5rem",
+          }}
+        >
+          Main Valve History
+        </text>
+      </div>
       <VictoryChart
         theme={theme}
         height={300}
@@ -105,7 +114,7 @@ export const BrushChart = ({data}) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        <VictoryAxis dependentAxis />
+        <VictoryAxis dependentAxis fontSize={1} />
         <VictoryBar
           barRatio={0.4}
           labels={({ datum: { x, y } }) => `${formatDate(x)} — ${y.toFixed(2)}`}
