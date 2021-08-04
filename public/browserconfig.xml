@@ -2,7 +2,7 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="/droplet.png"/>
+            <square150x150logo src="/drop.png"/>
             <TileColor>#ffffff</TileColor>
         </tile>
     </msapplication>
