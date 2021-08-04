@@ -49,18 +49,9 @@ const EquipmentStatus = ({ data }) => {
 const IrrigationControl = () => {
   const { farmId } = useParams();
   return (
-    <div className="p-0" style={{ backgroundColor: "#cad3de" }}>
+    <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
-          padding: "0.5rem",
-        }}
-      ></div>
-      <div style={{ marginTop: "3rem" }}>
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div
             style={{

@@ -145,7 +145,7 @@ export const Dashboard = () => {
           justifyContent: "center",
         }}
       ></div>
-      <div style={{ marginTop: "3rem" }}>
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
           <div className="bg-gray-400 rounded shadow-md">
             <IrrigationProgress data={data.irrigation_data} />
