@@ -113,6 +113,7 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
+              <div style={{marginTop:"5rem"}}></div>
               <Button
                 style={{
                   display: "flex",
@@ -125,7 +126,7 @@ const Sidebar = (props = {}) => {
                   fontFamily: "'Noto Sans JP', sans-serif",
                   gap: "0.5rem",
                   padding:"0.5rem",
-                  marginBottom:"3.5rem",
+                  marginBottom:"2.5rem",
                 }}
               >
                 <FontAwesomeIcon style={{padding:"0.5rem"}}icon={faLeaf} />
