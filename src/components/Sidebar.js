@@ -22,7 +22,7 @@ const Sidebar = (props = {}) => {
 
     return (
       <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
-        <Accordion.Item className="border-0" eventKey={eventKey}>
+        <Accordion.Item className="border-0 bg-blue-900" eventKey={eventKey}>
           <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center bg-red-900">
             <span>
               <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span>
