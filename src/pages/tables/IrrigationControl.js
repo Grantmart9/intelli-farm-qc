@@ -12,7 +12,7 @@ import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 const EquipmentStatus = ({ data }) => {
   return (
     <div>
-      <div className="shadow-md border-2">
+      <div className="shadow-md border-1 rounded">
         <div
           style={{
             border: "1px 1px solid black",

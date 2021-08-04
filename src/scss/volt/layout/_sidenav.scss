@@ -11,7 +11,7 @@
 	max-height: 100%;
 	overflow-y: auto;
 	width: 100%;
-	background-color: #293354;
+	background-color: #1e96ff;
 	@include transition(max-width .8s);
 	@include media-breakpoint-up(md) {
 		width: 300px;
@@ -27,21 +27,21 @@
 		&.active {
 			& > .nav-link {
 				color: $light;
-				background-color: #293354;
+				background-color: #1b425c;
 			}
 		}
 		.nav-link {
 			color: $light;
-			border: $border-width solid $dark;
+			border: $border-width solid $light;
 			font-family: 'Nunito Sans';
 			font-weight:"bold";
 			&:hover {
 				color: $light;
-				background-color: #2f3853;
+				background-color: #31729d;
 			}
 			&.active {
 				color: $white;
-				background-color: #2f3853;
+				background-color: #297b15;
 			}
 		}
 		margin-bottom: .2rem;
@@ -55,7 +55,7 @@
 		font-size: $font-size-base;
 		vertical-align: middle;
 		padding: 0.55rem 0.75rem;
-		background-color: #293354;
+		background-color: #1e96ff;
 		@include border-radius($border-radius);
 
 		.sidebar-icon {
@@ -182,12 +182,12 @@
 
 	.accordion {
 		padding-top: .25rem;
-		background-color:#293354;
+		background-color:#1e96ff;
 	}
 
 	.accordion-body {
 		padding: .5rem 0 0 0;
-		background-color:#293354;
+		background-color:#1e96ff;
 	}
 
 	.accordion-collapse{
@@ -201,7 +201,7 @@
 }
 
 .user-card{
-	border-bottom: 0.0625rem solid #293354;
+	border-bottom: 0.0625rem solid #1e96ff;
 }
 
 @include media-breakpoint-down(sm) {

@@ -56,6 +56,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
         },
         xaxis: {
           categories: days,
+          style:{fontSize:'40px',}
         },
         plotOptions: {
           bar: {

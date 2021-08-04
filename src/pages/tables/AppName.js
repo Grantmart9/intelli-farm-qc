@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 2,
-    display:"inline-flex",
+    display: "inline-flex",
   },
 }));
 
@@ -22,13 +22,13 @@ export const AppName = () => {
               justifyContent: "center",
               fontFamily: "'Noto Sans JP', sans-serif",
               fontSize: "3rem",
-              backgroundColor: "#293354",
+              backgroundColor: "#1e96ff",
               color: "white",
               width: "100%",
-              padding:"0.5rem",
+              padding: "0.5rem",
             }}
           >
-            <img width={300} src={Logo} alt={Logo}/>
+            <img width={250} src={Logo} alt={Logo} />
           </div>
         </AppBar>
       </div>

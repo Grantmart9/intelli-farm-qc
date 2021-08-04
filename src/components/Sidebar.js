@@ -22,7 +22,7 @@ const Sidebar = (props = {}) => {
 
     return (
       <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
-        <Accordion.Item className="border-0 bg-blue-900" eventKey={eventKey}>
+        <Accordion.Item className="border-0 bg-blue-500" eventKey={eventKey}>
           <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center bg-red-900">
             <span>
               <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span>
@@ -113,26 +113,28 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div style={{marginTop:"5rem"}}></div>
+              <div style={{ marginTop: "5rem" }}></div>
               <Button
                 style={{
                   display: "flex",
                   alignContent: "center",
-                  backgroundColor: "#293354",
+                  backgroundColor: "#1e96ff",
                   justifyContent: "center",
-                  alignItems:"center",
+                  alignItems: "center",
                   fontSize: "2.5rem",
-                  fontWeight:"bold",
+                  fontWeight: "bold",
                   fontFamily: "'Noto Sans JP', sans-serif",
                   gap: "0.5rem",
-                  padding:"0.5rem",
-                  marginBottom:"2.5rem",
+                  padding: "0.5rem",
+                  marginBottom: "2.5rem",
                 }}
               >
-                <FontAwesomeIcon style={{padding:"0.5rem"}}icon={faLeaf} />
+                <FontAwesomeIcon style={{ padding: "0.5rem" }} icon={faLeaf} />
                 {title}
               </Button>
-              <div className="" ><div style={{ fontFamily: "Times New Roman" }}>{navItems}</div></div>
+              <div className="">
+                <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
+              </div>
               <Button
                 style={{
                   display: "flex",
@@ -140,7 +142,7 @@ const Sidebar = (props = {}) => {
                   alignContent: "center",
                   justifyContent: "center",
                   marginTop: "1rem",
-                  backgroundColor: "#293354",
+                  backgroundColor: "#1e96ff",
                 }}
               >
                 Logout

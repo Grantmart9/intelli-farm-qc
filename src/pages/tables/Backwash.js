@@ -6,7 +6,7 @@ export const Backwash = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <img src={ErrorPage} alt={ErrorPage} width="100%" />
-    </div>
+        <img src={ErrorPage} alt={ErrorPage} width="100%" />
+      </div>
   );
 };
