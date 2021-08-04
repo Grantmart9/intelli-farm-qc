@@ -26,7 +26,7 @@ const EquipmentStatus = ({ data }) => {
         >
           <div style={{ padding: "1rem" }}>
             <FontAwesomeIcon
-              style={{ color: "gray", fontSize: "2rem" }}
+              style={{ color: "gray", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.2rem" }}
               icon={faChartLine}
             />
           </div>
