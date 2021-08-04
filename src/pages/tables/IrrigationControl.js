@@ -21,12 +21,12 @@ const EquipmentStatus = ({ data }) => {
             padding: "1rem",
             fontFamiliy: "Times New Roman",
             fontWeight: "bold",
-            gap: "1.5rem",
+            gap: "1rem",
           }}
         >
           <div style={{ padding: "1rem" }}>
             <FontAwesomeIcon
-              style={{ color: "gray", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.2rem" }}
+              style={{ color: "gray", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.5rem" }}
               icon={faChartLine}
             />
           </div>

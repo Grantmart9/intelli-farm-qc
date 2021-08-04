@@ -114,9 +114,9 @@ export const BrushChart = ({data}) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        <VictoryAxis dependentAxis fontSize={1} />
+        <VictoryAxis dependentAxis/>
         <VictoryBar
-          barRatio={0.4}
+          barRatio={0.5}
           labels={({ datum: { x, y } }) => `${formatDate(x)} — ${y.toFixed(2)}`}
           labelComponent={<BrushChartTooltip />}
           data={data}
