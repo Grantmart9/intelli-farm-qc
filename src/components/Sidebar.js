@@ -115,6 +115,7 @@ const Sidebar = (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               <div style={{ marginTop: "5rem" }}></div>
               <Button
+                className="border-1 border-white"
                 style={{
                   display: "flex",
                   alignContent: "center",
@@ -136,6 +137,7 @@ const Sidebar = (props = {}) => {
                 <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
               </div>
               <Button
+                className="border-1 border-white"
                 style={{
                   display: "flex",
                   alignItems: "center",

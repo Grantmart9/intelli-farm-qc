@@ -125,9 +125,9 @@ const FertilizerTable = ({ section, onChange = null }) => {
     <>
       <h3
         style={{
-          background: "#99a9c4",
+          background: "#a2d2fc",
           color: "#4a5073",
-          border: "1px solid #99a9c4",
+          border: "1px solid #a2d2fc",
           borderRadius: "0.09cm",
           height: "3rem",
           padding: "0.5rem",
@@ -167,16 +167,16 @@ const SectionRow = ({ section, onChange = null }) => (
     <div
       className="flex align-items-center align-content-center justify-content-center"
       style={{
-        background: "#99a9c4",
+        background: "#a2d2fc",
         color: "#4a5073",
         fontWeight: "bold",
-        border: "1px solid #e0dcdc",
+        border: "1px solid #a2d2fc",
         borderRadius: "0.09cm",
       }}
     >
       <h3
         style={{
-          background: "#99a9c4",
+          background: "#a2d2fc",
           color: "#4a5073",
           height: "3rem",
           padding: "0.5rem",
@@ -261,11 +261,10 @@ export const IrrigationSchedule = () => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          padding:"0.5rem"
         }}
       >
       </div>
-      <div className="p-3" style={{marginTop:"5rem"}}>
+      <div className="p-2" style={{marginTop:"5rem"}}>
       <div
         className="flex flex-col align-items-center align-content-center justify-content-center p-1"
         style={{
