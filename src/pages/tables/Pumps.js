@@ -6,7 +6,9 @@ export const Pumps = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <img src={ErrorPage} alt={ErrorPage} width="100%" />
+      <div style={{ display: "flex", marginLeft: "10%", marginTop: "2%" }}>
+        <img src={ErrorPage} alt={ErrorPage} width="90%" />
+      </div>
     </div>
   );
 };
