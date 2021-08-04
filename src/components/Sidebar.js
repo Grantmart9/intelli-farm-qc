@@ -120,7 +120,7 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div style={{ marginTop: "5rem" }}></div>
+              <div style={{ marginTop: "3.8rem" }}></div>
               <Button
                 className="border-1 border-white"
                 style={{

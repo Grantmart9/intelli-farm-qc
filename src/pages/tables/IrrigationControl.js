@@ -49,7 +49,7 @@ const EquipmentStatus = ({ data }) => {
 const IrrigationControl = () => {
   const { farmId } = useParams();
   return (
-    <div style={{ backgroundColor: "#cad3de" }}>
+    <div className="p-0" style={{ backgroundColor: "#cad3de" }}>
       <AppName />
       <div
         style={{
