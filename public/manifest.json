@@ -3,12 +3,12 @@
   "short_name": "Volt React Dashboard",
   "icons": [
     {
-      "src": "/docs/4.3/assets/img/favicons/android-chrome-192x192.png",
+      "src": "/droplet.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/docs/4.3/assets/img/favicons/android-chrome-512x512.png",
+      "src": "/droplet.png.png",
       "sizes": "512x512",
       "type": "image/png"
     }
