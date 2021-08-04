@@ -264,7 +264,7 @@ export const IrrigationSchedule = () => {
         }}
       >
       </div>
-      <div className="p-2" style={{marginTop:"5rem"}}>
+      <div className="p-3" style={{marginTop:"3.5rem"}}>
       <div
         className="flex flex-col align-items-center align-content-center justify-content-center p-1"
         style={{
@@ -275,7 +275,6 @@ export const IrrigationSchedule = () => {
           padding: "1rem",
           fontFamily:"'Rubik', sans-serif",
           fontSize:"1.2rem",
-          marginLeft:"1rem",
           color:"#4a5073",
         }}
       >

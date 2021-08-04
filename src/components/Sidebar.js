@@ -83,7 +83,14 @@ const Sidebar = (props = {}) => {
         expand={false}
         collapseOnSelect
         variant="dark"
-        className="navbar-theme-primary px-4 d-md-none"
+        className="navbar-theme-primary px-4 d-md-none mt-5"
+        style={{
+          backgroundColor: "#1e96ff",
+          borderBottom: "1px 1px solid #1e96ff",
+          borderRadius:"0.2cm",
+          display:"flex",
+          width:"100%"
+        }}
       >
         <Navbar.Brand
           className="me-lg-5"

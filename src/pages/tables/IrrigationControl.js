@@ -60,7 +60,7 @@ const IrrigationControl = () => {
           padding: "0.5rem",
         }}
       ></div>
-      <div style={{ marginTop: "5rem" }}>
+      <div style={{ marginTop: "3rem" }}>
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <div
             style={{
