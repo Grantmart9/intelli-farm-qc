@@ -1,12 +1,12 @@
 import React from "react";
 import {AppName} from "./AppName";
-import PageError from "./PageError.svg";
+import ErrorPage from "./ErrorPage.jpg";
 
 export const Settings = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <img src={PageError} alt={PageError}/>
+      <img src={ErrorPage} alt={ErrorPage} width="100%" />
     </div>
   );
 };

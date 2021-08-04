@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     display:"inline-flex",
   },
 }));
+
 export const AppName = () => {
     return (
       <div>
@@ -26,7 +27,7 @@ export const AppName = () => {
               width: "100%",
             }}
           >
-            Intelli-Farm <img src={drop} width={"50rem"} alt={drop} />
+            <em>intelli</em>-Farm <img src={drop} width={"50rem"} alt={drop} />
           </div>
         </AppBar>
       </div>

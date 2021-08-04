@@ -79,52 +79,58 @@ export const BrushChart = ({data}) => {
 
   return (
     <div className="w-full h-full" ref={setTarget}>
-      <h1  style={{marginLeft:"2.5rem",fontWeight:"bold",fontSize:"18px"}}>Main Valve History</h1>
-        <VictoryChart
-          theme={theme}
-          height={300}
-          width={width}
-          padding={{left: 40, bottom: 20}}
-          scale={{x: "time", y: "linear"}}
-          domain={{x: domain}}
-          containerComponent={
-            <VictoryZoomVoronoiContainer
-              style={{
-                touchAction: "auto"
-              }}
-              zoomDimension="x"
-              voronoiDimension="x"
-              allowPan={false}
-              allowZoom={false}
-              zoomDomain={{x: zoomDomain}}
-            />
-          }>
-            <VictoryAxis fixLabelOverlap gridComponent={<></>}/>
-            <VictoryAxis dependentAxis />
-            <VictoryBar 
-              barRatio={0.4} 
-              labels={({ datum: {x, y} }) => `${formatDate(x)} — ${y.toFixed(2)}`}
-              labelComponent={<BrushChartTooltip/>}
-              data={data} 
-              />
-        </VictoryChart>
-        <VictoryChart
-          theme={theme}
-          height={100}
-          width={width}
-          padding={{left: 40, bottom: 20}}
-          scale={{x: "time", y: "linear"}}
-          domain={{x: domain}}
-          containerComponent={
-            <VictoryBrushContainer
-              brushDimension="x"
-              brushDomain={{ x: zoomDomain }}
-              onBrushDomainChangeEnd={brushCallback}
-            />
-          }>
-            <VictoryAxis fixLabelOverlap gridComponent={<></>}/>
-            <VictoryBar barRatio={0.4} data={data} />
-        </VictoryChart>
+      <h1
+        style={{ marginLeft: "2.5rem", fontWeight: "bold", fontSize: "17px" }}
+      >
+        Main Valve History
+      </h1>
+      <VictoryChart
+        theme={theme}
+        height={300}
+        width={width}
+        padding={{ left: 40, bottom: 20 }}
+        scale={{ x: "time", y: "linear" }}
+        domain={{ x: domain }}
+        containerComponent={
+          <VictoryZoomVoronoiContainer
+            style={{
+              touchAction: "auto",
+            }}
+            zoomDimension="x"
+            voronoiDimension="x"
+            allowPan={false}
+            allowZoom={false}
+            zoomDomain={{ x: zoomDomain }}
+          />
+        }
+      >
+        <VictoryAxis fixLabelOverlap gridComponent={<></>} />
+        <VictoryAxis dependentAxis />
+        <VictoryBar
+          barRatio={0.4}
+          labels={({ datum: { x, y } }) => `${formatDate(x)} — ${y.toFixed(2)}`}
+          labelComponent={<BrushChartTooltip />}
+          data={data}
+        />
+      </VictoryChart>
+      <VictoryChart
+        theme={theme}
+        height={100}
+        width={width}
+        padding={{ left: 40, bottom: 20 }}
+        scale={{ x: "time", y: "linear" }}
+        domain={{ x: domain }}
+        containerComponent={
+          <VictoryBrushContainer
+            brushDimension="x"
+            brushDomain={{ x: zoomDomain }}
+            onBrushDomainChangeEnd={brushCallback}
+          />
+        }
+      >
+        <VictoryAxis fixLabelOverlap gridComponent={<></>} />
+        <VictoryBar barRatio={0.4} data={data} />
+      </VictoryChart>
     </div>
   );
 }

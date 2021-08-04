@@ -265,7 +265,7 @@ export const IrrigationSchedule = () => {
         }}
       >
       </div>
-      <div className="p-1" style={{marginTop:"5rem"}}>
+      <div className="p-3" style={{marginTop:"5rem"}}>
       <div
         className="flex flex-col align-items-center align-content-center justify-content-center p-1"
         style={{

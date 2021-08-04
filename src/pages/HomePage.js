@@ -20,7 +20,7 @@ import { API_URL } from '../api';
 
 const farm_pages = {
   irrigation: {
-    name: "Irrigation Control",
+    name: "Irrigation Valves",
     path: "/irrigation",
     page: IrrigationControl
   },

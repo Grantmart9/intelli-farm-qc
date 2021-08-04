@@ -12,29 +12,35 @@ import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 const EquipmentStatus = ({ data }) => {
   return (
     <div>
-      <div className="shadow-md">
-      <div
-        style={{
-          border:"1px 1px solid black",
-          display: "flex",
-          background: "#e1e3e8",
-          padding: "1rem",
-          fontFamiliy: "Times New Roman",
-          fontWeight: "bold",
-          gap: "3rem",
-        }}
-      ><div style={{ padding: "1rem" }}>
-          <FontAwesomeIcon
-            style={{ color: "gray", fontSize: "2rem" }}
-            icon={faChartLine}
-          />
+      <div className="shadow-md border-2">
+        <div
+          style={{
+            border: "1px 1px solid black",
+            display: "flex",
+            background: "#e3e5e8",
+            padding: "1rem",
+            fontFamiliy: "Times New Roman",
+            fontWeight: "bold",
+            gap: "1.5rem",
+          }}
+        >
+          <div style={{ padding: "1rem" }}>
+            <FontAwesomeIcon
+              style={{ color: "gray", fontSize: "2rem" }}
+              icon={faChartLine}
+            />
+          </div>
+          <div>
+            <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>{data.name}</h4>
+            <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>
+              {data.total_flow}
+            </h2>
+            <h2 style={{ color: "#4a5073", fontSize: "0.7rem" }}>
+              {data.real_time_flow}
+            </h2>
+            <h4 style={{ color: "red", fontSize: "0.8rem" }}>{data.alarm}</h4>
+          </div>
         </div>
-        <div>
-          <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>{data.name}</h4>
-          <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>{data.real_time_flow}</h2>
-          <h4 style={{ color: "red", fontSize: "0.8rem" }}>{data.alarm}</h4>
-        </div>
-      </div>
       </div>
     </div>
   );

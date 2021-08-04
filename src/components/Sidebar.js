@@ -50,7 +50,7 @@ const Sidebar = (props = {}) => {
         <Nav.Link {...linkProps} target={target} className={classNames}>
           <span>
             {icon ? <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span> : null}
-            {image ? <Image src={image} width={20} height={20} className="sidebar-icon svg-icon" /> : null}
+            {image ? <Image src={image} width={100} height={20} className="sidebar-icon svg-icon" /> : null}
             <span className="sidebar-text">{title}</span>
           </span>
           {badgeText ? (
