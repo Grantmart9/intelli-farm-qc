@@ -3,8 +3,6 @@ import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { AppName } from "./AppName";
 import ErrorPage from "./ErrorPage.jpg";
 
@@ -15,12 +13,7 @@ const Fertilizer = () => {
   );
 
   if (loading) return <Preloader />;
-  if (error)
-    return (
-      <p>
-        <FontAwesomeIcon icon={faExclamation} />
-      </p>
-    );
+  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
 
   console.log(data);
   return (

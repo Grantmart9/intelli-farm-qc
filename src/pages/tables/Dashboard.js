@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { API_URL } from "../../api";
 import {HomeFlowFertilizerBarChart} from './HomeFlowFertilizerBarChart';
 import {AppName} from "./AppName";
+import ErrorPage from './ErrorPage.jpg';
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -132,7 +133,7 @@ export const Dashboard = () => {
   const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/dashboard`);
 
   if (loading) return <Preloader />;
-  if (error) return "Error";
+  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
   return (
     <div style={{ display: "block", backgroundColor: "#cad3de" }}>
       <AppName />

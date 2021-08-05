@@ -20,10 +20,10 @@ export const Pumps = () => {
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="bg-gray-400 rounded shadow-md font-bold text-gray-800 text-center p-2">
-          <h1>Name: {data.map(({ name }) => name)}</h1>
-          <h1>Alarm: {data.map(({ alarm }) => alarm)}</h1>
-          <h1>Pressure: {data.map(({ pressure }) => pressure)}</h1>
+          <h1>{data.map(({ name }) => name)}</h1>
           <h1>Pump Type: {data.map(({ pump_type }) => pump_type)}</h1>
+          <h1>Alarm Status: {data.map(({ alarm }) => alarm)}</h1>
+          <h1>Pressure: {data.map(({ pressure }) => pressure)}</h1>
         </div>
       </div>
     </div>

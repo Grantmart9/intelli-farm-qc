@@ -12,6 +12,7 @@ import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import {AppName} from "./AppName";
+import ErrorPage from './ErrorPage.jpg';
 
 const DateTimeEditInputCell = (props) => {
   const {id, field, value, api} = props;
@@ -223,11 +224,7 @@ export const IrrigationSchedule = () => {
 
   if (loading || !schedule) return <Preloader />;
   if (error)
-    return (
-      <p>
-        <FontAwesomeIcon icon={faExclamation} />
-      </p>
-    );
+    return <img src={ErrorPage} alt={ErrorPage}/>;
 
   const handleChange = async (editedSection) => {
     const editedSchedule = schedule.map(section => 
