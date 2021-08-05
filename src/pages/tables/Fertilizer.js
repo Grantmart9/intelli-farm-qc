@@ -4,12 +4,19 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import { AppName } from "./AppName";
-import ErrorPage from "./ErrorPage.jpg";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
-
-
+import {
+  createContainer,
+  VictoryAxis,
+  VictoryBar,
+  VictoryBrushContainer,
+  VictoryChart,
+  VictoryLine,
+  VictoryTheme,
+  VictoryTooltip,
+} from "victory";
 
 const FertilizerValves = ({ valves }) => {
   return (
@@ -79,6 +86,15 @@ export const FertilizerPieChart = ({ data }) => {
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
           position: "bottom",
         },
+        title: {
+          text: "Fertilizer",
+          offsetX: 30,
+          offsetY: 10,
+          style: {
+            fontSize: "17px",
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
@@ -91,7 +107,7 @@ const Fertilizer = () => {
   );
 
   if (loading) return <Preloader />;
-  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
+  if (error) return <img src={ErrorGif} alt={ErrorGif}/>;
 
 
   return (
@@ -112,7 +128,27 @@ const Fertilizer = () => {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-3 bg-gray-400 rounded shadow-md m-4 p-2">
+        <div className="bg-gray-400 rounded shadow-md m-4 p-1">
+          <div style={{ width: "100%", height: "20rem" }}>
+            <VictoryChart theme={VictoryTheme.material}>
+              <VictoryLine
+                style={{
+                  data: { stroke: "black" },
+                  parent: { border: "4px solid black" },
+                }}
+                data={[
+                  { x: 1, y: 2 },
+                  { x: 2, y: 3 },
+                  { x: 3, y: 5 },
+                  { x: 4, y: 4 },
+                  { x: 5, y: 7 },
+                  { x: 20, y: 10 },
+                ]}
+              />
+            </VictoryChart>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 bg-gray-400 rounded shadow-md m-4 p-2">
           <div className="bg-gray-400 rounded shadow-md m-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />
           </div>
