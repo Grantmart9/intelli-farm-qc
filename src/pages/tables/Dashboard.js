@@ -5,7 +5,6 @@ import Preloader from "../../components/Preloader";
 import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import "./Dashboard.css";
 import { API_URL } from "../../api";
 import {HomeFlowFertilizerBarChart} from './HomeFlowFertilizerBarChart';
 import {AppName} from "./AppName";

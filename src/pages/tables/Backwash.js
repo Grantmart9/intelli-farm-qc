@@ -6,7 +6,6 @@ import Preloader from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 
-
  const WashBack = ({ backwash }) => {
    return (
      <div>
@@ -42,8 +41,6 @@ export const Backwash = () => {
 
  if (loading) return <Preloader />;
  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
-
- console.log(data);
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>

@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartLine } from "@fortawesome/free-solid-svg-icons";
-import "./IrrigationControl.css";
 import { AppName } from "./AppName";
 import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
