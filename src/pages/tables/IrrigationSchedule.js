@@ -252,9 +252,9 @@ export const IrrigationSchedule = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
           <div
-            className="flex flex-col align-items-center align-content-center justify-content-center p-1"
+            className="flex flex-col align-items-center align-content-center justify-content-center p-1 mt-2"
             style={{
               dislay: "flex",
               background: "white",
