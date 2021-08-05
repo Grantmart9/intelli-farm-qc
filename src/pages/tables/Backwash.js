@@ -51,7 +51,7 @@ export const Backwash = () => {
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="bg-gray-400 rounded shadow-md font-bold text-gray-800 p-2 text-center">
           <h1>Alarm Status: {data.backwash_status.status}</h1>
-          <h1>Percentage Left: {data.backwash_status.percentage_left}</h1>
+          <h1>Percentage Left: {data.backwash_status.percentage_left} %</h1>
         </div>
         <div
           style={{
