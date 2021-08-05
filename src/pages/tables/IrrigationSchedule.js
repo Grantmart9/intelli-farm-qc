@@ -250,40 +250,37 @@ export const IrrigationSchedule = () => {
   };
 
   return (
-    <div style={{backgroundColor:"#cad3de"}}>
+    <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-      <div
-        className="flex flex-col align-items-center align-content-center justify-content-center p-1"
-        style={{
-          dislay:"flex",
-          background: "white",
-          border: "1px solid white",
-          borderRadius: "0.09cm",
-          padding: "1rem",
-          fontFamily:"'Rubik', sans-serif",
-          fontSize:"1.2rem",
-          color:"#4a5073",
-        }}
-      >
-        <OverlayTrigger
-          placement="bottom"
-          trigger={["hover", "focus"]}
-          overlay={<Tooltip>Save All settings</Tooltip>}
-        >
-          <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-            <FontAwesomeIcon icon={faSave} /> Save
-          </Button>
-        </OverlayTrigger>
-        {
-          schedule.map((section, i) => {
-            return (
-              <SectionRow key={i} section={section} onChange={handleChange} />
-            );
-          })
-        }
-      </div>
-    </div>
+        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+          <div
+            className="flex flex-col align-items-center align-content-center justify-content-center p-1"
+            style={{
+              dislay: "flex",
+              background: "white",
+              border: "1px solid white",
+              borderRadius: "0.09cm",
+              fontFamily: "'Rubik', sans-serif",
+              fontSize: "1.2rem",
+              color: "#4a5073",
+            }}
+          >
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Save All settings</Tooltip>}
+            >
+              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+                <FontAwesomeIcon icon={faSave} /> Save
+              </Button>
+            </OverlayTrigger>
+            {schedule.map((section, i) => {
+              return (
+                <SectionRow key={i} section={section} onChange={handleChange} />
+              );
+            })}
+          </div>
+        </div>
     </div>
   );
 };

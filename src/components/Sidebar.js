@@ -120,7 +120,7 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div style={{ marginTop: "3.8rem" }}></div>
+              <div className="2xl:mt-16"></div>
               <Button
                 className="border-1 border-white"
                 style={{
@@ -140,9 +140,7 @@ const Sidebar = (props = {}) => {
                 <FontAwesomeIcon style={{ padding: "0.5rem" }} icon={faLeaf} />
                 {title}
               </Button>
-              <div className="">
                 <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
-              </div>
               <Button
                 className="border-1 border-white"
                 style={{
