@@ -7,6 +7,7 @@ import { AppName } from "./AppName";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
+import { BrushChart } from "../../components/BrushChart";
 import {
   createContainer,
   VictoryAxis,
@@ -17,6 +18,7 @@ import {
   VictoryTheme,
   VictoryTooltip,
 } from "victory";
+
 
 const FertilizerValves = ({ valves }) => {
   return (
@@ -33,9 +35,13 @@ const FertilizerValves = ({ valves }) => {
           }}
         >
           <div>
-            <h4 className="text-gray-800">Alarm Status: {valves.alarm}</h4>
+            <h4 className="text-gray-800">
+              Alarm Status: {valves.alarm}
+            </h4>
             <h4 className="text-gray-800">Name: {valves.name}</h4>
-            <h4 className="text-gray-800">Real Time Flow: {valves.real_time_flow}</h4>
+            <h4 className="text-gray-800">
+              Real Time Flow: {valves.real_time_flow}
+            </h4>
             <h4 className="text-gray-800">Total Flow: {valves.total_flow}</h4>
             <h4 className="text-gray-800">Valve Type: {valves.valve_type}</h4>
           </div>
@@ -129,23 +135,14 @@ const Fertilizer = () => {
           ))}
         </div>
         <div className="bg-gray-400 rounded shadow-md m-4 p-1">
-          <div style={{ width: "100%", height: "20rem" }}>
-            <VictoryChart theme={VictoryTheme.material}>
-              <VictoryLine
-                style={{
-                  data: { stroke: "black" },
-                  parent: { border: "4px solid black" },
-                }}
-                data={[
-                  { x: 1, y: 2 },
-                  { x: 2, y: 3 },
-                  { x: 3, y: 5 },
-                  { x: 4, y: 4 },
-                  { x: 5, y: 7 },
-                  { x: 20, y: 10 },
-                ]}
-              />
-            </VictoryChart>
+          <div style={{ width: "100%", height: "40rem" }}>
+            <BrushChart
+              data={data.ec_history.map(({ datetime, y, ...rest }) => ({
+                ...rest,
+                x: new Date(datetime),
+                y: Number(y),
+              }))}
+            />
           </div>
         </div>
         <div className="grid grid-cols-2 bg-gray-400 rounded shadow-md m-4 p-2">
