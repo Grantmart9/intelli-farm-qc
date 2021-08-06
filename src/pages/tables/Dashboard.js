@@ -6,23 +6,25 @@ import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import { API_URL } from "../../api";
-import {HomeFlowFertilizerBarChart} from './HomeFlowFertilizerBarChart';
-import {AppName} from "./AppName";
-import ErrorPage from './ErrorPage.jpg';
+import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
+import { AppName } from "./AppName";
+import ErrorPage from "./ErrorPage.jpg";
+
+
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 5
+    borderRadius: 5,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700]
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#05ab24"
-  }
+    backgroundColor: "#05ab24",
+  },
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
@@ -41,7 +43,7 @@ const IrrigationTimeLeft = ({ data }) => (
       padding: "1.5rem",
       alignItems: "center",
       alignContent: "center",
-      justifyContent: "center"
+      justifyContent: "center",
     }}
   >
     <h1 className=".text-lg">Irrigation Time Left</h1>
@@ -82,8 +84,8 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom"
-        }
+          position: "bottom",
+        },
       }}
     />
   );
@@ -96,33 +98,33 @@ export const HomeFlowWaterUsage = ({ data }) => {
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
-        }
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
+        },
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
         },
         subtitle: {
           text: data.name,
-          offsetX: 30
+          offsetX: 30,
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30
-        }
+          offsetX: 30,
+        },
       }}
     />
   );
@@ -133,7 +135,8 @@ export const Dashboard = () => {
   const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/dashboard`);
 
   if (loading) return <Preloader />;
-  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
+  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
+
   return (
     <div style={{ display: "block", backgroundColor: "#cad3de" }}>
       <AppName />

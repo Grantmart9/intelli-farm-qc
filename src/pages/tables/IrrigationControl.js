@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faChartLine,faSpa, faTint } from "@fortawesome/free-solid-svg-icons";
 import { AppName } from "./AppName";
 import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
@@ -25,8 +25,8 @@ const EquipmentStatus = ({ data }) => {
         >
           <div style={{ padding: "1rem" }}>
             <FontAwesomeIcon
-              style={{ color: "gray", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.5rem" }}
-              icon={faChartLine}
+              style={{ color: "steelblue", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.5rem" }}
+              icon={faTint}
             />
           </div>
           <div>

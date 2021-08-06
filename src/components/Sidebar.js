@@ -8,6 +8,7 @@ import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
+import {Login} from './Login';
 
 const Sidebar = (props = {}) => {
   const { title, items } = props;
@@ -151,8 +152,7 @@ const Sidebar = (props = {}) => {
                   marginTop: "1rem",
                   backgroundColor: "#1e96ff",
                 }}
-              >
-                Logout
+              >Logout
               </Button>
             </Nav>
           </div>

@@ -7,18 +7,7 @@ import { AppName } from "./AppName";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
-import { BrushChart } from "../../components/BrushChart";
-import {
-  createContainer,
-  VictoryAxis,
-  VictoryBar,
-  VictoryBrushContainer,
-  VictoryChart,
-  VictoryLine,
-  VictoryTheme,
-  VictoryTooltip,
-} from "victory";
-
+import ChartViewer from "./LineChart";
 
 const FertilizerValves = ({ valves }) => {
   return (
@@ -30,26 +19,25 @@ const FertilizerValves = ({ valves }) => {
             display: "flex",
             padding: "1rem",
             fontFamiliy: "Times New Roman",
-            fontWeight: "bold",
             gap: "1rem",
           }}
         >
           <div>
-            <h4 className="text-gray-800">
-              Alarm Status: {valves.alarm}
-            </h4>
-            <h4 className="text-gray-800">Name: {valves.name}</h4>
-            <h4 className="text-gray-800">
+            <h4 className="text-gray-700 text-lg font-bold">{valves.name}</h4>
+            <h4 className="text-red-800">Status: {valves.alarm}</h4>
+            <h4 className="text-green-800 text-xl font-bold">
               Real Time Flow: {valves.real_time_flow}
             </h4>
-            <h4 className="text-gray-800">Total Flow: {valves.total_flow}</h4>
-            <h4 className="text-gray-800">Valve Type: {valves.valve_type}</h4>
+            <h4 className="text-gray-800 text-sm font-bold">
+              Total Flow: {valves.total_flow}
+            </h4>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 const ECValves = ({ ec }) => {
   return (
     <div>
@@ -60,17 +48,19 @@ const ECValves = ({ ec }) => {
             display: "flex",
             padding: "1rem",
             fontFamiliy: "Times New Roman",
-            fontWeight: "bold",
             gap: "1rem",
           }}
         >
           <div>
-            <h4 className="text-gray-800">Alarm Status: {ec.alarm}</h4>
-            <h4 className="text-gray-800">Average: {ec.average}</h4>
-            <h4 className="text-gray-800">Name: {ec.name}</h4>
-            <h4 className="text-gray-800">Setpoint: {ec.setpoint}</h4>
-            <h4 className="text-gray-800">Type: {ec.type}</h4>
-            <h4 className="text-gray-800">Value: {ec.value}</h4>
+            <h4 className="text-gray-800  text-lg font-bold">{ec.name}</h4>
+            <h4 className="text-red-800 font-bold">Status: {ec.alarm}</h4>
+            <h4 className="text-gray-800 text-lg font-bold">
+              Setpoint: {ec.setpoint}
+            </h4>
+            <h4 className="text-green-800 text-lg font-bold">
+              Value: {ec.value}
+            </h4>
+            <h4 className="text-gray-800 text-sm font-bold">Average: {ec.average}</h4>
           </div>
         </div>
       </div>
@@ -115,6 +105,10 @@ const Fertilizer = () => {
   if (loading) return <Preloader />;
   if (error) return <img src={ErrorGif} alt={ErrorGif}/>;
 
+  var EcY = (data.ec_history.map(({y})=>y));
+  var EcX = (data.ec_history.map(({ x }) => x));
+  console.log(EcY);
+  console.log(EcX);
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
@@ -134,16 +128,8 @@ const Fertilizer = () => {
             </div>
           ))}
         </div>
-        <div className="bg-gray-400 rounded shadow-md m-4 p-1">
-          <div style={{ width: "100%", height: "40rem" }}>
-            <BrushChart
-              data={data.ec_history.map(({ datetime, y, ...rest }) => ({
-                ...rest,
-                x: new Date(datetime),
-                y: Number(y),
-              }))}
-            />
-          </div>
+        <div className="bg-gray-400 rounded shadow-md m-4 p-2">
+          <ChartViewer/>
         </div>
         <div className="grid grid-cols-2 bg-gray-400 rounded shadow-md m-4 p-2">
           <div className="bg-gray-400 rounded shadow-md m-4">

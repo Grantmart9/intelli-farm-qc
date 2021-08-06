@@ -5,6 +5,8 @@ import { API_URL } from "../../api";
 import Preloader from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartLine, faSpa, faTint,faRecycle } from "@fortawesome/free-solid-svg-icons";
 
  const WashBack = ({ backwash }) => {
    return (
@@ -21,13 +23,27 @@ import useAxios from "axios-hooks";
            }}
          >
            <div>
-             <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>{backwash.name}</h4>
+             <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>
+               {backwash.name}
+             </h4>
              <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>
                {backwash.status}
              </h2>
              <h2 style={{ color: "#4a5073", fontSize: "0.7rem" }}>
                {backwash.alarm}
              </h2>
+             <div
+               style={{
+                 color: "steelblue",
+                 fontSize: "2rem",
+                 display: "flex",
+                 justifyContent: "center",
+                 alignContent: "center",
+                 alignItems: "center",
+               }}
+             >
+               <FontAwesomeIcon icon={faRecycle} />
+             </div>
            </div>
          </div>
        </div>
@@ -48,7 +64,9 @@ export const Backwash = () => {
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="bg-gray-400 rounded shadow-md font-bold text-gray-800 p-2 text-center mt-3">
           <h1>Alarm Status: {data.backwash_status.status}</h1>
-          <h1>Percentage Left: {data.backwash_status.percentage_left} %</h1>
+          <h1>
+            Percentage Left: {data.backwash_status.percentage_left.toFixed(2)} %
+          </h1>
         </div>
         <div
           style={{
