@@ -9,26 +9,33 @@ const jsonify = (res) => res.json();
 const dataFetch = fetch(
   "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
 ).then(jsonify);
-const schemaFetch = fetch(
-  "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-).then(jsonify);
+
+const schemaFetch = [
+  {
+    name: "Time",
+    type: "date",
+    format: "%d-%b-%y",
+  },
+  {
+    name: "Type",
+    type: "string",
+  },
+  {
+    name: "Sales Value",
+    type: "number",
+  },
+];
 
 const dataSource = {
   chart: {},
   caption: {
-    text: "Sales Analysis",
-  },
-  subcaption: {
-    text: "Grocery & Footwear",
+    text: "EC History",
   },
   series: "Type",
   yaxis: [
     {
       plot: "Sales Value",
-      title: "Sale Value",
-      format: {
-        prefix: "$",
-      },
+      title: "Volume",
     },
   ],
 };
@@ -70,7 +77,7 @@ class ChartViewer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bg-blue-800">
         {this.state.timeseriesDs.dataSource.data ? (
           <ReactFC {...this.state.timeseriesDs} />
         ) : (
