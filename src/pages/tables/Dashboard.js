@@ -10,64 +10,55 @@ import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
 import ErrorPage from "./ErrorPage.jpg";
 
-
-
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 5,
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
   },
   bar: {
-    borderRadius: 5,
+    borderRadius: 6,
     backgroundColor: "#05ab24",
   },
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
-  <div style={{ padding: "1.5rem" }}>
-    <h1>Irrigation</h1>
-    <h4 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>Cycle Progress</h4>
-    <div style={{ marginTop: "1rem" }}>
+  <div className="p-4">
+    <div className="font-bold text-xl">Irrigation</div>
+    <div className="font-bold text-3xl">Cycle Progress</div>
+    <div className="mt-2">
       <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
   </div>
 );
 
 const IrrigationTimeLeft = ({ data }) => (
-  <div
-    style={{
-      padding: "1.5rem",
-      alignItems: "center",
-      alignContent: "center",
-      justifyContent: "center",
-    }}
-  >
-    <h1 className=".text-lg">Irrigation Time Left</h1>
-    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
-      {data.irrigation_time_left}min left
-    </h2>
+  <div className="p-4">
+    <div className="text-xl font-bold">Irrigation Time Left</div>
+    <div className="font-bold text-3xl">
+      {data.irrigation_time_left} min left
+    </div>
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
-  <div style={{ padding: "1.5rem" }}>
-    <h1>EC Average</h1>
-    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>2.93 mS</h2>
-    <h1>0.07 mS Below Target</h1>
+  <div className="p-4">
+    <div className="font-bold text-xl">EC Average</div>
+    <div className="text-3xl font-bold">2.93 mS</div>
+    <div className="font-bold">0.07 mS Below Target</div>
   </div>
 );
 
 const Pump = ({ pump }) => (
-  <div style={{ padding: "1.5rem" }}>
-    <h1>Water Pump</h1>
-    <h2 style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+  <div className="p-4">
+    <div className="font-bold text-xl">Water Pump</div>
+    <div className="font-bold text-3xl">
       Status: {pump.status}
-    </h2>
-    <h2>{pump.main_flow}</h2>
+    </div>
+    <div className="font-bold">{pump.main_flow}</div>
   </div>
 );
 
@@ -135,19 +126,11 @@ export const Dashboard = () => {
   const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/dashboard`);
 
   if (loading) return <Preloader />;
-  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
+  if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
 
   return (
     <div style={{ display: "block", backgroundColor: "#cad3de" }}>
       <AppName />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
-      ></div>
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
           <div className="bg-gray-400 rounded shadow-md">
@@ -180,7 +163,7 @@ export const Dashboard = () => {
               />
             </div>
           </div>
-          <div className="col-span-2 bg-gray-400  rounded shadow-md flex-grow m-4 flex align-items">
+          <div className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items">
             <div className="w-full">
               <HomeFlowFertilizerPieChart
                 data={data.fertilizer_usage.pie_chart}

@@ -24,9 +24,9 @@ const FertilizerValves = ({ valves }) => {
         >
           <div>
             <h4 className="text-gray-700 text-lg font-bold">{valves.name}</h4>
-            <h4 className="text-red-800">Status: {valves.alarm}</h4>
+            <h4 className="text-red-800 font-bold">Alarm Status: {valves.alarm}</h4>
             <h4 className="text-green-800 text-xl font-bold">
-              Real Time Flow: {valves.real_time_flow}
+              Flow: {valves.real_time_flow}
             </h4>
             <h4 className="text-gray-800 text-sm font-bold">
               Total Flow: {valves.total_flow}
@@ -53,7 +53,7 @@ const ECValves = ({ ec }) => {
         >
           <div>
             <h4 className="text-gray-800  text-lg font-bold">{ec.name}</h4>
-            <h4 className="text-red-800 font-bold">Status: {ec.alarm}</h4>
+            <h4 className="text-red-800 font-bold">Alarm status: {ec.alarm}</h4>
             <h4 className="text-gray-800 text-lg font-bold">
               Setpoint: {ec.setpoint}
             </h4>

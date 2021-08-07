@@ -50,6 +50,7 @@ class ChartViewer extends React.Component {
         renderAt: "container",
         width: "100%",
         height: "400",
+        backgroundColor: "#1e96ff",
         dataSource,
       },
     };

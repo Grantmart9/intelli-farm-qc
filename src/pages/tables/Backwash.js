@@ -6,84 +6,79 @@ import Preloader from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartLine, faSpa, faTint,faRecycle } from "@fortawesome/free-solid-svg-icons";
+import { faRecycle } from "@fortawesome/free-solid-svg-icons";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { withStyles } from "@material-ui/core/styles";
 
- const WashBack = ({ backwash }) => {
-   return (
-     <div>
-       <div className="shadow-md border-1 rounded">
-         <div
-           style={{
-             border: "1px 1px solid black",
-             display: "flex",
-             padding: "1rem",
-             fontFamiliy: "Times New Roman",
-             fontWeight: "bold",
-             gap: "1rem",
-           }}
-         >
-           <div>
-             <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>
-               {backwash.name}
-             </h4>
-             <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>
-               {backwash.status}
-             </h2>
-             <h2 style={{ color: "#4a5073", fontSize: "0.7rem" }}>
-               {backwash.alarm}
-             </h2>
-             <div
-               style={{
-                 color: "steelblue",
-                 fontSize: "2rem",
-                 display: "flex",
-                 justifyContent: "center",
-                 alignContent: "center",
-                 alignItems: "center",
-               }}
-             >
-               <FontAwesomeIcon icon={faRecycle} />
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   );
- };
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 6
+  },
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
+  },
+  bar: {
+    borderRadius: 6,
+    backgroundColor: "#05ab24"
+  }
+}))(LinearProgress);
+
+const WashBack = ({ backwash }) => {
+  return (
+    <div className="shadow-md rounded p-3 bg-gray-400">
+        <div className="font-bold text-2xl">{backwash.name}</div>
+        <div className="font-bold text-3xl">
+          {backwash.status}
+          <span className="ml-20"></span>
+          <span className="text-blue-800 text-3xl text-center ml-20">
+            <FontAwesomeIcon icon={faRecycle} />
+          </span>
+        </div>
+        <div className="font-bold text-md text-red-400">{backwash.alarm}</div>
+    </div>
+  );
+};
 
 export const Backwash = () => {
   const { farmId } = useParams();
- const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/backwash`);
+  const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/backwash`);
 
- if (loading) return <Preloader />;
- if (error) return <img src={ErrorPage} alt={ErrorPage}/>;
+  if (loading) return <Preloader />;
+  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-        <div className="bg-gray-400 rounded shadow-md font-bold text-gray-800 p-2 text-center mt-3">
-          <h1>Alarm Status: {data.backwash_status.status}</h1>
-          <h1>
-            Percentage Left: {data.backwash_status.percentage_left.toFixed(2)} %
-          </h1>
+        <div className="p-2.5">
+          <div className="bg-gray-400 rounded shadow-md font-bold block text-gray-800 text-center p-3">
+            <div className="font-bold text-xl">
+              Alarm Status: {data.backwash_status.status}
+            </div>
+            <div className="font-bold text-xl ">
+              Percentage Left: {data.backwash_status.percentage_left.toFixed(2)}{" "}
+              %
+            </div>
+            <div className="xl:mt-2 xl:ml-20 xl:mr-20 p-2">
+              <BorderLinearProgress
+                variant="determinate"
+                value={data.backwash_status.percentage_left.toFixed(2)}
+              />
+            </div>
+          </div>
         </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(15rem, 1fr))",
-            gridGap: "1rem",
-            marginTop: "1rem",
-            padding: "0.8rem",
-          }}
-        >
+        <div>
+        <div className="xl:grid grid-cols-4 rounded">
           {data.backwash_valves.map((backwash, i) => (
-            <div className="bg-gray-400 rounded shadow-md">
+            <div className="p-2">
               <WashBack key={i} backwash={backwash} />
             </div>
           ))}
+          </div>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
