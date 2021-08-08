@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
