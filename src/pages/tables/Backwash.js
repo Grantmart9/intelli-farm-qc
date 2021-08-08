@@ -59,11 +59,13 @@ export const Backwash = () => {
               %
             </div>
             </div>
-            <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-2">
+            <div className="bg-gray-400 shadow-md p-2">
+            <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-2 ">
               <BorderLinearProgress
                 variant="determinate"
                 value={data.backwash_status.percentage_left}
               />
+            </div>
             </div>
           </div>
         </div>
