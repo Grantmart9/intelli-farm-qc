@@ -29,7 +29,7 @@ const IrrigationProgress = ({ data }) => (
   <div className="p-4">
     <div className="font-bold text-xl">Irrigation</div>
     <div className="font-bold text-3xl">Cycle Progress</div>
-    <div className="mt-2">
+    <div className="mt-4">
       <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
   </div>

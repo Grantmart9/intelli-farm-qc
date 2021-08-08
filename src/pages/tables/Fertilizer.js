@@ -8,27 +8,33 @@ import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
 import ChartViewer from "./LineChart";
+import fertilizer from "./fertilizer.png";
+import fertilizerEc from "./fertilizerEc.png";
 
 const FertilizerValves = ({ valves }) => {
   return (
-    <div className="shadow-md rounded p-4">
+    <div className="flex p-2">
+    <div className="shadow-md rounded p-2 w-100">
       <div className="text-gray-800 text-2xl font-bold">{valves.name}</div>
-      <div className="text-red-800 font-bold text-xl">
-        Alarm Status: {valves.alarm}
+      <div className="text-green-800 text-lg font-bold">
+        Real Time Flow: {valves.real_time_flow}
       </div>
-      <div className="text-green-800 text-xl font-bold">
-        Flow: {valves.real_time_flow}
+      <div className="text-red-800 font-bold text-md">
+        Alarm Status: {valves.alarm}
       </div>
       <div className="text-gray-800 text-sm font-bold text-md">
         Total Flow: {valves.total_flow}
       </div>
+    </div >
+    <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"><img src={fertilizer} alt={fertilizer} width="50%" height="50%" /></div>
     </div>
   );
 };
 
 const ECValves = ({ ec }) => {
   return (
-    <div className="shadow-md border-1 rounded p-4">
+    <div className="flex p-2">
+    <div className="shadow-md border-1 rounded p-4 w-100">
       <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
       <div className="text-red-800 font-bold text-xl">Alarm status: {ec.alarm}</div>
       <div className="text-green-800 text-xl font-bold">
@@ -38,6 +44,8 @@ const ECValves = ({ ec }) => {
       <div className="text-gray-800 text-sm font-bold">
         Average: {ec.average}
       </div>
+    </div>
+    <div className="shadow-md rounded ml-2 items-center flex justify-center"><img src={fertilizerEc} alt={fertilizerEc} width="50%" height="50%" /></div>
     </div>
   );
 };
@@ -88,25 +96,27 @@ const Fertilizer = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-        <div className="grid xl:grid-cols-4 gap-3 xl:m-4 align-items p-2">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
+        <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.fertilizer_valves.map((valves, i) => (
             <div className=" bg-gray-400 rounded shadow-md">
               <FertilizerValves key={i} valves={valves} />
             </div>
           ))}
         </div>
-        <div className="grid xl:grid-cols-4 gap-3 xl:m-4 align-items p-2">
+        <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.ec_values.map((ec, i) => (
             <div className="bg-gray-400 rounded shadow-md">
               <ECValves key={i} ec={ec} />
             </div>
           ))}
         </div>
-        <div className="m-4">
+        <div className="xl:p-6 sm:p-4 p-2 ">
+        <div className="bg-gray-400 rounded shadow-md p-3">
           <ChartViewer />
+          </div>
         </div>
-        <div className="xl:grid grid-cols-2 block gap-4 p-2">
+        <div className="xl:grid grid-cols-2 gap-2 p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />
           </div>

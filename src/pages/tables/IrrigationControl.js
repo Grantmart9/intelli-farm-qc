@@ -1,45 +1,25 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartLine,faSpa, faTint } from "@fortawesome/free-solid-svg-icons";
+import { faTint } from "@fortawesome/free-solid-svg-icons";
 import { AppName } from "./AppName";
 import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
+import valve from "./Valve.jpg"
 
 const EquipmentStatus = ({ data }) => {
   return (
-    <div>
-      <div className="shadow-md border-1 rounded">
-        <div
-          style={{
-            border: "1px 1px solid black",
-            display: "flex",
-            background: "#e3e5e8",
-            padding: "1rem",
-            fontFamiliy: "Times New Roman",
-            fontWeight: "bold",
-            gap: "1rem",
-          }}
-        >
-          <div style={{ padding: "1rem" }}>
-            <FontAwesomeIcon
-              style={{ color: "steelblue", fontSize: "2rem",display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center",marginTop:"0.5rem" }}
-              icon={faTint}
-            />
-          </div>
-          <div>
-            <h4 style={{ color: "#4a5073", fontSize: "1rem" }}>{data.name}</h4>
-            <h2 style={{ color: "#4a5073", fontSize: "1.5rem" }}>
-              {data.total_flow}
-            </h2>
-            <h2 style={{ color: "#4a5073", fontSize: "0.7rem" }}>
-              {data.real_time_flow}
-            </h2>
-            <h4 style={{ color: "red", fontSize: "0.8rem" }}>{data.alarm}</h4>
-          </div>
-        </div>
+    <div className="shadow-md border-1 rounded">
+      <div className="shadow-md rounded p-3 bg-gray-400">
+        <div className="font-bold text-2xl">{data.name}</div>
+        <div className="font-bold text-3xl">{data.total_flow}</div>
+        <div className="font-bold text-2xl">{data.real_time_flow}</div>
+        <div className="font-bold text-md text-red-400">{data.alarm}</div>
+        <div>
+        <img src={valve} alt={valve} width="50%" height="50%"/>
+      </div>
       </div>
     </div>
   );
@@ -58,7 +38,7 @@ const IrrigationControl = () => {
               gridTemplateColumns: "repeat(auto-fit,minmax(15rem, 1fr))",
               gridGap: "1rem",
               marginTop: "1rem",
-              padding: "0.8rem",
+              padding: "0.8rem"
             }}
           >
             <AxiosSpinner
@@ -82,22 +62,22 @@ const IrrigationControl = () => {
           </div>
         </div>
         <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
-            <AxiosSpinner
-              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
-              renderData={({ data }) => (
-                <BrushChart
-                  data={data.map(({ datetime, y, ...rest }) => ({
-                    ...rest,
-                    x: new Date(datetime),
-                    y: Number(y),
-                  }))}
-                />
-              )}
-            />
+          <AxiosSpinner
+            callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
+            renderData={({ data }) => (
+              <BrushChart
+                data={data.map(({ datetime, y, ...rest }) => ({
+                  ...rest,
+                  x: new Date(datetime),
+                  y: Number(y)
+                }))}
+              />
+            )}
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default IrrigationControl;
