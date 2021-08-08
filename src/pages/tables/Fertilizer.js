@@ -26,7 +26,7 @@ const FertilizerValves = ({ valves }) => {
         Total Flow: {valves.total_flow}
       </div>
     </div >
-    <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"><img src={fertilizer} alt={fertilizer} width="50%" height="50%" /></div>
+    <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"><img src={fertilizer} alt={fertilizer} width="80%" height="80%" /></div>
     </div>
   );
 };
@@ -45,7 +45,7 @@ const ECValves = ({ ec }) => {
         Average: {ec.average}
       </div>
     </div>
-    <div className="shadow-md rounded ml-2 items-center flex justify-center"><img src={fertilizerEc} alt={fertilizerEc} width="50%" height="50%" /></div>
+    <div className="shadow-md rounded ml-2 items-center flex justify-center"><img src={fertilizerEc} alt={fertilizerEc} width="80%" height="80%" /></div>
     </div>
   );
 };

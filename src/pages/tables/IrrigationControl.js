@@ -17,7 +17,7 @@ const EquipmentStatus = ({ data }) => {
         <div className="font-bold text-md text-red-400">{data.alarm}</div>
       </div>
     <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
-    <img src={valve} alt={valve} width="80%" height="80%"/>
+    <img src={valve} alt={valve} width="60%" height="60%"/>
   </div>
   </div>
   );
