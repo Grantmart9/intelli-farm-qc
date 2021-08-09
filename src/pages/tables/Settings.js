@@ -1,7 +1,7 @@
 import React from "react";
 import {AppName} from "./AppName";
-import ErrorPage from "./ErrorPage.jpg";
 import ErrorGif from "./ErrorGif.gif";
+
 export const Settings = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>

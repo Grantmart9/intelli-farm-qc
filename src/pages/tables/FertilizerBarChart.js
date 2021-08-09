@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import ApexChart from "react-apexcharts";
 import moment from "moment";
+
 export const FertilizerBarChart = ({ data }) => {
   const today = useMemo(() => new Date(), []);
   const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
