@@ -9,15 +9,15 @@ import valve from "./Valve.jpg"
 
 const EquipmentStatus = ({ data }) => {
   return (
-    <div className="flex p-2 gap-2">
-      <div className="shadow-md rounded p-3 bg-gray-400 w-100">
-        <div className="font-bold text-xl">{data.name}</div>
-        <div className="font-bold text-2xl">{data.total_flow}</div>
-        <div className="font-bold text-xl">{data.real_time_flow}</div>
-        <div className="font-bold text-md text-red-400">{data.alarm}</div>
+    <div className="flex p-2">
+      <div className="shadow-md rounded p-2 w-100">
+        <div className="font-bold text-2xl">{data.name}</div>
+        <div className="font-bold text-xl">Real Time Flow: {data.real_time_flow}</div>
+        <div className="font-bold text-md text-red-400">Alarm Status: {data.alarm}</div>
+        <div className="font-bold text-sm">Total Flow: {data.total_flow}</div>
       </div>
-    <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
-    <img src={valve} alt={valve} width="60%" height="60%"/>
+    <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25">
+    <img src={valve} alt={valve} width="80%" height="80%"/>
   </div>
   </div>
   );
@@ -34,14 +34,14 @@ const IrrigationControl = () => {
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
               renderData={({ data }) =>
                 data.map((irrigation_valve) => (
-                  <div className="bg-gray-400 shadow-md rounded mt-2">
+                  <div className="bg-gray-400 shadow-md rounded mb-4">
                   <EquipmentStatus data={irrigation_valve} />
                   </div>
                 ))
               }
             />
         </div>
-        <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
+        <div className="bg-gray-400  rounded shadow-md ml-6 mr-6">
           <div className="w-full h-full">
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}

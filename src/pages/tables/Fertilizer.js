@@ -36,16 +36,16 @@ const ECValves = ({ ec }) => {
     <div className="flex p-2">
     <div className="shadow-md border-1 rounded p-4 w-100">
       <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
-      <div className="text-red-800 font-bold text-xl">Alarm status: {ec.alarm}</div>
-      <div className="text-green-800 text-xl font-bold">
+      <div className="text-green-800 text-md font-bold">
         Setpoint: {ec.setpoint}
       </div>
-      <div className="text-green-800 text-xl font-bold">Value: {ec.value}</div>
+      <div className="text-green-800 text-md font-bold">Value: {ec.value}</div>
+      <div className="text-red-800 font-bold text-md">Alarm status: {ec.alarm}</div>
       <div className="text-gray-800 text-sm font-bold">
         Average: {ec.average}
       </div>
     </div>
-    <div className="shadow-md rounded ml-2 items-center flex justify-center"><img src={fertilizerEc} alt={fertilizerEc} width="80%" height="80%" /></div>
+    <div className="shadow-md rounded ml-2 items-center flex justify-center p-2"><img src={fertilizerEc} alt={fertilizerEc} width="200rem" height="50rem" /></div>
     </div>
   );
 };

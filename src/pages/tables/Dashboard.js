@@ -26,39 +26,47 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
-  <div className="p-4">
+  <div className="p-2">
+    <div className="bg-gray-400 rounded p-3 shadow-md">
     <div className="font-bold text-xl">Irrigation</div>
     <div className="font-bold text-3xl">Cycle Progress</div>
     <div className="mt-4">
       <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
+    </div>
   </div>
 );
 
 const IrrigationTimeLeft = ({ data }) => (
-  <div className="p-4">
+  <div className="p-2">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
     <div className="text-xl font-bold">Irrigation Time Left</div>
     <div className="font-bold text-3xl">
       {data.irrigation_time_left} min left
+    </div>
     </div>
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
-  <div className="p-4">
+  <div className="p-2">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
     <div className="font-bold text-xl">EC Average</div>
     <div className="text-3xl font-bold">2.93 mS</div>
     <div className="font-bold">0.07 mS Below Target</div>
+    </div>
   </div>
 );
 
 const Pump = ({ pump }) => (
-  <div className="p-4">
+  <div className="p-2">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
     <div className="font-bold text-xl">Water Pump</div>
     <div className="font-bold text-3xl">
       Status: {pump.status}
     </div>
     <div className="font-bold">{pump.main_flow}</div>
+    </div>
   </div>
 );
 

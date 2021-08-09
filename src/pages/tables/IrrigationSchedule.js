@@ -11,24 +11,32 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import {AppName} from "./AppName";
-import ErrorPage from './ErrorPage.jpg';
+import { AppName } from "./AppName";
+import ErrorPage from "./ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
-  const {id, field, value, api} = props;
+  const { id, field, value, api } = props;
   const dateFormat = "YYYY-MM-DD HH:mm";
-  const handleChange = useCallback((editedDate) => {
-    const editedValue = moment(editedDate).format(dateFormat)
-    api.setEditCellValue({id, field, value: editedValue})
-  }, [id, field,api]);
+  const handleChange = useCallback(
+    (editedDate) => {
+      const editedValue = moment(editedDate).format(dateFormat);
+      api.setEditCellValue({ id, field, value: editedValue });
+    },
+    [id, field, api]
+  );
 
   return (
-    <LocalizationProvider 
-      dateAdapter={MomentUtils}
-      dateFormat={dateFormat}>
+    <LocalizationProvider dateAdapter={MomentUtils} dateFormat={dateFormat}>
       <div className="flex flex-col justify-content-center">
-        <DateTimePicker 
-          renderInput={props => <TextField {...props} variant="outlined" margin="none" helperText=""></TextField>}
+        <DateTimePicker
+          renderInput={(props) => (
+            <TextField
+              {...props}
+              variant="outlined"
+              margin="none"
+              helperText=""
+            ></TextField>
+          )}
           inputFormat={dateFormat}
           value={new Date(value)}
           onChange={handleChange}
@@ -36,7 +44,7 @@ const DateTimeEditInputCell = (props) => {
       </div>
     </LocalizationProvider>
   );
-}
+};
 
 const sectionColumns = [
   {
@@ -47,7 +55,7 @@ const sectionColumns = [
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
-    type: "number", 
+    type: "number",
     editable: true
   },
   {
@@ -58,37 +66,47 @@ const sectionColumns = [
   {
     field: "start_time",
     headerName: "Start time",
-    type: "string", 
-    renderEditCell: (props) => <DateTimeEditInputCell {...props}/>,
+    type: "string",
+    renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
     editable: true
   },
   {
     field: "end_time",
     headerName: "End time",
-    type: "string", 
+    type: "string",
     renderEditCell: DateTimeEditInputCell,
     editable: true
   }
-].map(column => ({ ...column, flex: 1 }));
+].map((column) => ({ ...column, flex: 1 }));
 
 const SectionTable = ({ section, onChange = null }) => {
   const id = section.sql_index;
-  const handleEditCellChangeCommited = useCallback(e => {
-    const {field, props: {value}} = e;
-    const editedSection = { ...section, [field]: value }
-    if (onChange) {
-      onChange(editedSection);
-    }
-  }, [section, onChange])
+  const handleEditCellChangeCommited = useCallback(
+    (e) => {
+      const {
+        field,
+        props: { value }
+      } = e;
+      const editedSection = { ...section, [field]: value };
+      if (onChange) {
+        onChange(editedSection);
+      }
+    },
+    [section, onChange]
+  );
 
   return (
     <div className="flex">
       <DataGrid
-        hideFooter={true} autoHeight rows={[{ id, ...section }]} columns={sectionColumns}
-        onEditCellChangeCommitted={handleEditCellChangeCommited} />
+        hideFooter={true}
+        autoHeight
+        rows={[{ id, ...section }]}
+        columns={sectionColumns}
+        onEditCellChangeCommitted={handleEditCellChangeCommited}
+      />
     </div>
-  )
-}
+  );
+};
 
 const fertilizerColumns = [
   {
@@ -99,50 +117,45 @@ const fertilizerColumns = [
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
-    type: "number", 
+    type: "number",
     editable: true
   },
   {
     field: "flow_rate",
     headerName: "Flow rate",
-    type: "number", 
+    type: "number",
     editable: true
-  },
-].map(column => ({ ...column, flex: 1, editable: true }));
+  }
+].map((column) => ({ ...column, flex: 1, editable: true }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
-  const handleEditCellChangeCommited = useCallback(e => {
-    const {id, field, props: {value} } = e;
-    const editedFertilizer = { ...fertilizers[id], [field]: value };
-    const editedFertilizers = [...fertilizers.slice(0, id), editedFertilizer, ...fertilizers.slice(id + 1)];
-    const editedSection = { ...section, fertilizer: editedFertilizers };
-    if (onChange) {
-      onChange(editedSection);
-    }
-  }, [section, fertilizers, onChange]);
+  const handleEditCellChangeCommited = useCallback(
+    (e) => {
+      const {
+        id,
+        field,
+        props: { value }
+      } = e;
+      const editedFertilizer = { ...fertilizers[id], [field]: value };
+      const editedFertilizers = [
+        ...fertilizers.slice(0, id),
+        editedFertilizer,
+        ...fertilizers.slice(id + 1)
+      ];
+      const editedSection = { ...section, fertilizer: editedFertilizers };
+      if (onChange) {
+        onChange(editedSection);
+      }
+    },
+    [section, fertilizers, onChange]
+  );
 
   return (
-    <>
-      <h3
-        style={{
-          background: "#a2d2fc",
-          color: "#4a5073",
-          border: "1px solid #a2d2fc",
-          borderRadius: "0.09cm",
-          height: "3rem",
-          padding: "0.5rem",
-          fontWeight: "bold",
-          fontFamily: "'Rubik', sans-serif",
-          fontSize: "1.rem",
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div>
+      <div className="bg-blue-200 align-center justify-center flex font-bold">
         Fertilizer
-      </h3>
+      </div>
       <DataGrid
         hideFooter={true}
         autoHeight
@@ -150,48 +163,14 @@ const FertilizerTable = ({ section, onChange = null }) => {
         columns={fertilizerColumns}
         onEditCellChangeCommitted={handleEditCellChangeCommited}
       />
-    </>
+    </div>
   );
 };
 
 const SectionRow = ({ section, onChange = null }) => (
-  <div
-    className="w-full p-1"
-    style={{
-      border: "1.5px solid #99a9c4",
-      borderRadius: "0.1cm",
-      padding: "1rem",
-      boxShadow: "3px 3px #5b5c75",
-      marginTop: "1rem",
-    }}
-  >
-    <div
-      className="flex align-items-center align-content-center justify-content-center"
-      style={{
-        background: "#a2d2fc",
-        color: "#4a5073",
-        fontWeight: "bold",
-        border: "1px solid #a2d2fc",
-        borderRadius: "0.09cm",
-      }}
-    >
-      <h3
-        style={{
-          background: "#a2d2fc",
-          color: "#4a5073",
-          height: "3rem",
-          padding: "0.5rem",
-          fontWeight: "bold",
-          fontFamily: "'Rubik', sans-serif",
-          fontSize: "1.2rem",
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {section.name}
-      </h3>
+  <div className="w-full p-2 bg-gray-200 rounded">
+    <div className="flex bg-blue-200 rounded-1 justify-content-center font-bold">
+     {section.name}
     </div>
     <SectionTable section={section} onChange={onChange} />
     <FertilizerTable section={section} onChange={onChange} />
@@ -204,7 +183,7 @@ export const IrrigationSchedule = () => {
   const [dirty, setDirty] = useState(false);
   const [schedule, setSchedule] = useState();
   useEffect(() => {
-    if(data) {
+    if (data) {
       setSchedule(data);
     }
   }, [data]);
@@ -212,31 +191,29 @@ export const IrrigationSchedule = () => {
   const [, postSchedule] = useAxios(
     {
       url: `${API_URL}/-${farmId}/schedule`,
-      method: 'POST',
+      method: "POST",
       headers: {
-          'content-type': 'application/json',
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
   if (loading || !schedule) return <Preloader />;
-  if (error)
-    return <img src={ErrorPage} alt={ErrorPage}/>;
+  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
 
   const handleChange = async (editedSection) => {
-    const editedSchedule = schedule.map(section => 
-      section.sql_index === editedSection.sql_index 
-      ? editedSection
-      : section);
+    const editedSchedule = schedule.map((section) =>
+      section.sql_index === editedSection.sql_index ? editedSection : section
+    );
     setDirty(true);
     setSchedule(editedSchedule);
   };
 
   const showMessage = (msg) => {
-    console.log(msg) // Leave it at this for now
+    console.log(msg); // Leave it at this for now
   };
 
   const handleSave = async () => {
@@ -252,37 +229,30 @@ export const IrrigationSchedule = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
-          <div
-            className="flex flex-col align-items-center align-content-center justify-content-center p-1 mt-2"
-            style={{
-              dislay: "flex",
-              background: "white",
-              border: "1px solid white",
-              borderRadius: "0.09cm",
-              fontFamily: "'Rubik', sans-serif",
-              fontSize: "1.2rem",
-              color: "#4a5073",
-            }}
-          >
-            <OverlayTrigger
-              placement="bottom"
-              trigger={["hover", "focus"]}
-              overlay={<Tooltip>Save All settings</Tooltip>}
-            >
-              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-                <FontAwesomeIcon icon={faSave} /> Save
-              </Button>
-            </OverlayTrigger>
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
+        <div
+          className="flex flex-col align-items-center align-content-center justify-content-center p-1">
+          <OverlayTrigger
+            placement="bottom"
+            trigger={["hover", "focus"]}
+            overlay={<Tooltip>Save All settings</Tooltip>}
+          ><div className="mb-3">
+            <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+              <FontAwesomeIcon icon={faSave} /> Save
+            </Button>
+            </div>
+          </OverlayTrigger>
+          <div className="w-full">
             {schedule.map((section, i) => {
               return (
+                <div className="bg-gray-200 rounded shadow-md w-full mb-4 p-2">
                 <SectionRow key={i} section={section} onChange={handleChange} />
+                </div>
               );
             })}
           </div>
         </div>
+      </div>
     </div>
   );
 };
-
-
