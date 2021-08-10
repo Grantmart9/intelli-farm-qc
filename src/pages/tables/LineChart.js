@@ -10,6 +10,10 @@ const dataFetch = fetch(
   "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
 ).then(jsonify);
 
+const fetchData = fetch("https://lodicon-test-api.herokuapp.com/api/v1/2147483551/fertilizer").then(jsonify);
+
+console.log(fetchData);
+
 const schemaFetch = [
   {
     name: "Time",

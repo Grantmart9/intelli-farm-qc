@@ -86,12 +86,7 @@ const Fertilizer = () => {
   );
 
   if (loading) return <Preloader />;
-  if (error) return <img src={ErrorGif} alt={ErrorGif} />;
-
-  var EcY = data.ec_history.map(({ y }) => y);
-  var EcX = data.ec_history.map(({ x }) => x);
-  console.log(EcY);
-  console.log(EcX);
+  if (error) return <div style={{display:"flex",marginTop:"100px", minHeight:"600px",alignItems:"center",alignContent:"center",justifyContent:"center"}}><img src={ErrorGif} alt={ErrorGif} /></div>;
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
