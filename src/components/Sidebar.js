@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import SimpleBar from 'simplebar-react';
-import { useLocation, Switch, Route, Router } from "react-router-dom";
+import { useLocation, Switch, Route, Router, Redirect } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
@@ -142,7 +142,7 @@ const Sidebar = (props = {}) => {
                 {title}
               </Button>
                 <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
-              <Button
+                <Link to="/Login"
                 className="border-1 border-white"
                 style={{
                   display: "flex",
@@ -153,7 +153,7 @@ const Sidebar = (props = {}) => {
                   backgroundColor: "#1e96ff",
                 }}
               >Logout
-              </Button>
+              </Link>
             </Nav>
           </div>
         </SimpleBar>
