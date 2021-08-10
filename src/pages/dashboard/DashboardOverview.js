@@ -1,15 +1,3 @@
-/**
- * @description      :
- * @author           : Grant
- * @group            :
- * @created          : 10/08/2021 - 15:12:38
- *
- * MODIFICATION LOG
- * - Version         : 1.0.0
- * - Date            : 10/08/2021
- * - Author          : Grant
- * - Modification    :
- **/
 import React from "react";
 import { AppName } from "./AppName";
 import { makeStyles } from "@material-ui/core/styles";
