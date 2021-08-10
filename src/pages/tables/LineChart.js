@@ -2,6 +2,19 @@ import React from "react";
 import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from "react-fusioncharts";
+import { useParams } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { API_URL } from "../../api";
+
+const CallApi = () => {
+  const { farmId } = useParams();
+  const [{ data, loading, error }] = useAxios(
+    `${API_URL}/${farmId}/fertilizer`
+  );
+
+  const Ec = data.ec_history.map(({y})=>y);
+  console.log(Ec);
+}
 
 ReactFC.fcRoot(FusionCharts, TimeSeries);
 
@@ -10,9 +23,6 @@ const dataFetch = fetch(
   "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
 ).then(jsonify);
 
-const fetchData = fetch("https://lodicon-test-api.herokuapp.com/api/v1/2147483551/fertilizer").then(jsonify);
-
-console.log(fetchData);
 
 const schemaFetch = [
   {

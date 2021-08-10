@@ -87,7 +87,7 @@ const Fertilizer = () => {
 
   if (loading) return <Preloader />;
   if (error) return <div style={{display:"flex",marginTop:"100px", minHeight:"600px",alignItems:"center",alignContent:"center",justifyContent:"center"}}><img src={ErrorGif} alt={ErrorGif} /></div>;
-
+  
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
