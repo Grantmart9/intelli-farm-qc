@@ -143,15 +143,7 @@ const Sidebar = (props = {}) => {
               </Button>
                 <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
                 <Link to="/Login"
-                className="border-1 border-white"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  alignContent: "center",
-                  justifyContent: "center",
-                  marginTop: "1rem",
-                  backgroundColor: "#1e96ff",
-                }}
+                className="border-1 border-white rounded-2 flex justify-center h-8 mt-10 font-bold"
               >Logout
               </Link>
             </Nav>
