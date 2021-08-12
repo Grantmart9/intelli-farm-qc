@@ -48,7 +48,7 @@ const FertilizerValves = ({ valves }) => {
 const ECValves = ({ ec }) => {
   return (
     <div className="flex p-2">
-      <div className="shadow-md border-1 rounded p-4 w-100">
+      <div className="shadow-md border-1 rounded p-2 w-100">
         <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
         <div className="text-green-800 text-md font-bold">
           Setpoint: {ec.setpoint}

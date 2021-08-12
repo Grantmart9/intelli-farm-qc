@@ -36,10 +36,13 @@ const schemaFetch = [
 
 const dataSource = {
   chart: {
-    exportenabled: true,
+    exportenabled: 1,
     showlegend: true,
     palettecolors: "#347aeb",
     theme: "gammel",
+    showBorder: 1,
+    borderColor: "black",
+    bgColor: "#DDDDDD",
   },
   caption: {
     text: "EC History",
@@ -52,11 +55,12 @@ const dataSource = {
         type: "realtimeline",
       },
       title: "Volume",
+      preffix: "l",
     },
   ],
   xAxis: {
     outputTimeFormat: {
-      day: "%d-%B-%Y",
+      day: "%d-%b-%Y",
       time: "%-I:%-M",
     },
   },
