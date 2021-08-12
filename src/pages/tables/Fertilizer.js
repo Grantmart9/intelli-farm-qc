@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 11/08/2021 - 15:03:41
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 11/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React from "react";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
@@ -14,19 +26,21 @@ import fertilizerEc from "./fertilizerEc.png";
 const FertilizerValves = ({ valves }) => {
   return (
     <div className="flex p-2">
-    <div className="shadow-md rounded p-2 w-100">
-      <div className="text-gray-800 text-2xl font-bold">{valves.name}</div>
-      <div className="text-green-800 text-lg font-bold">
-        Real Time Flow: {valves.real_time_flow}
+      <div className="shadow-md rounded p-2 w-100">
+        <div className="text-gray-800 text-2xl font-bold">{valves.name}</div>
+        <div className="text-green-800 text-lg font-bold">
+          Real Time Flow: {valves.real_time_flow}
+        </div>
+        <div className="text-red-800 font-bold text-md">
+          Alarm Status: {valves.alarm}
+        </div>
+        <div className="text-gray-800 text-sm font-bold text-md">
+          Total Flow: {valves.total_flow}
+        </div>
       </div>
-      <div className="text-red-800 font-bold text-md">
-        Alarm Status: {valves.alarm}
+      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
+        <img src={fertilizer} alt={fertilizer} width="80%" height="80%" />
       </div>
-      <div className="text-gray-800 text-sm font-bold text-md">
-        Total Flow: {valves.total_flow}
-      </div>
-    </div >
-    <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"><img src={fertilizer} alt={fertilizer} width="80%" height="80%" /></div>
     </div>
   );
 };
@@ -34,18 +48,29 @@ const FertilizerValves = ({ valves }) => {
 const ECValves = ({ ec }) => {
   return (
     <div className="flex p-2">
-    <div className="shadow-md border-1 rounded p-4 w-100">
-      <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
-      <div className="text-green-800 text-md font-bold">
-        Setpoint: {ec.setpoint}
+      <div className="shadow-md border-1 rounded p-4 w-100">
+        <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
+        <div className="text-green-800 text-md font-bold">
+          Setpoint: {ec.setpoint}
+        </div>
+        <div className="text-green-800 text-md font-bold">
+          Value: {ec.value}
+        </div>
+        <div className="text-red-800 font-bold text-md">
+          Alarm status: {ec.alarm}
+        </div>
+        <div className="text-gray-800 text-sm font-bold">
+          Average: {ec.average}
+        </div>
       </div>
-      <div className="text-green-800 text-md font-bold">Value: {ec.value}</div>
-      <div className="text-red-800 font-bold text-md">Alarm status: {ec.alarm}</div>
-      <div className="text-gray-800 text-sm font-bold">
-        Average: {ec.average}
+      <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
+        <img
+          src={fertilizerEc}
+          alt={fertilizerEc}
+          width="200rem"
+          height="50rem"
+        />
       </div>
-    </div>
-    <div className="shadow-md rounded ml-2 items-center flex justify-center p-2"><img src={fertilizerEc} alt={fertilizerEc} width="200rem" height="50rem" /></div>
     </div>
   );
 };
@@ -63,7 +88,7 @@ export const FertilizerPieChart = ({ data }) => {
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom"
+          position: "bottom",
         },
         title: {
           text: "Fertilizer",
@@ -71,9 +96,9 @@ export const FertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
@@ -86,8 +111,22 @@ const Fertilizer = () => {
   );
 
   if (loading) return <Preloader />;
-  if (error) return <div style={{display:"flex",marginTop:"100px", minHeight:"600px",alignItems:"center",alignContent:"center",justifyContent:"center"}}><img src={ErrorGif} alt={ErrorGif} /></div>;
-  
+  if (error)
+    return (
+      <div
+        style={{
+          display: "flex",
+          marginTop: "100px",
+          minHeight: "600px",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img src={ErrorGif} alt={ErrorGif} />
+      </div>
+    );
+
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
@@ -107,8 +146,8 @@ const Fertilizer = () => {
           ))}
         </div>
         <div className="xl:p-6 sm:p-4 p-2 ">
-        <div className="bg-gray-400 rounded shadow-md p-3">
-          <ChartViewer />
+          <div className="bg-gray-400 rounded shadow-md p-3">
+            <ChartViewer />
           </div>
         </div>
         <div className="xl:grid grid-cols-2 gap-2 p-2">

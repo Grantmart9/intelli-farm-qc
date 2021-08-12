@@ -1,57 +1,80 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 11/08/2021 - 08:26:55
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 11/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React from "react";
 import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from "react-fusioncharts";
-import { useParams } from "react-router-dom";
-import useAxios from "axios-hooks";
-import { API_URL } from "../../api";
-
-const CallApi = () => {
-  const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(
-    `${API_URL}/${farmId}/fertilizer`
-  );
-
-  const Ec = data.ec_history.map(({y})=>y);
-  console.log(Ec);
-}
 
 ReactFC.fcRoot(FusionCharts, TimeSeries);
 
 const jsonify = (res) => res.json();
 const dataFetch = fetch(
-  "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
+  "https://b5d02741-8aed-4856-81c3-41fae5665ce2.mock.pstmn.io/get"
 ).then(jsonify);
-
 
 const schemaFetch = [
   {
-    name: "Time",
+    name: "Date",
     type: "date",
-    format: "%d-%b-%y",
+    format: "%d-%b-%y-%H:%M",
   },
   {
-    name: "Type",
-    type: "string",
-  },
-  {
-    name: "Sales Value",
+    name: "Ec Value",
     type: "number",
   },
 ];
 
 const dataSource = {
-  chart: {},
+  chart: {
+    exportenabled: true,
+    showlegend: true,
+    palettecolors: "#347aeb",
+    theme: "gammel",
+  },
   caption: {
     text: "EC History",
   },
   series: "Type",
   yaxis: [
     {
-      plot: "Sales Value",
+      plot: {
+        value: "EC Volume",
+        type: "realtimeline",
+      },
       title: "Volume",
     },
   ],
+  xAxis: {
+    outputTimeFormat: {
+      day: "%d-%B-%Y",
+      time: "%-I:%-M",
+    },
+  },
+  tooltip: {
+    outputtimeformat: {
+      day: "%d-%B-%Y (%a)",
+    },
+    style: {
+      container: {
+        "border-color": "#000000",
+        "border-radius": "0.2cm",
+        "background-color": "#75748D",
+      },
+      text: {
+        color: "#FFFFFF",
+      },
+    },
+  },
 };
 
 class ChartViewer extends React.Component {
@@ -64,7 +87,6 @@ class ChartViewer extends React.Component {
         renderAt: "container",
         width: "100%",
         height: "400",
-        backgroundColor: "gray",
         dataSource,
       },
     };
@@ -92,11 +114,11 @@ class ChartViewer extends React.Component {
 
   render() {
     return (
-      <div className="bg-blue-800">
+      <div>
         {this.state.timeseriesDs.dataSource.data ? (
           <ReactFC {...this.state.timeseriesDs} />
         ) : (
-          "loading"
+          "Fetching Data"
         )}
       </div>
     );

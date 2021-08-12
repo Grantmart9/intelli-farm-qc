@@ -1,14 +1,19 @@
-
 import React, { useState } from "react";
-import SimpleBar from 'simplebar-react';
+import SimpleBar from "simplebar-react";
 import { useLocation, Switch, Route, Router, Redirect } from "react-router-dom";
-import { CSSTransition } from 'react-transition-group';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
-import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-bootstrap';
-import { Link } from 'react-router-dom';
+import {
+  Nav,
+  Badge,
+  Image,
+  Button,
+  Accordion,
+  Navbar,
+} from "@themesberg/react-bootstrap";
+import { Link } from "react-router-dom";
 import { Routes } from "../routes";
-import {Login} from './Login';
 
 const Sidebar = (props = {}) => {
   const { title, items } = props;
@@ -24,16 +29,19 @@ const Sidebar = (props = {}) => {
     return (
       <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
         <Accordion.Item className="border-0 bg-blue-500" eventKey={eventKey}>
-          <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center bg-red-900">
+          <Accordion.Button
+            as={Nav.Link}
+            className="d-flex justify-content-between align-items-center bg-red-900"
+          >
             <span>
-              <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span>
+              <span className="sidebar-icon">
+                <FontAwesomeIcon icon={icon} />{" "}
+              </span>
               <span className="sidebar-text">{title}</span>
             </span>
           </Accordion.Button>
           <Accordion.Body className="multi-level">
-            <Nav className="flex-column">
-              {children}
-            </Nav>
+            <Nav className="flex-column">{children}</Nav>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -41,8 +49,20 @@ const Sidebar = (props = {}) => {
   };
 
   const NavItem = (props) => {
-    const { title, link, external, target, icon, image, badgeText, badgeBg = "secondary", badgeColor = "primary" } = props;
-    const classNames = badgeText ? "d-flex justify-content-start align-items-center justify-content-between" : "";
+    const {
+      title,
+      link,
+      external,
+      target,
+      icon,
+      image,
+      badgeText,
+      badgeBg = "secondary",
+      badgeColor = "primary",
+    } = props;
+    const classNames = badgeText
+      ? "d-flex justify-content-start align-items-center justify-content-between"
+      : "";
     const navItemClassName = link === pathname ? "active" : "";
     const linkProps = external ? { href: link } : { as: Link, to: link };
 
@@ -50,12 +70,30 @@ const Sidebar = (props = {}) => {
       <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
         <Nav.Link {...linkProps} target={target} className={classNames}>
           <span>
-            {icon ? <span className="sidebar-icon"><FontAwesomeIcon icon={icon} /> </span> : null}
-            {image ? <Image src={image} width={100} height={20} className="sidebar-icon svg-icon" /> : null}
+            {icon ? (
+              <span className="sidebar-icon">
+                <FontAwesomeIcon icon={icon} />{" "}
+              </span>
+            ) : null}
+            {image ? (
+              <Image
+                src={image}
+                width={100}
+                height={20}
+                className="sidebar-icon svg-icon"
+              />
+            ) : null}
             <span className="sidebar-text">{title}</span>
           </span>
           {badgeText ? (
-            <Badge pill bg={badgeBg} text={badgeColor} className="badge-md notification-count ms-2">{badgeText}</Badge>
+            <Badge
+              pill
+              bg={badgeBg}
+              text={badgeColor}
+              className="badge-md notification-count ms-2"
+            >
+              {badgeText}
+            </Badge>
           ) : null}
         </Nav.Link>
       </Nav.Item>
@@ -63,13 +101,25 @@ const Sidebar = (props = {}) => {
   };
 
   const toNavItem = (item, i) => {
-    switch(item.action.type) {
+    switch (item.action.type) {
       case "link":
-        return <NavItem key={i} title={item.title} link={item.action.path} image={item.image}/>
+        return (
+          <NavItem
+            key={i}
+            title={item.title}
+            link={item.action.path}
+            image={item.image}
+          />
+        );
       case "accordion":
         return (
-          <CollapsableNavItem key={i} title={item.title} eventKey={item.title} image={item.image}>
-          { item.action.items.map(toNavItem) }
+          <CollapsableNavItem
+            key={i}
+            title={item.title}
+            eventKey={item.title}
+            image={item.image}
+          >
+            {item.action.items.map(toNavItem)}
           </CollapsableNavItem>
         );
       default:
@@ -88,9 +138,9 @@ const Sidebar = (props = {}) => {
         style={{
           backgroundColor: "#1e96ff",
           borderBottom: "1px 1px solid #1e96ff",
-          borderRadius:"0.2cm",
-          display:"flex",
-          width:"100%"
+          borderRadius: "0.2cm",
+          display: "flex",
+          width: "100%",
         }}
       >
         <Navbar.Brand
@@ -141,10 +191,12 @@ const Sidebar = (props = {}) => {
                 <FontAwesomeIcon style={{ padding: "0.5rem" }} icon={faLeaf} />
                 {title}
               </Button>
-                <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
-                <Link to="/Login"
+              <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
+              <Link
+                to="/Login"
                 className="border-1 border-white rounded-2 flex justify-center h-8 mt-10 font-bold"
-              >Logout
+              >
+                Logout
               </Link>
             </Nav>
           </div>
