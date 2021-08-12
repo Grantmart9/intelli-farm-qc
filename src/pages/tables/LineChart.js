@@ -29,7 +29,7 @@ const schemaFetch = [
     format: "%d-%b-%y-%H:%M",
   },
   {
-    name: "Ec Value",
+    name: "Ec Volume (l)",
     type: "number",
   },
 ];
@@ -37,12 +37,8 @@ const schemaFetch = [
 const dataSource = {
   chart: {
     exportenabled: 1,
-    showlegend: true,
     palettecolors: "#347aeb",
     theme: "gammel",
-    showBorder: 1,
-    borderColor: "black",
-    bgColor: "#DDDDDD",
   },
   caption: {
     text: "EC History",

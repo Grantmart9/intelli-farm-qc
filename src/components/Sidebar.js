@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 11/08/2021 - 08:12:28
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 11/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React, { useState } from "react";
 import SimpleBar from "simplebar-react";
 import { useLocation, Switch, Route, Router, Redirect } from "react-router-dom";
@@ -171,7 +183,7 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div className="2xl:mt-16"></div>
+              <div className="2xl:mt-16 xl:mt-16"></div>
               <Button
                 className="border-1 border-white"
                 style={{

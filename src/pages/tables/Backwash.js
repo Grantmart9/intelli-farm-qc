@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 12/08/2021 - 15:13:18
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 12/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React from "react";
 import { AppName } from "./AppName";
 import ErrorPage from "./ErrorPage.jpg";
@@ -12,27 +24,34 @@ import Irrigations from "./Irrigations.png";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
+    backgroundColor: "#05ab24",
+  },
 }))(LinearProgress);
 
 const WashBack = ({ backwash }) => {
   return (
     <div className="bg-gray-400 rounded shadow-md p-2 flex gap-2">
-    <div className="shadow-md rounded p-3 bg-gray-400">
-      <div className="font-bold text-2xl">{backwash.name}</div>
-      <div className="font-bold text-3xl">{backwash.status}</div>
-      <div className="font-bold text-md text-red-400">{backwash.alarm}</div>
-    </div>
-    <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center"><img src={Irrigations} alt={Irrigations} width="200rem" height="50rem" /></div>
+      <div className="shadow-md rounded p-3 bg-gray-400">
+        <div className="font-bold text-2xl">{backwash.name}</div>
+        <div className="font-bold text-3xl">{backwash.status}</div>
+        <div className="font-bold text-md text-red-400">{backwash.alarm}</div>
+      </div>
+      <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
+        <img
+          src={Irrigations}
+          alt={Irrigations}
+          width="200rem"
+          height="50rem"
+        />
+      </div>
     </div>
   );
 };
@@ -51,21 +70,21 @@ export const Backwash = () => {
         <div className="p-4">
           <div className="bg-gray-400 rounded shadow-md font-bold block text-gray-800 text-center p-4">
             <div className="bg-gray-400 rounded shadow-md inline-block p-2">
-            <div className="font-bold text-xl">
-              Alarm Status: {data.backwash_status.status}
-            </div>
-            <div className="font-bold text-xl ">
-              Percentage Left: {data.backwash_status.percentage_left.toFixed(2)}{" "}
-              %
-            </div>
+              <div className="font-bold text-xl">
+                Alarm Status: {data.backwash_status.status}
+              </div>
+              <div className="font-bold text-xl ">
+                Percentage Left:{" "}
+                {data.backwash_status.percentage_left.toFixed(2)} %
+              </div>
             </div>
             <div className="bg-gray-400 shadow-md p-2">
-            <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-2 ">
-              <BorderLinearProgress
-                variant="determinate"
-                value={data.backwash_status.percentage_left}
-              />
-            </div>
+              <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
+                <BorderLinearProgress
+                  variant="determinate"
+                  value={data.backwash_status.percentage_left}
+                />
+              </div>
             </div>
           </div>
         </div>
