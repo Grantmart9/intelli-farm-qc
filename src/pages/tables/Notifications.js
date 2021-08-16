@@ -34,9 +34,25 @@ const useStyles = makeStyles((theme) => ({
 export const Notifications = () => {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
+  const [User2, setUser2] = React.useState("");
+  const [User3, setUser3] = React.useState("");
+  const [User4, setUser4] = React.useState("");
+  const [User5, setUser5] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+  const handleChange2 = (event) => {
+    setUser2(event.target.value);
+  };
+  const handleChange3 = (event) => {
+    setUser3(event.target.value);
+  };
+  const handleChange4 = (event) => {
+    setUser4(event.target.value);
+  };
+  const handleChange5 = (event) => {
+    setUser5(event.target.value);
   };
 
   return (
@@ -87,8 +103,8 @@ export const Notifications = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                onChange={handleChange}
+                value={User2}
+                onChange={handleChange2}
               >
                 <MenuItem value={10}>SMS</MenuItem>
                 <MenuItem value={20}>Email</MenuItem>
@@ -115,11 +131,11 @@ export const Notifications = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                onChange={handleChange}
+                value={User3}
+                onChange={handleChange3}
               >
-                <MenuItem>SMS</MenuItem>
-                <MenuItem>Email</MenuItem>
+                <MenuItem value={10}>SMS</MenuItem>
+                <MenuItem value={20}>Email</MenuItem>
               </Select>
             </FormControl>
             <div className="flex justify-center bg-blue-400 rounded">
@@ -143,8 +159,8 @@ export const Notifications = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                onChange={handleChange}
+                value={User4}
+                onChange={handleChange4}
               >
                 <MenuItem value={10}>SMS</MenuItem>
                 <MenuItem value={20}>Email</MenuItem>
@@ -171,8 +187,8 @@ export const Notifications = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                onChange={handleChange}
+                value={User5}
+                onChange={handleChange5}
               >
                 <MenuItem value={10}>SMS</MenuItem>
                 <MenuItem value={20}>Email</MenuItem>
