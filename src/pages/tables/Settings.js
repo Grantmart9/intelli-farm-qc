@@ -1,5 +1,5 @@
 import React from "react";
-import {AppName} from "./AppName";
+import { AppName } from "./AppName";
 import ErrorGif from "./ErrorGif.gif";
 
 export const Settings = () => {

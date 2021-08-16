@@ -14,17 +14,15 @@ import React, { useState, useLayoutEffect } from "react";
 import {
   createContainer,
   VictoryAxis,
-  VictoryBar,
   VictoryBrushContainer,
   VictoryChart,
   VictoryTooltip,
   VictoryLine,
 } from "victory";
-
 import useResizeObserver from "@react-hook/resize-observer";
 import moment from "moment";
 
-const formatDate = (date) => moment(date).format("YYYY-MM-DD HH:mm");
+const formatDate = (date) => moment(date).format("YYYY-MM-DD");
 
 class BrushChartTooltip extends React.Component {
   static defaultEvents = VictoryTooltip.defaultEvents;
@@ -79,7 +77,7 @@ export const LineChart = ({ data }) => {
       style: {
         axis: {
           stroke: "grey",
-          strokeWidth: 1,
+          strokeWidth: 2,
         },
         tickLabels: {},
         grid: {

@@ -68,7 +68,7 @@ export const FertilizerBarChart = ({ data }) => {
           enabled: false,
         },
         title: {
-          text:"Fertilizer",
+          text: "Fertilizer",
           offsetX: 30,
           offsetY: 10,
           style: {
