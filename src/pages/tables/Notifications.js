@@ -58,143 +58,145 @@ export const Notifications = () => {
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1 justify-center flex gap-2 pb-4">
-        <div className="inline-flex mt-4">
-          <div className="bg-gray-200 rounded shadow-md p-4 ">
-            <div className="font-bold flex justify-center mb-2">User: 1</div>
-            <div className="mb-2 flex justify-center">
-              <TextField label="User email" variant="outlined" />
-            </div>
-            <div className="mb-2 block">
-              <TextField label="Contact Number" variant="outlined" />
-            </div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Contact Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="flex justify-center bg-blue-400 rounded">
-              <Button>Save</Button>
-            </div>
-          </div>
-        </div>
-        <div className="inline-flex mt-4">
-          <div className="bg-gray-200 rounded shadow-md p-4 ">
-            <div className="font-bold flex justify-center mb-2">User: 2</div>
-            <div className="mb-2 flex justify-center">
-              <TextField label="User email" variant="outlined" />
-            </div>
-            <div className="mb-2 block">
-              <TextField label="Contact Number" variant="outlined" />
-            </div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Contact Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={User2}
-                onChange={handleChange2}
-              >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="flex justify-center bg-blue-400 rounded">
-              <Button>Save</Button>
+        <div className="xl:grid grid-cols-4 rounded gap-4 ml-12">
+          <div className="inline-flex mt-4">
+            <div className="bg-gray-200 rounded shadow-md p-4 ">
+              <div className="font-bold flex justify-center mb-2">User: 1</div>
+              <div className="mb-2 flex justify-center">
+                <TextField label="User email" variant="outlined" />
+              </div>
+              <div className="mb-2 block">
+                <TextField label="Contact Number" variant="outlined" />
+              </div>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">
+                  Contact Method
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>SMS</MenuItem>
+                  <MenuItem value={20}>Email</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="flex justify-center bg-blue-400 rounded">
+                <Button>Save</Button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="inline-flex mt-4">
-          <div className="bg-gray-200 rounded shadow-md p-4 ">
-            <div className="font-bold flex justify-center mb-2">User: 3</div>
-            <div className="mb-2 flex justify-center">
-              <TextField label="User email" variant="outlined" />
-            </div>
-            <div className="mb-2 block">
-              <TextField label="Contact Number" variant="outlined" />
-            </div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Contact Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={User3}
-                onChange={handleChange3}
-              >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="flex justify-center bg-blue-400 rounded">
-              <Button>Save</Button>
-            </div>
-          </div>
-        </div>
-        <div className="inline-flex mt-4">
-          <div className="bg-gray-200 rounded shadow-md p-4 ">
-            <div className="font-bold flex justify-center mb-2">User: 4</div>
-            <div className="mb-2 flex justify-center">
-              <TextField label="User email" variant="outlined" />
-            </div>
-            <div className="mb-2 block">
-              <TextField label="Contact Number" variant="outlined" />
-            </div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Contact Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={User4}
-                onChange={handleChange4}
-              >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="flex justify-center bg-blue-400 rounded">
-              <Button>Save</Button>
+          <div className="inline-flex mt-4">
+            <div className="bg-gray-200 rounded shadow-md p-4 ">
+              <div className="font-bold flex justify-center mb-2">User: 2</div>
+              <div className="mb-2 flex justify-center">
+                <TextField label="User email" variant="outlined" />
+              </div>
+              <div className="mb-2 block">
+                <TextField label="Contact Number" variant="outlined" />
+              </div>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">
+                  Contact Method
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={User2}
+                  onChange={handleChange2}
+                >
+                  <MenuItem value={10}>SMS</MenuItem>
+                  <MenuItem value={20}>Email</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="flex justify-center bg-blue-400 rounded">
+                <Button>Save</Button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="inline-flex mt-4">
-          <div className="bg-gray-200 rounded shadow-md p-4 ">
-            <div className="font-bold flex justify-center mb-2">User: 5</div>
-            <div className="mb-2 flex justify-center">
-              <TextField label="User email" variant="outlined" />
+          <div className="inline-flex mt-4">
+            <div className="bg-gray-200 rounded shadow-md p-4 ">
+              <div className="font-bold flex justify-center mb-2">User: 3</div>
+              <div className="mb-2 flex justify-center">
+                <TextField label="User email" variant="outlined" />
+              </div>
+              <div className="mb-2 block">
+                <TextField label="Contact Number" variant="outlined" />
+              </div>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">
+                  Contact Method
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={User3}
+                  onChange={handleChange3}
+                >
+                  <MenuItem value={10}>SMS</MenuItem>
+                  <MenuItem value={20}>Email</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="flex justify-center bg-blue-400 rounded">
+                <Button>Save</Button>
+              </div>
             </div>
-            <div className="mb-2 block">
-              <TextField label="Contact Number" variant="outlined" />
+          </div>
+          <div className="inline-flex mt-4">
+            <div className="bg-gray-200 rounded shadow-md p-4 ">
+              <div className="font-bold flex justify-center mb-2">User: 4</div>
+              <div className="mb-2 flex justify-center">
+                <TextField label="User email" variant="outlined" />
+              </div>
+              <div className="mb-2 block">
+                <TextField label="Contact Number" variant="outlined" />
+              </div>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">
+                  Contact Method
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={User4}
+                  onChange={handleChange4}
+                >
+                  <MenuItem value={10}>SMS</MenuItem>
+                  <MenuItem value={20}>Email</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="flex justify-center bg-blue-400 rounded">
+                <Button>Save</Button>
+              </div>
             </div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Contact Method
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={User5}
-                onChange={handleChange5}
-              >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="flex justify-center bg-blue-400 rounded">
-              <Button>Save</Button>
+          </div>
+          <div className="inline-flex mt-4">
+            <div className="bg-gray-200 rounded shadow-md p-4 ">
+              <div className="font-bold flex justify-center mb-2">User: 5</div>
+              <div className="mb-2 flex justify-center">
+                <TextField label="User email" variant="outlined" />
+              </div>
+              <div className="mb-2 block">
+                <TextField label="Contact Number" variant="outlined" />
+              </div>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">
+                  Contact Method
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={User5}
+                  onChange={handleChange5}
+                >
+                  <MenuItem value={10}>SMS</MenuItem>
+                  <MenuItem value={20}>Email</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="flex justify-center bg-blue-400 rounded">
+                <Button>Save</Button>
+              </div>
             </div>
           </div>
         </div>
