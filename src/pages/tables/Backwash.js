@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import Irrigations from "./Irrigations.png";
+import fertilizer from "./fertilizer.png";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -45,12 +45,7 @@ const WashBack = ({ backwash }) => {
         <div className="font-bold text-md text-red-400">{backwash.alarm}</div>
       </div>
       <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
-        <img
-          src={Irrigations}
-          alt={Irrigations}
-          width="200rem"
-          height="50rem"
-        />
+        <img src={fertilizer} alt={fertilizer} width="200rem" height="50rem" />
       </div>
     </div>
   );

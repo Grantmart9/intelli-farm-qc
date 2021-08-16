@@ -14,7 +14,6 @@ import React from "react";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
-import { API_URL } from "../../api";
 import { AppName } from "./AppName";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
@@ -22,20 +21,22 @@ import ErrorGif from "./ErrorGif.gif";
 import ChartViewer from "./LineChart";
 import fertilizer from "./fertilizer.png";
 import fertilizerEc from "./fertilizerEc.png";
+import { LineChart } from "../../components/LineChart";
+import { API_URL } from "../../api";
+import { AxiosSpinner } from "../../components/AxiosSpinner";
 
 const FertilizerValves = ({ valves }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
         <div className="text-gray-800 text-2xl font-bold">{valves.name}</div>
+        <div className="text-green-800 text-2xl font-bold">{valves.status}</div>
         <div className="text-green-800 text-lg font-bold">
-          Real Time Flow: {valves.real_time_flow}
+          {valves.real_time_flow}
         </div>
-        <div className="text-red-800 font-bold text-md">
-          Alarm Status: {valves.alarm}
-        </div>
+        <div className="text-red-800 font-bold text-md">{valves.alarm}</div>
         <div className="text-gray-800 text-sm font-bold text-md">
-          Total Flow: {valves.total_flow}
+          {valves.total_flow}
         </div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
@@ -56,9 +57,7 @@ const ECValves = ({ ec }) => {
         <div className="text-green-800 text-md font-bold">
           Value: {ec.value}
         </div>
-        <div className="text-red-800 font-bold text-md">
-          Alarm status: {ec.alarm}
-        </div>
+        <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
         <div className="text-gray-800 text-sm font-bold">
           Average: {ec.average}
         </div>
@@ -145,11 +144,18 @@ const Fertilizer = () => {
             </div>
           ))}
         </div>
-        <div className="xl:p-6 sm:p-4 p-2 ">
-          <div className="bg-gray-400 rounded shadow-md p-3">
-            <ChartViewer />
+        <div className="p-2">
+          <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
+            <LineChart
+              data={data.ec_history.map(({ datetime, y, ...rest }) => ({
+                ...rest,
+                x: new Date(datetime),
+                y: Number(y),
+              }))}
+            />
           </div>
         </div>
+        <div className="bg-gray-400 rounded shadow-md mb-4"></div>
         <div className="xl:grid grid-cols-2 gap-2 p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />

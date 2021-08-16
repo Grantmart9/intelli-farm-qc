@@ -88,6 +88,7 @@ class ChartViewer extends React.Component {
         width: "100%",
         height: "400",
         dataSource,
+        fontSize: "0",
       },
     };
   }

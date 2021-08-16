@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 16/08/2021 - 13:41:01
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 16/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React from "react";
 import { useParams } from "react-router-dom";
 import { AppName } from "./AppName";
@@ -5,21 +17,22 @@ import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
-import valve from "./Valve.jpg"
+import fertilizer from "./fertilizer.png";
 
 const EquipmentStatus = ({ data }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
         <div className="font-bold text-2xl">{data.name}</div>
-        <div className="font-bold text-xl">Real Time Flow: {data.real_time_flow}</div>
-        <div className="font-bold text-md text-red-400">Alarm Status: {data.alarm}</div>
-        <div className="font-bold text-sm">Total Flow: {data.total_flow}</div>
+        <div className="font-bold text-2xl">{data.status}</div>
+        <div className="font-bold text-xl">{data.real_time_flow}</div>
+        <div className="font-bold text-md text-red-400">{data.alarm}</div>
+        <div className="font-bold text-sm">{data.total_flow}</div>
       </div>
-    <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25">
-    <img src={valve} alt={valve} width="80%" height="80%"/>
-  </div>
-  </div>
+      <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25">
+        <img src={fertilizer} alt={fertilizer} width="80%" height="80%" />
+      </div>
+    </div>
   );
 };
 
@@ -30,16 +43,16 @@ const IrrigationControl = () => {
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
         <div className="xl:grid grid-cols-4 p-4 gap-4">
-            <AxiosSpinner
-              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
-              renderData={({ data }) =>
-                data.map((irrigation_valve) => (
-                  <div className="bg-gray-400 shadow-md rounded mb-4">
+          <AxiosSpinner
+            callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
+            renderData={({ data }) =>
+              data.map((irrigation_valve) => (
+                <div className="bg-gray-400 shadow-md rounded mb-4">
                   <EquipmentStatus data={irrigation_valve} />
-                  </div>
-                ))
-              }
-            />
+                </div>
+              ))
+            }
+          />
         </div>
         <div className="bg-gray-400  rounded shadow-md ml-6 mr-6">
           <div className="w-full h-full">
@@ -59,7 +72,7 @@ const IrrigationControl = () => {
                 data={data.map(({ datetime, y, ...rest }) => ({
                   ...rest,
                   x: new Date(datetime),
-                  y: Number(y)
+                  y: Number(y),
                 }))}
               />
             )}
