@@ -118,8 +118,8 @@ export const Notifications = () => {
                 value={age}
                 onChange={handleChange}
               >
-                <MenuItem value={10}>SMS</MenuItem>
-                <MenuItem value={20}>Email</MenuItem>
+                <MenuItem>SMS</MenuItem>
+                <MenuItem>Email</MenuItem>
               </Select>
             </FormControl>
             <div className="flex justify-center bg-blue-400 rounded">
