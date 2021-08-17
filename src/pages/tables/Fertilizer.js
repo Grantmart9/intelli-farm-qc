@@ -121,9 +121,9 @@ const Fertilizer = () => {
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
-          {data.fertilizer_valves.map((valves, i) => (
+          {data.fertilizer_valves.map((valves, e) => (
             <div className=" bg-gray-400 rounded shadow-md">
-              <FertilizerValves key={i} valves={valves} />
+              <FertilizerValves key={e} valves={valves} />
             </div>
           ))}
         </div>
@@ -137,6 +137,7 @@ const Fertilizer = () => {
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
             <LineChart
+              key="no1"
               data={data.ec_history.map(({ datetime, y, ...rest }) => ({
                 ...rest,
                 x: new Date(datetime),

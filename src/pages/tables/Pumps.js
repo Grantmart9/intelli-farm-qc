@@ -39,7 +39,7 @@ export const Pumps = () => {
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
         <div className="flex gap-2">
-          {data.map((data, i) => (
+          {data.map((data) => (
             <div className="flex p-2 gap-2 bg-gray-400 rounded shadow-md ">
               <div className="bg-gray-400 rounded shadow-md p-2">
                 <div className="font-bold text-2xl">{data.name}</div>
