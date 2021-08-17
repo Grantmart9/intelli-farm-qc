@@ -101,7 +101,7 @@ export const LineChart = ({ data }) => {
       <div
         style={{ marginLeft: "2.5rem", fontWeight: "bold", fontSize: "17px" }}
       >
-        <text
+        <div
           style={{
             display: "inline-flex",
             color: "#373738",
@@ -110,7 +110,7 @@ export const LineChart = ({ data }) => {
           }}
         >
           EC History
-        </text>
+        </div>
       </div>
       <VictoryChart
         theme={theme}
