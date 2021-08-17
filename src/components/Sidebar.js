@@ -14,8 +14,7 @@ import React, { useState } from "react";
 import SimpleBar from "simplebar-react";
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import leaf from "./leaf.png";
 import {
   Nav,
   Badge,
@@ -35,7 +34,7 @@ const Sidebar = (props = {}) => {
   const showClass = show ? "show" : "";
   const onCollapse = () => setShow(!show);
   const CollapsableNavItem = (props) => {
-    const { eventKey, title, icon, children = null } = props;
+    const { eventKey, title, children = null } = props;
     const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
 
     return (
@@ -46,9 +45,7 @@ const Sidebar = (props = {}) => {
             className="d-flex justify-content-between align-items-center bg-red-900"
           >
             <span>
-              <span className="sidebar-icon">
-                <FontAwesomeIcon icon={icon} />{" "}
-              </span>
+              <span className="sidebar-icon"></span>
               <span className="sidebar-text">{title}</span>
             </span>
           </Accordion.Button>
@@ -82,11 +79,7 @@ const Sidebar = (props = {}) => {
       <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
         <Nav.Link {...linkProps} target={target} className={classNames}>
           <span>
-            {icon ? (
-              <span className="sidebar-icon">
-                <FontAwesomeIcon icon={icon} />{" "}
-              </span>
-            ) : null}
+            {icon ? <span className="sidebar-icon"></span> : null}
             {image ? (
               <Image
                 src={image}
@@ -200,7 +193,7 @@ const Sidebar = (props = {}) => {
                   marginBottom: "2.5rem",
                 }}
               >
-                <FontAwesomeIcon style={{ padding: "0.5rem" }} icon={faLeaf} />
+                <img src={leaf} width="40rem" alt={leaf} />
                 {title}
               </Button>
               <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>

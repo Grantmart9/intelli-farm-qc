@@ -2,11 +2,11 @@
  * @description      :
  * @author           : Grant
  * @group            :
- * @created          : 16/08/2021 - 15:59:24
+ * @created          : 17/08/2021 - 14:05:27
  *
  * MODIFICATION LOG
  * - Version         : 1.0.0
- * - Date            : 16/08/2021
+ * - Date            : 17/08/2021
  * - Author          : Grant
  * - Modification    :
  **/
@@ -15,7 +15,7 @@ import Logo from "./Logo.png";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 2,
     display: "inline-flex",

@@ -18,7 +18,6 @@ import { AppName } from "./AppName";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
-import fertilizer from "./fertilizer.png";
 import fertilizerEc from "./fertilizerEc.png";
 import { LineChart } from "../../components/LineChart";
 import { API_URL } from "../../api";
