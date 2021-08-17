@@ -18,6 +18,7 @@ import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import IrrigationPump from "./IrrigationPump.png";
+import pump from "./pump.png";
 
 export const Pumps = () => {
   const { farmId } = useParams();
@@ -45,14 +46,14 @@ export const Pumps = () => {
                 {data.map(({ name }) => name)}
               </div>
               <div className="font-bold text-3xl">
-                Pressure: {data.map(({ pressure }) => pressure)}
+                {data.map(({ pressure }) => pressure)}
               </div>
               <div className="font-bold text-md text-red-400">
-                Alarm Status: {data.map(({ alarm }) => alarm)}
+                {data.map(({ alarm }) => alarm)}
               </div>
             </div>
             <div className="bg-gray-400 rounded shadow-md p-2 flex justify-center">
-              <img src={IrrigationPump} alt={IrrigationPump} width={100} />
+              <img src={pump} alt={pump} width={100} />
             </div>
           </div>
         </div>

@@ -83,10 +83,10 @@ export const Backwash = () => {
           <div className="bg-gray-400 rounded shadow-md font-bold block text-gray-800 text-center p-4">
             <div className="bg-gray-400 rounded shadow-md inline-block p-2">
               <div className="font-bold text-xl">
-                Alarm Status: {data.backwash_status.status}
+                Status: {data.backwash_status.status}
               </div>
               <div className="font-bold text-xl ">
-                Percentage Left:{" "}
+                Percentage left:
                 {data.backwash_status.percentage_left.toFixed(2)} %
               </div>
             </div>

@@ -12,7 +12,7 @@
  **/
 import React, { useState } from "react";
 import SimpleBar from "simplebar-react";
-import { useLocation, Switch, Route, Router, Redirect } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";

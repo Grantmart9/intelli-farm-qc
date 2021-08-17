@@ -22,6 +22,7 @@ import fertilizer from "./fertilizer.png";
 import fertilizerEc from "./fertilizerEc.png";
 import { LineChart } from "../../components/LineChart";
 import { API_URL } from "../../api";
+import greendrop from "./greendrop.gif";
 
 const FertilizerValves = ({ valves }) => {
   return (
@@ -38,7 +39,7 @@ const FertilizerValves = ({ valves }) => {
         </div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
-        <img src={fertilizer} alt={fertilizer} width="80%" height="80%" />
+        <img src={greendrop} alt={greendrop} width="80%" height="80%" />
       </div>
     </div>
   );
@@ -56,9 +57,7 @@ const ECValves = ({ ec }) => {
           Value: {ec.value}
         </div>
         <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
-        <div className="text-gray-800 text-sm font-bold">
-          Average: {ec.average}
-        </div>
+        <div className="text-gray-800 text-sm font-bold">{ec.average}</div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
         <img
