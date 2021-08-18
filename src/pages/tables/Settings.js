@@ -61,7 +61,7 @@ const DateAndTimePicker = () => {
 
 const EmailInput = () => {
   return (
-    <div className="flex align-center justify-center mt-3">
+    <div className="flex align-center justify-center bg-gray-400 rounded shadow-md pd-2 mt-3">
       <TextField className="w-full" label="Email Address" variant="outlined" />
     </div>
   );
