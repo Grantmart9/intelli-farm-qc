@@ -40,9 +40,15 @@ const WashBack = ({ backwash }) => {
   return (
     <div className="bg-gray-400 rounded shadow-md p-2 flex gap-2">
       <div className="shadow-md rounded p-3 bg-gray-400 w-100">
-        <div className="font-bold text-2xl">{backwash.name}</div>
-        <div className="font-bold text-xl">{backwash.status}</div>
-        <div className="font-bold text-md text-red-400">{backwash.alarm}</div>
+        <div key={backwash.name} className="font-bold text-2xl">
+          {backwash.name}
+        </div>
+        <div key={backwash.status} className="font-bold text-xl">
+          {backwash.status}
+        </div>
+        <div key={backwash.alarm} className="font-bold text-md text-red-400">
+          {backwash.alarm}
+        </div>
       </div>
       <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
         <img src={fertilizer} alt={fertilizer} width="100rem" height="50rem" />

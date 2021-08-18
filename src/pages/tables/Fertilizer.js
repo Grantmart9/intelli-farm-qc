@@ -27,17 +27,29 @@ const FertilizerValves = ({ valves }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
-        <div className="text-gray-800 text-2xl font-bold">{valves.name}</div>
-        <div className="text-green-800 text-2xl font-bold">{valves.status}</div>
-        <div className="text-green-800 text-lg font-bold">
+        <div key="name" className="text-gray-800 text-2xl font-bold">
+          {valves.name}
+        </div>
+        <div key="status" className="text-green-800 text-2xl font-bold">
+          {valves.status}
+        </div>
+        <div key="realflow" className="text-green-800 text-lg font-bold">
           {valves.real_time_flow}
         </div>
-        <div className="text-red-800 font-bold text-md">{valves.alarm}</div>
-        <div className="text-gray-800 text-sm font-bold text-md">
+        <div key="alarm" className="text-red-800 font-bold text-md">
+          {valves.alarm}
+        </div>
+        <div
+          key="totalflow"
+          className="text-gray-800 text-sm font-bold text-md"
+        >
           {valves.total_flow}
         </div>
       </div>
-      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
+      <div
+        key="icon"
+        className="shadow-md rounded ml-2 items-center flex justify-center w-20"
+      >
         <img src={greendrop} alt={greendrop} width="80%" height="80%" />
       </div>
     </div>
@@ -48,15 +60,21 @@ const ECValves = ({ ec }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md border-1 rounded p-2 w-100">
-        <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
-        <div className="text-green-800 text-md font-bold">
+        <div key="ecname" className="text-gray-800 text-2xl font-bold">
+          {ec.name}
+        </div>
+        <div key="setpoint" className="text-green-800 text-md font-bold">
           Setpoint: {ec.setpoint}
         </div>
-        <div className="text-green-800 text-md font-bold">
+        <div key="value" className="text-green-800 text-md font-bold">
           Value: {ec.value}
         </div>
-        <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
-        <div className="text-gray-800 text-sm font-bold">{ec.average}</div>
+        <div key="ecalarm" className="text-red-800 font-bold text-md">
+          {ec.alarm}
+        </div>
+        <div key="average" className="text-gray-800 text-sm font-bold">
+          {ec.average}
+        </div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
         <img
@@ -137,7 +155,6 @@ const Fertilizer = () => {
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
             <LineChart
-              key="no1"
               data={data.ec_history.map(({ datetime, y, ...rest }) => ({
                 ...rest,
                 x: new Date(datetime),
@@ -148,10 +165,10 @@ const Fertilizer = () => {
         </div>
         <div className="bg-gray-400 rounded shadow-md mb-4"></div>
         <div className="xl:grid grid-cols-2 gap-2 p-2">
-          <div className="bg-gray-400 rounded shadow-md mb-4">
+          <div key="9" className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />
           </div>
-          <div className="bg-gray-400 rounded shadow-md mb-4">
+          <div key="10" className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerPieChart data={data.fertilizer_pie_chart} />
           </div>
         </div>

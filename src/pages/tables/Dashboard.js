@@ -160,40 +160,49 @@ export const Dashboard = () => {
   return (
     <div style={{ display: "block", backgroundColor: "#cad3de" }}>
       <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-        <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
-          <div className="bg-gray-400 rounded shadow-md">
+      <div
+        key="1"
+        className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1"
+      >
+        <div key="2" className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
+          <div key="3" className="bg-gray-400 rounded shadow-md">
             <IrrigationProgress key="no1" data={data.irrigation_data} />
           </div>
-          <div className="bg-gray-400 rounded shadow-md">
+          <div key="4" className="bg-gray-400 rounded shadow-md">
             <IrrigationTimeLeft key="no2" data={data.irrigation_data} />
           </div>
-          <div className="bg-gray-400 rounded shadow-md">
+          <div key="5" className="bg-gray-400 rounded shadow-md">
             <IrrigationEC key="no3" data={data.irrigation_data} />
           </div>
           {data.irrigation_data.pump_data.map((pump, i) => (
-            <div className="bg-gray-400 rounded shadow-md">
+            <div key="6" className="bg-gray-400 rounded shadow-md">
               <Pump key={i} pump={pump} />
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+        <div key="7" className="grid grid-cols-1 lg:grid-cols-3 p-2">
           {data.water_usage.map((waterUsageData, i) => (
             <div className="bg-gray-400  rounded shadow-md m-3 pt-4" key={i}>
               <HomeFlowWaterUsage data={waterUsageData} />
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-5">
-          <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
-            <div className="w-full h-full">
+        <div key="9" className="grid grid-cols-1 lg:grid-cols-5">
+          <div
+            key="10"
+            className="col-span-3 bg-gray-400 rounded shadow-md m-4"
+          >
+            <div key="11" className="w-full h-full">
               <HomeFlowFertilizerBarChart
                 data={data.fertilizer_usage.bar_graph}
               />
             </div>
           </div>
-          <div className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items">
-            <div className="w-full">
+          <div
+            key="12"
+            className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items"
+          >
+            <div key="13" className="w-full">
               <HomeFlowFertilizerPieChart
                 data={data.fertilizer_usage.pie_chart}
               />

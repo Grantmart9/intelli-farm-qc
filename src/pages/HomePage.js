@@ -24,7 +24,7 @@ import IrrigationControl from "./tables/IrrigationControl";
 import Fertilizer from "./tables/Fertilizer";
 import { IrrigationSchedule } from "./tables/IrrigationSchedule";
 import { Dashboard } from "./tables/Dashboard";
-import { Settings } from "./tables/Settings";
+import Settings from "./tables/Settings";
 import { Backwash } from "./tables/Backwash";
 import { Notifications } from "./tables/Notifications";
 import { Pumps } from "./tables/Pumps";
