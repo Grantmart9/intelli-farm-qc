@@ -29,17 +29,38 @@ const useStyles = makeStyles((theme) => ({
 const DashboardOverview = () => {
   const [username, setInput] = useState("");
   const [password, setInputPassword] = useState("");
+  var [usernamestate, usernamehandle] = useState(false);
+  var [passwordstate, passwordhandle] = useState(false);
 
-  var userCreds = Array(username.concat("," + password));
-  console.log(userCreds);
+  var apiusername = username;
+  var apipassword = password;
+
+  console.log("UsernameState:" + usernamestate);
+  console.log("PasswordState:" + passwordstate);
+  console.log("Entered Username:" + apiusername);
+  console.log("Entered Password:" + apipassword);
 
   axios
-    .get(`https://b885888a-e8d2-451f-9204-244988a28d5c.mock.pstmn.io/get`)
+    .get(`https://522435bb-be54-485a-a53b-5e2e83d24e81.mock.pstmn.io/get`)
     .then((res) => {
       const login = res.data;
-      console.log(login[0]);
-      if (JSON.stringify(userCreds) === JSON.stringify(login[0])) {
-        console.log("success, logging in");
+      const user = login.map((username) => username);
+      const password = user.map(({ password }) => password);
+      const userss = user.map(({ username }) => username);
+
+      if (userss.includes(apiusername)) {
+        console.log("Username Success Logging in...");
+        usernamehandle((usernamestate = true));
+      } else {
+        console.log("Username Failed");
+        usernamehandle((usernamestate = false));
+      }
+      if (password.includes(apipassword)) {
+        console.log("Password Success Logging in...");
+        passwordhandle((passwordstate = true));
+      } else {
+        console.log("Username Failed");
+        passwordhandle((passwordstate = false));
       }
     });
 

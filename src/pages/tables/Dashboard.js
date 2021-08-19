@@ -77,7 +77,7 @@ const Pump = ({ pump }) => (
   <div className="p-2">
     <div className="bg-gray-400 rounded p-3 shadow-md h-32">
       <div className="font-bold text-xl">Water Pump</div>
-      <div className="font-bold text-3xl">Status: {pump.status}</div>
+      <div className="font-bold text-3xl">{pump.status}</div>
       <div className="font-bold">{pump.main_flow}</div>
     </div>
   </div>
