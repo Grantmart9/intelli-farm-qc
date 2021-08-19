@@ -56,9 +56,7 @@ const IrrigationTimeLeft = ({ data }) => (
   <div className="p-2">
     <div className="bg-gray-400 rounded p-3 shadow-md h-32">
       <div className="text-xl font-bold">Irrigation Time Left</div>
-      <div className="font-bold text-3xl">
-        {data.irrigation_time_left} min left
-      </div>
+      <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
     </div>
   </div>
 );
