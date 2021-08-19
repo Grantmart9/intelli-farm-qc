@@ -63,12 +63,16 @@ const IrrigationTimeLeft = ({ data }) => (
   </div>
 );
 
-const IrrigationEC = () => (
+const IrrigationEC = ({ data }) => (
   <div className="p-2">
     <div className="bg-gray-400 rounded p-3 shadow-md h-32">
-      <div className="font-bold text-xl">EC Average</div>
-      <div className="text-3xl font-bold">2.93 mS</div>
-      <div className="font-bold">0.07 mS Below Target</div>
+      <div className="font-bold text-xl">
+        EC Average: {data.ec_data.average}
+      </div>
+      <div className="text-3xl font-bold">
+        Setpoint: {data.ec_data.setpoint}mS
+      </div>
+      <div className="font-bold">{data.ec_data.value} mS Below Target</div>
     </div>
   </div>
 );
