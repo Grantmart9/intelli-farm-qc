@@ -84,7 +84,8 @@ const Pump = ({ pump }) => (
 );
 
 export const HomeFlowFertilizerPieChart = ({ data }) => {
-  const series = data.map(({ ratio }) => ratio);
+  const series = data.map(({ ratio }) => Number(ratio.toFixed(2)));
+  console.log(series);
   const labels = data.map(({ name }) => name);
   return (
     <ApexChart
@@ -92,6 +93,12 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
       height={300}
       series={series}
       options={{
+        dataLabels: {
+          enabled: true,
+          formatter: function (val) {
+            return val + "%";
+          },
+        },
         labels: labels,
         legend: {
           formatter: (label, { seriesIndex }) =>

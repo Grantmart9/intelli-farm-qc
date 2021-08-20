@@ -71,7 +71,7 @@ const formatData = (data) => {
     {
       id: 0,
       label: "Full",
-      value: data.sensor_percentage_value.toFixed(2),
+      value: data.sensor_percentage_value,
     },
     {
       id: 1,
