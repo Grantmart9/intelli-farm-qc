@@ -22,8 +22,17 @@ import fertilizerEc from "./fertilizerEc.png";
 import { API_URL } from "../../api";
 import greendrop from "./greendrop.gif";
 import { LineChart } from "./LineChart";
+import fertilizer from "./fertilizer.png";
 
 const FertilizerValves = ({ valves }) => {
+  var image;
+
+  if (valves.status === "Opened") {
+    image = greendrop;
+  } else {
+    image = fertilizer;
+  }
+
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
@@ -50,7 +59,7 @@ const FertilizerValves = ({ valves }) => {
         key="icon"
         className="shadow-md rounded ml-2 items-center flex justify-center w-20"
       >
-        <img src={greendrop} alt={greendrop} width="80%" height="80%" />
+        <img src={image} alt={image} width="80%" height="80%" />
       </div>
     </div>
   );

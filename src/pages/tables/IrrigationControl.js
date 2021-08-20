@@ -18,8 +18,15 @@ import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import fertilizer from "./fertilizer.png";
+import greendrop from "./greendrop.gif";
 
 const EquipmentStatus = ({ data }) => {
+  var image;
+  if (data.status === "Opened") {
+    image = greendrop;
+  } else {
+    image = fertilizer;
+  }
   return (
     <div key="20" className="flex p-2">
       <div key="21" className="shadow-md rounded p-2 w-100">
@@ -43,13 +50,7 @@ const EquipmentStatus = ({ data }) => {
         key="27"
         className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25"
       >
-        <img
-          key="28"
-          src={fertilizer}
-          alt={fertilizer}
-          width="80%"
-          height="80%"
-        />
+        <img key="28" src={image} alt={image} width="80%" height="80%" />
       </div>
     </div>
   );
