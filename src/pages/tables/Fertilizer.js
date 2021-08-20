@@ -140,24 +140,24 @@ const Fertilizer = () => {
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.fertilizer_valves.map((valves, e) => (
-            <div className=" bg-gray-400 rounded shadow-md">
-              <FertilizerValves key={e} valves={valves} />
+            <div key={e} className=" bg-gray-400 rounded shadow-md">
+              <FertilizerValves valves={valves} />
             </div>
           ))}
         </div>
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.ec_values.map((ec, i) => (
-            <div className="bg-gray-400 rounded shadow-md">
-              <ECValves key={i} ec={ec} />
+            <div key={i} className="bg-gray-400 rounded shadow-md">
+              <ECValves ec={ec} />
             </div>
           ))}
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
             <LineChart
-              data={data.ec_history.map(({ datetime, y, ...rest }) => ({
+              data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
                 ...rest,
-                x: new Date(datetime),
+                x: new Date(datetime+" "+x),
                 y: Number(y),
               }))}
             />
