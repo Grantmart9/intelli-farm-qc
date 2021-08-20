@@ -22,7 +22,7 @@ import {
 import useResizeObserver from "@react-hook/resize-observer";
 import moment from "moment";
 
-const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+const formatDate = (date) => moment(date).format("YYYY/MM/DD hh:mm");
 
 class BrushChartTooltip extends React.Component {
   static defaultEvents = VictoryTooltip.defaultEvents;
@@ -76,21 +76,23 @@ export const LineChart = ({ data }) => {
     axis: {
       style: {
         axis: {
-          stroke: "grey",
+          stroke: "gray",
           strokeWidth: 2,
         },
         tickLabels: {},
         grid: {
-          stroke: "grey",
+          stroke: "blue",
           strokeDasharray: "5,5",
           strokeWidth: 0.5,
         },
       },
     },
-    bar: {
+    line: {
       style: {
         data: {
-          fill: "steelblue",
+          stroke: "blue",
+          strokeWidth: "2",
+          fill: "#dae1ed",
         },
       },
     },
@@ -109,7 +111,7 @@ export const LineChart = ({ data }) => {
             marginBottom: "0.5rem",
           }}
         >
-          EC History
+          Fertilizer History
         </div>
       </div>
       <VictoryChart
@@ -126,8 +128,8 @@ export const LineChart = ({ data }) => {
             }}
             zoomDimension="x"
             voronoiDimension="x"
-            allowPan={false}
-            allowZoom={false}
+            allowPan={true}
+            allowZoom={true}
             zoomDomain={{ x: zoomDomain }}
           />
         }
@@ -135,8 +137,11 @@ export const LineChart = ({ data }) => {
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
         <VictoryAxis dependentAxis />
         <VictoryLine
-          barRatio={0.5}
-          labels={({ datum: { x, y } }) => `${formatDate(x)} — ${y.toFixed(2)}`}
+          sortKey="datetime"
+          interpolation="linear"
+          labels={({ datum: { x, y, datetime } }) =>
+            `${formatDate(datetime, x)}-${y.toFixed(2)}`
+          }
           labelComponent={<BrushChartTooltip />}
           data={data}
         />
@@ -157,7 +162,7 @@ export const LineChart = ({ data }) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        <VictoryLine barRatio={0.4} data={data} />
+        <VictoryLine interpolation="linear" data={data} sortKey="x" />
       </VictoryChart>
     </div>
   );

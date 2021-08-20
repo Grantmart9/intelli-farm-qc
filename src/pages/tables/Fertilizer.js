@@ -19,9 +19,9 @@ import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "./FertilizerBarChart";
 import ErrorGif from "./ErrorGif.gif";
 import fertilizerEc from "./fertilizerEc.png";
-import { LineChart } from "../../components/LineChart";
 import { API_URL } from "../../api";
 import greendrop from "./greendrop.gif";
+import { LineChart } from "./LineChart";
 
 const FertilizerValves = ({ valves }) => {
   return (
@@ -71,9 +71,6 @@ const ECValves = ({ ec }) => {
         </div>
         <div key="ecalarm" className="text-red-800 font-bold text-md">
           {ec.alarm}
-        </div>
-        <div key="average" className="text-gray-800 text-sm font-bold">
-          {ec.average}
         </div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
@@ -155,9 +152,9 @@ const Fertilizer = () => {
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
             <LineChart
-              data={data.ec_history.map(({ datetime, y, ...rest }) => ({
+              data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
                 ...rest,
-                x: new Date(datetime),
+                x: new Date(datetime + " " + x),
                 y: Number(y),
               }))}
             />
