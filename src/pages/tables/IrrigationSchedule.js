@@ -81,11 +81,11 @@ const sectionColumns = [
 
 const SectionTable = ({ section, onChange = null }) => {
   const id = section.sql_index;
-  const handleEditCellChangeCommited = useCallback(
+  const handleCellEditCommit = useCallback(
     (e) => {
       const {
         field,
-        props: { value }
+        value
       } = e;
       const editedSection = { ...section, [field]: value };
       if (onChange) {
@@ -102,7 +102,7 @@ const SectionTable = ({ section, onChange = null }) => {
         autoHeight
         rows={[{ id, ...section }]}
         columns={sectionColumns}
-        onEditCellChangeCommitted={handleEditCellChangeCommited}
+        onCellEditCommit={handleCellEditCommit}
       />
     </div>
   );
@@ -130,12 +130,12 @@ const fertilizerColumns = [
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
-  const handleEditCellChangeCommited = useCallback(
+  const handleCellEditCommit = useCallback(
     (e) => {
       const {
         id,
         field,
-        props: { value }
+        value 
       } = e;
       const editedFertilizer = { ...fertilizers[id], [field]: value };
       const editedFertilizers = [
@@ -161,7 +161,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
         autoHeight
         rows={fertilizers.map((fertilizer, id) => ({ id: id, ...fertilizer }))}
         columns={fertilizerColumns}
-        onEditCellChangeCommitted={handleEditCellChangeCommited}
+        onCellEditCommit={handleCellEditCommit}
       />
     </div>
   );
@@ -245,8 +245,8 @@ export const IrrigationSchedule = () => {
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
-                <div className="bg-gray-200 rounded shadow-md w-full mb-4 p-2">
-                <SectionRow key={i} section={section} onChange={handleChange} />
+                <div key={i} className="bg-gray-200 rounded shadow-md w-full mb-4 p-2">
+                  <SectionRow section={section} onChange={handleChange} />
                 </div>
               );
             })}
