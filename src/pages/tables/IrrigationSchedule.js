@@ -16,7 +16,7 @@ import ErrorPage from "./ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
-  const dateFormat = "YYYY-MM-DD HH:mm";
+  const dateFormat = "YYYY-MM-DD HH:mm:ss";
   const handleChange = useCallback(
     (editedDate) => {
       const editedValue = moment(editedDate).format(dateFormat);
