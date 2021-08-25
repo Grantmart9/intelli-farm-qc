@@ -79,7 +79,7 @@ const sectionColumns = [
   }
 ].map((column) => ({ ...column, flex: 1 }));
 
-const SectionTable = ({ section, onChange = null }) => {
+const SectionTable = ({ editable, section, onChange = null }) => {
   const id = section.sql_index;
   const handleCellEditCommit = useCallback(
     (e) => {
@@ -102,6 +102,7 @@ const SectionTable = ({ section, onChange = null }) => {
         autoHeight
         rows={[{ id, ...section }]}
         columns={sectionColumns}
+        isCellEditable={({ colDef }) => editable && colDef.editable}
         onCellEditCommit={handleCellEditCommit}
       />
     </div>
@@ -167,13 +168,13 @@ const FertilizerTable = ({ section, onChange = null }) => {
   );
 };
 
-const SectionRow = ({ section, onChange = null }) => (
+const SectionRow = ({ editable, section, onChange = null }) => (
   <div className="w-full p-2 bg-gray-200 rounded">
     <div className="flex bg-blue-200 rounded-1 justify-content-center font-bold">
      {section.name}
     </div>
-    <SectionTable section={section} onChange={onChange} />
-    <FertilizerTable section={section} onChange={onChange} />
+    <SectionTable editable={editable} section={section} onChange={onChange} />
+    <FertilizerTable editable={editable} section={section} onChange={onChange} />
   </div>
 );
 
@@ -181,6 +182,7 @@ export const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useAxios(`${API_URL}/-${farmId}/schedule`);
   const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [schedule, setSchedule] = useState();
   useEffect(() => {
     if (data) {
@@ -217,12 +219,17 @@ export const IrrigationSchedule = () => {
   };
 
   const handleSave = async () => {
+    if(saving) return;
     try {
-      showMessage("Saving...");
-      await postSchedule({ data: schedule });
+      setSaving(true);
       setDirty(false);
+      let newSchedule = await postSchedule({ data: schedule });
+      setSchedule(newSchedule);
     } catch (e) {
+      setDirty(true);
       showMessage("Failed to save");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -246,7 +253,7 @@ export const IrrigationSchedule = () => {
             {schedule.map((section, i) => {
               return (
                 <div key={i} className="bg-gray-200 rounded shadow-md w-full mb-4 p-2">
-                  <SectionRow section={section} onChange={handleChange} />
+                  <SectionRow editable={!saving} section={section} onChange={handleChange} />
                 </div>
               );
             })}
