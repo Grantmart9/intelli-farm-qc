@@ -31,30 +31,30 @@ import { Pumps } from "./tables/Pumps";
 import { API_URL } from "../api";
 
 const farm_pages = {
-  irrigation: {
-    name: "Irrigation Valves",
-    path: "/irrigation",
-    page: IrrigationControl,
-  },
-  fertilizer: {
-    name: "Fertilizer",
-    path: "/fertilizer",
-    page: Fertilizer,
+  dashboard: {
+    name: "Dashboard",
+    path: "/dashboard",
+    page: Dashboard,
   },
   schedule: {
     name: "Schedule",
     path: "/schedule",
     page: IrrigationSchedule,
   },
-  dashboard: {
-    name: "Dashboard",
-    path: "/dashboard",
-    page: Dashboard,
+  fertilizer: {
+    name: "Fertilizer",
+    path: "/fertilizer",
+    page: Fertilizer,
   },
-  settings: {
-    name: "Settings",
-    path: "/settings",
-    page: Settings,
+  irrigation: {
+    name: "Irrigation Valves",
+    path: "/irrigation",
+    page: IrrigationControl,
+  },
+  pumps: {
+    name: "Pumps",
+    path: "/pumps",
+    page: Pumps,
   },
   backwash: {
     name: "Backwash",
@@ -66,12 +66,23 @@ const farm_pages = {
     path: "/notifications",
     page: Notifications,
   },
-  pumps: {
-    name: "Pumps",
-    path: "/pumps",
-    page: Pumps,
-  },
+  settings: {
+    name: "Settings",
+    path: "/settings",
+    page: Settings,
+  }
 };
+
+const farm_order = [
+  "dashboard",
+  "schedule",
+  "fertilizer",
+  "irrigation",
+  "pumps",
+  "backwash",
+  "notifications",
+  "settings"
+]
 
 const FarmRoutes = ({ prefix }) => (
   <>
@@ -94,7 +105,8 @@ const getNavItems = (prefix, layout) => {
     title: farmName,
     action: {
       type: "accordion",
-      items: Object.entries(pages).map(([pageName, path]) => {
+      items: farm_order.filter(x => x in pages).map(pageName => {
+        const path = pages[pageName];
         const farmPage = farm_pages[pageName] || { name: pageName };
         return {
           title: farmPage.name,
