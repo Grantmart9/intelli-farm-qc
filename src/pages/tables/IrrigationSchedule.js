@@ -223,7 +223,7 @@ export const IrrigationSchedule = () => {
     try {
       setSaving(true);
       setDirty(false);
-      let newSchedule = await postSchedule({ data: schedule });
+      let newSchedule = (await postSchedule({ data: schedule })).data;
       setSchedule(newSchedule);
     } catch (e) {
       setDirty(true);
