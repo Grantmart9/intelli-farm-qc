@@ -14,10 +14,18 @@ export const AxiosSpinner = ({
   renderLoader: RenderLoader = Preloader,
 }) => {
   const [{ data, loading, error }, refetch] = callHook(useAxios);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Fetching data");
+      refetch();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [refetch]);
+
   if (error) {
     return <RenderError {...{ error, refetch }} />;
   }
-  if (loading) {
+  if (!data && loading) {
     return <RenderLoader />;
   }
   return <RenderData {...{ data, refetch }} />;

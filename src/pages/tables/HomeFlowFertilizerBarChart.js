@@ -14,7 +14,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
     (date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
   );
 
-  const seriesNames = Array.from(new Set(data.map(({name}) => name)))
+  const seriesNames = Array.from(new Set(data.map(({ name }) => name)));
   const series = seriesNames.map((seriesName) => ({
     name: seriesName,
     data: dates.map((date) => {
@@ -56,7 +56,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
         },
         xaxis: {
           categories: days,
-          style:{fontSize:'40px',}
+          style: { fontSize: "40px" },
         },
         plotOptions: {
           bar: {
@@ -68,12 +68,12 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
           enabled: false,
         },
         title: {
-          text: "Field Valve History",
+          text: "Fertilizer Field History",
           offsetX: 30,
           offsetY: 10,
           style: {
-            fontSize:  '17px',
-            fontWeight:  'bold',
+            fontSize: "17px",
+            fontWeight: "bold",
           },
         },
       }}

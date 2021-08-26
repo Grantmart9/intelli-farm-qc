@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useEffect } from "react";
 import { AppName } from "./AppName";
 import ErrorGif from "./ErrorGif.gif";
 import { useParams } from "react-router-dom";
@@ -18,12 +18,23 @@ import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import pump from "./pump.png";
+import { INTERVAL } from "./Timer";
 
 export const Pumps = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/pumps`);
+  const [{ data, loading, error }, refetch] = useAxios(
+    `${API_URL}/${farmId}/pumps`
+  );
 
-  if (loading) return <Preloader />;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Fetching data");
+      refetch();
+    }, INTERVAL);
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>

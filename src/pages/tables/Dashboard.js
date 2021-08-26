@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
@@ -21,6 +21,7 @@ import { API_URL } from "../../api";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
 import ErrorGif from "./ErrorGif.gif";
+import { INTERVAL } from "./Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -105,6 +106,15 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
           position: "bottom",
         },
+        title: {
+          text: "Fertilizer Ratio",
+          offsetX: 30,
+          offsetY: 10,
+          style: {
+            fontSize: "17px",
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
@@ -151,9 +161,19 @@ export const HomeFlowWaterUsage = ({ data }) => {
 
 export const Dashboard = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/dashboard`);
+  const [{ data, loading, error }, refetch] = useAxios(
+    `${API_URL}/${farmId}/dashboard`
+  );
 
-  if (loading) return <Preloader />;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Fetching data");
+      refetch();
+    }, INTERVAL);
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>

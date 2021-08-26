@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useEffect } from "react";
 import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
@@ -23,6 +23,7 @@ import { API_URL } from "../../api";
 import greendrop from "./greendrop.gif";
 import { LineChart } from "./LineChart";
 import fertilizer from "./fertilizer.png";
+import { INTERVAL } from "./Timer";
 
 const FertilizerValves = ({ valves }) => {
   var image;
@@ -110,7 +111,7 @@ export const FertilizerPieChart = ({ data }) => {
           position: "bottom",
         },
         title: {
-          text: "Fertilizer",
+          text: "Fertilizer Ratio",
           offsetX: 30,
           offsetY: 10,
           style: {
@@ -125,11 +126,18 @@ export const FertilizerPieChart = ({ data }) => {
 
 const Fertilizer = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(
+  const [{ data, loading, error }, refetch] = useAxios(
     `${API_URL}/${farmId}/fertilizer`
   );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Fetching data");
+      refetch();
+    }, INTERVAL);
+    return () => clearInterval(interval);
+  }, [refetch]);
 
-  if (loading) return <Preloader />;
+  if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>

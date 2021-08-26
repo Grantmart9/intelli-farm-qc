@@ -50,43 +50,40 @@ const sectionColumns = [
   {
     field: "name",
     headerName: "Name",
-    type: "string"
+    type: "string",
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: true
+    editable: true,
   },
   {
     field: "run_time",
     headerName: "Run time",
-    type: "number"
+    type: "number",
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: true
+    editable: true,
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: true
-  }
+    editable: true,
+  },
 ].map((column) => ({ ...column, flex: 1 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
   const id = section.sql_index;
   const handleCellEditCommit = useCallback(
     (e) => {
-      const {
-        field,
-        value
-      } = e;
+      const { field, value } = e;
       const editedSection = { ...section, [field]: value };
       if (onChange) {
         onChange(editedSection);
@@ -113,36 +110,32 @@ const fertilizerColumns = [
   {
     field: "name",
     headerName: "Name",
-    type: "string"
+    type: "string",
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: true
+    editable: true,
   },
   {
     field: "flow_rate",
     headerName: "Flow rate",
     type: "number",
-    editable: true
-  }
+    editable: true,
+  },
 ].map((column) => ({ ...column, flex: 1, editable: true }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
   const handleCellEditCommit = useCallback(
     (e) => {
-      const {
-        id,
-        field,
-        value 
-      } = e;
+      const { id, field, value } = e;
       const editedFertilizer = { ...fertilizers[id], [field]: value };
       const editedFertilizers = [
         ...fertilizers.slice(0, id),
         editedFertilizer,
-        ...fertilizers.slice(id + 1)
+        ...fertilizers.slice(id + 1),
       ];
       const editedSection = { ...section, fertilizer: editedFertilizers };
       if (onChange) {
@@ -171,10 +164,14 @@ const FertilizerTable = ({ section, onChange = null }) => {
 const SectionRow = ({ editable, section, onChange = null }) => (
   <div className="w-full p-2 bg-gray-200 rounded">
     <div className="flex bg-blue-200 rounded-1 justify-content-center font-bold">
-     {section.name}
+      {section.name}
     </div>
     <SectionTable editable={editable} section={section} onChange={onChange} />
-    <FertilizerTable editable={editable} section={section} onChange={onChange} />
+    <FertilizerTable
+      editable={editable}
+      section={section}
+      onChange={onChange}
+    />
   </div>
 );
 
@@ -184,6 +181,7 @@ export const IrrigationSchedule = () => {
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [schedule, setSchedule] = useState();
+
   useEffect(() => {
     if (data) {
       setSchedule(data);
@@ -195,11 +193,11 @@ export const IrrigationSchedule = () => {
       url: `${API_URL}/-${farmId}/schedule`,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -219,7 +217,7 @@ export const IrrigationSchedule = () => {
   };
 
   const handleSave = async () => {
-    if(saving) return;
+    if (saving) return;
     try {
       setSaving(true);
       setDirty(false);
@@ -237,23 +235,30 @@ export const IrrigationSchedule = () => {
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
-        <div
-          className="flex flex-col align-items-center align-content-center justify-content-center p-1">
+        <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
           <OverlayTrigger
             placement="bottom"
             trigger={["hover", "focus"]}
             overlay={<Tooltip>Save All settings</Tooltip>}
-          ><div className="mb-3">
-            <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-              <FontAwesomeIcon icon={faSave} /> Save
-            </Button>
+          >
+            <div className="mb-3">
+              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+                <FontAwesomeIcon icon={faSave} /> Save
+              </Button>
             </div>
           </OverlayTrigger>
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
-                <div key={i} className="bg-gray-200 rounded shadow-md w-full mb-4 p-2">
-                  <SectionRow editable={!saving} section={section} onChange={handleChange} />
+                <div
+                  key={i}
+                  className="bg-gray-200 rounded shadow-md w-full mb-4 p-2"
+                >
+                  <SectionRow
+                    editable={!saving}
+                    section={section}
+                    onChange={handleChange}
+                  />
                 </div>
               );
             })}

@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useEffect } from "react";
 import { AppName } from "./AppName";
 import ErrorGif from "./ErrorGif.gif";
 import { API_URL } from "../../api";
@@ -20,6 +20,7 @@ import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import fertilizer from "./fertilizer.png";
+import { INTERVAL } from "./Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -59,9 +60,20 @@ const WashBack = ({ backwash }) => {
 
 export const Backwash = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(`${API_URL}/${farmId}/backwash`);
+  const [{ data, loading, error }, refetch] = useAxios(
+    `${API_URL}/${farmId}/backwash`
+  );
 
-  if (loading) return <Preloader />;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Fetching data");
+      refetch();
+    }, INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
