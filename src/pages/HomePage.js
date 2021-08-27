@@ -70,7 +70,7 @@ const farm_pages = {
     name: "Settings",
     path: "/settings",
     page: Settings,
-  }
+  },
 };
 
 const farm_order = [
@@ -81,8 +81,8 @@ const farm_order = [
   "pumps",
   "backwash",
   "notifications",
-  "settings"
-]
+  "settings",
+];
 
 const FarmRoutes = ({ prefix }) => (
   <>
@@ -105,17 +105,19 @@ const getNavItems = (prefix, layout) => {
     title: farmName,
     action: {
       type: "accordion",
-      items: farm_order.filter(x => x in pages).map(pageName => {
-        const path = pages[pageName];
-        const farmPage = farm_pages[pageName] || { name: pageName };
-        return {
-          title: farmPage.name,
-          action: {
-            type: "link",
-            path: `${prefix}/${path}`,
-          },
-        };
-      }),
+      items: farm_order
+        .filter((x) => x in pages)
+        .map((pageName) => {
+          const path = pages[pageName];
+          const farmPage = farm_pages[pageName] || { name: pageName };
+          return {
+            title: farmPage.name,
+            action: {
+              type: "link",
+              path: `${prefix}/${path}`,
+            },
+          };
+        }),
     },
   }));
   return [topItems, farmItems, botItems].flat();
@@ -129,7 +131,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     `${API_URL}/${clientId}/get_app_layout`
   );
 
-  if (loading) return <Preloader />;
+  if (loading) return <></>;
   if (error) return <p>Error!</p>;
 
   return (
