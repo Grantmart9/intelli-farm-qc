@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const DateAndTimePicker = () => {
   const classes = useStyles();
   return (
-    <div className=" p-2 flex gap-2 align-center justify-center">
+    <div className="p-2 block md:flex md:align-center md:justify-center md:gap-2">
       <div className="bg-gray-400 rounded shadow-md p-2">
         <TextField
           id="datetime-local"
@@ -43,7 +43,7 @@ const DateAndTimePicker = () => {
           }}
         />
       </div>
-      <div className="bg-gray-400 rounded shadow-md p-2">
+      <div className="bg-gray-400 rounded shadow-md p-2 mt-2">
         <TextField
           id="datetime-local"
           label="End date"
@@ -91,8 +91,8 @@ export default function Settings() {
     <div style={{ backgroundColor: "#cad3de" }}>
       <AppName />
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
-        <div className="flex align-center justify-center">
-          <div className="bg-gray-400 shadow-md rounded p-2 inline-block">
+        <div className="block">
+          <div className="bg-gray-400 shadow-md rounded p-2 block">
             <DateAndTimePicker />
             <EmailInput />
             <SaveButton />
