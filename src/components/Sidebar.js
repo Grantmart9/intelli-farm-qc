@@ -176,7 +176,7 @@ const Sidebar = (props = {}) => {
               ></Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <div className="2xl:mt-16 xl:mt-16"></div>
+              <div className="2xl:mt-16 xl:mt-16 md:mt-16"></div>
               <Button
                 className="border-1 border-white"
                 style={{
