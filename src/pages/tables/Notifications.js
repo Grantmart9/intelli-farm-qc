@@ -62,11 +62,13 @@ export const Notifications = () => {
           <div className="inline-flex mt-4">
             <div className="bg-gray-200 rounded shadow-md p-4 ">
               <div className="font-bold flex justify-center mb-2">User: 1</div>
-              <div className="mb-2 flex justify-center">
-                <TextField label="User email" variant="outlined" />
-              </div>
-              <div className="mb-2 block">
-                <TextField label="Contact Number" variant="outlined" />
+              <div className="block">
+                <div className="mb-2 flex justify-center">
+                  <TextField label="User email" variant="outlined" />
+                </div>
+                <div className="mb-2 block">
+                  <TextField label="Contact Number" variant="outlined" />
+                </div>
               </div>
               <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label">
