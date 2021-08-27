@@ -22,6 +22,7 @@ import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
 import ErrorGif from "./ErrorGif.gif";
 import { INTERVAL } from "./Timer";
+import { removeAllListeners, removeListener } from "npmlog";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -86,7 +87,6 @@ const Pump = ({ pump }) => (
 
 export const HomeFlowFertilizerPieChart = ({ data }) => {
   const series = data.map(({ ratio }) => Number(ratio.toFixed(2)));
-  console.log(series);
   const labels = data.map(({ name }) => name);
   return (
     <ApexChart
