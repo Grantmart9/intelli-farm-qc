@@ -20,9 +20,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { API_URL } from "../../api";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
-import ErrorGif from "./ErrorGif.gif";
+import ErrorGif from "./images/ErrorGif.gif";
 import { INTERVAL } from "./Timer";
-import { removeAllListeners, removeListener } from "npmlog";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {

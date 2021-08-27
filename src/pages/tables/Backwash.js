@@ -12,14 +12,14 @@
  **/
 import React, { useEffect } from "react";
 import { AppName } from "./AppName";
-import ErrorGif from "./ErrorGif.gif";
+import ErrorGif from "./images/ErrorGif.gif";
 import { API_URL } from "../../api";
 import Preloader from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import fertilizer from "./fertilizer.png";
+import fertilizer from "./images/fertilizer.png";
 import { INTERVAL } from "./Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({

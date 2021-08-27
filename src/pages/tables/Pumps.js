@@ -12,12 +12,12 @@
  **/
 import React, { useEffect } from "react";
 import { AppName } from "./AppName";
-import ErrorGif from "./ErrorGif.gif";
+import ErrorGif from "./images/ErrorGif.gif";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
-import pump from "./pump.png";
+import pump from "./images/pump.png";
 import { INTERVAL } from "./Timer";
 
 export const Pumps = () => {

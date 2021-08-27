@@ -14,7 +14,6 @@ import React from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
 import useAxios from "axios-hooks";
-import Preloader from "../components/Preloader";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";

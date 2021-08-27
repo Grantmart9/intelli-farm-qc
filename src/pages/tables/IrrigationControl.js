@@ -17,11 +17,11 @@ import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
-import fertilizer from "./fertilizer.png";
-import greendrop from "./greendrop.gif";
+import fertilizer from "./images/fertilizer.png";
+import greendrop from "./images/greendrop.gif";
 import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
-import ErrorGif from "./ErrorGif.gif";
+import ErrorGif from "./images/ErrorGif.gif";
 
 const EquipmentStatus = ({ data }) => {
   var image;

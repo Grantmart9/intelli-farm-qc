@@ -12,7 +12,7 @@ import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import { AppName } from "./AppName";
-import ErrorPage from "./ErrorPage.jpg";
+import ErrorPage from "./images/ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;

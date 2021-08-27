@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 26/08/2021 - 10:03:47
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 26/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React, { useMemo } from "react";
 import ApexChart from "react-apexcharts";
 import moment from "moment";
