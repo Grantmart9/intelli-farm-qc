@@ -1,6 +1,17 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 26/08/2021 - 10:28:09
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 26/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import useAxios from "axios-hooks";
 import React, { useEffect } from "react";
-import Preloader from "./Preloader";
 
 const RenderErrorLogger = ({ error, refetch }) => {
   useEffect((error) => console.error(error), [error]);
@@ -11,7 +22,6 @@ export const AxiosSpinner = ({
   renderData: RenderData,
   callHook,
   renderError: RenderError = RenderErrorLogger,
-  renderLoader: RenderLoader = Preloader,
 }) => {
   const [{ data, loading, error }, refetch] = callHook(useAxios);
   useEffect(() => {
@@ -26,7 +36,7 @@ export const AxiosSpinner = ({
     return <RenderError {...{ error, refetch }} />;
   }
   if (!data && loading) {
-    return <RenderLoader />;
+    return <></>;
   }
   return <RenderData {...{ data, refetch }} />;
 };

@@ -19,6 +19,9 @@ import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
 import fertilizer from "./fertilizer.png";
 import greendrop from "./greendrop.gif";
+import useAxios from "axios-hooks";
+import Preloader from "../../components/Preloader";
+import ErrorGif from "./ErrorGif.gif";
 
 const EquipmentStatus = ({ data }) => {
   var image;
@@ -58,6 +61,20 @@ const EquipmentStatus = ({ data }) => {
 
 const IrrigationControl = () => {
   const { farmId } = useParams();
+  const [{ data, loading, error }, refetch] = useAxios(
+    `${API_URL}/${farmId}/irrigation_1`
+  );
+  if (!data && loading) return <Preloader />;
+  if (error)
+    return (
+      <div style={{ backgroundColor: "#cad3de" }}>
+        <AppName />
+        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+          <img src={ErrorGif} alt={ErrorGif} width="100%" />
+        </div>
+      </div>
+    );
+
   return (
     <div key="0" style={{ backgroundColor: "#cad3de" }}>
       <AppName />
