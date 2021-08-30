@@ -171,7 +171,7 @@ const Sidebar = (props = {}) => {
           <div className="sidebar-inner px-4 pt-3">
             <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
               <Nav.Link
-                className="collapse-close d-md-none"
+                className="collapse-close"
                 onClick={onCollapse}
               ></Nav.Link>
             </div>
