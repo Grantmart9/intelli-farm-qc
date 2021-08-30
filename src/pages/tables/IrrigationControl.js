@@ -13,10 +13,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { AppName } from "./AppName";
-import { BrushChart } from "../../components/BrushChart";
+import { BrushChart } from "../../components/Charts/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
-import { HomeFlowFertilizerBarChart } from "../../components/HomeFlowFertilizerBarChart";
+import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
 import fertilizer from "./images/fertilizer.png";
 import greendrop from "./images/greendrop.gif";
 import useAxios from "axios-hooks";

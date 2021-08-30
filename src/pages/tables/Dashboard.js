@@ -18,7 +18,7 @@ import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import { API_URL } from "../../api";
-import { HomeFlowFertilizerBarChart } from "../../components/HomeFlowFertilizerBarChart";
+import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
 import ErrorGif from "./images/ErrorGif.gif";
 import { INTERVAL } from "../../components/Timer";
