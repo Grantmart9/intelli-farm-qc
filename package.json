@@ -32,6 +32,7 @@
     "axios": "^0.21.1",
     "axios-hooks": "^2.6.3",
     "bootstrap": "5.0.2",
+    "emailjs": "^3.5.0",
     "eslint-plugin-react": "^7.24.0",
     "fusioncharts": "^3.17.0",
     "git": "^0.1.5",
