@@ -11,8 +11,7 @@
  * - Modification    :
  **/
 import React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { Ripple } from "react-preloaders";
+import PreloaderBar from "./PreloaderBar.gif";
 
 const Preloader = (props) => {
   return (
@@ -27,11 +26,7 @@ const Preloader = (props) => {
       }}
     >
       <div>
-        <CircularProgress
-          color={"primary"}
-          size={200}
-          style={{ color: "gray" }}
-        />
+        <img src={PreloaderBar} alt={PreloaderBar} />
       </div>
     </div>
   );
