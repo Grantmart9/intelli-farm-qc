@@ -1,6 +1,5 @@
 export const Routes = {
-  // page//
   DashboardOverview: { path: "" },
-  NotFound: { path: "/notfound"
-},
+  Logout: { path: "/logout" },
+  NotFound: { path: "/notfound" },
 }
