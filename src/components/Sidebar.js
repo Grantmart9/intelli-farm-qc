@@ -127,6 +127,8 @@ const Sidebar = (props = {}) => {
             {item.action.items.map(toNavItem)}
           </CollapsableNavItem>
         );
+      case "spacer":
+        return <div key={i} className="mt-10"/>
       default:
         throw Error("impossible");
     }
@@ -163,9 +165,6 @@ const Sidebar = (props = {}) => {
       </Navbar>
       <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
         <SimpleBar
-          {
-            ...{} /* style={{ width: "420px" }} */
-          }
           className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}
         >
           <div className="sidebar-inner px-4 pt-3">
@@ -197,12 +196,6 @@ const Sidebar = (props = {}) => {
                 {title}
               </Button>
               <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
-              <Link
-                to="/Login"
-                className="border-1 border-white rounded-2 flex justify-center h-8 mt-10 font-bold"
-              >
-                Logout
-              </Link>
             </Nav>
           </div>
         </SimpleBar>

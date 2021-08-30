@@ -17,7 +17,7 @@ import useAxios from "axios-hooks";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Login, ModalContext as LoginContext, openLoginOnUnauthorized as interceptAxiosErrorUnauthorized, useAxiosAddJwt, useAxiosErrorUnauthorized, useAxiosLoginToken } from "../components/Login";
+import { Login, Logout, LoginContext, useAxiosLoginToken, useLoginTest } from "../components/Login";
 
 import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
@@ -28,7 +28,7 @@ import Settings from "./tables/Settings";
 import { Backwash } from "./tables/Backwash";
 import { Notifications } from "./tables/Notifications";
 import { Pumps } from "./tables/Pumps";
-import { API_URL } from "../api";
+import { API_URL, throwAxiosError } from "../api";
 
 const farm_pages = {
   dashboard: {
@@ -98,7 +98,7 @@ const FarmRoutes = ({ prefix }) => (
 );
 
 const getFarmItems = (prefix, layout) =>
-  Object.entries(layout.farms).map(([farmName, pages]) => ({
+  !layout ? [] : Object.entries(layout.farms).map(([farmName, pages]) => ({
     title: farmName,
     action: {
       type: "accordion",
@@ -118,33 +118,40 @@ const getFarmItems = (prefix, layout) =>
     },
   }));
 
+const spacerItem = { action: { type: "spacer" } };
+
+const getLogoutItem = (prefix) => ({
+  title: "Logout",
+  action: {
+    type: "link",
+    path: `${prefix}/logout`
+  }
+})
+
 const getNavItems = (prefix, layout) =>
-  layout ? getFarmItems(prefix, layout) : [];
+  [getFarmItems(prefix, layout), [spacerItem, getLogoutItem(prefix)]].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
-
+  
+  const loggedIn = useLoginTest(`${API_URL}/${clientId}/intellifarm/login`);
   const [{ data: appLayout }, fetchAppLayout] = useAxios(
     `${API_URL}/${clientId}/get_app_layout`,
     { manual: true }
   );
 
-  const [loginOpen,] = useContext(LoginContext);
   useEffect(() => {
-    if(!appLayout && !loginOpen) {
+    if(loggedIn && !appLayout) {
         fetchAppLayout().catch(() => {})
     }
-  }, [fetchAppLayout, appLayout, loginOpen])
+  }, [fetchAppLayout, loggedIn, appLayout]);
 
   return (
     <Route
       {...rest}
       render={(props) => (
-        <div
-          style={{ "--sidenav-width": "400px" }}
-          className="absolute inset-0"
-        >
+        <div className="absolute inset-0">
           <Sidebar
             title={appLayout && appLayout.company_name}
             items={getNavItems(prefix, appLayout)}
@@ -177,11 +184,15 @@ const RouteInner = () => {
           path={routes.DashboardOverview.path}
           component={DashboardOverview}
         />
-        <Route
+        <RouteWithSidebar
           exact
           path={routes.NotFound.path}
           component={() => <p>Not Found</p>}
         />
+        <RouteWithSidebar
+          exact
+          path={routes.Logout.path}
+          component={() => <Logout logoutUrl={`${prefix}/intellifarm/logout`} redirect={routes.DashboardOverview.path}/>}/>
         <FarmRoutes prefix={prefix} />
         <Redirect to={routes.NotFound.path} />
       </Switch>
@@ -190,8 +201,9 @@ const RouteInner = () => {
 
 const HomePage = () => {
   const [loginOpen, setLoginOpen] = useState(false);
-  useAxiosLoginToken(() => setLoginOpen(true));
+  const ready = useAxiosLoginToken(() => setLoginOpen(true));
 
+  if(!ready) return <></>;
   return (
     <LoginContext.Provider value={[loginOpen, setLoginOpen]}>
       <Switch>
