@@ -23,15 +23,16 @@ import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import ErrorGif from "./images/ErrorGif.gif";
 
-const EquipmentStatus = ({ data }) => {
+const EquipmentStatus = ({ data, d }) => {
   var image;
+
   if (data.status === "Opened") {
     image = greendrop;
   } else {
     image = fertilizer;
   }
   return (
-    <div key="20" className="flex p-2">
+    <div key={d} className="flex p-2">
       <div key="21" className="shadow-md rounded p-2 w-100">
         <div key="22" className="font-bold text-2xl">
           {data.name}
@@ -99,7 +100,7 @@ const IrrigationControl = () => {
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
               renderData={({ data }) => (
-                <HomeFlowFertilizerBarChart key="13" data={data} />
+                <HomeFlowFertilizerBarChart data={data} />
               )}
             />
           </div>
@@ -109,7 +110,6 @@ const IrrigationControl = () => {
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
             renderData={({ data }) => (
               <BrushChart
-                key="12"
                 data={data.map(({ datetime, y, ...rest }) => ({
                   ...rest,
                   x: new Date(datetime),

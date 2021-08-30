@@ -213,7 +213,7 @@
   padding: 0rem;
   @include transition(all 0.3s);
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     margin-left: 16.9rem;
   }
 }
