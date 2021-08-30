@@ -13,7 +13,7 @@
   width: 100%;
   background-color: #1e96ff;
   @include transition(max-width 0.8s);
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     width: 300px;
   }
 
