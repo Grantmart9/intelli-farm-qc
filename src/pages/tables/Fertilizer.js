@@ -16,14 +16,14 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { AppName } from "./AppName";
 import ApexChart from "react-apexcharts";
-import { FertilizerBarChart } from "./FertilizerBarChart";
+import { FertilizerBarChart } from "../../components/FertilizerBarChart";
 import ErrorGif from "./images/ErrorGif.gif";
 import fertilizerEc from "./images/fertilizerEc.png";
 import { API_URL } from "../../api";
 import greendrop from "./images/greendrop.gif";
-import { LineChart } from "./LineChart";
+import { LineChart } from "../../components/LineChart";
 import fertilizer from "./images/fertilizer.png";
-import { INTERVAL } from "./Timer";
+import { INTERVAL } from "../../components/Timer";
 
 const FertilizerValves = ({ valves }) => {
   var image;

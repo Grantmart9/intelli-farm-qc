@@ -18,7 +18,7 @@ import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import { API_URL } from "../../api";
 import pump from "./images/pump.png";
-import { INTERVAL } from "./Timer";
+import { INTERVAL } from "../../components/Timer";
 
 export const Pumps = () => {
   const { farmId } = useParams();

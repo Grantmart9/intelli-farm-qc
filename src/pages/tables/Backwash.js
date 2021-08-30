@@ -20,7 +20,7 @@ import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import fertilizer from "./images/fertilizer.png";
-import { INTERVAL } from "./Timer";
+import { INTERVAL } from "../../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {

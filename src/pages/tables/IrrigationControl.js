@@ -16,7 +16,7 @@ import { AppName } from "./AppName";
 import { BrushChart } from "../../components/BrushChart";
 import { API_URL } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
-import { HomeFlowFertilizerBarChart } from "./HomeFlowFertilizerBarChart";
+import { HomeFlowFertilizerBarChart } from "../../components/HomeFlowFertilizerBarChart";
 import fertilizer from "./images/fertilizer.png";
 import greendrop from "./images/greendrop.gif";
 import useAxios from "axios-hooks";
