@@ -98,7 +98,7 @@
     @include transition(opacity 0.3s);
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     .sidebar-text-contracted {
       display: none;
       @include transition(opacity 0.3s);
