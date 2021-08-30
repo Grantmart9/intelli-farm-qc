@@ -1,1 +1,1 @@
-export const API_URL="https://lodicon-test-api.herokuapp.com/api/v1"
+export const API_URL="https://lodicon-api.herokuapp.com/api/v1"

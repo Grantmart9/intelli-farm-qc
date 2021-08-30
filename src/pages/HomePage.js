@@ -10,13 +10,14 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
 import useAxios from "axios-hooks";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { Login, ModalContext as LoginContext, openLoginOnUnauthorized as interceptAxiosErrorUnauthorized, useAxiosAddJwt, useAxiosErrorUnauthorized, useAxiosLoginToken } from "../components/Login";
 
 import DashboardOverview from "./dashboard/DashboardOverview";
 import IrrigationControl from "./tables/IrrigationControl";
@@ -96,11 +97,8 @@ const FarmRoutes = ({ prefix }) => (
   </>
 );
 
-const getNavItems = (prefix, layout) => {
-  const topItems = [];
-  const botItems = [];
-
-  const farmItems = Object.entries(layout.farms).map(([farmName, pages]) => ({
+const getFarmItems = (prefix, layout) =>
+  Object.entries(layout.farms).map(([farmName, pages]) => ({
     title: farmName,
     action: {
       type: "accordion",
@@ -119,19 +117,25 @@ const getNavItems = (prefix, layout) => {
         }),
     },
   }));
-  return [topItems, farmItems, botItems].flat();
-};
+
+const getNavItems = (prefix, layout) =>
+  layout ? getFarmItems(prefix, layout) : [];
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
 
-  const [{ data: appLayout, loading, error }] = useAxios(
-    `${API_URL}/${clientId}/get_app_layout`
+  const [{ data: appLayout }, fetchAppLayout] = useAxios(
+    `${API_URL}/${clientId}/get_app_layout`,
+    { manual: true }
   );
 
-  if (loading) return <></>;
-  if (error) return <p>Error!</p>;
+  const [loginOpen,] = useContext(LoginContext);
+  useEffect(() => {
+    if(!appLayout && !loginOpen) {
+        fetchAppLayout().catch(() => {})
+    }
+  }, [fetchAppLayout, appLayout, loginOpen])
 
   return (
     <Route
@@ -142,13 +146,14 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           className="absolute inset-0"
         >
           <Sidebar
-            title={appLayout.company_name}
+            title={appLayout && appLayout.company_name}
             items={getNavItems(prefix, appLayout)}
           />
 
           <main className="content">
             <Navbar />
-            <Component {...props} />
+              <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`}/>
+              <Component {...props}/>
             <Footer />
           </main>
         </div>
@@ -166,27 +171,35 @@ const RouteInner = () => {
   const prefix = `/${clientId}`;
   const routes = prefixRoutes(prefix, Routes);
   return (
-    <Switch>
-      <RouteWithSidebar
-        exact
-        path={routes.DashboardOverview.path}
-        component={DashboardOverview}
-      />
-      <Route
-        exact
-        path={routes.NotFound.path}
-        component={() => <p>Not Found</p>}
-      />
-      <FarmRoutes prefix={prefix} />
-      <Redirect to={routes.NotFound.path} />
-    </Switch>
+      <Switch>
+        <RouteWithSidebar
+          exact
+          path={routes.DashboardOverview.path}
+          component={DashboardOverview}
+        />
+        <Route
+          exact
+          path={routes.NotFound.path}
+          component={() => <p>Not Found</p>}
+        />
+        <FarmRoutes prefix={prefix} />
+        <Redirect to={routes.NotFound.path} />
+      </Switch>
   );
 };
 
-const HomePage = () => (
-  <Switch>
-    <Route path="/:clientId" component={RouteInner} />
-  </Switch>
-);
+const HomePage = () => {
+  const [loginOpen, setLoginOpen] = useState(false);
+  useAxiosLoginToken(() => setLoginOpen(true));
+
+  return (
+    <LoginContext.Provider value={[loginOpen, setLoginOpen]}>
+      <Switch>
+        <Redirect exact path="/" to="/denau"/>
+        <Route path="/:clientId/" component={RouteInner} />
+      </Switch>
+    </LoginContext.Provider>
+  )
+};
 
 export default HomePage;
