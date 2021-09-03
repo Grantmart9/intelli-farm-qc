@@ -13,7 +13,7 @@
 import React, { useEffect } from "react";
 import { AppName } from "./AppName";
 import ErrorGif from "./images/ErrorGif.gif";
-import { API_URL } from "../../api";
+import { API_URL, useApi } from "../../api";
 import Preloader from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
@@ -60,7 +60,7 @@ const WashBack = ({ backwash }) => {
 
 export const Backwash = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/backwash`
   );
 

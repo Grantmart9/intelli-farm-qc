@@ -11,10 +11,9 @@
     * - Modification    : 
 **/
 import React, { useCallback, useEffect, useState } from "react";
-import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
-import { API_URL } from "../../api";
+import { API_URL, useApi } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
@@ -189,7 +188,7 @@ const SectionRow = ({ editable, section, onChange = null }) => (
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useAxios(`${API_URL}/-${farmId}/schedule`);
+  const [{ data, loading, error }] = useApi(`${API_URL}/-${farmId}/schedule`);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [schedule, setSchedule] = useState();
@@ -200,7 +199,7 @@ export const IrrigationSchedule = () => {
     }
   }, [data]);
 
-  const [, postSchedule] = useAxios(
+  const [, postSchedule] = useApi(
     {
       url: `${API_URL}/-${farmId}/schedule`,
       method: "POST",

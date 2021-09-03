@@ -11,7 +11,6 @@
  * - Modification    :
  **/
 import React, { useEffect } from "react";
-import useAxios from "axios-hooks";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
 import { AppName } from "./AppName";
@@ -19,7 +18,7 @@ import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "../../components/Charts/FertilizerBarChart";
 import ErrorGif from "./images/ErrorGif.gif";
 import fertilizerEc from "./images/fertilizerEc.png";
-import { API_URL } from "../../api";
+import { API_URL, useApi } from "../../api";
 import greendrop from "./images/greendrop.gif";
 import { LineChart } from "../../components/Charts/LineChart";
 import fertilizer from "./images/fertilizer.png";
@@ -126,7 +125,7 @@ export const FertilizerPieChart = ({ data }) => {
 
 const Fertilizer = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/fertilizer`
   );
   useEffect(() => {

@@ -1,23 +1,16 @@
 import React, { createContext, useContext, useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import useAxios from 'axios-hooks'
-import { useParams, Redirect } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
-import { throwAxiosError } from "../api";
+import useAxios from 'axios-hooks';
+import { useApi } from "../api";
 
 export const LoginContext = createContext();
 
 export const useAxiosLoginToken = (onUnauthorized) => {
   const [ready, setReady] = useState(false);
-  const respErrorHandler = useCallback(error => {
-    if (error.response && [401, 403].includes(error.response.status)) {
-      onUnauthorized();
-    }
-    return error;
-  }, [onUnauthorized])
   const reqHandler = (request) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -25,36 +18,14 @@ export const useAxiosLoginToken = (onUnauthorized) => {
     }
     return request;
   };
-  const respHandler = (response) => response
   useEffect(() => {
     if(!ready) {
       axios.interceptors.request.use(reqHandler);
-      axios.interceptors.response.use(respHandler, respErrorHandler);
       setReady(true);
     }
-  }, [ready, setReady, respErrorHandler]);
+  }, [ready, setReady]);
   return ready;
 };
-
-export const useLoginTest = (loginUrl) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [loginOpen,] = useContext(LoginContext);
-  const [, getLogin] = useAxios(
-    loginUrl,
-    { manual: true }
-  );
-
-  useEffect(() => {
-    if(!loggedIn && !loginOpen) {
-      getLogin()
-        .then(throwAxiosError)
-        .then(() => setLoggedIn(true))
-        .catch(() => {})
-    }
-  }, [getLogin, loggedIn, loginOpen])
-  return loggedIn;
-}
-
 
 export const Login = ({loginUrl}) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
@@ -123,7 +94,7 @@ export const Login = ({loginUrl}) => {
 
 export const Logout = ({logoutUrl, redirect}) => {
   const [state, setState] = useState({type: "message", message: ""});
-  const [{loading}, postLogout] = useAxios(
+  const [{loading}, postLogout] = useApi(
     {
       url: logoutUrl,
       method: "POST",
@@ -138,13 +109,12 @@ export const Logout = ({logoutUrl, redirect}) => {
 
   useEffect(() => {
     postLogout()
-      .then(throwAxiosError)
       .then(() => {
         localStorage.clear("token");
         setState({type: "redirect"});
       })
       .catch(() => setState({type: "message", message: "Something happened when logging out."}))
-  });
+  }, []);
 
   switch(state.type) {
     case "message":
@@ -152,7 +122,6 @@ export const Logout = ({logoutUrl, redirect}) => {
     case "redirect":
       window.location.hash=redirect;
       window.location.reload();
-      return <></>;
     default:
       throw new Error("Impossible");
   }

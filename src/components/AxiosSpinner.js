@@ -10,8 +10,8 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import useAxios from "axios-hooks";
 import React, { useEffect } from "react";
+import { useApi } from "../api";
 
 const RenderErrorLogger = ({ error, refetch }) => {
   useEffect((error) => console.error(error), [error]);
@@ -23,10 +23,9 @@ export const AxiosSpinner = ({
   callHook,
   renderError: RenderError = RenderErrorLogger,
 }) => {
-  const [{ data, loading, error }, refetch] = callHook(useAxios);
+  const [{ data, loading, error }, refetch] = callHook(useApi);
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("Fetching data");
       refetch();
     }, 10000);
     return () => clearInterval(interval);

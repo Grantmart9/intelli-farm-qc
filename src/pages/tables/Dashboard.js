@@ -17,7 +17,7 @@ import Preloader from "../../components/Preloader";
 import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import { API_URL } from "../../api";
+import { API_URL, useApi } from "../../api";
 import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
 import ErrorGif from "./images/ErrorGif.gif";
@@ -160,14 +160,13 @@ export const HomeFlowWaterUsage = ({ data }) => {
 
 export const Dashboard = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/dashboard`
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("Fetching data");
-      refetch();
+      //refetch();
     }, INTERVAL);
     return () => clearInterval(interval);
   }, [refetch]);

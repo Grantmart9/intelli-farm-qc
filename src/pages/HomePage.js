@@ -13,7 +13,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
-import useAxios from "axios-hooks";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -28,7 +27,7 @@ import Settings from "./tables/Settings";
 import { Backwash } from "./tables/Backwash";
 import { Notifications } from "./tables/Notifications";
 import { Pumps } from "./tables/Pumps";
-import { API_URL, throwAxiosError } from "../api";
+import { API_URL, useApi } from "../api";
 
 const farm_pages = {
   dashboard: {
@@ -135,17 +134,9 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
   
-  const loggedIn = useLoginTest(`${API_URL}/${clientId}/intellifarm/login`);
-  const [{ data: appLayout }, fetchAppLayout] = useAxios(
+  const [{ data: appLayout }, fetchAppLayout] = useApi(
     `${API_URL}/${clientId}/get_app_layout`,
-    { manual: true }
   );
-
-  useEffect(() => {
-    if(loggedIn && !appLayout) {
-        fetchAppLayout().catch(() => {})
-    }
-  }, [fetchAppLayout, loggedIn, appLayout]);
 
   return (
     <Route
@@ -192,7 +183,7 @@ const RouteInner = () => {
         <RouteWithSidebar
           exact
           path={routes.Logout.path}
-          component={() => <Logout logoutUrl={`${prefix}/intellifarm/logout`} redirect={routes.DashboardOverview.path}/>}/>
+          component={() => <Logout logoutUrl={`${API_URL}${prefix}/intellifarm/logout`} redirect={routes.DashboardOverview.path}/>}/>
         <FarmRoutes prefix={prefix} />
         <Redirect to={routes.NotFound.path} />
       </Switch>

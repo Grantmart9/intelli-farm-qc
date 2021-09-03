@@ -14,12 +14,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { AppName } from "./AppName";
 import { BrushChart } from "../../components/Charts/BrushChart";
-import { API_URL } from "../../api";
+import { API_URL, useApi } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
 import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
 import fertilizer from "./images/fertilizer.png";
 import greendrop from "./images/greendrop.gif";
-import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import ErrorGif from "./images/ErrorGif.gif";
 
@@ -62,7 +61,7 @@ const EquipmentStatus = ({ data, d }) => {
 
 const IrrigationControl = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/irrigation_1`
   );
   if (!data && loading) return <Preloader />;
