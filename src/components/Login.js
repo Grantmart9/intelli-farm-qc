@@ -1,10 +1,16 @@
-import React, { createContext, useContext, useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, {
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
-import useAxios from 'axios-hooks';
+import useAxios from "axios-hooks";
 import { useApi } from "../api";
 
 export const LoginContext = createContext();
@@ -19,7 +25,7 @@ export const useAxiosLoginToken = (onUnauthorized) => {
     return request;
   };
   useEffect(() => {
-    if(!ready) {
+    if (!ready) {
       axios.interceptors.request.use(reqHandler);
       setReady(true);
     }
@@ -27,7 +33,7 @@ export const useAxiosLoginToken = (onUnauthorized) => {
   return ready;
 };
 
-export const Login = ({loginUrl}) => {
+export const Login = ({ loginUrl }) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,29 +53,24 @@ export const Login = ({loginUrl}) => {
   );
 
   const onClose = () => setLoginOpen(false);
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    postLogin({ data: { username, password } })
-      .then((result) => {
-        const data = result.data || result.response.data;
-        if(data.access_token) {
-          localStorage.setItem('token', data.access_token);
-          onClose();
-        } else {
-          setMessage(data.message);
-        }
-      });
+    postLogin({ data: { username, password } }).then((result) => {
+      const data = result.data || result.response.data;
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        onClose();
+      } else {
+        setMessage(data.message);
+      }
+    });
   };
 
   return (
     <Dialog open={loginOpen} onClose={onClose}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
-        <div className="font-bold align-self-center">
-          Credentials
-        </div>
-        <div className="text-red-400">
-          {message}
-        </div>
+        <div className="font-bold align-self-center">Credentials</div>
+        <div className="text-red-400">{message}</div>
         <TextField
           label="User Name"
           type="text"
@@ -84,26 +85,26 @@ export const Login = ({loginUrl}) => {
           onInput={(d) => setPassword(d.target.value)}
           variant="outlined"
         />
-        <Button type="submit" variant="contained" color="secondary">
+        <Button type="submit" variant="contained" color="primary">
           <div style={{ color: "white" }}>Login</div>
         </Button>
       </form>
     </Dialog>
   );
-}
+};
 
-export const Logout = ({logoutUrl, redirect}) => {
-  const [state, setState] = useState({type: "message", message: ""});
-  const [{loading}, postLogout] = useApi(
+export const Logout = ({ logoutUrl, redirect }) => {
+  const [state, setState] = useState({ type: "message", message: "" });
+  const [{ loading }, postLogout] = useApi(
     {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -111,18 +112,23 @@ export const Logout = ({logoutUrl, redirect}) => {
     postLogout()
       .then(() => {
         localStorage.clear("token");
-        setState({type: "redirect"});
+        setState({ type: "redirect" });
       })
-      .catch(() => setState({type: "message", message: "Something happened when logging out."}))
+      .catch(() =>
+        setState({
+          type: "message",
+          message: "Something happened when logging out.",
+        })
+      );
   }, []);
 
-  switch(state.type) {
+  switch (state.type) {
     case "message":
       return <p>{state.message}</p>;
     case "redirect":
-      window.location.hash=redirect;
+      window.location.hash = redirect;
       window.location.reload();
     default:
       throw new Error("Impossible");
   }
-}
+};
