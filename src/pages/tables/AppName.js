@@ -11,7 +11,7 @@
  * - Modification    :
  **/
 import React from "react";
-import Logo from "./images/Logo.png";
+import Logo from "../../images/Logo.png";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 

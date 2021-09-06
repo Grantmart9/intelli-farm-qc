@@ -12,7 +12,6 @@
  **/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useAxios from "axios-hooks";
 import Preloader from "../../components/Preloader";
 import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -20,7 +19,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "../../api";
 import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
 import { AppName } from "./AppName";
-import ErrorGif from "./images/ErrorGif.gif";
+import ErrorGif from "../../images/ErrorGif.gif";
 import { INTERVAL } from "../../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({

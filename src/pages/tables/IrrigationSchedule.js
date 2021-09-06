@@ -1,15 +1,15 @@
 /**
-    * @description      : 
-    * @author           : Grant
-    * @group            : 
-    * @created          : 27/08/2021 - 15:24:25
-    * 
-    * MODIFICATION LOG
-    * - Version         : 1.0.0
-    * - Date            : 27/08/2021
-    * - Author          : Grant
-    * - Modification    : 
-**/
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 27/08/2021 - 15:24:25
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 27/08/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/Preloader";
@@ -23,7 +23,7 @@ import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import { AppName } from "./AppName";
-import ErrorPage from "./images/ErrorPage.jpg";
+import ErrorPage from "../../images/ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
