@@ -40,10 +40,10 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
       <div className="font-bold text-xl">Irrigation</div>
       <div className="font-bold text-3xl">Cycle Progress</div>
-      <div className="mt-4">
+      <div className="mt-2">
         <BorderLinearProgress
           variant="determinate"
           value={data.cycle_progress}
@@ -55,7 +55,7 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
       <div className="text-xl font-bold">Irrigation Time Left</div>
       <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
     </div>
@@ -64,7 +64,7 @@ const IrrigationTimeLeft = ({ data }) => (
 
 const IrrigationEC = ({ data }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-32">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
       <div className="font-bold text-xl">
         EC Average: {data.ec_data.average}
       </div>
@@ -76,7 +76,7 @@ const IrrigationEC = ({ data }) => (
 
 const Pump = ({ pump }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-2 shadow-md h-32">
+    <div className="bg-gray-400 rounded p-2 shadow-md h-full">
       <div className="font-bold text-xl">Water Pump</div>
       <div className="font-bold text-3xl">{pump.status}</div>
       <div className="font-bold">{pump.main_flow}</div>
