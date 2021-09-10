@@ -10,13 +10,13 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useEffect } from "react";
+import React from "react";
 import ErrorGif from "images/ErrorGif.gif";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import { API_URL, useApi } from "api";
 import pump from "images/pump.png";
-import { INTERVAL } from "components/Timer";
+import { useRefetch } from "../components/Timer";
 
 export const Pumps = () => {
   const { farmId } = useParams();
@@ -24,13 +24,7 @@ export const Pumps = () => {
     `${API_URL}/${farmId}/pumps`
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("Fetching data");
-      refetch();
-    }, INTERVAL);
-    return () => clearInterval(interval);
-  }, [refetch]);
+  useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
   if (error)

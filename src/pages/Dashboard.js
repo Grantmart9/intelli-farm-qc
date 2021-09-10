@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
@@ -19,7 +19,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "api";
 import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
 import ErrorGif from "images/ErrorGif.gif";
-import { INTERVAL } from "components/Timer";
+import { useRefetch } from "components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -162,12 +162,7 @@ export const Dashboard = () => {
     `${API_URL}/${farmId}/dashboard`
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, INTERVAL);
-    return () => clearInterval(interval);
-  }, [refetch]);
+  useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
   if (error)

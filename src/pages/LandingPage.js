@@ -11,13 +11,13 @@
  * - Modification    :
  **/
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router";
-import { INTERVAL } from "components/Timer";
 import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
 import ErrorPage from "images/ErrorPage.jpg";
 import { Table, ProgressBar } from "@themesberg/react-bootstrap";
+import { useRefetch } from "../components/Timer";
 
 const columns = [
   {
@@ -111,13 +111,7 @@ export const LandingPage = () => {
     `${API_URL}/${clientId}/landing`
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [refetch]);
+  useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
   if (error) return <img src={ErrorPage} alt={ErrorPage} />;

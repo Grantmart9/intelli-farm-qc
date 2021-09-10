@@ -1,5 +1,5 @@
 import useAxios from "axios-hooks";
-import { useEffect, useContext, useState, useMemo } from "react";
+import { useEffect, useContext, useState } from "react";
 import { LoginContext } from "components/Login";
 
 export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
@@ -21,14 +21,19 @@ export const useApi = (url, config) => {
     if (!authorized(error)) {
       setLoginOpen(true);
     }
-  }, [error]);
+  }, [error, setLoginOpen]);
 
-  useEffect(() => {
-    if (!loginOpen && retry) {
-      setRetry(null);
-      retry();
-    }
-  }, [loginOpen]);
+  useEffect(
+    () => {
+      if (!loginOpen && retry) {
+        setRetry(null);
+        retry();
+      }
+    },
+    // Here we explicitly don't want the effect to rerun when retry is changed
+    // eslint-disable-next-line
+    [loginOpen]
+  );
 
   const decoratedFetch = async (...args) => {
     const data = await fetch(...args);

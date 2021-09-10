@@ -8,6 +8,7 @@ import fertilizer from "images/fertilizer.png";
 import greendrop from "images/greendrop.gif";
 import ErrorGif from "images/ErrorGif.gif";
 import { Preloader } from "components/Preloader";
+import { useRefetch } from "../components/Timer";
 
 const EquipmentStatus = ({ data }) => {
   var image;
@@ -38,6 +39,8 @@ export const IrrigationControl = () => {
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/irrigation_1`
   );
+  useRefetch(refetch);
+
   if (!data && loading) return <Preloader />;
   if (error)
     return (

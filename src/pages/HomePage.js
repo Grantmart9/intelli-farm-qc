@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "routes";
 import { Sidebar } from "components/Sidebar";
@@ -20,7 +20,6 @@ import {
   Logout,
   LoginContext,
   useAxiosLoginToken,
-  useLoginTest,
 } from "components/Login";
 
 import { LandingPage } from "pages/LandingPage";
@@ -153,9 +152,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
 
-  const [{ data: appLayout }, fetchAppLayout] = useApi(
-    `${API_URL}/${clientId}/get_app_layout`
-  );
+  const [{ data: appLayout }] = useApi(`${API_URL}/${clientId}/get_app_layout`);
 
   return (
     <Route

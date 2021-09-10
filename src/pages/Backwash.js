@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import fertilizer from "images/fertilizer.png";
-import { INTERVAL } from "components/Timer";
+import { useRefetch } from "../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -61,6 +61,8 @@ export const Backwash = () => {
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/backwash`
   );
+
+  useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
   if (error)

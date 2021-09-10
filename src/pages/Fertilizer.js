@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
@@ -21,7 +21,7 @@ import { API_URL, useApi } from "api";
 import greendrop from "images/greendrop.gif";
 import { LineChart } from "components/charts/LineChart";
 import fertilizer from "images/fertilizer.png";
-import { INTERVAL } from "components/Timer";
+import { useRefetch } from "../components/Timer";
 
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
@@ -105,13 +105,8 @@ export const Fertilizer = () => {
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/fertilizer`
   );
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log("Fetching data");
-  //     refetch();
-  //   }, INTERVAL);
-  //   return () => clearInterval(interval);
-  // }, [refetch]);
+
+  useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
   if (error)

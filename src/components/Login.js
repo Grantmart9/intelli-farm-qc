@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -95,7 +89,7 @@ export const Login = ({ loginUrl }) => {
 
 export const Logout = ({ logoutUrl, redirect }) => {
   const [state, setState] = useState({ type: "message", message: "" });
-  const [{ loading }, postLogout] = useApi(
+  const [, postLogout] = useApi(
     {
       url: logoutUrl,
       method: "POST",
@@ -120,7 +114,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
           message: "Something happened when logging out.",
         })
       );
-  }, []);
+  }, [postLogout]);
 
   switch (state.type) {
     case "message":
