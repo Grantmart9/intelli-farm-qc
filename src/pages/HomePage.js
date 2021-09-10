@@ -163,7 +163,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <div className="flex flex-grow-1">
             <Sidebar items={getNavItems(prefix, appLayout)} />
 
-            <main className="content">
+            <main className="content flex-grow-1">
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
               <Component {...props} />
             </main>
