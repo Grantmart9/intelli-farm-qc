@@ -128,6 +128,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
     case "redirect":
       window.location.hash = redirect;
       window.location.reload();
+      break;
     default:
       throw new Error("Impossible");
   }

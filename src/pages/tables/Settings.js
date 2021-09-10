@@ -11,7 +11,6 @@
  * - Modification    :
  **/
 import React from "react";
-import { AppName } from "./AppName";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
@@ -86,11 +85,10 @@ const SaveButton = () => {
   );
 };
 
-export default function Settings() {
+export const Settings = () => {
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4">
         <div className="block">
           <div className="bg-gray-400 shadow-md rounded p-2 block">
             <DateAndTimePicker />

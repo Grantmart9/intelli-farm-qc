@@ -21,16 +21,14 @@ import {
   Image,
   Button,
   Accordion,
-  Navbar,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 import { Routes } from "../routes";
 
-const Sidebar = (props = {}) => {
-  const { title, items } = props;
+export const Sidebar = ({ items }) => {
   const location = useLocation();
   const { pathname } = location;
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const showClass = show ? "show" : "";
   const onCollapse = () => setShow(!show);
   const CollapsableNavItem = (props) => {
@@ -107,6 +105,30 @@ const Sidebar = (props = {}) => {
 
   const toNavItem = (item, i) => {
     switch (item.action.type) {
+      case "brand":
+        return (
+            <Button
+              key={i}
+              className="border-1 border-white"
+              style={{
+                display: "flex",
+                alignContent: "center",
+                backgroundColor: "#1e96ff",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "2.5rem",
+                fontWeight: "bold",
+                fontFamily: "'Noto Sans JP', sans-serif",
+                gap: "0.5rem",
+                padding: "0.5rem",
+                marginBottom: "2.5rem",
+              }}
+              href={item.action.path}
+            >
+              <img src={leaf} width="40rem" alt={leaf} />
+              {item.title}
+            </Button>
+        )
       case "link":
         return (
           <NavItem
@@ -128,7 +150,7 @@ const Sidebar = (props = {}) => {
           </CollapsableNavItem>
         );
       case "spacer":
-        return <div key={i} className="mt-10"/>
+        return <div key={i} className="flex-grow-1"/>
       default:
         throw Error("impossible");
     }
@@ -137,70 +159,17 @@ const Sidebar = (props = {}) => {
 
   return (
     <>
-      <Navbar
-        expand={false}
-        collapseOnSelect
-        variant="dark"
-        className="navbar-theme-primary px-4 d-md-none mt-5"
-        style={{
-          backgroundColor: "#1e96ff",
-          borderBottom: "1px 1px solid #1e96ff",
-          borderRadius: "0.2cm",
-          display: "flex",
-          width: "100%",
-        }}
-      >
-        <Navbar.Brand
-          className="me-lg-5"
-          as={Link}
-          to={Routes.DashboardOverview.path}
-        ></Navbar.Brand>
-        <Navbar.Toggle
-          as={Button}
-          aria-controls="main-navbar"
-          onClick={onCollapse}
-        >
-          <span className="navbar-toggler-icon" />
-        </Navbar.Toggle>
-      </Navbar>
       <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
-        <SimpleBar
-          className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}
+        <div
+          className={`collapse ${showClass} sidebar flex-shrink-0 text-white`}
         >
-          <div className="sidebar-inner px-4 pt-3">
-            <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
-              <Nav.Link
-                className="collapse-close"
-                onClick={onCollapse}
-              ></Nav.Link>
-            </div>
-            <Nav className="flex-column pt-3 pt-md-0">
-              <div className="2xl:mt-16 xl:mt-16 md:mt-16"></div>
-              <Button
-                className="border-1 border-white"
-                style={{
-                  display: "flex",
-                  alignContent: "center",
-                  backgroundColor: "#1e96ff",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                  fontFamily: "'Noto Sans JP', sans-serif",
-                  gap: "0.5rem",
-                  padding: "0.5rem",
-                  marginBottom: "2.5rem",
-                }}
-              >
-                <img src={leaf} width="40rem" alt={leaf} />
-                {title}
-              </Button>
-              <div style={{ fontFamily: "Times New Roman" }}>{navItems}</div>
+          <div className="h-full sidebar-inner px-4 pt-3">
+            <Nav style={{ fontFamily: "Times New Roman" }} className="h-full flex-column pt-3 pb-3">
+              {navItems}
             </Nav>
           </div>
-        </SimpleBar>
+        </div>
       </CSSTransition>
     </>
   );
 };
-export default Sidebar;

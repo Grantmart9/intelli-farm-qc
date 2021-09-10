@@ -12,8 +12,7 @@
  **/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Preloader from "../../components/Preloader";
-import { AppName } from "./AppName";
+import { Preloader } from "../../components/Preloader";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "../../components/Charts/FertilizerBarChart";
 import ErrorGif from "../../images/ErrorGif.gif";
@@ -24,40 +23,29 @@ import { LineChart } from "../../components/Charts/LineChart";
 import fertilizer from "../../images/fertilizer.png";
 import { INTERVAL } from "../../components/Timer";
 
-const FertilizerValves = ({ valves }) => {
-  var image;
-
-  if (valves.status === "Opened") {
-    image = greendrop;
-  } else {
-    image = fertilizer;
-  }
+const FertilizerValve = ({ valve }) => {
+  var image = valve.status === "Opened" ? greendrop : fertilizer
 
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
-        <div key="name" className="text-gray-800 text-2xl font-bold">
-          {valves.name}
+        <div className="text-gray-800 text-2xl font-bold">
+          {valve.name}
         </div>
-        <div key="status" className="text-green-800 text-2xl font-bold">
-          {valves.status}
+        <div className="text-green-800 text-2xl font-bold">
+          {valve.status}
         </div>
-        <div key="realflow" className="text-green-800 text-lg font-bold">
-          {valves.real_time_flow}
+        <div className="text-green-800 text-lg font-bold">
+          {valve.real_time_flow}
         </div>
-        <div key="alarm" className="text-red-800 font-bold text-md">
-          {valves.alarm}
+        <div className="text-red-800 font-bold text-md">
+          {valve.alarm}
         </div>
-        <div
-          key="totalflow"
-          className="text-gray-800 text-sm font-bold text-md"
-        >
-          {valves.total_flow}
+        <div className="text-gray-800 text-sm font-bold text-md">
+          {valve.total_flow}
         </div>
       </div>
-      <div
-        key="icon"
-        className="shadow-md rounded ml-2 items-center flex justify-center w-20"
+      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"
       >
         <img src={image} alt={image} width="80%" height="80%" />
       </div>
@@ -65,20 +53,20 @@ const FertilizerValves = ({ valves }) => {
   );
 };
 
-const ECValves = ({ ec }) => {
+const ECValve = ({ ec }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md border-1 rounded p-2 w-100">
-        <div key="ecname" className="text-gray-800 text-2xl font-bold">
+        <div className="text-gray-800 text-2xl font-bold">
           {ec.name}
         </div>
-        <div key="setpoint" className="text-green-800 text-md font-bold">
+        <div className="text-green-800 text-md font-bold">
           Setpoint: {ec.setpoint}
         </div>
-        <div key="value" className="text-green-800 text-md font-bold">
+        <div className="text-green-800 text-md font-bold">
           Value: {ec.value}
         </div>
-        <div key="ecalarm" className="text-red-800 font-bold text-md">
+        <div className="text-red-800 font-bold text-md">
           {ec.alarm}
         </div>
       </div>
@@ -123,25 +111,24 @@ export const FertilizerPieChart = ({ data }) => {
   );
 };
 
-const Fertilizer = () => {
+export const Fertilizer = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/fertilizer`
   );
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("Fetching data");
-      refetch();
-    }, INTERVAL);
-    return () => clearInterval(interval);
-  }, [refetch]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log("Fetching data");
+  //     refetch();
+  //   }, INTERVAL);
+  //   return () => clearInterval(interval);
+  // }, [refetch]);
 
   if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
-        <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1">
           <img src={ErrorGif} alt={ErrorGif} width="100%" />
         </div>
       </div>
@@ -149,19 +136,18 @@ const Fertilizer = () => {
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
-          {data.fertilizer_valves.map((valves, e) => (
-            <div key={e} className=" bg-gray-400 rounded shadow-md">
-              <FertilizerValves valves={valves} />
+          {data.fertilizer_valves.map((valve, i) => (
+            <div key={i} className=" bg-gray-400 rounded shadow-md">
+              <FertilizerValve valve={valve} />
             </div>
           ))}
         </div>
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.ec_values.map((ec, i) => (
             <div key={i} className="bg-gray-400 rounded shadow-md">
-              <ECValves ec={ec} />
+              <ECValve ec={ec} />
             </div>
           ))}
         </div>
@@ -178,10 +164,10 @@ const Fertilizer = () => {
         </div>
         <div className="bg-gray-400 rounded shadow-md mb-4"></div>
         <div className="xl:grid grid-cols-2 gap-2 p-2">
-          <div key="9" className="bg-gray-400 rounded shadow-md mb-4">
+          <div className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />
           </div>
-          <div key="10" className="bg-gray-400 rounded shadow-md mb-4">
+          <div className="bg-gray-400 rounded shadow-md mb-4">
             <FertilizerPieChart data={data.fertilizer_pie_chart} />
           </div>
         </div>
@@ -189,4 +175,3 @@ const Fertilizer = () => {
     </div>
   );
 };
-export default Fertilizer;

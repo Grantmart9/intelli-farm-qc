@@ -13,7 +13,7 @@
 import React from "react";
 import PreloaderBar from "./PreloaderBar.gif";
 
-const Preloader = (props) => {
+export const Preloader = (props) => {
   return (
     <div
       style={{
@@ -31,5 +31,3 @@ const Preloader = (props) => {
     </div>
   );
 };
-
-export default Preloader;

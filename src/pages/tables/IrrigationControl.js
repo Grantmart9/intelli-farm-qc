@@ -12,7 +12,6 @@
  **/
 import React from "react";
 import { useParams } from "react-router-dom";
-import { AppName } from "./AppName";
 import { BrushChart } from "../../components/Charts/BrushChart";
 import { API_URL, useApi } from "../../api";
 import { AxiosSpinner } from "../../components/AxiosSpinner";
@@ -21,8 +20,9 @@ import fertilizer from "../../images/fertilizer.png";
 import greendrop from "../../images/greendrop.gif";
 import Preloader from "../../components/Preloader";
 import ErrorGif from "../../images/ErrorGif.gif";
+import { Preloader } from "../../components/Preloader";
 
-const EquipmentStatus = ({ data, d }) => {
+const EquipmentStatus = ({ data }) => {
   var image;
 
   if (data.status === "Opened") {
@@ -31,35 +31,33 @@ const EquipmentStatus = ({ data, d }) => {
     image = fertilizer;
   }
   return (
-    <div key={d} className="flex p-2">
-      <div key="21" className="shadow-md rounded p-2 w-100">
-        <div key="22" className="font-bold text-2xl">
+    <div className="flex p-2">
+      <div className="shadow-md rounded p-2 w-100">
+        <div className="font-bold text-2xl">
           {data.name}
         </div>
-        <div key="23" className="font-bold text-2xl">
+        <div className="font-bold text-2xl">
           {data.status}
         </div>
-        <div key="24" className="font-bold text-xl">
+        <div className="font-bold text-xl">
           {data.real_time_flow}
         </div>
-        <div key="25" className="font-bold text-md text-red-400">
+        <div className="font-bold text-md text-red-400">
           {data.alarm}
         </div>
-        <div key="26" className="font-bold text-sm">
+        <div className="font-bold text-sm">
           {data.total_flow}
         </div>
       </div>
-      <div
-        key="27"
-        className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25"
+      <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25"
       >
-        <img key="28" src={image} alt={image} width="80%" height="80%" />
+        <img src={image} alt={image} width="80%" height="80%" />
       </div>
     </div>
   );
 };
 
-const IrrigationControl = () => {
+export const IrrigationControl = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/irrigation_1`
@@ -68,34 +66,31 @@ const IrrigationControl = () => {
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
-        <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1">
           <img src={ErrorGif} alt={ErrorGif} width="100%" />
         </div>
       </div>
     );
 
   return (
-    <div key="0" style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
+    <div style={{ backgroundColor: "#cad3de" }}>
       <div
-        key="1"
-        className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1"
+        className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1"
       >
-        <div key="2" className="xl:grid grid-cols-4 p-4 gap-4">
+        <div className="xl:grid grid-cols-4 p-4 gap-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={({ data }) =>
               data.map((irrigation_valve, i) => (
-                <div className="bg-gray-400 shadow-md rounded mb-4">
-                  <EquipmentStatus key={i} data={irrigation_valve} />
+                <div key={i} className="bg-gray-400 shadow-md rounded mb-4">
+                  <EquipmentStatus data={irrigation_valve} />
                 </div>
               ))
             }
           />
         </div>
-        <div key="4" className="bg-gray-400  rounded shadow-md ml-6 mr-6">
-          <div key="5" className="w-full h-full">
+        <div className="bg-gray-400  rounded shadow-md ml-6 mr-6">
+          <div className="w-full h-full">
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
               renderData={({ data }) => (
@@ -104,7 +99,7 @@ const IrrigationControl = () => {
             />
           </div>
         </div>
-        <div key="6" className="col-span-3 bg-gray-400  rounded shadow-md m-4">
+        <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
             renderData={({ data }) => (
@@ -122,5 +117,3 @@ const IrrigationControl = () => {
     </div>
   );
 };
-
-export default IrrigationControl;

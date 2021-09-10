@@ -13,17 +13,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "../routes";
-import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
+import { Navbar } from "../components/Navbar";
 import { Login, Logout, LoginContext, useAxiosLoginToken, useLoginTest } from "../components/Login";
 
-import DashboardOverview from "./dashboard/DashboardOverview";
-import IrrigationControl from "./tables/IrrigationControl";
-import Fertilizer from "./tables/Fertilizer";
+import { LandingPage } from "./dashboard/LandingPage";
+import { IrrigationControl } from "./tables/IrrigationControl";
+import { Fertilizer } from "./tables/Fertilizer";
 import { IrrigationSchedule } from "./tables/IrrigationSchedule";
 import { Dashboard } from "./tables/Dashboard";
-import Settings from "./tables/Settings";
+import { Settings } from "./tables/Settings";
 import { Backwash } from "./tables/Backwash";
 import { Notifications } from "./tables/Notifications";
 import { Pumps } from "./tables/Pumps";
@@ -96,6 +95,14 @@ const FarmRoutes = ({ prefix }) => (
   </>
 );
 
+const getBrandItem = (prefix, title) => ({
+  title: title,
+  action: {
+    type: "brand",
+    path: `${prefix}/`
+  }
+})
+
 const getFarmItems = (prefix, layout) =>
   !layout ? [] : Object.entries(layout.farms).map(([farmName, pages]) => ({
     title: farmName,
@@ -128,7 +135,7 @@ const getLogoutItem = (prefix) => ({
 })
 
 const getNavItems = (prefix, layout) =>
-  [getFarmItems(prefix, layout), [spacerItem, getLogoutItem(prefix)]].flat();
+  [[getBrandItem(prefix, layout && layout.company_name)], getFarmItems(prefix, layout), [spacerItem, getLogoutItem(prefix)]].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
@@ -142,18 +149,18 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => (
-        <div className="absolute inset-0">
-          <Sidebar
-            title={appLayout && appLayout.company_name}
-            items={getNavItems(prefix, appLayout)}
-          />
+        <div className="absolute inset-0 flex flex-col">
+          <Navbar />
+          <div className="flex flex-grow-1">
+            <Sidebar
+              items={getNavItems(prefix, appLayout)}
+            />
 
-          <main className="content">
-            <Navbar />
-              <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`}/>
-              <Component {...props}/>
-            <Footer />
-          </main>
+            <main className="content">
+              <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
+              <Component {...props} />
+            </main>
+          </div>
         </div>
       )}
     />
@@ -172,8 +179,8 @@ const RouteInner = () => {
       <Switch>
         <RouteWithSidebar
           exact
-          path={routes.DashboardOverview.path}
-          component={DashboardOverview}
+          path={routes.LandingPage.path}
+          component={LandingPage}
         />
         <RouteWithSidebar
           exact
@@ -183,14 +190,16 @@ const RouteInner = () => {
         <RouteWithSidebar
           exact
           path={routes.Logout.path}
-          component={() => <Logout logoutUrl={`${API_URL}${prefix}/intellifarm/logout`} redirect={routes.DashboardOverview.path}/>}/>
+          component={() => 
+            <Logout logoutUrl={`${API_URL}${prefix}/intellifarm/logout`} redirect={routes.LandingPage.path} />
+            } />
         <FarmRoutes prefix={prefix} />
         <Redirect to={routes.NotFound.path} />
       </Switch>
   );
 };
 
-const HomePage = () => {
+export const HomePage = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const ready = useAxiosLoginToken(() => setLoginOpen(true));
 
@@ -204,5 +213,3 @@ const HomePage = () => {
     </LoginContext.Provider>
   )
 };
-
-export default HomePage;

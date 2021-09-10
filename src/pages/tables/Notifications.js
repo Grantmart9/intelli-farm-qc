@@ -11,7 +11,6 @@
  * - Modification    :
  **/
 import React from "react";
-import { AppName } from "./AppName";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -56,8 +55,7 @@ export const Notifications = () => {
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1 justify-center flex gap-2 pb-4">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1 justify-center flex gap-2 pb-4">
         <div className="xl:grid grid-cols-4 rounded gap-4 ml-12">
           <div className="inline-flex mt-4">
             <div className="bg-gray-200 rounded shadow-md p-4 ">

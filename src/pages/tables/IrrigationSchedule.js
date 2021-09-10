@@ -12,7 +12,7 @@
  **/
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Preloader from "../../components/Preloader";
+import { Preloader } from "../../components/Preloader";
 import { API_URL, useApi } from "../../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,6 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import { AppName } from "./AppName";
 import ErrorPage from "../../images/ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
@@ -244,8 +243,7 @@ export const IrrigationSchedule = () => {
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-4">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
           <OverlayTrigger
             placement="bottom"

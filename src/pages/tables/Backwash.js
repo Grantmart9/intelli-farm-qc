@@ -12,9 +12,9 @@
  **/
 import React, { useEffect } from "react";
 import { AppName } from "./AppName";
-import ErrorGif from "../../images/ErrorGif.gif";
+import ErrorGif from "./images/ErrorGif.gif";
 import { API_URL, useApi } from "../../api";
-import Preloader from "../../components/Preloader";
+import { Preloader } from "../../components/Preloader";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -64,39 +64,23 @@ export const Backwash = () => {
     `${API_URL}/${farmId}/backwash`
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("Fetching data");
-      refetch();
-    }, INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [refetch]);
-
   if (!data && loading) return <Preloader />;
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
-        <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-          <img src={ErrorGif} alt={ErrorGif} width="100%" />
-        </div>
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
   if (data === null)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
-        <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-          <img src={ErrorGif} alt={ErrorGif} width="100%" />
-        </div>
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div className="h-500 sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
+      <div className="h-500">
         <div className="p-4">
           <div className="bg-gray-400 rounded shadow-md font-bold block text-gray-800 text-center p-4">
             <div className="bg-gray-400 rounded shadow-md inline-block p-2">

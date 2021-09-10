@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useMemo, useLayoutEffect } from "react";
 import {
   createContainer,
   VictoryAxis,
@@ -51,7 +51,6 @@ const useSize = (target) => {
     }
   }, [target]);
 
-  // Where the magic happens
   useResizeObserver(target, (entry) => setSize(entry.contentRect));
   return size;
 };
@@ -62,12 +61,13 @@ export const LineChart = ({ data }) => {
   const [target, setTarget] = useState(null);
   const { width } = useSize(target);
 
-  const domain = data
+  const truncatedData = useMemo(() => data.slice(Math.max(0,data.length-200)), [data]);
+  const domain = useMemo(() => truncatedData
     .reduce(
       ([dStart, dEnd], { x }) => [Math.min(+x, dStart), Math.max(+x, dEnd)],
       [Infinity, -Infinity]
     )
-    .map((date) => new Date(date));
+    .map((date) => new Date(date)), [truncatedData]);
   const [zoomDomain, setZoomDomain] = useState(domain);
 
   let brushCallback = ({ x }) => setZoomDomain(x);
@@ -128,8 +128,8 @@ export const LineChart = ({ data }) => {
             }}
             zoomDimension="x"
             voronoiDimension="x"
+            allowZoom={false}
             allowPan={true}
-            allowZoom={true}
             zoomDomain={{ x: zoomDomain }}
           />
         }
@@ -143,7 +143,7 @@ export const LineChart = ({ data }) => {
             `${formatDate(datetime, x)}-${y.toFixed(2)}`
           }
           labelComponent={<BrushChartTooltip />}
-          data={data}
+          data={truncatedData}
         />
       </VictoryChart>
       <VictoryChart
@@ -162,7 +162,7 @@ export const LineChart = ({ data }) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        <VictoryLine interpolation="linear" data={data} sortKey="x" />
+        <VictoryLine interpolation="linear" data={truncatedData} sortKey="x" />
       </VictoryChart>
     </div>
   );
