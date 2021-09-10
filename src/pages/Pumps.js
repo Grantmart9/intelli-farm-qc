@@ -59,8 +59,7 @@ export const Pumps = () => {
                   {data.alarm}
                 </div>
               </div>
-              <div className="bg-gray-400 rounded shadow-md p-2 flex justify-center"
-              >
+              <div className="bg-gray-400 rounded shadow-md p-2 flex justify-center">
                 <img src={pump} alt={pump} width={100} />
               </div>
             </div>

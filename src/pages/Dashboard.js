@@ -198,24 +198,20 @@ export const Dashboard = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
           {data.water_usage.map((waterUsageData, i) => (
-            <div key={i}className="bg-gray-400  rounded shadow-md m-3 pt-4" >
+            <div key={i} className="bg-gray-400  rounded shadow-md m-3 pt-4">
               <HomeFlowWaterUsage data={waterUsageData} />
             </div>
           ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-5">
-          <div
-            className="col-span-3 bg-gray-400 rounded shadow-md m-4"
-          >
+          <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
             <div className="w-full h-full">
               <HomeFlowFertilizerBarChart
                 data={data.fertilizer_usage.bar_graph}
               />
             </div>
           </div>
-          <div
-            className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items"
-          >
+          <div className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items">
             <div className="w-full">
               <HomeFlowFertilizerPieChart
                 data={data.fertilizer_usage.pie_chart}

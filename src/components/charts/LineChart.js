@@ -61,13 +61,20 @@ export const LineChart = ({ data }) => {
   const [target, setTarget] = useState(null);
   const { width } = useSize(target);
 
-  const truncatedData = useMemo(() => data.slice(Math.max(0,data.length-200)), [data]);
-  const domain = useMemo(() => truncatedData
-    .reduce(
-      ([dStart, dEnd], { x }) => [Math.min(+x, dStart), Math.max(+x, dEnd)],
-      [Infinity, -Infinity]
-    )
-    .map((date) => new Date(date)), [truncatedData]);
+  const truncatedData = useMemo(
+    () => data.slice(Math.max(0, data.length - 200)),
+    [data]
+  );
+  const domain = useMemo(
+    () =>
+      truncatedData
+        .reduce(
+          ([dStart, dEnd], { x }) => [Math.min(+x, dStart), Math.max(+x, dEnd)],
+          [Infinity, -Infinity]
+        )
+        .map((date) => new Date(date)),
+    [truncatedData]
+  );
   const [zoomDomain, setZoomDomain] = useState(domain);
 
   let brushCallback = ({ x }) => setZoomDomain(x);

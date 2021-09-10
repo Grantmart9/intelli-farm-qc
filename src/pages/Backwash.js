@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { } from "react";
+import React from "react";
 import ErrorGif from "images/ErrorGif.gif";
 import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";

@@ -16,56 +16,56 @@ import { useParams } from "react-router";
 import { INTERVAL } from "components/Timer";
 import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
-import ErrorPage from "images/ErrorPage.jpg"
+import ErrorPage from "images/ErrorPage.jpg";
 import { Table, ProgressBar } from "@themesberg/react-bootstrap";
 
 const columns = [
   {
     name: "Name",
     field: "name",
-    type: "text"
+    type: "text",
   },
   {
     name: "Irrigation",
     field: "irrigation_status",
-    type: "text"
+    type: "text",
   },
   {
     name: "Irrigation %",
     field: "irrigation_percentage",
-    type: "progress"
+    type: "progress",
   },
   {
     name: "Time Left",
     field: "irrigation_time_left",
-    type: "text"
+    type: "text",
   },
   {
     name: "Backwash",
     field: "backwash_status",
-    type: "text"
+    type: "text",
   },
   {
     name: "Backwash %",
     field: "backwash_percentage",
-    type: "progress"
+    type: "progress",
   },
   {
     name: "Water Total",
     field: "water_total",
-    type: "text"
+    type: "text",
   },
   {
     name: "Pumps",
     field: "pumps",
-    type: "text"
+    type: "text",
   },
   {
     name: "EC Value",
     field: "ec_value",
-    type: "text"
-  }
-]
+    type: "text",
+  },
+];
 
 const FarmTableCell = ({ value, type }) => {
   switch (type) {
@@ -80,30 +80,36 @@ const FarmTableCell = ({ value, type }) => {
     default:
       throw Error("impossible");
   }
-}
+};
 
 const FarmTable = ({ data }) => {
-  return <Table>
-    <thead>
-      <tr>
-        { columns.map((col, i) => <th key={i}>{col.name}</th>) }
-      </tr>
-    </thead>
-    <tbody>
-      {
-        data.map(farm =>
+  return (
+    <Table>
+      <thead>
+        <tr>
+          {columns.map((col, i) => (
+            <th key={i}>{col.name}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((farm) => (
           <tr>
-            { columns.map((col, i) => <FarmTableCell key={i} value={farm[col.field]} type={col.type} />) }
+            {columns.map((col, i) => (
+              <FarmTableCell key={i} value={farm[col.field]} type={col.type} />
+            ))}
           </tr>
-        )
-      }
-    </tbody>
-  </Table>
-}
+        ))}
+      </tbody>
+    </Table>
+  );
+};
 
 export const LandingPage = () => {
   const { clientId } = useParams();
-  const [{ data, loading, error }, refetch] = useApi(`${API_URL}/${clientId}/landing`);
+  const [{ data, loading, error }, refetch] = useApi(
+    `${API_URL}/${clientId}/landing`
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -116,7 +122,5 @@ export const LandingPage = () => {
   if (!data && loading) return <Preloader />;
   if (error) return <img src={ErrorPage} alt={ErrorPage} />;
 
-  return <FarmTable data={data.landing_page.farms} />
-}
-
-
+  return <FarmTable data={data.landing_page.farms} />;
+};

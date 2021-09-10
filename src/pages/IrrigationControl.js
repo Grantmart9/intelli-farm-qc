@@ -20,24 +20,13 @@ const EquipmentStatus = ({ data }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
-        <div className="font-bold text-2xl">
-          {data.name}
-        </div>
-        <div className="font-bold text-2xl">
-          {data.status}
-        </div>
-        <div className="font-bold text-xl">
-          {data.real_time_flow}
-        </div>
-        <div className="font-bold text-md text-red-400">
-          {data.alarm}
-        </div>
-        <div className="font-bold text-sm">
-          {data.total_flow}
-        </div>
+        <div className="font-bold text-2xl">{data.name}</div>
+        <div className="font-bold text-2xl">{data.status}</div>
+        <div className="font-bold text-xl">{data.real_time_flow}</div>
+        <div className="font-bold text-md text-red-400">{data.alarm}</div>
+        <div className="font-bold text-sm">{data.total_flow}</div>
       </div>
-      <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25"
-      >
+      <div className="bg-gray-400 rounded shadow-md ml-2 items-center flex justify-center w-25">
         <img src={image} alt={image} width="80%" height="80%" />
       </div>
     </div>
@@ -61,9 +50,7 @@ export const IrrigationControl = () => {
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <div
-        className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1"
-      >
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1">
         <div className="xl:grid grid-cols-4 p-4 gap-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}

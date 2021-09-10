@@ -107,28 +107,28 @@ export const Sidebar = ({ items }) => {
     switch (item.action.type) {
       case "brand":
         return (
-            <Button
-              key={i}
-              className="border-1 border-white"
-              style={{
-                display: "flex",
-                alignContent: "center",
-                backgroundColor: "#1e96ff",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "2.5rem",
-                fontWeight: "bold",
-                fontFamily: "'Noto Sans JP', sans-serif",
-                gap: "0.5rem",
-                padding: "0.5rem",
-                marginBottom: "2.5rem",
-              }}
-              href={item.action.path}
-            >
-              <img src={leaf} width="40rem" alt={leaf} />
-              {item.title}
-            </Button>
-        )
+          <Button
+            key={i}
+            className="border-1 border-white"
+            style={{
+              display: "flex",
+              alignContent: "center",
+              backgroundColor: "#1e96ff",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "2.5rem",
+              fontWeight: "bold",
+              fontFamily: "'Noto Sans JP', sans-serif",
+              gap: "0.5rem",
+              padding: "0.5rem",
+              marginBottom: "2.5rem",
+            }}
+            href={item.action.path}
+          >
+            <img src={leaf} width="40rem" alt={leaf} />
+            {item.title}
+          </Button>
+        );
       case "link":
         return (
           <NavItem
@@ -150,7 +150,7 @@ export const Sidebar = ({ items }) => {
           </CollapsableNavItem>
         );
       case "spacer":
-        return <div key={i} className="flex-grow-1"/>
+        return <div key={i} className="flex-grow-1" />;
       default:
         throw Error("impossible");
     }
@@ -164,7 +164,10 @@ export const Sidebar = ({ items }) => {
           className={`collapse ${showClass} sidebar flex-shrink-0 text-white`}
         >
           <div className="h-full sidebar-inner px-4 pt-3">
-            <Nav style={{ fontFamily: "Times New Roman" }} className="h-full flex-column pt-3 pb-3">
+            <Nav
+              style={{ fontFamily: "Times New Roman" }}
+              className="h-full flex-column pt-3 pb-3"
+            >
               {navItems}
             </Nav>
           </div>

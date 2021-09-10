@@ -1,32 +1,31 @@
-
 .pie-chart-container {
-    font-family: consolas, sans-serif;
-    text-align: center;
+  font-family: consolas, sans-serif;
+  text-align: center;
 
-    --pie-size: 6rem;
-    width: var(--pie-size);
+  --pie-size: 6rem;
+  width: var(--pie-size);
 }
 
 .pie-chart-container .pie-chart {
-    height: var(--pie-size);
+  height: var(--pie-size);
 }
 
-@media (min-width : 320px) {
-    .pie-chart-container {
-        --pie-size: 8rem;
-    }
+@media (min-width: 320px) {
+  .pie-chart-container {
+    --pie-size: 8rem;
+  }
 }
 
 /* Medium (md) */
 @media (min-width: 768px) {
-    .pie-chart-container {
-        --pie-size: 10rem;
-    }
+  .pie-chart-container {
+    --pie-size: 10rem;
+  }
 }
 
 /* Large (lg) */
 @media (min-width: 1024px) {
-    .pie-chart-container {
-        --pie-size: 12rem;
-    }
+  .pie-chart-container {
+    --pie-size: 12rem;
+  }
 }

@@ -15,7 +15,13 @@ import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "routes";
 import { Sidebar } from "components/Sidebar";
 import { Navbar } from "components/Navbar";
-import { Login, Logout, LoginContext, useAxiosLoginToken, useLoginTest } from "components/Login";
+import {
+  Login,
+  Logout,
+  LoginContext,
+  useAxiosLoginToken,
+  useLoginTest,
+} from "components/Login";
 
 import { LandingPage } from "pages/LandingPage";
 import { IrrigationControl } from "pages/IrrigationControl";
@@ -99,30 +105,32 @@ const getBrandItem = (prefix, title) => ({
   title: title,
   action: {
     type: "brand",
-    path: `${prefix}/`
-  }
-})
+    path: `${prefix}/`,
+  },
+});
 
 const getFarmItems = (prefix, layout) =>
-  !layout ? [] : Object.entries(layout.farms).map(([farmName, pages]) => ({
-    title: farmName,
-    action: {
-      type: "accordion",
-      items: farm_order
-        .filter((x) => x in pages)
-        .map((pageName) => {
-          const path = pages[pageName];
-          const farmPage = farm_pages[pageName] || { name: pageName };
-          return {
-            title: farmPage.name,
-            action: {
-              type: "link",
-              path: `${prefix}/${path}`,
-            },
-          };
-        }),
-    },
-  }));
+  !layout
+    ? []
+    : Object.entries(layout.farms).map(([farmName, pages]) => ({
+        title: farmName,
+        action: {
+          type: "accordion",
+          items: farm_order
+            .filter((x) => x in pages)
+            .map((pageName) => {
+              const path = pages[pageName];
+              const farmPage = farm_pages[pageName] || { name: pageName };
+              return {
+                title: farmPage.name,
+                action: {
+                  type: "link",
+                  path: `${prefix}/${path}`,
+                },
+              };
+            }),
+        },
+      }));
 
 const spacerItem = { action: { type: "spacer" } };
 
@@ -130,19 +138,23 @@ const getLogoutItem = (prefix) => ({
   title: "Logout",
   action: {
     type: "link",
-    path: `${prefix}/logout`
-  }
-})
+    path: `${prefix}/logout`,
+  },
+});
 
 const getNavItems = (prefix, layout) =>
-  [[getBrandItem(prefix, layout && layout.company_name)], getFarmItems(prefix, layout), [spacerItem, getLogoutItem(prefix)]].flat();
+  [
+    [getBrandItem(prefix, layout && layout.company_name)],
+    getFarmItems(prefix, layout),
+    [spacerItem, getLogoutItem(prefix)],
+  ].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
-  
+
   const [{ data: appLayout }, fetchAppLayout] = useApi(
-    `${API_URL}/${clientId}/get_app_layout`,
+    `${API_URL}/${clientId}/get_app_layout`
   );
 
   return (
@@ -152,9 +164,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
         <div className="absolute inset-0 flex flex-col">
           <Navbar />
           <div className="flex flex-grow-1">
-            <Sidebar
-              items={getNavItems(prefix, appLayout)}
-            />
+            <Sidebar items={getNavItems(prefix, appLayout)} />
 
             <main className="content">
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
@@ -176,26 +186,30 @@ const RouteInner = () => {
   const prefix = `/${clientId}`;
   const routes = prefixRoutes(prefix, Routes);
   return (
-      <Switch>
-        <RouteWithSidebar
-          exact
-          path={routes.LandingPage.path}
-          component={LandingPage}
-        />
-        <RouteWithSidebar
-          exact
-          path={routes.NotFound.path}
-          component={() => <p>Not Found</p>}
-        />
-        <RouteWithSidebar
-          exact
-          path={routes.Logout.path}
-          component={() => 
-            <Logout logoutUrl={`${API_URL}${prefix}/intellifarm/logout`} redirect={routes.LandingPage.path} />
-            } />
-        <FarmRoutes prefix={prefix} />
-        <Redirect to={routes.NotFound.path} />
-      </Switch>
+    <Switch>
+      <RouteWithSidebar
+        exact
+        path={routes.LandingPage.path}
+        component={LandingPage}
+      />
+      <RouteWithSidebar
+        exact
+        path={routes.NotFound.path}
+        component={() => <p>Not Found</p>}
+      />
+      <RouteWithSidebar
+        exact
+        path={routes.Logout.path}
+        component={() => (
+          <Logout
+            logoutUrl={`${API_URL}${prefix}/intellifarm/logout`}
+            redirect={routes.LandingPage.path}
+          />
+        )}
+      />
+      <FarmRoutes prefix={prefix} />
+      <Redirect to={routes.NotFound.path} />
+    </Switch>
   );
 };
 
@@ -203,13 +217,13 @@ export const HomePage = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const ready = useAxiosLoginToken(() => setLoginOpen(true));
 
-  if(!ready) return <></>;
+  if (!ready) return <></>;
   return (
     <LoginContext.Provider value={[loginOpen, setLoginOpen]}>
       <Switch>
-        <Redirect exact path="/" to="/denau"/>
+        <Redirect exact path="/" to="/denau" />
         <Route path="/:clientId/" component={RouteInner} />
       </Switch>
     </LoginContext.Provider>
-  )
+  );
 };

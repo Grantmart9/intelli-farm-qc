@@ -24,29 +24,22 @@ import fertilizer from "images/fertilizer.png";
 import { INTERVAL } from "components/Timer";
 
 const FertilizerValve = ({ valve }) => {
-  var image = valve.status === "Opened" ? greendrop : fertilizer
+  var image = valve.status === "Opened" ? greendrop : fertilizer;
 
   return (
     <div className="flex p-2">
       <div className="shadow-md rounded p-2 w-100">
-        <div className="text-gray-800 text-2xl font-bold">
-          {valve.name}
-        </div>
-        <div className="text-green-800 text-2xl font-bold">
-          {valve.status}
-        </div>
+        <div className="text-gray-800 text-2xl font-bold">{valve.name}</div>
+        <div className="text-green-800 text-2xl font-bold">{valve.status}</div>
         <div className="text-green-800 text-lg font-bold">
           {valve.real_time_flow}
         </div>
-        <div className="text-red-800 font-bold text-md">
-          {valve.alarm}
-        </div>
+        <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
         <div className="text-gray-800 text-sm font-bold text-md">
           {valve.total_flow}
         </div>
       </div>
-      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20"
-      >
+      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
         <img src={image} alt={image} width="80%" height="80%" />
       </div>
     </div>
@@ -57,18 +50,14 @@ const ECValve = ({ ec }) => {
   return (
     <div className="flex p-2">
       <div className="shadow-md border-1 rounded p-2 w-100">
-        <div className="text-gray-800 text-2xl font-bold">
-          {ec.name}
-        </div>
+        <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
         <div className="text-green-800 text-md font-bold">
           Setpoint: {ec.setpoint}
         </div>
         <div className="text-green-800 text-md font-bold">
           Value: {ec.value}
         </div>
-        <div className="text-red-800 font-bold text-md">
-          {ec.alarm}
-        </div>
+        <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
       </div>
       <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
         <img

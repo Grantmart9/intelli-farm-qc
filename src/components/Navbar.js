@@ -2,10 +2,10 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Logo from "images/Logo.png";
 
-
-export const Navbar = () =>
+export const Navbar = () => (
   <AppBar position="static">
-    <div className="flex align-items-center align-content-center justify-content-center w-full"
+    <div
+      className="flex align-items-center align-content-center justify-content-center w-full"
       style={{
         fontFamily: "'Noto Sans JP', sans-serif",
         fontSize: "3rem",
@@ -16,4 +16,5 @@ export const Navbar = () =>
     >
       <img width={250} src={Logo} alt={Logo} />
     </div>
-  </AppBar>;
+  </AppBar>
+);

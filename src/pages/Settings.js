@@ -99,4 +99,4 @@ export const Settings = () => {
       </div>
     </div>
   );
-}
+};
