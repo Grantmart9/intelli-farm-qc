@@ -12,21 +12,21 @@
  **/
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
-import { Routes } from "../routes";
-import { Sidebar } from "../components/Sidebar";
-import { Navbar } from "../components/Navbar";
-import { Login, Logout, LoginContext, useAxiosLoginToken, useLoginTest } from "../components/Login";
+import { Routes } from "routes";
+import { Sidebar } from "components/Sidebar";
+import { Navbar } from "components/Navbar";
+import { Login, Logout, LoginContext, useAxiosLoginToken, useLoginTest } from "components/Login";
 
-import { LandingPage } from "./dashboard/LandingPage";
-import { IrrigationControl } from "./tables/IrrigationControl";
-import { Fertilizer } from "./tables/Fertilizer";
-import { IrrigationSchedule } from "./tables/IrrigationSchedule";
-import { Dashboard } from "./tables/Dashboard";
-import { Settings } from "./tables/Settings";
-import { Backwash } from "./tables/Backwash";
-import { Notifications } from "./tables/Notifications";
-import { Pumps } from "./tables/Pumps";
-import { API_URL, useApi } from "../api";
+import { LandingPage } from "pages/LandingPage";
+import { IrrigationControl } from "pages/IrrigationControl";
+import { Fertilizer } from "pages/Fertilizer";
+import { IrrigationSchedule } from "pages/IrrigationSchedule";
+import { Dashboard } from "pages/Dashboard";
+import { Settings } from "pages/Settings";
+import { Backwash } from "pages/Backwash";
+import { Notifications } from "pages/Notifications";
+import { Pumps } from "pages/Pumps";
+import { API_URL, useApi } from "api";
 
 const farm_pages = {
   dashboard: {

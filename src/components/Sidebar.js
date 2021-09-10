@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import SimpleBar from "simplebar-react";
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import leaf from "./leaf.png";
+import leaf from "images/leaf.png";
 import {
   Nav,
   Badge,
@@ -23,7 +23,7 @@ import {
   Accordion,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
-import { Routes } from "../routes";
+import { Routes } from "routes";
 
 export const Sidebar = ({ items }) => {
   const location = useLocation();

@@ -11,7 +11,7 @@
  * - Modification    :
  **/
 import React from "react";
-import PreloaderBar from "./PreloaderBar.gif";
+import PreloaderBar from "images/PreloaderBar.gif";
 
 export const Preloader = (props) => {
   return (

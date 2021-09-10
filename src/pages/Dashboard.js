@@ -2,25 +2,24 @@
  * @description      :
  * @author           : Grant
  * @group            :
- * @created          : 08/09/2021 - 09:26:02
+ * @created          : 16/08/2021 - 14:40:38
  *
  * MODIFICATION LOG
  * - Version         : 1.0.0
- * - Date            : 08/09/2021
+ * - Date            : 16/08/2021
  * - Author          : Grant
  * - Modification    :
  **/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Preloader from "../../components/Preloader";
+import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import { API_URL, useApi } from "../../api";
-import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
-import { AppName } from "../tables/AppName";
-import ErrorGif from "../../images/ErrorGif.gif";
-import { INTERVAL } from "../../components/Timer";
+import { API_URL, useApi } from "api";
+import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import ErrorGif from "images/ErrorGif.gif";
+import { INTERVAL } from "components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -39,7 +38,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md -full">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
       <div className="font-bold text-xl">Irrigation</div>
       <div className="font-bold text-3xl">Cycle Progress</div>
       <div className="mt-2">
@@ -54,7 +53,7 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md xl:h-20 2xl:h-full">
+    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
       <div className="text-xl font-bold">Irrigation Time Left</div>
       <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
     </div>
@@ -84,7 +83,7 @@ const Pump = ({ pump }) => (
 );
 
 export const HomeFlowFertilizerPieChart = ({ data }) => {
-  const series = data.map(({ ratio }) => Number(ratio.toFixed(2)));
+  const series = data.map(({ ratio }) => Number(ratio));
   const labels = data.map(({ name }) => name);
   return (
     <ApexChart
@@ -95,7 +94,7 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
         dataLabels: {
           enabled: true,
           formatter: function (val) {
-            return val + "%";
+            return val.toFixed(2) + "%";
           },
         },
         labels: labels,
@@ -157,7 +156,7 @@ export const HomeFlowWaterUsage = ({ data }) => {
   );
 };
 
-const DashboardOverview = () => {
+export const Dashboard = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${farmId}/dashboard`
@@ -165,7 +164,7 @@ const DashboardOverview = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      //refetch();
+      refetch();
     }, INTERVAL);
     return () => clearInterval(interval);
   }, [refetch]);
@@ -174,59 +173,50 @@ const DashboardOverview = () => {
   if (error)
     return (
       <div style={{ backgroundColor: "#cad3de" }}>
-        <AppName />
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1">
-          <img src={ErrorGif} alt={ErrorGif} width="100%" />
-        </div>
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
 
   return (
     <div style={{ display: "block", backgroundColor: "#cad3de" }}>
-      <AppName />
-      <div
-        key="1"
-        className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:mt-0 md:mt-16 xl:mt-16 2xl:mt-16 sm:p-1 md:p-1 p-1"
-      >
-        <div key="2" className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
-          <div key="3" className="bg-gray-400 rounded shadow-md">
-            <IrrigationProgress key="no1" data={data.irrigation_data} />
+      <div className="p-1">
+        <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
+          <div className="bg-gray-400 rounded shadow-md">
+            <IrrigationProgress data={data.irrigation_data} />
           </div>
-          <div key="4" className="bg-gray-400 rounded shadow-md">
-            <IrrigationTimeLeft key="no2" data={data.irrigation_data} />
+          <div className="bg-gray-400 rounded shadow-md">
+            <IrrigationTimeLeft data={data.irrigation_data} />
           </div>
-          <div key="5" className="bg-gray-400 rounded shadow-md">
-            <IrrigationEC key="no3" data={data.irrigation_data} />
+          <div className="bg-gray-400 rounded shadow-md">
+            <IrrigationEC data={data.irrigation_data} />
           </div>
           {data.irrigation_data.pump_data.map((pump, i) => (
-            <div key="6" className="bg-gray-400 rounded shadow-md">
-              <Pump key={i} pump={pump} />
+            <div key={i} className="bg-gray-400 rounded shadow-md">
+              <Pump pump={pump} />
             </div>
           ))}
         </div>
-        <div key="7" className="grid grid-cols-1 lg:grid-cols-3 p-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
           {data.water_usage.map((waterUsageData, i) => (
-            <div className="bg-gray-400  rounded shadow-md m-3 pt-4" key={i}>
+            <div key={i}className="bg-gray-400  rounded shadow-md m-3 pt-4" >
               <HomeFlowWaterUsage data={waterUsageData} />
             </div>
           ))}
         </div>
-        <div key="9" className="grid grid-cols-1 lg:grid-cols-5">
+        <div className="grid grid-cols-1 lg:grid-cols-5">
           <div
-            key="10"
             className="col-span-3 bg-gray-400 rounded shadow-md m-4"
           >
-            <div key="11" className="w-full h-full">
+            <div className="w-full h-full">
               <HomeFlowFertilizerBarChart
                 data={data.fertilizer_usage.bar_graph}
               />
             </div>
           </div>
           <div
-            key="12"
             className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items"
           >
-            <div key="13" className="w-full">
+            <div className="w-full">
               <HomeFlowFertilizerPieChart
                 data={data.fertilizer_usage.pie_chart}
               />
@@ -237,5 +227,3 @@ const DashboardOverview = () => {
     </div>
   );
 };
-
-export default DashboardOverview;

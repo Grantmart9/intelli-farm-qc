@@ -1,6 +1,6 @@
 import useAxios from 'axios-hooks';
 import { useEffect, useContext, useState, useMemo } from "react";
-import { LoginContext } from './components/Login';
+import { LoginContext } from 'components/Login';
 
 export const API_URL = "https://lodicon-api.herokuapp.com/api/v1"
 

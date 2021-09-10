@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
 import useAxios from "axios-hooks";
-import { useApi } from "../api";
+import { useApi } from "api";
 
 export const LoginContext = createContext();
 

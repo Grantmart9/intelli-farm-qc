@@ -12,16 +12,16 @@
  **/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Preloader } from "../../components/Preloader";
+import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
-import { FertilizerBarChart } from "../../components/Charts/FertilizerBarChart";
-import ErrorGif from "../../images/ErrorGif.gif";
-import fertilizerEc from "../../images/fertilizerEc.png";
-import { API_URL, useApi } from "../../api";
-import greendrop from "../../images/greendrop.gif";
-import { LineChart } from "../../components/Charts/LineChart";
-import fertilizer from "../../images/fertilizer.png";
-import { INTERVAL } from "../../components/Timer";
+import { FertilizerBarChart } from "components/charts/FertilizerBarChart";
+import ErrorGif from "images/ErrorGif.gif";
+import fertilizerEc from "images/fertilizerEc.png";
+import { API_URL, useApi } from "api";
+import greendrop from "images/greendrop.gif";
+import { LineChart } from "components/charts/LineChart";
+import fertilizer from "images/fertilizer.png";
+import { INTERVAL } from "components/Timer";
 
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer

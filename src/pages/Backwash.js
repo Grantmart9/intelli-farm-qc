@@ -10,17 +10,15 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useEffect } from "react";
-import { AppName } from "./AppName";
-import ErrorGif from "./images/ErrorGif.gif";
-import { API_URL, useApi } from "../../api";
-import { Preloader } from "../../components/Preloader";
+import React, { } from "react";
+import ErrorGif from "images/ErrorGif.gif";
+import { API_URL, useApi } from "api";
+import { Preloader } from "components/Preloader";
 import { useParams } from "react-router-dom";
-import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import fertilizer from "../../images/fertilizer.png";
-import { INTERVAL } from "../../components/Timer";
+import fertilizer from "images/fertilizer.png";
+import { INTERVAL } from "components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {

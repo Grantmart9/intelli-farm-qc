@@ -11,12 +11,12 @@
  * - Modification    :
  **/
 import React, { useEffect } from "react";
-import ErrorGif from "../../images/ErrorGif.gif";
+import ErrorGif from "images/ErrorGif.gif";
 import { useParams } from "react-router-dom";
-import { Preloader } from "../../components/Preloader";
-import { API_URL, useApi } from "../../api";
-import pump from "../../images/pump.png";
-import { INTERVAL } from "../../components/Timer";
+import { Preloader } from "components/Preloader";
+import { API_URL, useApi } from "api";
+import pump from "images/pump.png";
+import { INTERVAL } from "components/Timer";
 
 export const Pumps = () => {
   const { farmId } = useParams();

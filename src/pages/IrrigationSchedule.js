@@ -12,8 +12,8 @@
  **/
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Preloader } from "../../components/Preloader";
-import { API_URL, useApi } from "../../api";
+import { Preloader } from "components/Preloader";
+import { API_URL, useApi } from "api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
@@ -22,7 +22,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import ErrorPage from "../../images/ErrorPage.jpg";
+import ErrorPage from "images/ErrorPage.jpg";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;

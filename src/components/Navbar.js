@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import Logo from "../pages/tables/images/Logo.png";
+import Logo from "images/Logo.png";
 
 
 export const Navbar = () =>

@@ -11,7 +11,7 @@
  * - Modification    :
  **/
 import React, { useEffect } from "react";
-import { useApi } from "../api";
+import { useApi } from "api";
 
 const RenderErrorLogger = ({ error, refetch }) => {
   useEffect((error) => console.error(error), [error]);

@@ -1,26 +1,13 @@
-/**
- * @description      :
- * @author           : Grant
- * @group            :
- * @created          : 16/08/2021 - 13:41:01
- *
- * MODIFICATION LOG
- * - Version         : 1.0.0
- * - Date            : 16/08/2021
- * - Author          : Grant
- * - Modification    :
- **/
 import React from "react";
 import { useParams } from "react-router-dom";
-import { BrushChart } from "../../components/Charts/BrushChart";
-import { API_URL, useApi } from "../../api";
-import { AxiosSpinner } from "../../components/AxiosSpinner";
-import { HomeFlowFertilizerBarChart } from "../../components/Charts/HomeFlowFertilizerBarChart";
-import fertilizer from "../../images/fertilizer.png";
-import greendrop from "../../images/greendrop.gif";
-import Preloader from "../../components/Preloader";
-import ErrorGif from "../../images/ErrorGif.gif";
-import { Preloader } from "../../components/Preloader";
+import { BrushChart } from "components/charts/BrushChart";
+import { API_URL, useApi } from "api";
+import { AxiosSpinner } from "components/AxiosSpinner";
+import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import fertilizer from "images/fertilizer.png";
+import greendrop from "images/greendrop.gif";
+import ErrorGif from "images/ErrorGif.gif";
+import { Preloader } from "components/Preloader";
 
 const EquipmentStatus = ({ data }) => {
   var image;
