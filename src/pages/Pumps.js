@@ -38,7 +38,7 @@ export const Pumps = () => {
 
   return (
     <div style={{ backgroundColor: "#cad3de" }}>
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4">
+      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4 mt-2">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.map((data, name, pressure, alarm) => (
             <div className="flex p-2 gap-2 bg-gray-400 rounded shadow-md ">

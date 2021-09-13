@@ -23,48 +23,48 @@ const columns = [
   {
     name: "Name",
     field: "name",
-    type: "text",
+    type: "text"
   },
   {
     name: "Irrigation",
     field: "irrigation_status",
-    type: "text",
+    type: "text"
   },
   {
     name: "Irrigation %",
     field: "irrigation_percentage",
-    type: "progress",
+    type: "progress"
   },
   {
     name: "Time Left",
     field: "irrigation_time_left",
-    type: "text",
+    type: "text"
   },
   {
     name: "Backwash",
     field: "backwash_status",
-    type: "text",
+    type: "text"
   },
   {
     name: "Backwash %",
     field: "backwash_percentage",
-    type: "progress",
+    type: "progress"
   },
   {
     name: "Water Total",
     field: "water_total",
-    type: "text",
+    type: "text"
   },
   {
     name: "Pumps",
     field: "pumps",
-    type: "text",
+    type: "text"
   },
   {
     name: "EC Value",
     field: "ec_value",
-    type: "text",
-  },
+    type: "text"
+  }
 ];
 
 const FarmTableCell = ({ value, type }) => {
@@ -84,24 +84,32 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <Table>
-      <thead>
-        <tr>
-          {columns.map((col, i) => (
-            <th key={i}>{col.name}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((farm) => (
-          <tr>
-            {columns.map((col, i) => (
-              <FarmTableCell key={i} value={farm[col.field]} type={col.type} />
+    <div className="sm-ml-0 md:ml-6 xl:ml-6 2xl:ml-6 sm:p-1 md:p-1 p-2">
+      <div className="bg-blue-100 rounded shadow-md w-full ">
+        <Table>
+          <thead>
+            <tr>
+              {columns.map((col, i) => (
+                <th key={i}>{col.name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((farm) => (
+              <tr>
+                {columns.map((col, i) => (
+                  <FarmTableCell
+                    key={i}
+                    value={farm[col.field]}
+                    type={col.type}
+                  />
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+          </tbody>
+        </Table>
+      </div>
+    </div>
   );
 };
 
