@@ -1,5 +1,5 @@
 import useAxios from "axios-hooks";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
 
 export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
@@ -35,26 +35,29 @@ export const useApi = (url, config) => {
     [loginOpen]
   );
 
-  const decoratedFetch = async (...args) => {
-    const data = await fetch(...args);
-    if (data && data.isAxiosError) {
-      const error = data;
-      if (authorized(error)) {
-        throw error;
-      } else {
-        return new Promise((resolve, reject) => {
-          setRetry((retry) => () => {
-            retry && retry();
-            decoratedFetch(...args)
-              .then(resolve)
-              .catch(reject);
+  const decoratedFetch = useCallback(
+    async (...args) => {
+      const data = await fetch(...args);
+      if (data && data.isAxiosError) {
+        const error = data;
+        if (authorized(error)) {
+          throw error;
+        } else {
+          return new Promise((resolve, reject) => {
+            setRetry((retry) => () => {
+              retry && retry();
+              decoratedFetch(...args)
+                .then(resolve)
+                .catch(reject);
+            });
+            setLoginOpen(true);
           });
-          setLoginOpen(true);
-        });
+        }
       }
-    }
-    return data;
-  };
+      return data;
+    },
+    [fetch, setLoginOpen]
+  );
 
   return [
     Object.assign({}, result, {

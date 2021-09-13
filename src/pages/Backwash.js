@@ -103,8 +103,8 @@ export const Backwash = () => {
         </div>
         <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
           {data.backwash_valves.map((backwash, i) => (
-            <div className="mt-2 mb-2">
-              <WashBack key={i} backwash={backwash} />
+            <div key={i} className="mt-2 mb-2">
+              <WashBack backwash={backwash} />
             </div>
           ))}
         </div>

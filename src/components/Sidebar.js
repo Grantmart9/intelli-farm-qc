@@ -12,7 +12,6 @@
  **/
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 import leaf from "images/leaf.png";
 import {
   Nav,
@@ -26,9 +25,6 @@ import { Link } from "react-router-dom";
 export const Sidebar = ({ items }) => {
   const location = useLocation();
   const { pathname } = location;
-  const [show, setShow] = useState(true);
-  const showClass = show ? "show" : "";
-  const onCollapse = () => setShow(!show);
   const CollapsableNavItem = (props) => {
     const { eventKey, title, children = null } = props;
     const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
@@ -72,7 +68,7 @@ export const Sidebar = ({ items }) => {
     const linkProps = external ? { href: link } : { as: Link, to: link };
 
     return (
-      <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
+      <Nav.Item className={navItemClassName}>
         <Nav.Link {...linkProps} target={target} className={classNames}>
           <span>
             {icon ? <span className="sidebar-icon"></span> : null}
@@ -157,20 +153,16 @@ export const Sidebar = ({ items }) => {
 
   return (
     <>
-      <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
-        <div
-          className={`collapse ${showClass} sidebar flex-shrink-0 text-white`}
-        >
-          <div className="h-full sidebar-inner px-4 pt-3">
-            <Nav
-              style={{ fontFamily: "Times New Roman" }}
-              className="h-full flex-column pt-3 pb-3"
-            >
-              {navItems}
-            </Nav>
-          </div>
+      <div className={`sidebar flex-shrink-0 text-white`}>
+        <div className="h-full sidebar-inner px-4 pt-3">
+          <Nav
+            style={{ fontFamily: "Times New Roman" }}
+            className="h-full flex-column pt-3 pb-3"
+          >
+            {navItems}
+          </Nav>
         </div>
-      </CSSTransition>
+      </div>
     </>
   );
 };

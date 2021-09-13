@@ -10,7 +10,7 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "routes";
 import { Sidebar } from "components/Sidebar";
@@ -27,11 +27,13 @@ import { IrrigationControl } from "pages/IrrigationControl";
 import { Fertilizer } from "pages/Fertilizer";
 import { IrrigationSchedule } from "pages/IrrigationSchedule";
 import { Dashboard } from "pages/Dashboard";
-import { Settings } from "pages/Settings";
+import { Report } from "pages/Report";
 import { Backwash } from "pages/Backwash";
 import { Notifications } from "pages/Notifications";
 import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
+
+const AppLayout = createContext();
 
 const farm_pages = {
   dashboard: {
@@ -69,10 +71,10 @@ const farm_pages = {
     path: "/notifications",
     page: Notifications,
   },
-  settings: {
-    name: "Settings",
-    path: "/settings",
-    page: Settings,
+  report: {
+    name: "Report",
+    path: "/report",
+    page: Report,
   },
 };
 
@@ -84,7 +86,7 @@ const farm_order = [
   "pumps",
   "backwash",
   "notifications",
-  "settings",
+  "report",
 ];
 
 const FarmRoutes = ({ prefix }) => (
@@ -150,9 +152,8 @@ const getNavItems = (prefix, layout) =>
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
+  const appLayout = useContext(AppLayout);
   const prefix = `/${clientId}`;
-
-  const [{ data: appLayout }] = useApi(`${API_URL}/${clientId}/get_app_layout`);
 
   return (
     <Route
@@ -163,7 +164,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <div className="flex flex-grow-1">
             <Sidebar items={getNavItems(prefix, appLayout)} />
 
-            <main className="content flex-grow-1">
+            <main className="relative content flex-grow-1">
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
               <Component {...props} />
             </main>
@@ -182,39 +183,42 @@ const RouteInner = () => {
   const { clientId } = useParams();
   const prefix = `/${clientId}`;
   const routes = prefixRoutes(prefix, Routes);
+
+  const [{ data: appLayout }] = useApi(`${API_URL}${prefix}/get_app_layout`);
+
   return (
-    <Switch>
-      <RouteWithSidebar
-        exact
-        path={routes.LandingPage.path}
-        component={LandingPage}
-      />
-      <RouteWithSidebar
-        exact
-        path={routes.NotFound.path}
-        component={() => <p>Not Found</p>}
-      />
-      <RouteWithSidebar
-        exact
-        path={routes.Logout.path}
-        component={() => (
-          <Logout
-            logoutUrl={`${API_URL}${prefix}/intellifarm/logout`}
-            redirect={routes.LandingPage.path}
-          />
-        )}
-      />
-      <FarmRoutes prefix={prefix} />
-      <Redirect to={routes.NotFound.path} />
-    </Switch>
+    <AppLayout.Provider value={appLayout}>
+      <Switch>
+        <RouteWithSidebar
+          exact
+          path={routes.LandingPage.path}
+          component={LandingPage}
+        />
+        <RouteWithSidebar
+          exact
+          path={routes.NotFound.path}
+          component={() => <p>Not Found</p>}
+        />
+        <RouteWithSidebar
+          exact
+          path={routes.Logout.path}
+          component={() => (
+            <Logout
+              logoutUrl={`${API_URL}${prefix}/intellifarm/logout`}
+              redirect={routes.LandingPage.path}
+            />
+          )}
+        />
+        <FarmRoutes prefix={prefix} />
+        <Redirect to={routes.NotFound.path} />
+      </Switch>
+    </AppLayout.Provider>
   );
 };
 
 export const HomePage = () => {
   const [loginOpen, setLoginOpen] = useState(false);
-  const ready = useAxiosLoginToken(() => setLoginOpen(true));
 
-  if (!ready) return <></>;
   return (
     <LoginContext.Provider value={[loginOpen, setLoginOpen]}>
       <Switch>

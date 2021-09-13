@@ -18,6 +18,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
+import { ComingSoon } from "./ComingSoon";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Notifications = () => {
+export const Notifications = () => <ComingSoon />;
+
+const NotificationsOld = () => {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [User2, setUser2] = React.useState("");

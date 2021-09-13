@@ -84,7 +84,7 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <div className="sm-ml-0 md:ml-6 xl:ml-6 2xl:ml-6 sm:p-1 md:p-1 p-2">
+    <div className="p-2">
       <div className="bg-blue-100 rounded shadow-md w-full ">
         <Table>
           <thead>
@@ -95,11 +95,11 @@ const FarmTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((farm) => (
-              <tr>
-                {columns.map((col, i) => (
+            {data.map((farm, i) => (
+              <tr key={i}>
+                {columns.map((col, j) => (
                   <FarmTableCell
-                    key={i}
+                    key={j}
                     value={farm[col.field]}
                     type={col.type}
                   />
