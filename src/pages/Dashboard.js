@@ -37,48 +37,35 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
-  <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
-      <div className="font-bold text-xl">Irrigation</div>
-      <div className="font-bold text-3xl">Cycle Progress</div>
-      <div className="mt-2">
-        <BorderLinearProgress
-          variant="determinate"
-          value={data.cycle_progress}
-        />
-      </div>
+  <div className="p-4 h-full">
+    <div className="font-bold text-xl">Irrigation</div>
+    <div className="font-bold text-3xl">Cycle Progress</div>
+    <div className="mt-2">
+      <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
   </div>
 );
 
 const IrrigationTimeLeft = ({ data }) => (
-  <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
-      <div className="text-xl font-bold">Irrigation Time Left</div>
-      <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
-    </div>
+  <div className="p-4 h-full">
+    <div className="text-xl font-bold">Irrigation Time Left</div>
+    <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
-  <div className="p-2">
-    <div className="bg-gray-400 rounded p-3 shadow-md h-full">
-      <div className="font-bold text-xl">
-        EC Average: {data.ec_data.average}
-      </div>
-      <div className="text-3xl font-bold">Value: {data.ec_data.value} mS</div>
-      <div className="font-bold">Setpoint: {data.ec_data.setpoint} mS</div>
-    </div>
+  <div className="p-4 h-full">
+    <div className="font-bold text-xl">EC Average: {data.ec_data.average}</div>
+    <div className="text-3xl font-bold">Value: {data.ec_data.value} mS</div>
+    <div className="font-bold">Setpoint: {data.ec_data.setpoint} mS</div>
   </div>
 );
 
 const Pump = ({ pump }) => (
-  <div className="p-2">
-    <div className="bg-gray-400 rounded p-2 shadow-md h-full">
-      <div className="font-bold text-xl">Water Pump</div>
-      <div className="font-bold text-3xl">{pump.status}</div>
-      <div className="font-bold">{pump.main_flow}</div>
-    </div>
+  <div className="p-4 h-full">
+    <div className="font-bold text-xl">Water Pump</div>
+    <div className="font-bold text-3xl">{pump.status}</div>
+    <div className="font-bold">{pump.main_flow}</div>
   </div>
 );
 
@@ -167,51 +154,49 @@ export const Dashboard = () => {
   if (!data && loading) return <Preloader />;
   if (error)
     return (
-      <div style={{ backgroundColor: "#cad3de" }}>
+      <div>
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
 
   return (
-    <div style={{ display: "block", backgroundColor: "#cad3de" }}>
-      <div className="p-1">
-        <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
-          <div className="bg-gray-400 rounded shadow-md">
-            <IrrigationProgress data={data.irrigation_data} />
-          </div>
-          <div className="bg-gray-400 rounded shadow-md">
-            <IrrigationTimeLeft data={data.irrigation_data} />
-          </div>
-          <div className="bg-gray-400 rounded shadow-md">
-            <IrrigationEC data={data.irrigation_data} />
-          </div>
-          {data.irrigation_data.pump_data.map((pump, i) => (
-            <div key={i} className="bg-gray-400 rounded shadow-md">
-              <Pump pump={pump} />
-            </div>
-          ))}
+    <div className="p-1">
+      <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
+        <div className="bg-gray-300 rounded shadow-md">
+          <IrrigationProgress data={data.irrigation_data} />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
-          {data.water_usage.map((waterUsageData, i) => (
-            <div key={i} className="bg-gray-400  rounded shadow-md m-3 pt-4">
-              <HomeFlowWaterUsage data={waterUsageData} />
-            </div>
-          ))}
+        <div className="bg-gray-300 rounded shadow-md">
+          <IrrigationTimeLeft data={data.irrigation_data} />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-5">
-          <div className="col-span-3 bg-gray-400 rounded shadow-md m-4">
-            <div className="w-full h-full">
-              <HomeFlowFertilizerBarChart
-                data={data.fertilizer_usage.bar_graph}
-              />
-            </div>
+        <div className="bg-gray-300 rounded shadow-md">
+          <IrrigationEC data={data.irrigation_data} />
+        </div>
+        {data.irrigation_data.pump_data.map((pump, i) => (
+          <div key={i} className="bg-gray-300 rounded shadow-md">
+            <Pump pump={pump} />
           </div>
-          <div className="col-span-2 bg-gray-400 rounded shadow-md flex-grow m-4 flex align-items">
-            <div className="w-full">
-              <HomeFlowFertilizerPieChart
-                data={data.fertilizer_usage.pie_chart}
-              />
-            </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+        {data.water_usage.map((waterUsageData, i) => (
+          <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4">
+            <HomeFlowWaterUsage data={waterUsageData} />
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
+          <div className="w-full h-full">
+            <HomeFlowFertilizerBarChart
+              data={data.fertilizer_usage.bar_graph}
+            />
+          </div>
+        </div>
+        <div className="col-span-2 bg-gray-300 rounded shadow-md flex-grow m-4 flex align-items">
+          <div className="w-full">
+            <HomeFlowFertilizerPieChart
+              data={data.fertilizer_usage.pie_chart}
+            />
           </div>
         </div>
       </div>

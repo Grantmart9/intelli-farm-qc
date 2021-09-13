@@ -37,8 +37,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const WashBack = ({ backwash }) => {
   return (
-    <div className="bg-gray-400 rounded shadow-md p-2 flex gap-2">
-      <div className="shadow-md rounded p-3 bg-gray-400 w-100">
+    <div className="bg-gray-300 rounded shadow-md p-2 flex gap-2">
+      <div className="p-3 bg-gray-300 w-100">
         <div key={backwash.name} className="font-bold text-2xl">
           {backwash.name}
         </div>
@@ -49,7 +49,7 @@ const WashBack = ({ backwash }) => {
           {backwash.alarm}
         </div>
       </div>
-      <div className="bg-gray-400 rounded shadow-md p-2 items-center flex justify-center">
+      <div className="bg-gray-300 p-2 items-center flex justify-center">
         <img src={fertilizer} alt={fertilizer} width="100rem" height="50rem" />
       </div>
     </div>
@@ -67,23 +67,23 @@ export const Backwash = () => {
   if (!data && loading) return <Preloader />;
   if (error)
     return (
-      <div style={{ backgroundColor: "#cad3de" }}>
+      <div>
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
   if (data === null)
     return (
-      <div style={{ backgroundColor: "#cad3de" }}>
+      <div>
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
 
   return (
-    <div style={{ backgroundColor: "#cad3de" }}>
+    <div>
       <div className="h-500">
         <div className="p-4">
-          <div className="bg-gray-400 rounded shadow-md font-bold block text-gray-800 text-center p-4">
-            <div className="bg-gray-400 rounded shadow-md inline-block p-2">
+          <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
+            <div className="inline-block p-2">
               <div className="font-bold text-xl">
                 Status : {data.backwash_status.status}
               </div>
@@ -91,7 +91,7 @@ export const Backwash = () => {
                 Progress : {data.backwash_status.percentage_left.toFixed(2)} %
               </div>
             </div>
-            <div className="bg-gray-400 shadow-md p-2">
+            <div className="p-2">
               <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
                 <BorderLinearProgress
                   variant="determinate"

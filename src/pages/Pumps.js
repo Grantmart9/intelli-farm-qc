@@ -29,31 +29,31 @@ export const Pumps = () => {
   if (!data && loading) return <Preloader />;
   if (error)
     return (
-      <div style={{ backgroundColor: "#cad3de" }}>
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1">
+      <div>
+        <div className="p-1">
           <img src={ErrorGif} alt={ErrorGif} width="100%" />
         </div>
       </div>
     );
 
   return (
-    <div style={{ backgroundColor: "#cad3de" }}>
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4 mt-2">
+    <div>
+      <div className="p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.map((data, i) => (
             <div
               key={i}
               className="flex p-2 gap-2 bg-gray-400 rounded shadow-md "
             >
-              <div className="bg-gray-400 rounded shadow-md p-2">
+              <div className="p-2">
                 <div className="font-bold text-2xl">{data.name}</div>
                 <div className="font-bold text-3xl">{data.pressure}</div>
                 <div className="font-bold text-md text-red-400">
                   {data.alarm}
                 </div>
               </div>
-              <div className="bg-gray-400 rounded shadow-md p-2 flex justify-center">
-                <img src={pump} alt={pump} width={100} />
+              <div className="ml-2 items-center flex flex-shrink-0 justify-center w-20">
+                <img src={pump} alt={pump} />
               </div>
             </div>
           ))}

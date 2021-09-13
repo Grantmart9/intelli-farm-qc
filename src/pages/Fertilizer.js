@@ -28,7 +28,7 @@ const FertilizerValve = ({ valve }) => {
 
   return (
     <div className="flex p-2">
-      <div className="shadow-md rounded p-2 w-100">
+      <div className="w-100">
         <div className="text-gray-800 text-2xl font-bold">{valve.name}</div>
         <div className="text-green-800 text-2xl font-bold">{valve.status}</div>
         <div className="text-green-800 text-lg font-bold">
@@ -39,8 +39,8 @@ const FertilizerValve = ({ valve }) => {
           {valve.total_flow}
         </div>
       </div>
-      <div className="shadow-md rounded ml-2 items-center flex justify-center w-20">
-        <img src={image} alt={image} width="80%" height="80%" />
+      <div className="ml-2 items-center flex flex-shrink-0 justify-center w-20">
+        <img src={image} alt={image} />
       </div>
     </div>
   );
@@ -49,7 +49,7 @@ const FertilizerValve = ({ valve }) => {
 const ECValve = ({ ec }) => {
   return (
     <div className="flex p-2">
-      <div className="shadow-md border-1 rounded p-2 w-100">
+      <div className="p-2 w-100">
         <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
         <div className="text-green-800 text-md font-bold">
           Setpoint: {ec.setpoint}
@@ -59,13 +59,8 @@ const ECValve = ({ ec }) => {
         </div>
         <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
       </div>
-      <div className="shadow-md rounded ml-2 items-center flex justify-center p-2">
-        <img
-          src={fertilizerEc}
-          alt={fertilizerEc}
-          width="200rem"
-          height="50rem"
-        />
+      <div className="ml-2 items-center flex flex-shrink-0 justify-center p-2 w-20">
+        <img src={fertilizerEc} alt={fertilizerEc} />
       </div>
     </div>
   );
@@ -111,19 +106,17 @@ export const Fertilizer = () => {
   if (!data && loading) return <Preloader />;
   if (error)
     return (
-      <div style={{ backgroundColor: "#cad3de" }}>
-        <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1">
-          <img src={ErrorGif} alt={ErrorGif} width="100%" />
-        </div>
+      <div className="p-4">
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
 
   return (
-    <div style={{ backgroundColor: "#cad3de" }}>
-      <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-4">
+    <div>
+      <div className="p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.fertilizer_valves.map((valve, i) => (
-            <div key={i} className=" bg-gray-400 rounded shadow-md">
+            <div key={i} className="bg-gray-400 rounded shadow-md">
               <FertilizerValve valve={valve} />
             </div>
           ))}

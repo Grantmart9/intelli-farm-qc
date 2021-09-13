@@ -15,12 +15,7 @@ import { Route, Switch, Redirect, useParams } from "react-router-dom";
 import { Routes } from "routes";
 import { Sidebar } from "components/Sidebar";
 import { Navbar } from "components/Navbar";
-import {
-  Login,
-  Logout,
-  LoginContext,
-  useAxiosLoginToken,
-} from "components/Login";
+import { Login, Logout, LoginContext } from "components/Login";
 
 import { LandingPage } from "pages/LandingPage";
 import { IrrigationControl } from "pages/IrrigationControl";
@@ -32,6 +27,8 @@ import { Backwash } from "pages/Backwash";
 import { Notifications } from "pages/Notifications";
 import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
+import { SidebarContext } from "../components/Sidebar";
+import { useMd } from "media-query";
 
 const AppLayout = createContext();
 
@@ -152,6 +149,9 @@ const getNavItems = (prefix, layout) =>
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const { clientId } = useParams();
+  const isMd = useMd();
+  const [show] = useContext(SidebarContext);
+  const fullSidebar = show && isMd;
   const appLayout = useContext(AppLayout);
   const prefix = `/${clientId}`;
 
@@ -159,12 +159,16 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => (
-        <div className="absolute inset-0 flex flex-col">
+        <div className="absolute w-full vh-100 flex flex-col overflow-hidden">
           <Navbar />
-          <div className="flex flex-grow-1">
+          <div style={{ height: "calc(100vh - 60px)" }} className="flex">
             <Sidebar items={getNavItems(prefix, appLayout)} />
 
-            <main className="relative content flex-grow-1">
+            <main
+              className={`relative ${
+                fullSidebar ? "hidden" : ""
+              } content flex-grow-1 bg-gray-500 overflow-y-scroll`}
+            >
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
               <Component {...props} />
             </main>
@@ -218,13 +222,16 @@ const RouteInner = () => {
 
 export const HomePage = () => {
   const [loginOpen, setLoginOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   return (
     <LoginContext.Provider value={[loginOpen, setLoginOpen]}>
-      <Switch>
-        <Redirect exact path="/" to="/denau" />
-        <Route path="/:clientId/" component={RouteInner} />
-      </Switch>
+      <SidebarContext.Provider value={[showSidebar, setShowSidebar]}>
+        <Switch>
+          <Redirect exact path="/" to="/denau" />
+          <Route path="/:clientId/" component={RouteInner} />
+        </Switch>
+      </SidebarContext.Provider>
     </LoginContext.Provider>
   );
 };

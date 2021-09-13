@@ -57,7 +57,7 @@ const NotificationsOld = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#cad3de" }}>
+    <div>
       <div className="sm-ml-0 md:ml-8 xl:ml-8 2xl:ml-8 sm:p-1 md:p-1 p-1 justify-center flex gap-2 pb-4">
         <div className="xl:grid grid-cols-4 rounded gap-4 ml-12">
           <div className="inline-flex mt-4">
