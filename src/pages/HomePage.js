@@ -161,13 +161,21 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
       render={(props) => (
         <div className="absolute w-full vh-100 flex flex-col overflow-hidden">
           <Navbar />
-          <div style={{ height: "calc(100vh - 60px)" }} className="flex">
+          <div
+            style={{
+              height: "calc(100vh - 60px)",
+            }}
+            className="flex"
+          >
             <Sidebar items={getNavItems(prefix, appLayout)} />
 
             <main
+              style={{
+                width: show ? "calc(100vw - 300px)" : "calc(100vw)",
+              }}
               className={`relative ${
                 fullSidebar ? "hidden" : ""
-              } content flex-grow-1 bg-gray-500 overflow-y-scroll`}
+              } content flex-grow-1 bg-gray-500 overflow-scroll`}
             >
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
               <Component {...props} />

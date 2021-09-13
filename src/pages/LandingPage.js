@@ -23,48 +23,48 @@ const columns = [
   {
     name: "Name",
     field: "name",
-    type: "text"
+    type: "text",
   },
   {
     name: "Irrigation",
     field: "irrigation_status",
-    type: "text"
+    type: "text",
   },
   {
     name: "Irrigation %",
     field: "irrigation_percentage",
-    type: "progress"
+    type: "progress",
   },
   {
     name: "Time Left",
     field: "irrigation_time_left",
-    type: "text"
+    type: "text",
   },
   {
     name: "Backwash",
     field: "backwash_status",
-    type: "text"
+    type: "text",
   },
   {
     name: "Backwash %",
     field: "backwash_percentage",
-    type: "progress"
+    type: "progress",
   },
   {
     name: "Water Total",
     field: "water_total",
-    type: "text"
+    type: "text",
   },
   {
     name: "Pumps",
     field: "pumps",
-    type: "text"
+    type: "text",
   },
   {
     name: "EC Value",
     field: "ec_value",
-    type: "text"
-  }
+    type: "text",
+  },
 ];
 
 const FarmTableCell = ({ value, type }) => {
@@ -73,8 +73,10 @@ const FarmTableCell = ({ value, type }) => {
       return <td>{value}</td>;
     case "progress":
       return (
-        <td>
-          <ProgressBar value={value} min={0} max={100} />
+        <td class="relative">
+          <div class="absolute inset-0 flex align-items-center">
+            <ProgressBar now={value} min={0} max={100} />
+          </div>
         </td>
       );
     default:
@@ -84,8 +86,8 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <div className="p-2">
-      <div className="bg-blue-100 rounded shadow-md w-full ">
+    <div className="flex">
+      <div className="bg-blue-100 rounded shadow-md m-4">
         <Table>
           <thead>
             <tr>
