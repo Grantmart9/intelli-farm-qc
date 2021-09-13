@@ -175,7 +175,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
               }}
               className={`relative ${
                 fullSidebar ? "hidden" : ""
-              } content flex-grow-1 bg-gray-500 overflow-scroll`}
+              } content flex-grow-1 bg-gray-500 overflow-auto`}
             >
               <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
               <Component {...props} />

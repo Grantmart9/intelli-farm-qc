@@ -116,20 +116,20 @@ export const Fertilizer = () => {
       <div className="p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.fertilizer_valves.map((valve, i) => (
-            <div key={i} className="bg-gray-400 rounded shadow-md">
+            <div key={i} className="bg-gray-300 rounded shadow-md">
               <FertilizerValve valve={valve} />
             </div>
           ))}
         </div>
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.ec_values.map((ec, i) => (
-            <div key={i} className="bg-gray-400 rounded shadow-md">
+            <div key={i} className="bg-gray-300 rounded shadow-md">
               <ECValve ec={ec} />
             </div>
           ))}
         </div>
         <div className="p-2">
-          <div className="bg-gray-400 rounded shadow-md mb-4 p-2">
+          <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
             <LineChart
               data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
                 ...rest,
@@ -139,12 +139,12 @@ export const Fertilizer = () => {
             />
           </div>
         </div>
-        <div className="bg-gray-400 rounded shadow-md mb-4"></div>
+        <div className="bg-gray-300 rounded shadow-md mb-4"></div>
         <div className="xl:grid grid-cols-2 gap-2 p-2">
-          <div className="bg-gray-400 rounded shadow-md mb-4">
+          <div className="bg-gray-300 rounded shadow-md mb-4">
             <FertilizerBarChart data={data.fertilizer_bargraph} />
           </div>
-          <div className="bg-gray-400 rounded shadow-md mb-4">
+          <div className="bg-gray-300 rounded shadow-md mb-4">
             <FertilizerPieChart data={data.fertilizer_pie_chart} />
           </div>
         </div>

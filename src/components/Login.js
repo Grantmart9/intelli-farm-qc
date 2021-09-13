@@ -9,24 +9,6 @@ import { useApi } from "api";
 
 export const LoginContext = createContext();
 
-export const useAxiosLoginToken = (onUnauthorized) => {
-  const [ready, setReady] = useState(false);
-  const reqHandler = (request) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
-    return request;
-  };
-  useEffect(() => {
-    if (!ready) {
-      axios.interceptors.request.use(reqHandler);
-      setReady(true);
-    }
-  }, [ready, setReady]);
-  return ready;
-};
-
 export const Login = ({ loginUrl }) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const [username, setUsername] = useState("");

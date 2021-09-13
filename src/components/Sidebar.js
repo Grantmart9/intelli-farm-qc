@@ -166,7 +166,7 @@ export const Sidebar = ({ items }) => {
     <div
       className={`sidebar ${
         show ? "" : "hidden"
-      } flex-shrink-0 text-white overflow-y-scroll h-full`}
+      } flex-shrink-0 text-white overflow-y-auto h-full`}
     >
       <Nav
         style={{ fontFamily: "Times New Roman" }}

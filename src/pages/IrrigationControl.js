@@ -59,14 +59,14 @@ export const IrrigationControl = () => {
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={({ data }) =>
               data.map((irrigation_valve, i) => (
-                <div key={i} className="bg-gray-400 shadow-md rounded mb-4">
+                <div key={i} className="bg-gray-300 shadow-md rounded mb-4">
                   <EquipmentStatus data={irrigation_valve} />
                 </div>
               ))
             }
           />
         </div>
-        <div className="bg-gray-400 rounded shadow-md ml-6 mr-6">
+        <div className="bg-gray-300 rounded shadow-md ml-6 mr-6">
           <div className="w-full h-full">
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
@@ -76,7 +76,7 @@ export const IrrigationControl = () => {
             />
           </div>
         </div>
-        <div className="col-span-3 bg-gray-400  rounded shadow-md m-4">
+        <div className="col-span-3 bg-gray-300  rounded shadow-md m-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
             renderData={({ data }) => (
