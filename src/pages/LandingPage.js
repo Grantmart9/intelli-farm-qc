@@ -23,48 +23,48 @@ const columns = [
   {
     name: "Name",
     field: "name",
-    type: "text",
+    type: "text"
   },
   {
     name: "Irrigation",
     field: "irrigation_status",
-    type: "text",
+    type: "text"
   },
   {
     name: "Irrigation %",
     field: "irrigation_percentage",
-    type: "progress",
+    type: "progress"
   },
   {
     name: "Time Left",
     field: "irrigation_time_left",
-    type: "text",
+    type: "text"
   },
   {
     name: "Backwash",
     field: "backwash_status",
-    type: "text",
+    type: "text"
   },
   {
     name: "Backwash %",
     field: "backwash_percentage",
-    type: "progress",
+    type: "progress"
   },
   {
     name: "Water Total",
     field: "water_total",
-    type: "text",
+    type: "text"
   },
   {
     name: "Pumps",
     field: "pumps",
-    type: "text",
+    type: "text"
   },
   {
     name: "EC Value",
     field: "ec_value",
-    type: "text",
-  },
+    type: "text"
+  }
 ];
 
 const FarmTableCell = ({ value, type }) => {
@@ -86,31 +86,31 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <div className="flex">
-      <div className="bg-blue-100 rounded shadow-md m-4">
-        <Table>
-          <thead>
+    <div className="bg-blue-200 shadow-md rounded p-2">
+      <Table className="table-fixed">
+        <thead>
+          <div>
             <tr>
               {columns.map((col, i) => (
                 <th key={i}>{col.name}</th>
               ))}
             </tr>
-          </thead>
-          <tbody>
-            {data.map((farm, i) => (
-              <tr key={i}>
-                {columns.map((col, j) => (
-                  <FarmTableCell
-                    key={j}
-                    value={farm[col.field]}
-                    type={col.type}
-                  />
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+          </div>
+        </thead>
+        <tbody>
+          {data.map((farm, i) => (
+            <tr key={i}>
+              {columns.map((col, j) => (
+                <FarmTableCell
+                  key={j}
+                  value={farm[col.field]}
+                  type={col.type}
+                />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };
@@ -126,5 +126,9 @@ export const LandingPage = () => {
   if (!data && loading) return <Preloader />;
   if (error) return <img src={ErrorPage} alt={ErrorPage} />;
 
-  return <FarmTable data={data.landing_page.farms} />;
+  return (
+    <div className="p-2">
+      <FarmTable data={data.landing_page.farms} />
+    </div>
+  );
 };

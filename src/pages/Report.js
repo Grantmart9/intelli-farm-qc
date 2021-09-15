@@ -14,17 +14,17 @@ import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "api";
-import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
+import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 
 import TextField from "@material-ui/core/TextField";
 
 const dateFormat = "YYYY-MM-DD";
-const DatePicker = ({ value, onChange }) => {
+const DatePickers = ({ value, onChange }) => {
   return (
     <LocalizationProvider dateAdapter={MomentUtils} dateFormat={dateFormat}>
-      <DateTimePicker
+      <DatePicker
         renderInput={(props) => (
           <TextField
             {...props}
@@ -63,10 +63,10 @@ const SaveButton = () => {
         borderRadius: "0.2cm",
         color: "white",
         width: "5rem",
-        height: "2rem",
+        height: "2rem"
       }}
     >
-      Save
+      Send
     </button>
   );
 };
@@ -76,16 +76,16 @@ export const Report = () => {
   const [date, setDate] = useState(new Date());
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [{ loading, error }, postReport] = useApi(
+  const [{ data, loading, error }, postReport] = useApi(
     {
       url: `${API_URL}/-${farmId}/report`,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
@@ -95,8 +95,8 @@ export const Report = () => {
       postReport({
         data: {
           start_date: moment(date).format(dateFormat),
-          email: email,
-        },
+          email: email
+        }
       }).catch((e) => setMessage(e.toString()));
     },
     [date, email]
@@ -109,8 +109,9 @@ export const Report = () => {
         onSubmit={handleSubmit}
       >
         <EmailInput value={email} onInput={(e) => setEmail(e.target.value)} />
-        <DatePicker value={date} onChange={(date) => setDate(date)} />
+        <DatePickers value={date} onChange={(date) => setDate(date)} />
         <div className="text-red-400 text-center">{message}</div>
+        <div>{data}</div>
         <SaveButton />
       </form>
     </div>
