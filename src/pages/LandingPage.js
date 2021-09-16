@@ -86,8 +86,8 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <div className="bg-blue-200 shadow-md rounded p-2">
-      <Table className="table-fixed">
+    <div className="bg-blue-200 shadow-md rounded">
+      <Table>
         <thead>
           <div>
             <tr>

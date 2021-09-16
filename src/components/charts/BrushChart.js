@@ -17,7 +17,7 @@ import {
   VictoryBar,
   VictoryBrushContainer,
   VictoryChart,
-  VictoryTooltip,
+  VictoryTooltip
 } from "victory";
 
 import useResizeObserver from "@react-hook/resize-observer";
@@ -78,23 +78,23 @@ export const BrushChart = ({ data }) => {
       style: {
         axis: {
           stroke: "grey",
-          strokeWidth: 1,
+          strokeWidth: 1
         },
         tickLabels: {},
         grid: {
           stroke: "grey",
           strokeDasharray: "5,5",
-          strokeWidth: 0.5,
-        },
-      },
+          strokeWidth: 0.5
+        }
+      }
     },
     bar: {
       style: {
         data: {
-          fill: "steelblue",
-        },
-      },
-    },
+          fill: "steelblue"
+        }
+      }
+    }
   };
 
   return (
@@ -107,10 +107,10 @@ export const BrushChart = ({ data }) => {
             display: "inline-flex",
             color: "#373738",
             marginTop: "0.5rem",
-            marginBottom: "0.5rem",
+            marginBottom: "0.5rem"
           }}
         >
-          Main Valve History
+          Overall Water Usage
         </div>
       </div>
       <VictoryChart
@@ -123,7 +123,7 @@ export const BrushChart = ({ data }) => {
         containerComponent={
           <VictoryZoomVoronoiContainer
             style={{
-              touchAction: "auto",
+              touchAction: "auto"
             }}
             zoomDimension="x"
             voronoiDimension="x"

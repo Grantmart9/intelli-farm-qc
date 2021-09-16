@@ -40,21 +40,25 @@ export const Login = ({ loginUrl }) => {
       manual: true
     }
   );
-  console.log(message);
 
   const onClose = () => setLoginOpen(false);
+  console.log(message);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     postLogin({ data: { username, password } }).then((result) => {
       const data = result.data || result.response.data;
 
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
         onClose();
-      } else {
-        setMessage(data.message);
-        console.log(result);
+        setMessage(result.data.message);
+        console.log(result.data.message);
+      }
+      if (!data) {
+        setMessage(result.data.message);
+        console.log(result.data.message);
       }
     });
     if (loginOpen == true) {
@@ -65,7 +69,6 @@ export const Login = ({ loginUrl }) => {
       );
     }
   };
-
   return (
     <Dialog open={loginOpen} onClose={onClose}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>

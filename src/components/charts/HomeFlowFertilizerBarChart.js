@@ -36,7 +36,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
           dayUsage.name === seriesName
       );
       return dayUsage ? dayUsage.value : 0;
-    }),
+    })
   }));
 
   return (
@@ -47,8 +47,8 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
       options={{
         chart: {
           toolbar: {
-            show: false,
-          },
+            show: false
+          }
         },
         tooltip: {
           x: {
@@ -57,37 +57,37 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
                 "YYYY-MM-DD ddd"
               );
               return date;
-            },
+            }
           },
           y: {
             formatter: (y, { dataPointIndex }) => {
               const unit = data[dataPointIndex].unit;
               return `${y} ${unit}`;
-            },
-          },
+            }
+          }
         },
         xaxis: {
           categories: days,
-          style: { fontSize: "40px" },
+          style: { fontSize: "40px" }
         },
         plotOptions: {
           bar: {
             endingShape: "rounded",
-            columnWidth: "55%",
-          },
+            columnWidth: "55%"
+          }
         },
         dataLabels: {
-          enabled: false,
+          enabled: false
         },
         title: {
-          text: "Fertilizer Field History",
+          text: "Field Water Usage",
           offsetX: 30,
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-          },
-        },
+            fontWeight: "bold"
+          }
+        }
       }}
     />
   );
