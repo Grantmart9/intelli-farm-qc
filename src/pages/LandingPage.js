@@ -86,16 +86,14 @@ const FarmTableCell = ({ value, type }) => {
 
 const FarmTable = ({ data }) => {
   return (
-    <div className="bg-blue-200 shadow-md rounded">
+    <div className="bg-blue-100 align-center justify-center items-center shadow-md rounded">
       <Table>
         <thead>
-          <div>
-            <tr>
-              {columns.map((col, i) => (
-                <th key={i}>{col.name}</th>
-              ))}
-            </tr>
-          </div>
+          <tr>
+            {columns.map((col, i) => (
+              <th key={i}>{col.name}</th>
+            ))}
+          </tr>
         </thead>
         <tbody>
           {data.map((farm, i) => (
