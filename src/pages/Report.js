@@ -16,8 +16,9 @@ import { API_URL, useApi } from "api";
 import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import { Preloader } from "components/Preloader";
+import PreloaderBar from "images/PreloaderBar.gif";
 import ErrorGif from "images/ErrorGif.gif";
+import blank from "images/blank.png";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -102,8 +103,12 @@ export const Report = () => {
     },
     [date, email]
   );
+  var preload = blank;
 
-  if (loading) return <Preloader />;
+  if (loading) {
+    preload = PreloaderBar;
+  } else preload = blank;
+
   if (error)
     return (
       <div>
@@ -124,6 +129,7 @@ export const Report = () => {
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
         <div className="text-red-400 text-center">{data}</div>
+        <img width={50} height={50} src={preload} />
         <SaveButton />
       </form>
     </div>

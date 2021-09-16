@@ -54,12 +54,13 @@ export const Login = ({ loginUrl }) => {
         onClose();
       } else {
         setMessage(data.message);
+        console.log(result);
       }
     });
     if (loginOpen == true) {
       loggin = (
         <div className="flex text-center justify-center align-center text-red-500 ">
-          Wrong username and/or password
+          Wrong username and/or password{message}
         </div>
       );
     }

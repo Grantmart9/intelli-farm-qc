@@ -51,6 +51,7 @@ export const Pumps = () => {
                 <div className="font-bold text-md text-red-400">
                   {data.alarm}
                 </div>
+                <div className="font-bold text-2xl">{data.status}</div>
               </div>
               <div className="ml-2 items-center flex flex-shrink-0 justify-center w-20">
                 <img src={pump} alt={pump} />
