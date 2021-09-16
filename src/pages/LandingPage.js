@@ -16,102 +16,55 @@ import { useParams } from "react-router";
 import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
 import ErrorPage from "images/ErrorPage.jpg";
-import { Table, ProgressBar } from "@themesberg/react-bootstrap";
 import { useRefetch } from "../components/Timer";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { withStyles } from "@material-ui/core/styles";
 
-const columns = [
-  {
-    name: "Name",
-    field: "name",
-    type: "text"
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 6
   },
-  {
-    name: "Irrigation",
-    field: "irrigation_status",
-    type: "text"
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
   },
-  {
-    name: "Irrigation %",
-    field: "irrigation_percentage",
-    type: "progress"
-  },
-  {
-    name: "Time Left",
-    field: "irrigation_time_left",
-    type: "text"
-  },
-  {
-    name: "Backwash",
-    field: "backwash_status",
-    type: "text"
-  },
-  {
-    name: "Backwash %",
-    field: "backwash_percentage",
-    type: "progress"
-  },
-  {
-    name: "Water Total",
-    field: "water_total",
-    type: "text"
-  },
-  {
-    name: "Pumps",
-    field: "pumps",
-    type: "text"
-  },
-  {
-    name: "EC Value",
-    field: "ec_value",
-    type: "text"
+  bar: {
+    borderRadius: 6,
+    backgroundColor: "#05ab24"
   }
-];
+}))(LinearProgress);
 
-const FarmTableCell = ({ value, type }) => {
-  switch (type) {
-    case "text":
-      return <td>{value}</td>;
-    case "progress":
-      return (
-        <td class="relative">
-          <div class="absolute inset-0 flex align-items-center">
-            <ProgressBar now={value} min={0} max={100} />
-          </div>
-        </td>
-      );
-    default:
-      throw Error("impossible");
-  }
-};
-
-const FarmTable = ({ data }) => {
-  return (
-    <div className="bg-blue-100 align-center justify-center items-center shadow-md rounded">
-      <Table>
-        <thead>
-          <tr>
-            {columns.map((col, i) => (
-              <th key={i}>{col.name}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((farm, i) => (
-            <tr key={i}>
-              {columns.map((col, j) => (
-                <FarmTableCell
-                  key={j}
-                  value={farm[col.field]}
-                  type={col.type}
-                />
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+const FarmsData = ({ farm }) => (
+  <div className="p-4">
+    <div className="font-bold text-3xl">{farm.name}</div>
+    <div className="font-bold text-md flex align-center justify-center ">
+      Backwash Status: {farm.backwash_status}
     </div>
-  );
-};
+    <div className="font-bold text-md flex align-center justify-center">
+      EC Value: {farm.ec_value}
+    </div>
+    <div className="font-bold text-md flex align-center justify-center">
+      Irrigation percentage
+    </div>
+    <BorderLinearProgress
+      variant="determinate"
+      value={farm.irrigation_percentage}
+    />
+    <div className="font-bold text-md flex align-center justify-center">
+      {farm.irrigation_status}
+    </div>
+    <div className="font-bold text-md flex align-center justify-center">
+      Irrigation time left: {farm.irrigation_time_left}
+    </div>
+    <div className="font-bold text-md flex align-center justify-center">
+      Pump Status: {farm.pumps}
+    </div>
+    <div className="font-bold text-md flex align-center justify-center">
+      Water Total: {farm.water_total}
+    </div>
+  </div>
+);
 
 export const LandingPage = () => {
   const { clientId } = useParams();
@@ -125,8 +78,15 @@ export const LandingPage = () => {
   if (error) return <img src={ErrorPage} alt={ErrorPage} />;
 
   return (
-    <div className="p-2">
-      <FarmTable data={data.landing_page.farms} />
+    <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+      {data.landing_page.farms.map((farm, i) => (
+        <div
+          key={i}
+          className="bg-gray-300  rounded shadow-md m-3 pt-1 flex align-center justify-center p-3"
+        >
+          <FarmsData farm={farm} />
+        </div>
+      ))}
     </div>
   );
 };
