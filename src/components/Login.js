@@ -1,3 +1,15 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 15/09/2021 - 11:43:11
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 15/09/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +20,7 @@ import useAxios from "axios-hooks";
 import { useApi } from "api";
 
 export const LoginContext = createContext();
+var loggin = "";
 
 export const Login = ({ loginUrl }) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
@@ -20,19 +33,22 @@ export const Login = ({ loginUrl }) => {
       url: loginUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
+  console.log(message);
 
   const onClose = () => setLoginOpen(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     postLogin({ data: { username, password } }).then((result) => {
       const data = result.data || result.response.data;
+
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
         onClose();
@@ -40,6 +56,13 @@ export const Login = ({ loginUrl }) => {
         setMessage(data.message);
       }
     });
+    if (loginOpen == true) {
+      loggin = (
+        <div className="flex text-center justify-center align-center text-red-500 ">
+          Wrong username and/or password
+        </div>
+      );
+    }
   };
 
   return (
@@ -64,6 +87,7 @@ export const Login = ({ loginUrl }) => {
         <Button type="submit" variant="contained" color="primary">
           <div style={{ color: "white" }}>Login</div>
         </Button>
+        {loggin}
       </form>
     </Dialog>
   );
@@ -76,11 +100,11 @@ export const Logout = ({ logoutUrl, redirect }) => {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
@@ -93,7 +117,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out.",
+          message: "Something happened when logging out."
         })
       );
   }, [postLogout]);

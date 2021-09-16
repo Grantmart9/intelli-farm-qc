@@ -12,11 +12,12 @@
  **/
 import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "api";
 import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
+import { Preloader } from "components/Preloader";
+import ErrorGif from "images/ErrorGif.gif";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -102,16 +103,27 @@ export const Report = () => {
     [date, email]
   );
 
+  if (loading) return <Preloader />;
+  if (error)
+    return (
+      <div>
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
+      </div>
+    );
+
   return (
     <div className="flex justify-content-center p-4">
       <form
         className="flex flex-col align-items-center bg-gray-400 shadow-md rounded p-5 space-y-5 block"
         onSubmit={handleSubmit}
       >
-        <EmailInput value={email} onInput={(e) => setEmail(e.target.value)} />
-        <DatePickers value={date} onChange={(date) => setDate(date)} />
-        <div className="text-red-400 text-center">{message}</div>
-        <div>{data}</div>
+        <div className="w-full">
+          <EmailInput value={email} onInput={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <DatePickers value={date} onChange={(date) => setDate(date)} />
+        </div>
+        <div className="text-red-400 text-center">{data}</div>
         <SaveButton />
       </form>
     </div>
