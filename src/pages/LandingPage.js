@@ -37,7 +37,9 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const FarmsData = ({ farm }) => (
   <div className="p-4">
-    <div className="font-bold text-3xl">{farm.name}</div>
+    <div className="font-bold text-3xl flex align-center justify-center">
+      {farm.name}
+    </div>
     <div className="font-bold text-md flex align-center justify-center ">
       Backwash Status: {farm.backwash_status}
     </div>
@@ -52,7 +54,7 @@ const FarmsData = ({ farm }) => (
       value={farm.irrigation_percentage}
     />
     <div className="font-bold text-md flex align-center justify-center">
-      {farm.irrigation_status}
+      Irrigation status: {farm.irrigation_status}
     </div>
     <div className="font-bold text-md flex align-center justify-center">
       Irrigation time left: {farm.irrigation_time_left}
@@ -82,7 +84,7 @@ export const LandingPage = () => {
       {data.landing_page.farms.map((farm, i) => (
         <div
           key={i}
-          className="bg-gray-300  rounded shadow-md m-3 pt-1 flex align-center justify-center p-3"
+          className="bg-gray-300  rounded shadow-md m-3 pt-1 flex align-center justify-center"
         >
           <FarmsData farm={farm} />
         </div>
