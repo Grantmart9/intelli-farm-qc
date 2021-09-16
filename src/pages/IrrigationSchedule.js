@@ -60,33 +60,33 @@ const sectionColumns = [
   {
     field: "name",
     headerName: "Name",
-    type: "string",
+    type: "string"
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: true,
+    editable: false
   },
   {
     field: "run_time",
     headerName: "Run time",
-    type: "number",
+    type: "number"
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: true,
+    editable: true
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: true,
-  },
+    editable: true
+  }
 ].map((column) => ({ ...column, flex: 1 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
@@ -121,20 +121,21 @@ const fertilizerColumns = [
     field: "name",
     headerName: "Name",
     type: "string",
+    editable: false
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: true,
+    editable: true
   },
   {
     field: "flow_rate",
     headerName: "Flow rate",
     type: "number",
-    editable: true,
-  },
-].map((column) => ({ ...column, flex: 1, editable: true }));
+    editable: true
+  }
+].map((column) => ({ ...column, flex: 1 }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;
@@ -145,7 +146,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
       const editedFertilizers = [
         ...fertilizers.slice(0, id),
         editedFertilizer,
-        ...fertilizers.slice(id + 1),
+        ...fertilizers.slice(id + 1)
       ];
       const editedSection = { ...section, fertilizer: editedFertilizers };
       if (onChange) {
@@ -203,11 +204,11 @@ export const IrrigationSchedule = () => {
       url: `${API_URL}/-${farmId}/schedule`,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
