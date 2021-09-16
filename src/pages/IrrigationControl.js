@@ -1,9 +1,21 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 16/09/2021 - 14:07:52
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 16/09/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import React from "react";
 import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
 import { API_URL, useApi } from "api";
 import { AxiosSpinner } from "components/AxiosSpinner";
-import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import { HomeFlowFertilizerBarChartV } from "components/charts/HomeFlowFertilizerBarChartV";
 import fertilizer from "images/fertilizer.png";
 import greendrop from "images/greendrop.gif";
 import ErrorGif from "images/ErrorGif.gif";
@@ -71,7 +83,7 @@ export const IrrigationControl = () => {
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
               renderData={({ data }) => (
-                <HomeFlowFertilizerBarChart data={data} />
+                <HomeFlowFertilizerBarChartV data={data} />
               )}
             />
           </div>
@@ -84,7 +96,7 @@ export const IrrigationControl = () => {
                 data={data.map(({ datetime, y, ...rest }) => ({
                   ...rest,
                   x: new Date(datetime),
-                  y: Number(y),
+                  y: Number(y)
                 }))}
               />
             )}

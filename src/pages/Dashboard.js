@@ -17,23 +17,23 @@ import ApexChart from "react-apexcharts";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "api";
-import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import { HomeFlowFertilizerBarChartD } from "components/charts/HomeFlowFertilizerBarChartD";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6,
+    borderRadius: 6
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24",
-  },
+    backgroundColor: "#05ab24"
+  }
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
@@ -82,13 +82,13 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           enabled: true,
           formatter: function (val) {
             return val.toFixed(2) + "%";
-          },
+          }
         },
         labels: labels,
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom",
+          position: "bottom"
         },
         title: {
           text: "Fertilizer Ratio",
@@ -96,9 +96,9 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-          },
-        },
+            fontWeight: "bold"
+          }
+        }
       }}
     />
   );
@@ -111,33 +111,33 @@ export const HomeFlowWaterUsage = ({ data }) => {
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
-        },
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
+        }
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true,
-          },
+            enabled: true
+          }
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            },
-          },
+            }
+          }
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
         },
         subtitle: {
           text: data.name,
-          offsetX: 30,
+          offsetX: 30
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30,
-        },
+          offsetX: 30
+        }
       }}
     />
   );
@@ -187,7 +187,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-5">
         <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
           <div className="w-full h-full">
-            <HomeFlowFertilizerBarChart
+            <HomeFlowFertilizerBarChartD
               data={data.fertilizer_usage.bar_graph}
             />
           </div>

@@ -14,7 +14,7 @@ import React, { useMemo } from "react";
 import ApexChart from "react-apexcharts";
 import moment from "moment";
 
-export const HomeFlowFertilizerBarChart = ({ data }) => {
+export const HomeFlowFertilizerBarChartD = ({ data }) => {
   const today = useMemo(() => new Date(), []);
   const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
     const date = new Date(today);
@@ -80,7 +80,7 @@ export const HomeFlowFertilizerBarChart = ({ data }) => {
           enabled: false
         },
         title: {
-          text: "Field Water Usage",
+          text: "Fertilizer Usage",
           offsetX: 30,
           offsetY: 10,
           style: {

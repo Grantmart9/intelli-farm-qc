@@ -44,19 +44,19 @@ export const Login = ({ loginUrl }) => {
   const onClose = () => setLoginOpen(false);
   console.log(message);
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
 
     postLogin({ data: { username, password } }).then((result) => {
       const data = result.data || result.response.data;
+      const Errors = result.data || result.response.data;
 
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
         onClose();
         setMessage(result.data.message);
         console.log(result.data.message);
-      }
-      if (!data) {
+      } else {
         setMessage(result.data.message);
         console.log(result.data.message);
       }
@@ -64,11 +64,11 @@ export const Login = ({ loginUrl }) => {
     if (loginOpen == true) {
       loggin = (
         <div className="flex text-center justify-center align-center text-red-500 ">
-          Wrong username and/or password{message}
+          Wrong username and/or password
         </div>
       );
     }
-  };
+  }
   return (
     <Dialog open={loginOpen} onClose={onClose}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
