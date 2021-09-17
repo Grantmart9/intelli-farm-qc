@@ -42,25 +42,25 @@ export const Login = ({ loginUrl }) => {
   );
 
   const onClose = () => setLoginOpen(false);
-  console.log(message);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     postLogin({ data: { username, password } }).then((result) => {
       const data = result.data || result.response.data;
-      const Errors = result.data || result.response.data;
+
+      console.log(result.data.message);
 
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
         onClose();
         setMessage(result.data.message);
-        console.log(result.data.message);
-      } else {
+      }
+      if (data.status == 403) {
         setMessage(result.data.message);
-        console.log(result.data.message);
       }
     });
+
     if (loginOpen == true) {
       loggin = (
         <div className="flex text-center justify-center align-center text-red-500 ">
@@ -69,11 +69,11 @@ export const Login = ({ loginUrl }) => {
       );
     }
   }
+
   return (
     <Dialog open={loginOpen} onClose={onClose}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
         <div className="font-bold align-self-center">Credentials</div>
-        <div className="text-red-400">{message}</div>
         <TextField
           label="User Name"
           type="text"
@@ -91,6 +91,7 @@ export const Login = ({ loginUrl }) => {
         <Button type="submit" variant="contained" color="primary">
           <div style={{ color: "white" }}>Login</div>
         </Button>
+        <div className="text-red-400">{message}</div>
         {loggin}
       </form>
     </Dialog>

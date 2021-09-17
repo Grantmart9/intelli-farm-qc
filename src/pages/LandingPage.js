@@ -10,60 +10,50 @@
  * - Author          : Grant
  * - Modification    :
  **/
-
-import React from "react";
 import { useParams } from "react-router";
 import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
-import ErrorPage from "images/ErrorPage.jpg";
+import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "../components/Timer";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { withStyles } from "@material-ui/core/styles";
-
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 10,
-    borderRadius: 6
-  },
-  colorPrimary: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
-  },
-  bar: {
-    borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
-}))(LinearProgress);
+import { ProgressBar } from "@themesberg/react-bootstrap";
+import drop from "images/drop.png";
 
 const FarmsData = ({ farm }) => (
-  <div className="p-4">
-    <div className="font-bold text-3xl flex align-center justify-center">
-      {farm.name}
+  <div className="p-2">
+    <div className="grid grid-cols-2 gap-1 p-1">
+      <div className="shadow-md flex align-center justify-center rounded">
+        <img src={drop} alt={drop} />
+      </div>
+      <div className="inline-block shadow-md text-center rounded">
+        <div className="font-bold rounded text-xl">
+          Water Total: {farm.water_total}
+        </div>
+        <div className="font-bold text-md">{farm.name}</div>
+      </div>
     </div>
-    <div className="font-bold text-md flex align-center justify-center ">
-      Backwash Status: {farm.backwash_status}
-    </div>
-    <div className="font-bold text-md flex align-center justify-center">
-      EC Value: {farm.ec_value}
-    </div>
-    <div className="font-bold text-md flex align-center justify-center">
-      Irrigation percentage
-    </div>
-    <BorderLinearProgress
-      variant="determinate"
-      value={farm.irrigation_percentage}
-    />
-    <div className="font-bold text-md flex align-center justify-center">
-      Irrigation status: {farm.irrigation_status}
-    </div>
-    <div className="font-bold text-md flex align-center justify-center">
-      Irrigation time left: {farm.irrigation_time_left}
-    </div>
-    <div className="font-bold text-md flex align-center justify-center">
-      Pump Status: {farm.pumps}
-    </div>
-    <div className="font-bold text-md flex align-center justify-center">
-      Water Total: {farm.water_total}
+    <div className="grid grid-cols-2 gap-2 p-1">
+      <div className="p-2 shadow-md text-center rounded ">
+        <div className="font-bold text-lg">Irrigation</div>
+        <div className="font-bold text-sm">
+          Time left: {farm.irrigation_time_left} min
+        </div>
+        <div className="p-2">
+          <ProgressBar
+            variant="success"
+            animated
+            now={farm.irrigation_percentage}
+          />
+        </div>
+      </div>
+      <div className="p-2 shadow-md text-center rounded">
+        <div className="font-bold text-lg">Backwash</div>
+        <div className="font-bold text-sm">
+          Percentage: {farm.backwash_percentage} %
+        </div>
+        <div className="p-2">
+          <ProgressBar variant="info" animated now={farm.backwash_percentage} />
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -77,15 +67,12 @@ export const LandingPage = () => {
   useRefetch(refetch);
 
   if (!data && loading) return <Preloader />;
-  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
+  if (error) return <img src={ErrorGif} alt={ErrorGif} />;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
       {data.landing_page.farms.map((farm, i) => (
-        <div
-          key={i}
-          className="bg-gray-300  rounded shadow-md m-3 pt-1 flex align-center justify-center"
-        >
+        <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-1">
           <FarmsData farm={farm} />
         </div>
       ))}

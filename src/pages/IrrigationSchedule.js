@@ -22,7 +22,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
-import ErrorPage from "images/ErrorPage.jpg";
+import ErrorGif from "images/ErrorGif.gif";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
@@ -213,7 +213,7 @@ export const IrrigationSchedule = () => {
   );
 
   if (loading || !schedule) return <Preloader />;
-  if (error) return <img src={ErrorPage} alt={ErrorPage} />;
+  if (error) return <img src={ErrorGif} alt={ErrorGif} />;
 
   const handleChange = async (editedSection) => {
     const editedSchedule = schedule.map((section) =>
