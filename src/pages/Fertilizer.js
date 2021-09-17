@@ -27,20 +27,28 @@ const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
 
   return (
-    <div className="flex p-2">
-      <div className="w-100">
-        <div className="text-gray-800 text-2xl font-bold">{valve.name}</div>
-        <div className="text-green-800 text-2xl font-bold">{valve.status}</div>
-        <div className="text-green-800 text-lg font-bold">
-          {valve.real_time_flow}
-        </div>
-        <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
-        <div className="text-gray-800 text-sm font-bold text-md">
-          {valve.total_flow}
+    <div className="p-2">
+      <div className="inline-flex">
+        <div className="text-gray-800 text-2xl font-bold mb-2">
+          {valve.name}
         </div>
       </div>
-      <div className="ml-2 items-center flex flex-shrink-0 justify-center w-20">
-        <img src={image} alt={image} />
+      <div className="grid grid-cols-2">
+        <div>
+          <div className="text-green-800 text-2xl font-bold">
+            Status: {valve.status}
+          </div>
+          <div className="text-green-800 text-lg font-bold">
+            Real flow: {valve.real_time_flow}
+          </div>
+          <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
+          <div className="text-green-800 text-sm font-bold text-md">
+            Total flow: {valve.total_flow}
+          </div>
+        </div>
+        <div className="ml-20 mt-3">
+          <img width={60} height={60} src={image} alt={image} />
+        </div>
       </div>
     </div>
   );
@@ -79,7 +87,7 @@ export const FertilizerPieChart = ({ data }) => {
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom",
+          position: "bottom"
         },
         title: {
           text: "Fertilizer Ratio",
@@ -87,9 +95,9 @@ export const FertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-          },
-        },
+            fontWeight: "bold"
+          }
+        }
       }}
     />
   );
@@ -134,7 +142,7 @@ export const Fertilizer = () => {
               data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
                 ...rest,
                 x: new Date(datetime + " " + x),
-                y: Number(y),
+                y: Number(y)
               }))}
             />
           </div>

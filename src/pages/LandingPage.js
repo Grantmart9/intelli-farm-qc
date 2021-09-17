@@ -21,11 +21,11 @@ import drop from "images/drop.png";
 const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 p-1">
-      <div className="shadow-md flex align-center justify-center rounded text-justify text-center ">
-        <img src={drop} alt={drop} />
+      <div className="shadow-md flex align-center justify-center rounded text-justify text-center p-1">
+        <img width={60} src={drop} alt={drop} />
         <div className="font-bold text-md mt-3">{farm.name}</div>
       </div>
-      <div className="inline-block shadow-md text-center rounded">
+      <div className="inline-block shadow-md text-center rounded p-1">
         <div className="font-bold rounded text-xl">
           Water Total <div>{farm.water_total} m³</div>
         </div>
@@ -33,7 +33,7 @@ const FarmsData = ({ farm }) => (
     </div>
     <div className="grid grid-cols-2 gap-2 p-1">
       <div className="p-2 shadow-md text-center rounded ">
-        <div className="font-bold text-xl pb-1">Irrigation</div>
+        <div className="font-bold text-xl pb-3">Irrigation</div>
         <div className="font-bold text-sm">
           Time left: {farm.irrigation_time_left} min
         </div>
@@ -46,7 +46,7 @@ const FarmsData = ({ farm }) => (
         </div>
       </div>
       <div className="p-2 shadow-md text-center rounded">
-        <div className="font-bold text-xl pb-1">Backwash</div>
+        <div className="font-bold text-xl pb-3">Backwash</div>
         <div className="font-bold text-sm">Status: {farm.backwash_status}</div>
         <div className="p-2">
           <ProgressBar variant="info" animated now={farm.backwash_percentage} />

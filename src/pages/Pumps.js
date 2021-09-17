@@ -41,20 +41,25 @@ export const Pumps = () => {
       <div className="p-4">
         <div className="grid xl:grid-cols-4 gap-3 p-2">
           {data.map((data, i) => (
-            <div
-              key={i}
-              className="flex p-2 gap-2 bg-gray-400 rounded shadow-md "
-            >
-              <div className="p-2">
-                <div className="font-bold text-2xl">{data.name}</div>
-                <div className="font-bold text-3xl">{data.pressure}</div>
-                <div className="font-bold text-2xl">{data.status}</div>
-                <div className="font-bold text-md text-red-400">
-                  {data.alarm}
+            <div key={i} className="p-2 bg-gray-400 rounded shadow-md ">
+              <div className="">
+                <div className="font-bold text-2xl mb-2">{data.name}</div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="">
+                    <div className="font-bold text-green-800 text-xl">
+                      Pressure: {data.pressure}
+                    </div>
+                    <div className="font-bold text-green-800 text-xl">
+                      Status: {data.status}
+                    </div>
+                    <div className="font-bold text-md text-red-400">
+                      {data.alarm}
+                    </div>
+                  </div>
+                  <div className="flex ml-10 align-center justify-center">
+                    <img width={80} src={pump} alt={pump} />
+                  </div>
                 </div>
-              </div>
-              <div className="ml-2 items-center flex flex-shrink-0 justify-center w-20">
-                <img src={pump} alt={pump} />
               </div>
             </div>
           ))}

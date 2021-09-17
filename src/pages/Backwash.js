@@ -23,16 +23,16 @@ import { useRefetch } from "../components/Timer";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6,
+    borderRadius: 6
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24",
-  },
+    backgroundColor: "#05ab24"
+  }
 }))(LinearProgress);
 
 const WashBack = ({ backwash }) => {
@@ -42,8 +42,8 @@ const WashBack = ({ backwash }) => {
         <div key={backwash.name} className="font-bold text-2xl">
           {backwash.name}
         </div>
-        <div key={backwash.status} className="font-bold text-xl">
-          {backwash.status}
+        <div key={backwash.status} className="font-bold text-green-800 text-xl">
+          Status: {backwash.status}
         </div>
         <div key={backwash.alarm} className="font-bold text-md text-red-400">
           {backwash.alarm}

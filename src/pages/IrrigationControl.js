@@ -33,11 +33,17 @@ const EquipmentStatus = ({ data }) => {
   return (
     <div className="flex p-2">
       <div className="w-100">
-        <div className="font-bold text-2xl">{data.name}</div>
-        <div className="font-bold text-2xl">{data.status}</div>
-        <div className="font-bold text-xl">{data.real_time_flow}</div>
+        <div className="font-bold text-2xl mb-2">{data.name}</div>
+        <div className="font-bold text-green-800 text-2xl">
+          Status: {data.status}
+        </div>
+        <div className="font-bold text-green-800 text-xl">
+          Real flow: {data.real_time_flow}
+        </div>
+        <div className="font-bold text-green-800 text-sm">
+          Total flow{data.total_flow}
+        </div>
         <div className="font-bold text-md text-red-400">{data.alarm}</div>
-        <div className="font-bold text-sm">{data.total_flow}</div>
       </div>
       <div className="ml-2 items-center flex justify-center w-25">
         <img src={image} alt={image} width="80%" height="80%" />
