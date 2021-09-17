@@ -21,9 +21,9 @@ import drop from "images/drop.png";
 const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 p-1">
-      <div className="shadow-md flex align-center justify-center rounded">
+      <div className="shadow-md flex align-center justify-center rounded text-justify text-center ">
         <img src={drop} alt={drop} />
-        <div className="font-bold text-md">{farm.name}</div>
+        <div className="font-bold text-md mt-3">{farm.name}</div>
       </div>
       <div className="inline-block shadow-md text-center rounded">
         <div className="font-bold rounded text-xl">
@@ -37,9 +37,6 @@ const FarmsData = ({ farm }) => (
         <div className="font-bold text-sm">
           Time left: {farm.irrigation_time_left} min
         </div>
-        <div className="font-bold text-sm">
-          Percentage: {farm.irrigation_percentage} %
-        </div>
         <div className="p-2">
           <ProgressBar
             variant="success"
@@ -50,9 +47,7 @@ const FarmsData = ({ farm }) => (
       </div>
       <div className="p-2 shadow-md text-center rounded">
         <div className="font-bold text-xl pb-1">Backwash</div>
-        <div className="font-bold text-sm">
-          Percentage: {farm.backwash_percentage} %
-        </div>
+        <div className="font-bold text-sm">Status: {farm.backwash_status}</div>
         <div className="p-2">
           <ProgressBar variant="info" animated now={farm.backwash_percentage} />
         </div>
