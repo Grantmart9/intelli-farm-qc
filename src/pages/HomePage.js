@@ -86,13 +86,13 @@ const farm_order = [
   "report",
 ];
 
-const FarmRoutes = ({ prefix }) => (
+const FarmRoutes = () => (
   <>
     {Object.values(farm_pages).map((page, i) => (
       <RouteWithSidebar
         key={i}
         exact
-        path={`${prefix}/:farmId${page.path}`}
+        path={`/:clientId/:farmId${page.path}`}
         component={page.page}
       />
     ))}
@@ -186,43 +186,37 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     />
   );
 };
-const prefixRoutes = (prefix, routes) =>
-  Object.entries(routes)
-    .map(([name, { path }]) => ({ [name]: { path: `${prefix}${path}` } }))
-    .reduce((acc, obj) => Object.assign(acc, obj), {});
 
 const RouteInner = () => {
   const { clientId } = useParams();
-  const prefix = `/${clientId}`;
-  const routes = prefixRoutes(prefix, Routes);
 
-  const [{ data: appLayout }] = useApi(`${API_URL}${prefix}/get_app_layout`);
+  const [{ data: appLayout }] = useApi(`${API_URL}/${clientId}/get_app_layout`);
 
   return (
     <AppLayout.Provider value={appLayout}>
       <Switch>
         <RouteWithSidebar
           exact
-          path={routes.LandingPage.path}
+          path={Routes.LandingPage.path}
           component={LandingPage}
         />
         <RouteWithSidebar
           exact
-          path={routes.NotFound.path}
+          path={Routes.NotFound.path}
           component={() => <p>Not Found</p>}
         />
         <RouteWithSidebar
           exact
-          path={routes.Logout.path}
+          path={Routes.Logout.path}
           component={() => (
             <Logout
-              logoutUrl={`${API_URL}${prefix}/intellifarm/logout`}
-              redirect={routes.LandingPage.path}
+              logoutUrl={`${API_URL}/${clientId}/intellifarm/logout`}
+              redirect={Routes.LandingPage.path.replace(":clientId", clientId)}
             />
           )}
         />
-        <FarmRoutes prefix={prefix} />
-        <Redirect to={routes.NotFound.path} />
+        <FarmRoutes />
+        <Redirect to={Routes.NotFound.path} />
       </Switch>
     </AppLayout.Provider>
   );

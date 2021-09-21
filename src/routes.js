@@ -1,5 +1,5 @@
 export const Routes = {
-  LandingPage: { path: "/" },
-  Logout: { path: "/logout" },
-  NotFound: { path: "/notfound" },
+  LandingPage: { path: "/:clientId" },
+  Logout: { path: "/:clientId/logout" },
+  NotFound: { path: "/:clientId/notfound" },
 };

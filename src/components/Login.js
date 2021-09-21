@@ -20,7 +20,6 @@ import useAxios from "axios-hooks";
 import { useApi } from "api";
 
 export const LoginContext = createContext();
-var loggin = "";
 
 export const Login = ({ loginUrl }) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
@@ -33,11 +32,11 @@ export const Login = ({ loginUrl }) => {
       url: loginUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -46,28 +45,24 @@ export const Login = ({ loginUrl }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    postLogin({ data: { username, password } }).then((result) => {
-      const data = result.data || result.response.data;
+    postLogin({ data: { username, password } })
+      .then((result) => {
+        const data = result.data || result.response.data;
 
-      console.log(result.data.message);
+        console.log(result.data.message);
 
-      if (data.access_token) {
-        localStorage.setItem("token", data.access_token);
-        onClose();
-        setMessage(result.data.message);
-      }
-      if (data.status == 403) {
-        setMessage(result.data.message);
-      }
-    });
-
-    if (loginOpen == true) {
-      loggin = (
-        <div className="flex text-center justify-center align-center text-red-500 ">
-          Wrong username and/or password
-        </div>
-      );
-    }
+        if (data.access_token) {
+          localStorage.setItem("token", data.access_token);
+          onClose();
+          setMessage(result.data.message);
+        }
+        if (data.status == 403) {
+          setMessage(result.data.message);
+        }
+      })
+      .catch((error) => {
+        setMessage(error.response.data.message);
+      });
   }
 
   return (
@@ -91,8 +86,7 @@ export const Login = ({ loginUrl }) => {
         <Button type="submit" variant="contained" color="primary">
           <div style={{ color: "white" }}>Login</div>
         </Button>
-        <div className="text-red-400">{message}</div>
-        {loggin}
+        <div className="text-red-400 text-center">{message}</div>
       </form>
     </Dialog>
   );
@@ -105,11 +99,11 @@ export const Logout = ({ logoutUrl, redirect }) => {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -122,7 +116,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out."
+          message: "Something happened when logging out.",
         })
       );
   }, [postLogout]);
