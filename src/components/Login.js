@@ -32,11 +32,11 @@ export const Login = ({ loginUrl }) => {
       url: loginUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
@@ -86,7 +86,7 @@ export const Login = ({ loginUrl }) => {
         <Button type="submit" variant="contained" color="primary">
           <div style={{ color: "white" }}>Login</div>
         </Button>
-        <div className="text-red-400 text-center">{message}</div>
+        <div className="text-gray-800 text-center">{message}</div>
       </form>
     </Dialog>
   );
@@ -99,11 +99,11 @@ export const Logout = ({ logoutUrl, redirect }) => {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        "content-type": "application/json"
+      }
     },
     {
-      manual: true,
+      manual: true
     }
   );
 
@@ -116,7 +116,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out.",
+          message: "Something happened when logging out."
         })
       );
   }, [postLogout]);

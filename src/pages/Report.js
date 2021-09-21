@@ -128,7 +128,7 @@ export const Report = () => {
         <div>
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
-        <div className="text-red-400 text-center">{data}</div>
+        <div className="text-gray-900 text-center">{data}</div>
         <img width={50} height={50} src={preload} />
         <SaveButton />
       </form>
