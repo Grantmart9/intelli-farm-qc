@@ -50,7 +50,7 @@ export const Pumps = () => {
                       Pressure: {data.pressure}
                     </div>
                     <div className="font-bold text-green-800 text-xl">
-                      Status: {data.status}
+                  {data.status}
                     </div>
                     <div className="font-bold text-md text-red-400">
                       {data.alarm}

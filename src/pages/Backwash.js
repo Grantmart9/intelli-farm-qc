@@ -43,7 +43,7 @@ const WashBack = ({ backwash }) => {
           {backwash.name}
         </div>
         <div key={backwash.status} className="font-bold text-green-800 text-xl">
-          Status: {backwash.status}
+          {backwash.status}
         </div>
         <div key={backwash.alarm} className="font-bold text-md text-red-400">
           {backwash.alarm}

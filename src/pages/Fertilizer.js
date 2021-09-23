@@ -36,7 +36,7 @@ const FertilizerValve = ({ valve }) => {
       <div className="grid grid-cols-2">
         <div>
           <div className="text-green-800 text-2xl font-bold">
-            Status: {valve.status}
+            {valve.status}
           </div>
           <div className="text-green-800 text-lg font-bold">
             Real flow: {valve.real_time_flow}
