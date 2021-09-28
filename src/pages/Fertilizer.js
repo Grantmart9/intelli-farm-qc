@@ -39,11 +39,11 @@ const FertilizerValve = ({ valve }) => {
             {valve.status}
           </div>
           <div className="text-green-800 text-lg font-bold">
-            Real flow: {valve.real_time_flow}
+            {valve.real_time_flow}
           </div>
           <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
           <div className="text-green-800 text-sm font-bold text-md">
-            Total flow: {valve.total_flow}
+            {valve.total_flow}
           </div>
         </div>
         <div className="ml-20 mt-3">

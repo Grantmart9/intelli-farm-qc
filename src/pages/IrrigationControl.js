@@ -38,10 +38,10 @@ const EquipmentStatus = ({ data }) => {
         {data.status}
         </div>
         <div className="font-bold text-green-800 text-xl">
-          Real flow: {data.real_time_flow}
+          {data.real_time_flow}
         </div>
         <div className="font-bold text-green-800 text-sm">
-          Total flow{data.total_flow}
+          {data.total_flow}
         </div>
         <div className="font-bold text-md text-red-400">{data.alarm}</div>
       </div>
