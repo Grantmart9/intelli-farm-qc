@@ -18,7 +18,7 @@ import {
   Badge,
   Image,
   Button,
-  Accordion,
+  Accordion
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 import { useMd } from "media-query";
@@ -34,7 +34,7 @@ const NavItem = ({
   image,
   badgeText,
   badgeBg = "secondary",
-  badgeColor = "primary",
+  badgeColor = "primary"
 }) => {
   const { pathname } = useLocation();
   const classNames = badgeText
@@ -116,7 +116,7 @@ const toNavItem = (item, i) => {
             fontFamily: "'Noto Sans JP', sans-serif",
             gap: "0.5rem",
             padding: "0.5rem",
-            marginBottom: "2.5rem",
+            marginBottom: "2.5rem"
           }}
           href={item.action.path}
         >
@@ -173,6 +173,21 @@ export const Sidebar = ({ items }) => {
         className="sidebar-inner min-h-full p-3 flex flex-col flex-nowrap pt-3 pb-3"
       >
         {items.map(toNavItem)}
+        <Link to="/denau/users">
+          <Button
+            className="border-1 border-white text-left"
+            style={{
+              display: "inline-block",
+              alignContent: "center",
+              backgroundColor: "#1e96ff",
+              fontFamily: "Nunito Sans",
+              fontSize: "1rem",
+              width: "100%"
+            }}
+          >
+            Users
+          </Button>
+        </Link>
       </Nav>
     </div>
   );

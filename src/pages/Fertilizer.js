@@ -25,25 +25,22 @@ import { useRefetch } from "../components/Timer";
 
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
-
   return (
     <div className="p-2">
-      <div className="text-gray-800 text-2xl font-bold mb-2">{valve.name}</div>
+      <div className="text-gray-800 text-xl font-bold mb-2">{valve.name}</div>
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-4">
-          <div className="text-green-800 text-2xl font-bold">
-            {valve.status}
-          </div>
+          <div className="text-green-800 text-xl font-bold">{valve.status}</div>
           <div className="text-green-800 text-lg font-bold">
             {valve.real_time_flow}
           </div>
-          <div className="text-green-800 text-sm font-bold text-md">
+          <div className="text-green-800 text-lg font-bold text-md">
             {valve.total_flow}
           </div>
           <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
         </div>
-        <div className="items-center flex justify-center">
-          <img width={80} height={80} src={image} alt={image} />
+        <div className="ml-24 2xl:ml-28 md:ml-10">
+          <img width={60} height={60} src={image} alt={image} />
         </div>
       </div>
     </div>
@@ -52,20 +49,17 @@ const FertilizerValve = ({ valve }) => {
 
 const ECValve = ({ ec }) => {
   return (
-    <div className="block p-2 w-full">
-      <div className="text-gray-800 text-2xl font-bold mb-2">{ec.name}</div>
+    <div className="block p-2">
+      <div className="text-gray-800 text-xl font-bold mb-2">{ec.name}</div>
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-3 gap-2">
+        <div className="grid grid-rows-3">
           <div className="text-green-800 text-lg font-bold">
-            Setpoint: {ec.setpoint}
+            SP: {ec.setpoint}
           </div>
-          <div className="text-green-800 text-lg font-bold">
-            Value: {ec.value}
-          </div>
+          <div className="text-green-800 text-lg font-bold">{ec.value}</div>
           <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
         </div>
-
-        <div className="items-center flex justify-center">
+        <div className="ml-24 2xl:ml-24 md:ml-10">
           <img src={fertilizerEc} alt={fertilizerEc} width={80} height={80} />
         </div>
       </div>
@@ -119,41 +113,41 @@ export const Fertilizer = () => {
     );
 
   return (
-    <div>
-      <div className="p-4">
-        <div className="grid xl:grid-cols-4 gap-3 p-2">
-          {data.fertilizer_valves.map((valve, i) => (
-            <div key={i} className="bg-gray-300 rounded shadow-md">
-              <FertilizerValve valve={valve} />
-            </div>
-          ))}
-        </div>
-        <div className="p-2 flex">
+    <div className="p-4">
+      <div className="grid xl:grid-cols-4 gap-3 p-2">
+        {data.fertilizer_valves.map((valve, i) => (
+          <div key={i} className="bg-gray-300 rounded shadow-md">
+            <FertilizerValve valve={valve} />
+          </div>
+        ))}
+      </div>
+      <div className="p-2">
+        <div className="grid xl:grid-cols-4 gap-3">
           {data.ec_values.map((ec, i) => (
             <div key={i} className="bg-gray-300 rounded shadow-md">
               <ECValve ec={ec} />
             </div>
           ))}
         </div>
-        <div className="p-2">
-          <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
-            <LineChart
-              data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
-                ...rest,
-                x: new Date(datetime + " " + x),
-                y: Number(y)
-              }))}
-            />
-          </div>
+      </div>
+      <div className="p-2">
+        <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
+          <LineChart
+            data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
+              ...rest,
+              x: new Date(datetime + " " + x),
+              y: Number(y)
+            }))}
+          />
         </div>
-        <div className="bg-gray-300 rounded shadow-md mb-4"></div>
-        <div className="xl:grid grid-cols-2 gap-2 p-2">
-          <div className="bg-gray-300 rounded shadow-md mb-4">
-            <FertilizerBarChart data={data.fertilizer_bargraph} />
-          </div>
-          <div className="bg-gray-300 rounded shadow-md mb-4">
-            <FertilizerPieChart data={data.fertilizer_pie_chart} />
-          </div>
+      </div>
+      <div className="bg-gray-300 rounded shadow-md mb-4"></div>
+      <div className="xl:grid grid-cols-2 gap-2 p-2">
+        <div className="bg-gray-300 rounded shadow-md mb-4">
+          <FertilizerBarChart data={data.fertilizer_bargraph} />
+        </div>
+        <div className="bg-gray-300 rounded shadow-md mb-4">
+          <FertilizerPieChart data={data.fertilizer_pie_chart} />
         </div>
       </div>
     </div>

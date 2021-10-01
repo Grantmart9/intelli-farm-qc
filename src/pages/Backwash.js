@@ -41,8 +41,8 @@ const WashBack = ({ backwash }) => {
       <div key={backwash.name} className="font-bold text-2xl mb-2">
         {backwash.name}
       </div>
-      <div className="grid grid-cols-2 gap-1">
-        <div className="grid grid-rows-2 gap-1">
+      <div className="grid grid-cols-2">
+        <div className="grid grid-rows-2">
           <div className="font-bold text-green-800 text-xl">
             {backwash.status}
           </div>
@@ -50,7 +50,7 @@ const WashBack = ({ backwash }) => {
             {backwash.alarm}
           </div>
         </div>
-        <div className="items-center flex justify-center">
+        <div className="ml-24 2xl:ml-24 md:ml-10">
           <img src={fertilizer} alt={fertilizer} width={70} height={70} />
         </div>
       </div>
@@ -103,7 +103,7 @@ export const Backwash = () => {
             </div>
           </div>
         </div>
-        <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-1">
+        <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
           {data.backwash_valves.map((backwash, i) => (
             <div key={i} className="mt-2 mb-2">
               <WashBack backwash={backwash} />

@@ -11,12 +11,12 @@
  * - Modification    :
  **/
 import React, { createContext, useState, useContext } from "react";
-import { Route, Switch, Redirect, useParams } from "react-router-dom";
+import { Route, Switch, Redirect, useParams, Link } from "react-router-dom";
 import { Routes } from "routes";
 import { Sidebar } from "components/Sidebar";
 import { Navbar } from "components/Navbar";
 import { Login, Logout, LoginContext } from "components/Login";
-
+import { Users } from "pages/Users";
 import { LandingPage } from "pages/LandingPage";
 import { IrrigationControl } from "pages/IrrigationControl";
 import { Fertilizer } from "pages/Fertilizer";
@@ -29,6 +29,13 @@ import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
 import { SidebarContext } from "../components/Sidebar";
 import { useMd } from "media-query";
+import {
+  Nav,
+  Badge,
+  Image,
+  Button,
+  Accordion
+} from "@themesberg/react-bootstrap";
 
 const AppLayout = createContext();
 
@@ -36,43 +43,43 @@ const farm_pages = {
   dashboard: {
     name: "Dashboard",
     path: "/dashboard",
-    page: Dashboard,
+    page: Dashboard
   },
   schedule: {
     name: "Schedule",
     path: "/schedule",
-    page: IrrigationSchedule,
+    page: IrrigationSchedule
   },
   fertilizer: {
     name: "Fertilizer",
     path: "/fertilizer",
-    page: Fertilizer,
+    page: Fertilizer
   },
   irrigation: {
     name: "Irrigation Valves",
     path: "/irrigation",
-    page: IrrigationControl,
+    page: IrrigationControl
   },
   pumps: {
     name: "Pumps",
     path: "/pumps",
-    page: Pumps,
+    page: Pumps
   },
   backwash: {
     name: "Backwash",
     path: "/backwash",
-    page: Backwash,
+    page: Backwash
   },
   notifications: {
     name: "Notifications",
     path: "/notifications",
-    page: Notifications,
+    page: Notifications
   },
   report: {
     name: "Report",
     path: "/report",
-    page: Report,
-  },
+    page: Report
+  }
 };
 
 const farm_order = [
@@ -83,7 +90,7 @@ const farm_order = [
   "pumps",
   "backwash",
   "notifications",
-  "report",
+  "report"
 ];
 
 const FarmRoutes = () => (
@@ -103,8 +110,8 @@ const getBrandItem = (prefix, title) => ({
   title: title,
   action: {
     type: "brand",
-    path: `${prefix}/`,
-  },
+    path: `${prefix}/`
+  }
 });
 
 const getFarmItems = (prefix, layout) =>
@@ -123,11 +130,11 @@ const getFarmItems = (prefix, layout) =>
                 title: farmPage.name,
                 action: {
                   type: "link",
-                  path: `${prefix}/${path}`,
-                },
+                  path: `${prefix}/${path}`
+                }
               };
-            }),
-        },
+            })
+        }
       }));
 
 const spacerItem = { action: { type: "spacer" } };
@@ -136,15 +143,15 @@ const getLogoutItem = (prefix) => ({
   title: "Logout",
   action: {
     type: "link",
-    path: `${prefix}/logout`,
-  },
+    path: `${prefix}/logout`
+  }
 });
 
 const getNavItems = (prefix, layout) =>
   [
     [getBrandItem(prefix, layout && layout.company_name)],
     getFarmItems(prefix, layout),
-    [spacerItem, getLogoutItem(prefix)],
+    [spacerItem, getLogoutItem(prefix)]
   ].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
@@ -163,15 +170,15 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <Navbar />
           <div
             style={{
-              height: "calc(100vh - 60px)",
+              height: "calc(100vh - 60px)"
             }}
             className="flex"
           >
-            <Sidebar items={getNavItems(prefix, appLayout)} />
+            <Sidebar items={getNavItems(prefix, appLayout)}></Sidebar>
 
             <main
               style={{
-                width: show ? "calc(100vw - 300px)" : "calc(100vw)",
+                width: show ? "calc(100vw - 300px)" : "calc(100vw)"
               }}
               className={`relative ${
                 fullSidebar ? "hidden" : ""
@@ -205,6 +212,7 @@ const RouteInner = () => {
           path={Routes.NotFound.path}
           component={() => <p>Not Found</p>}
         />
+        <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
         <RouteWithSidebar
           exact
           path={Routes.Logout.path}

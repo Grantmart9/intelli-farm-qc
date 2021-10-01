@@ -31,20 +31,22 @@ const EquipmentStatus = ({ data }) => {
     image = fertilizer;
   }
   return (
-    <div className="flex p-2 w-full">
-      <div className="w-full">
-        <div className="font-bold text-2xl mb-2">{data.name}</div>
-        <div className="font-bold text-green-800 text-2xl">{data.status}</div>
-        <div className="font-bold text-green-800 text-xl">
-          {data.real_time_flow}
+    <div className="p-2">
+      <div className="font-bold text-2xl mb-2">{data.name}</div>
+      <div className="grid grid-cols-2">
+        <div className="grid grid-rows-4">
+          <div className="font-bold text-green-800 text-2xl">{data.status}</div>
+          <div className="font-bold text-green-800 text-xl">
+            {data.real_time_flow}
+          </div>
+          <div className="font-bold text-green-800 text-sm">
+            {data.total_flow}
+          </div>
+          <div className="font-bold text-md text-red-400">{data.alarm}</div>
         </div>
-        <div className="font-bold text-green-800 text-sm">
-          {data.total_flow}
+        <div className="ml-24 2xl:ml-24 md:ml-10">
+          <img src={image} alt={image} width={70} height={70} />
         </div>
-        <div className="font-bold text-md text-red-400">{data.alarm}</div>
-      </div>
-      <div className="ml-2 items-center flex justify-center w-25">
-        <img src={image} alt={image} width={100} height={100} />
       </div>
     </div>
   );
@@ -70,12 +72,12 @@ export const IrrigationControl = () => {
   return (
     <div>
       <div className="p-1">
-        <div className="xl:grid grid-cols-4 p-4 gap-4">
+        <div className="xl:grid grid-cols-4 gap-4 p-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={({ data }) =>
               data.map((irrigation_valve, i) => (
-                <div key={i} className="bg-gray-300 shadow-md rounded mb-4">
+                <div key={i} className="bg-gray-300 shadow-md rounded">
                   <EquipmentStatus data={irrigation_valve} />
                 </div>
               ))
