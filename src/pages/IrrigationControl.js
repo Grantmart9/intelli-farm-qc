@@ -31,12 +31,10 @@ const EquipmentStatus = ({ data }) => {
     image = fertilizer;
   }
   return (
-    <div className="flex p-2">
-      <div className="w-100">
+    <div className="flex p-2 w-full">
+      <div className="w-full">
         <div className="font-bold text-2xl mb-2">{data.name}</div>
-        <div className="font-bold text-green-800 text-2xl">
-        {data.status}
-        </div>
+        <div className="font-bold text-green-800 text-2xl">{data.status}</div>
         <div className="font-bold text-green-800 text-xl">
           {data.real_time_flow}
         </div>
@@ -46,7 +44,7 @@ const EquipmentStatus = ({ data }) => {
         <div className="font-bold text-md text-red-400">{data.alarm}</div>
       </div>
       <div className="ml-2 items-center flex justify-center w-25">
-        <img src={image} alt={image} width="80%" height="80%" />
+        <img src={image} alt={image} width={100} height={100} />
       </div>
     </div>
   );

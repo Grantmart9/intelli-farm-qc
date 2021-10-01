@@ -37,20 +37,22 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const WashBack = ({ backwash }) => {
   return (
-    <div className="bg-gray-300 rounded shadow-md p-2 flex gap-2">
-      <div className="p-3 bg-gray-300 w-100">
-        <div key={backwash.name} className="font-bold text-2xl">
-          {backwash.name}
-        </div>
-        <div key={backwash.status} className="font-bold text-green-800 text-xl">
-          {backwash.status}
-        </div>
-        <div key={backwash.alarm} className="font-bold text-md text-red-400">
-          {backwash.alarm}
-        </div>
+    <div className="bg-gray-300 rounded shadow-md p-2 w-full block">
+      <div key={backwash.name} className="font-bold text-2xl mb-2">
+        {backwash.name}
       </div>
-      <div className="bg-gray-300 p-2 items-center flex justify-center">
-        <img src={fertilizer} alt={fertilizer} width="100rem" height="50rem" />
+      <div className="grid grid-cols-2 gap-1">
+        <div className="grid grid-rows-2 gap-1">
+          <div className="font-bold text-green-800 text-xl">
+            {backwash.status}
+          </div>
+          <div key={backwash.alarm} className="font-bold text-md text-red-400">
+            {backwash.alarm}
+          </div>
+        </div>
+        <div className="items-center flex justify-center">
+          <img src={fertilizer} alt={fertilizer} width={70} height={70} />
+        </div>
       </div>
     </div>
   );
@@ -101,7 +103,7 @@ export const Backwash = () => {
             </div>
           </div>
         </div>
-        <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
+        <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-1">
           {data.backwash_valves.map((backwash, i) => (
             <div key={i} className="mt-2 mb-2">
               <WashBack backwash={backwash} />

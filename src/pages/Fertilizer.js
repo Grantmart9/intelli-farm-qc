@@ -28,26 +28,22 @@ const FertilizerValve = ({ valve }) => {
 
   return (
     <div className="p-2">
-      <div className="inline-flex">
-        <div className="text-gray-800 text-2xl font-bold mb-2">
-          {valve.name}
-        </div>
-      </div>
+      <div className="text-gray-800 text-2xl font-bold mb-2">{valve.name}</div>
       <div className="grid grid-cols-2">
-        <div>
+        <div className="grid grid-rows-4">
           <div className="text-green-800 text-2xl font-bold">
             {valve.status}
           </div>
           <div className="text-green-800 text-lg font-bold">
             {valve.real_time_flow}
           </div>
-          <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
           <div className="text-green-800 text-sm font-bold text-md">
             {valve.total_flow}
           </div>
+          <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
         </div>
-        <div className="ml-20 mt-3">
-          <img width={60} height={60} src={image} alt={image} />
+        <div className="items-center flex justify-center">
+          <img width={80} height={80} src={image} alt={image} />
         </div>
       </div>
     </div>
@@ -56,19 +52,22 @@ const FertilizerValve = ({ valve }) => {
 
 const ECValve = ({ ec }) => {
   return (
-    <div className="flex p-2">
-      <div className="p-2 w-100">
-        <div className="text-gray-800 text-2xl font-bold">{ec.name}</div>
-        <div className="text-green-800 text-md font-bold">
-          Setpoint: {ec.setpoint}
+    <div className="block p-2 w-full">
+      <div className="text-gray-800 text-2xl font-bold mb-2">{ec.name}</div>
+      <div className="grid grid-cols-2">
+        <div className="grid grid-rows-3 gap-2">
+          <div className="text-green-800 text-lg font-bold">
+            Setpoint: {ec.setpoint}
+          </div>
+          <div className="text-green-800 text-lg font-bold">
+            Value: {ec.value}
+          </div>
+          <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
         </div>
-        <div className="text-green-800 text-md font-bold">
-          Value: {ec.value}
+
+        <div className="items-center flex justify-center">
+          <img src={fertilizerEc} alt={fertilizerEc} width={80} height={80} />
         </div>
-        <div className="text-red-800 font-bold text-md">{ec.alarm}</div>
-      </div>
-      <div className="ml-2 items-center flex flex-shrink-0 justify-center p-2 w-20">
-        <img src={fertilizerEc} alt={fertilizerEc} />
       </div>
     </div>
   );
@@ -129,7 +128,7 @@ export const Fertilizer = () => {
             </div>
           ))}
         </div>
-        <div className="grid xl:grid-cols-4 gap-3 p-2">
+        <div className="p-2 flex">
           {data.ec_values.map((ec, i) => (
             <div key={i} className="bg-gray-300 rounded shadow-md">
               <ECValve ec={ec} />
