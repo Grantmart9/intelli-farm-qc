@@ -26,10 +26,10 @@ import { useRefetch } from "../components/Timer";
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
   return (
-    <div className="p-2">
-      <div className="text-gray-800 text-xl font-bold mb-2">{valve.name}</div>
+    <div className="-py-8 px-2">
+      <div className="text-gray-800 text-2xl font-bold mb-2">{valve.name}</div>
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-4">
+        <div className="grid grid-rows-3">
           <div className="text-green-800 text-xl font-bold">{valve.status}</div>
           <div className="text-green-800 text-lg font-bold">
             {valve.real_time_flow}
@@ -40,7 +40,7 @@ const FertilizerValve = ({ valve }) => {
           <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
         </div>
         <div className="ml-24 2xl:ml-28 md:ml-10">
-          <img width={60} height={60} src={image} alt={image} />
+          <img width={80} height={80} src={image} alt={image} />
         </div>
       </div>
     </div>
@@ -49,18 +49,18 @@ const FertilizerValve = ({ valve }) => {
 
 const ECValve = ({ ec }) => {
   return (
-    <div className="block p-2">
-      <div className="text-gray-800 text-xl font-bold mb-2">{ec.name}</div>
+    <div className="-py-2 px-2">
+      <div className="text-gray-800 text-2xl font-bold mb-2">{ec.name}</div>
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-3">
+        <div className="grid grid-rows-2">
           <div className="text-green-800 text-lg font-bold">
             SP: {ec.setpoint}
           </div>
           <div className="text-green-800 text-lg font-bold">{ec.value}</div>
           <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-24 md:ml-10">
-          <img src={fertilizerEc} alt={fertilizerEc} width={80} height={80} />
+        <div className="ml-28 2xl:ml-28 md:ml-10">
+          <img src={fertilizerEc} alt={fertilizerEc} width={70} height={70} />
         </div>
       </div>
     </div>
