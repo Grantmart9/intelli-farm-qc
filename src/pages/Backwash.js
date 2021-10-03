@@ -37,12 +37,12 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const WashBack = ({ backwash }) => {
   return (
-    <div className="bg-gray-300 rounded shadow-md p-2 w-full block">
+    <div className="bg-gray-300 rounded shadow-md p-2 ">
       <div key={backwash.name} className="font-bold text-2xl mb-2">
         {backwash.name}
       </div>
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-2">
+        <div className="grid grid-rows-1">
           <div className="font-bold text-green-800 text-xl">
             {backwash.status}
           </div>
@@ -105,7 +105,7 @@ export const Backwash = () => {
         </div>
         <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
           {data.backwash_valves.map((backwash, i) => (
-            <div key={i} className="mt-2 mb-2">
+            <div key={i} className="mt-2 mb-3">
               <WashBack backwash={backwash} />
             </div>
           ))}
