@@ -60,11 +60,9 @@ const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
 export const LineChart = ({ data }) => {
   const [target, setTarget] = useState(null);
   const { width } = useSize(target);
+  const maxData = 400;
 
-  const truncatedData = useMemo(
-    () => data.slice(Math.max(0, data.length - 200)),
-    [data]
-  );
+  const truncatedData = useMemo(() => data.slice(0, maxData), [data]);
   const domain = useMemo(
     () =>
       truncatedData
