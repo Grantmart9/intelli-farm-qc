@@ -111,6 +111,8 @@ export const Fertilizer = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
+  var ec = data.ec_history;
+  console.log(ec);
 
   return (
     <div className="p-4">
