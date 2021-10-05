@@ -121,13 +121,13 @@ const fertilizerColumns = [
   },
   {
     field: "ec_setpoint",
-    headerName: "EC Setpoint",
+    headerName: "EC Setpoint µS",
     type: "number",
     editable: true
   },
   {
     field: "flow_rate",
-    headerName: "Flow rate",
+    headerName: "Flow rate ℓ fertilizer/m³ water ",
     type: "number",
     editable: true
   }
