@@ -61,7 +61,7 @@ const ECValve = ({ ec }) => {
           </div>
           <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
         </div>
-        <div className="ml-28 2xl:ml-28 md:ml-10">
+        <div className="ml-28 2xl:ml-28 md:ml-10 p-2">
           <img src={fertilizerEc} alt={fertilizerEc} width={70} height={70} />
         </div>
       </div>
@@ -134,7 +134,7 @@ export const Fertilizer = () => {
           ))}
         </div>
       </div>
-      <div className="p-2">
+      <div className="p-2 mt-2">
         <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
           <LineChart
             data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
@@ -145,7 +145,6 @@ export const Fertilizer = () => {
           />
         </div>
       </div>
-      <div className="bg-gray-300 rounded shadow-md mb-4"></div>
       <div className="xl:grid grid-cols-2 gap-2 p-2">
         <div className="bg-gray-300 rounded shadow-md mb-4">
           <FertilizerBarChart data={data.fertilizer_bargraph} />

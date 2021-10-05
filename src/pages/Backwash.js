@@ -50,7 +50,7 @@ const WashBack = ({ backwash }) => {
             {backwash.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-24 md:ml-10 -mt-4">
+        <div style={{marginLeft:"8rem"}} className="-mt-4">
           <img src={fertilizer} alt={fertilizer} width={70} height={70} />
         </div>
       </div>
@@ -84,7 +84,7 @@ export const Backwash = () => {
     <div>
       <div className="p-4">
         <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
-          <div className="inline-block p-2">
+          <div className="inline-block p-1">
             <div className="font-bold text-xl">
               Status : {data.backwash_status.status}
             </div>
@@ -92,7 +92,7 @@ export const Backwash = () => {
               Progress : {data.backwash_status.percentage_left.toFixed(2)} %
             </div>
           </div>
-          <div className="p-2">
+          <div className="mt-1">
             <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
               <BorderLinearProgress
                 variant="determinate"

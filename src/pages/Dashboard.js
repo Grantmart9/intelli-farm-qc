@@ -50,12 +50,13 @@ const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
     <div className="text-xl font-bold">Irrigation Time Left</div>
     <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
+
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-3xl font-bold">EC</div>
+    <div className="text-xl font-bold">EC</div>
     <div className="text-2xl font-bold">Value: {data.ec_data.value} µS</div>
     <div className="font-bold">Target: {data.ec_data.setpoint} µS</div>
   </div>
@@ -178,14 +179,14 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 p-2 pt-0">
         {data.water_usage.map((waterUsageData, i) => (
           <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
             <HomeFlowWaterUsage data={waterUsageData} />
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-5">
+      <div className="grid grid-cols-1 lg:grid-cols-5 ">
         <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
           <div className="w-full h-full">
             <HomeFlowFertilizerBarChartD
