@@ -31,7 +31,7 @@ const EquipmentStatus = ({ data }) => {
     image = fertilizer;
   }
   return (
-    <div className="-py-2 px-2 mb-3">
+    <div className="-py-2 px-2 mb-3 p-2">
       <div className="font-bold text-2xl mb-2">{data.name}</div>
       <div className="grid grid-cols-2 -mb-4">
         <div className="grid grid-rows-3">
