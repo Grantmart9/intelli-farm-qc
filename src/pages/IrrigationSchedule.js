@@ -248,7 +248,7 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="grid grid-cols-2 -gap-2">
+          <div className="grid grid-cols-2 -gap-2 mb-3">
             <div>
               <OverlayTrigger
                 placement="bottom"
@@ -259,17 +259,6 @@ export const IrrigationSchedule = () => {
                   <FontAwesomeIcon icon={faSave} /> Save
                 </Button>
               </OverlayTrigger>
-            </div>
-            <div className="grid grid-cols-3 gap-2 mb-2">
-              <Button>
-                <img src={play} width={25} height={25} />
-              </Button>
-              <Button>
-                <img src={pause} width={25} height={25} />
-              </Button>
-              <Button>
-                <img src={stop} width={25} height={25} />
-              </Button>
             </div>
           </div>
           <div className="w-full">
