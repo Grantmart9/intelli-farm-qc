@@ -19,7 +19,10 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
+import {
+  MobileDateTimePicker,
+  LocalizationProvider
+} from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import ErrorGif from "images/ErrorGif.gif";
@@ -41,7 +44,7 @@ const DateTimeEditInputCell = (props) => {
   return (
     <LocalizationProvider dateAdapter={MomentUtils} dateFormat={dateFormat}>
       <div className="flex flex-col justify-content-center">
-        <DateTimePicker
+        <MobileDateTimePicker
           renderInput={(props) => (
             <TextField
               {...props}
@@ -77,14 +80,14 @@ const sectionColumns = [
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: false
+    editable: true
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: false
+    editable: true
   }
 ].map((column) => ({ ...column, flex: 0.5 }));
 
@@ -245,7 +248,7 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 -gap-2">
             <div>
               <OverlayTrigger
                 placement="bottom"
@@ -259,13 +262,13 @@ export const IrrigationSchedule = () => {
             </div>
             <div className="grid grid-cols-3 gap-2 mb-2">
               <Button>
-                <img src={play} width={30} height={30} />
-              </Button>
-              <Button style={{ color: "white" }}>
-                <img src={pause} width={30} height={30} />
+                <img src={play} width={25} height={25} />
               </Button>
               <Button>
-                <img src={stop} width={30} height={30} />
+                <img src={pause} width={25} height={25} />
+              </Button>
+              <Button>
+                <img src={stop} width={25} height={25} />
               </Button>
             </div>
           </div>
