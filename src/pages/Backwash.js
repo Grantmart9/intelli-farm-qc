@@ -50,7 +50,7 @@ const WashBack = ({ backwash }) => {
             {backwash.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-24 md:ml-10">
+        <div className="ml-24 2xl:ml-24 md:ml-10 -mt-4">
           <img src={fertilizer} alt={fertilizer} width={70} height={70} />
         </div>
       </div>

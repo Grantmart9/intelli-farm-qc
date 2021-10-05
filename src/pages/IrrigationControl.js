@@ -33,7 +33,7 @@ const EquipmentStatus = ({ data }) => {
   return (
     <div className="-py-2 px-2 mb-3">
       <div className="font-bold text-2xl mb-2">{data.name}</div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 -mb-4">
         <div className="grid grid-rows-3">
           <div className="font-bold text-green-800 text-2xl">{data.status}</div>
           <div className="font-bold text-green-800 text-xl">
