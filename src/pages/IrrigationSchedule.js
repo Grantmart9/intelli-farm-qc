@@ -23,6 +23,9 @@ import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import ErrorGif from "images/ErrorGif.gif";
+import play from "images/play.png";
+import pause from "images/pause.png";
+import stop from "images/stop.png";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
@@ -127,7 +130,7 @@ const fertilizerColumns = [
   },
   {
     field: "flow_rate",
-    headerName: "Flow rate ℓ fertilizer/m³ water ",
+    headerName: "Flow rate ℓ/m",
     type: "number",
     editable: true
   }
@@ -242,17 +245,30 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <OverlayTrigger
-            placement="bottom"
-            trigger={["hover", "focus"]}
-            overlay={<Tooltip>Save All settings</Tooltip>}
-          >
-            <div className="mb-3">
-              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-                <FontAwesomeIcon icon={faSave} /> Save
+          <div className="grid grid-cols-2">
+            <div>
+              <OverlayTrigger
+                placement="bottom"
+                trigger={["hover", "focus"]}
+                overlay={<Tooltip>Save All settings</Tooltip>}
+              >
+                <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+                  <FontAwesomeIcon icon={faSave} /> Save
+                </Button>
+              </OverlayTrigger>
+            </div>
+            <div className="grid grid-cols-3 gap-2 mb-2">
+              <Button>
+                <img src={play} width={30} height={30} />
+              </Button>
+              <Button style={{ color: "white" }}>
+                <img src={pause} width={30} height={30} />
+              </Button>
+              <Button>
+                <img src={stop} width={30} height={30} />
               </Button>
             </div>
-          </OverlayTrigger>
+          </div>
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
