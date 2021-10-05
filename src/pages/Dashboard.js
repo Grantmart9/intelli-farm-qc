@@ -56,8 +56,8 @@ const IrrigationTimeLeft = ({ data }) => (
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
     <div className="text-3xl font-bold">EC</div>
-    <div className="text-2xl font-bold">Value: {data.ec_data.value} mS</div>
-    <div className="font-bold">Target: {data.ec_data.setpoint} mS</div>
+    <div className="text-2xl font-bold">Value: {data.ec_data.value} µS</div>
+    <div className="font-bold">Target: {data.ec_data.setpoint} µS</div>
   </div>
 );
 
@@ -158,6 +158,7 @@ export const Dashboard = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
+  console.log(data);
 
   return (
     <div className="p-1">

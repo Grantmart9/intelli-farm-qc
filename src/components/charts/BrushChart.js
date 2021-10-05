@@ -110,7 +110,7 @@ export const BrushChart = ({ data }) => {
             marginBottom: "0.5rem"
           }}
         >
-          Overall Water Usage in m3
+          Overall Water Usage in m³
         </div>
       </div>
       <VictoryChart

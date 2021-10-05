@@ -82,34 +82,32 @@ export const Backwash = () => {
 
   return (
     <div>
-      <div className="h-500">
-        <div className="p-4">
-          <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
-            <div className="inline-block p-2">
-              <div className="font-bold text-xl">
-                Status : {data.backwash_status.status}
-              </div>
-              <div className="font-bold text-xl ">
-                Progress : {data.backwash_status.percentage_left.toFixed(2)} %
-              </div>
+      <div className="p-4">
+        <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
+          <div className="inline-block p-2">
+            <div className="font-bold text-xl">
+              Status : {data.backwash_status.status}
             </div>
-            <div className="p-2">
-              <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
-                <BorderLinearProgress
-                  variant="determinate"
-                  value={data.backwash_status.percentage_left}
-                />
-              </div>
+            <div className="font-bold text-xl ">
+              Progress : {data.backwash_status.percentage_left.toFixed(2)} %
+            </div>
+          </div>
+          <div className="p-2">
+            <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
+              <BorderLinearProgress
+                variant="determinate"
+                value={data.backwash_status.percentage_left}
+              />
             </div>
           </div>
         </div>
-        <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
-          {data.backwash_valves.map((backwash, i) => (
-            <div key={i} className="mt-2 mb-3">
-              <WashBack backwash={backwash} />
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
+        {data.backwash_valves.map((backwash, i) => (
+          <div key={i} className="mt-2 mb-3">
+            <WashBack backwash={backwash} />
+          </div>
+        ))}
       </div>
     </div>
   );
