@@ -130,7 +130,7 @@ const fertilizerColumns = [
   },
   {
     field: "flow_rate",
-    headerName: "Flow rate ℓ/m",
+    headerName: "Flow rate ℓ/m³",
     type: "number",
     editable: true
   }
