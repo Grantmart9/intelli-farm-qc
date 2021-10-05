@@ -55,8 +55,9 @@ const IrrigationTimeLeft = ({ data }) => (
 
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-3xl font-bold">Value: {data.ec_data.value} mS</div>
-    <div className="font-bold">Setpoint: {data.ec_data.setpoint} mS</div>
+    <div className="text-3xl font-bold">EC</div>
+    <div className="text-2xl font-bold">Value: {data.ec_data.value} mS</div>
+    <div className="font-bold">Target: {data.ec_data.setpoint} mS</div>
   </div>
 );
 

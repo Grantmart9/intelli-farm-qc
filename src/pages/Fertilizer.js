@@ -54,9 +54,11 @@ const ECValve = ({ ec }) => {
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-2">
           <div className="text-green-800 text-lg font-bold">
-            SP: {ec.setpoint}
+            Target: {ec.setpoint}
           </div>
-          <div className="text-green-800 text-lg font-bold">{ec.value}</div>
+          <div className="text-green-800 text-lg font-bold">
+            Value: {ec.value}
+          </div>
           <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
         </div>
         <div className="ml-28 2xl:ml-28 md:ml-10">

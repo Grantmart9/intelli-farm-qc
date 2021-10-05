@@ -58,11 +58,6 @@ const DateTimeEditInputCell = (props) => {
 
 const sectionColumns = [
   {
-    field: "name",
-    headerName: "Name",
-    type: "string"
-  },
-  {
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
@@ -71,23 +66,24 @@ const sectionColumns = [
   {
     field: "run_time",
     headerName: "Run time",
-    type: "number"
+    type: "number",
+    editable: false
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: true
+    editable: false
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: true
+    editable: false
   }
-].map((column) => ({ ...column, flex: 1 }));
+].map((column) => ({ ...column, flex: 0.5 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
   const id = section.sql_index;
@@ -120,7 +116,7 @@ const fertilizerColumns = [
   {
     field: "name",
     headerName: "Name",
-    type: "string",
+    type: "text",
     editable: false
   },
   {
@@ -135,7 +131,7 @@ const fertilizerColumns = [
     type: "number",
     editable: true
   }
-].map((column) => ({ ...column, flex: 1 }));
+].map((column) => ({ ...column, flex: 0.5 }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
   const { fertilizer: fertilizers } = section;

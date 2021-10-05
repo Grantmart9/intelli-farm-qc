@@ -17,7 +17,7 @@ import {
   VictoryBrushContainer,
   VictoryChart,
   VictoryTooltip,
-  VictoryLine,
+  VictoryLine
 } from "victory";
 import useResizeObserver from "@react-hook/resize-observer";
 import moment from "moment";
@@ -82,25 +82,25 @@ export const LineChart = ({ data }) => {
       style: {
         axis: {
           stroke: "gray",
-          strokeWidth: 2,
+          strokeWidth: 2
         },
         tickLabels: {},
         grid: {
           stroke: "blue",
           strokeDasharray: "5,5",
-          strokeWidth: 0.5,
-        },
-      },
+          strokeWidth: 0.5
+        }
+      }
     },
     line: {
       style: {
         data: {
           stroke: "blue",
           strokeWidth: "2",
-          fill: "#dae1ed",
-        },
-      },
-    },
+          fill: "#dae1ed"
+        }
+      }
+    }
   };
 
   return (
@@ -113,10 +113,10 @@ export const LineChart = ({ data }) => {
             display: "inline-flex",
             color: "#373738",
             marginTop: "0.5rem",
-            marginBottom: "0.5rem",
+            marginBottom: "0.5rem"
           }}
         >
-          Fertilizer History
+          EC History in µS
         </div>
       </div>
       <VictoryChart
@@ -129,7 +129,7 @@ export const LineChart = ({ data }) => {
         containerComponent={
           <VictoryZoomVoronoiContainer
             style={{
-              touchAction: "auto",
+              touchAction: "auto"
             }}
             zoomDimension="x"
             voronoiDimension="x"
