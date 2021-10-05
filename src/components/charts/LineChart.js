@@ -22,7 +22,7 @@ import {
 import useResizeObserver from "@react-hook/resize-observer";
 import moment from "moment";
 
-const formatDate = (date) => moment(date).format("YYYY/MM/DD hh:mm");
+const formatDate = (date) => moment(date).format("YYYY/MM/DD HH:mm");
 
 class BrushChartTooltip extends React.Component {
   static defaultEvents = VictoryTooltip.defaultEvents;
