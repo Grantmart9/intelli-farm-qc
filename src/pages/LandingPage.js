@@ -22,8 +22,10 @@ const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 p-1">
       <div className="shadow-md flex align-center justify-center rounded text-justify text-center p-1">
-        <img width={60} src={drop} alt={drop} />
-        <div className="font-bold text-md mt-3">{farm.name}</div>
+        <div className="p-1 mt-2">
+        <img width={70} src={drop} alt={drop} />
+        </div>
+        <div className="font-bold text-md mt-3 mr-2">{farm.name}</div>
       </div>
       <div className="inline-block shadow-md text-center rounded p-1">
         <div className="font-bold rounded text-xl">

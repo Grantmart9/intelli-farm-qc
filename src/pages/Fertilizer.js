@@ -27,8 +27,8 @@ const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
   return (
     <div className="-py-8 px-2">
-      <div className="text-gray-800 text-2xl font-bold mb-2">{valve.name}</div>
-      <div className="grid grid-cols-2">
+      <div className="font-bold text-2xl mb-2">{valve.name}</div>
+      <div className="grid grid-cols-2 mb-2">
         <div className="grid grid-rows-3">
           <div className="text-green-800 text-xl font-bold">{valve.status}</div>
           <div className="text-green-800 text-lg font-bold">
@@ -37,10 +37,10 @@ const FertilizerValve = ({ valve }) => {
           <div className="text-green-800 text-lg font-bold text-md">
             {valve.total_flow}
           </div>
-          <div className="text-red-800 font-bold text-md">{valve.alarm}</div>
+          <div className="text-red-400 font-bold text-sm">{valve.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
-          <img width={80} height={80} src={image} alt={image} />
+        <div className="ml-24 2xl:ml-20 md:ml-10">
+          <img width={100} height={100} src={image} alt={image} />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ const FertilizerValve = ({ valve }) => {
 const ECValve = ({ ec }) => {
   return (
     <div className="-py-2 px-2">
-      <div className="text-gray-800 text-2xl font-bold mb-2">{ec.name}</div>
+      <div className="text-2xl font-bold mb-2">{ec.name}</div>
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-2">
           <div className="text-green-800 text-lg font-bold">
@@ -59,10 +59,10 @@ const ECValve = ({ ec }) => {
           <div className="text-green-800 text-lg font-bold">
             Value: {ec.value}
           </div>
-          <div className="text-red-800 font-bold text-lg">{ec.alarm}</div>
+          <div className="text-red-400 font-bold text-sm">{ec.alarm}</div>
         </div>
-        <div className="ml-28 2xl:ml-28 md:ml-10 p-2">
-          <img src={fertilizerEc} alt={fertilizerEc} width={70} height={70} />
+        <div className="ml-24 2xl:ml-28 md:ml-10 p-2">
+          <img src={fertilizerEc} alt={fertilizerEc} width={100} height={100} />
         </div>
       </div>
     </div>

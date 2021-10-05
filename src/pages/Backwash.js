@@ -37,7 +37,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const WashBack = ({ backwash }) => {
   return (
-    <div className="bg-gray-300 rounded shadow-md p-2 ">
+    <div className="bg-gray-300 rounded shadow-md p-1">
       <div key={backwash.name} className="font-bold text-2xl mb-2">
         {backwash.name}
       </div>
@@ -46,12 +46,12 @@ const WashBack = ({ backwash }) => {
           <div className="font-bold text-green-800 text-xl">
             {backwash.status}
           </div>
-          <div key={backwash.alarm} className="font-bold text-md text-red-400">
+          <div key={backwash.alarm} className="font-bold text-sm text-red-400">
             {backwash.alarm}
           </div>
         </div>
-        <div style={{marginLeft:"8rem"}} className="-mt-4">
-          <img src={fertilizer} alt={fertilizer} width={70} height={70} />
+        <div style={{marginLeft:"6rem"}} className="-mt-4">
+          <img src={fertilizer} alt={fertilizer} width={100} height={100} />
         </div>
       </div>
     </div>
