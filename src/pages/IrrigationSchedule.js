@@ -248,8 +248,7 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="grid grid-cols-2 -gap-2 mb-3">
-            <div>
+            <div className="flex align-center justify-center items-center mb-3">
               <OverlayTrigger
                 placement="bottom"
                 trigger={["hover", "focus"]}
@@ -260,7 +259,6 @@ export const IrrigationSchedule = () => {
                 </Button>
               </OverlayTrigger>
             </div>
-          </div>
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
