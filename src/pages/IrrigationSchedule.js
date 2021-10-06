@@ -80,14 +80,14 @@ const sectionColumns = [
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: true
+    editable: false
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: true
+    editable: false
   }
 ].map((column) => ({ ...column, flex: 0.5 }));
 
@@ -248,17 +248,17 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-            <div className="flex align-center justify-center items-center mb-3">
-              <OverlayTrigger
-                placement="bottom"
-                trigger={["hover", "focus"]}
-                overlay={<Tooltip>Save All settings</Tooltip>}
-              >
-                <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-                  <FontAwesomeIcon icon={faSave} /> Save
-                </Button>
-              </OverlayTrigger>
-            </div>
+          <div className="flex align-center justify-center items-center mb-3">
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Save All settings</Tooltip>}
+            >
+              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+                <FontAwesomeIcon icon={faSave} /> Save
+              </Button>
+            </OverlayTrigger>
+          </div>
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
