@@ -18,6 +18,7 @@ import { Navbar } from "components/Navbar";
 import { Login, Logout, LoginContext } from "components/Login";
 import { Users } from "pages/Users";
 import { LandingPage } from "pages/LandingPage";
+import { Control } from "pages/Control";
 import { IrrigationControl } from "pages/IrrigationControl";
 import { Fertilizer } from "pages/Fertilizer";
 import { IrrigationSchedule } from "pages/IrrigationSchedule";
@@ -79,6 +80,11 @@ const farm_pages = {
     name: "Report",
     path: "/report",
     page: Report
+  },
+  control: {
+    name: "Control",
+    path: "/control",
+    page: Control
   }
 };
 
@@ -89,6 +95,7 @@ const farm_order = [
   "irrigation",
   "pumps",
   "backwash",
+  "control",
   "notifications",
   "report"
 ];
@@ -213,6 +220,11 @@ const RouteInner = () => {
           component={() => <p>Not Found</p>}
         />
         <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
+        <RouteWithSidebar
+          exact
+          path={Routes.Control.path}
+          component={Control}
+        />
         <RouteWithSidebar
           exact
           path={Routes.Logout.path}
