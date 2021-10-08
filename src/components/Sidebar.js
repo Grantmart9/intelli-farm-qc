@@ -182,7 +182,8 @@ export const Sidebar = ({ items }) => {
               backgroundColor: "#1e96ff",
               fontFamily: "Nunito Sans",
               fontSize: "1rem",
-              width: "100%"
+              width: "100%",
+              marginBottom: "0.2rem"
             }}
           >
             Users
