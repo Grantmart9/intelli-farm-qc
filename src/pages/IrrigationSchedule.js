@@ -248,29 +248,16 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="grid grid-cols-2 -gap-2">
-            <div>
-              <OverlayTrigger
-                placement="bottom"
-                trigger={["hover", "focus"]}
-                overlay={<Tooltip>Save All settings</Tooltip>}
-              >
-                <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-                  <FontAwesomeIcon icon={faSave} /> Save
-                </Button>
-              </OverlayTrigger>
-            </div>
-            <div className="grid grid-cols-3 gap-2 mb-2">
-              <Button>
-                <img src={play} width={25} height={25} />
+          <div className="mb-2">
+            <OverlayTrigger
+              placement="bottom"
+              trigger={["hover", "focus"]}
+              overlay={<Tooltip>Save All settings</Tooltip>}
+            >
+              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
+                <FontAwesomeIcon icon={faSave} /> Save
               </Button>
-              <Button>
-                <img src={pause} width={25} height={25} />
-              </Button>
-              <Button>
-                <img src={stop} width={25} height={25} />
-              </Button>
-            </div>
+            </OverlayTrigger>
           </div>
           <div className="w-full">
             {schedule.map((section, i) => {
