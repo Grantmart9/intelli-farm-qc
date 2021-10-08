@@ -29,6 +29,7 @@ import { Notifications } from "pages/Notifications";
 import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
 import { SidebarContext } from "../components/Sidebar";
+import Moisture from "pages/Moisture";
 import { useMd } from "media-query";
 import {
   Nav,
@@ -85,6 +86,11 @@ const farm_pages = {
     name: "Control",
     path: "/control",
     page: Control
+  },
+  moisture: {
+    name: "Moisture",
+    path: "/moisture",
+    page: Moisture
   }
 };
 
@@ -96,6 +102,7 @@ const farm_order = [
   "pumps",
   "backwash",
   "control",
+  "moisture",
   "notifications",
   "report"
 ];
@@ -220,6 +227,11 @@ const RouteInner = () => {
           component={() => <p>Not Found</p>}
         />
         <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
+        <RouteWithSidebar
+          exact
+          path={Routes.Moisture.path}
+          component={Moisture}
+        />
         <RouteWithSidebar
           exact
           path={Routes.Control.path}

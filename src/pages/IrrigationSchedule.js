@@ -48,19 +48,15 @@ const DateTimeEditInputCell = (props) => {
           renderInput={(props) => (
             <TextField
               {...props}
-              id="datetime-local"
-              type="datetime-local"
-              defaultValue="2017-05-24T10:30"
-              InputLabelProps={{
-                shrink: false
-              }}
-            />
+              variant="outlined"
+              margin="none"
+              helperText=""
+            ></TextField>
           )}
           inputFormat={dateFormat}
           value={new Date(value)}
           onChange={handleChange}
         />
-        <TextField />
       </div>
     </LocalizationProvider>
   );
@@ -252,7 +248,7 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="mb-2">
+          <div className="flex align-center justify-center items-center mb-3">
             <OverlayTrigger
               placement="bottom"
               trigger={["hover", "focus"]}

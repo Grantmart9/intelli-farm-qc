@@ -195,7 +195,7 @@ const Tanks = () => {
 const ControlStartStop = () => {
   return (
     <div className="rounded shadow-lg p-3 mt-2">
-      <div className="grid grid-cols-3 gap-2 p-2">
+      <div className="grid grid-cols-3">
         <div>Name</div>
         <div>Start Time</div>
         <div>Run Time</div>
@@ -203,7 +203,7 @@ const ControlStartStop = () => {
       <div>
         <BlockName />
       </div>
-      <div className="p-2">
+      <div className="">
         <Tanks />
       </div>
     </div>

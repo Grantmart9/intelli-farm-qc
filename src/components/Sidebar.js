@@ -204,6 +204,21 @@ export const Sidebar = ({ items }) => {
             Control
           </Button>
         </Link>
+        <Link to="/denau/moisture">
+          <Button
+            className="border-1 border-white text-left"
+            style={{
+              display: "inline-block",
+              alignContent: "center",
+              backgroundColor: "#1e96ff",
+              fontFamily: "Nunito Sans",
+              fontSize: "1rem",
+              width: "100%"
+            }}
+          >
+            Moisture
+          </Button>
+        </Link>
       </Nav>
     </div>
   );
