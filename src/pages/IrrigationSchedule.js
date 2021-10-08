@@ -48,15 +48,19 @@ const DateTimeEditInputCell = (props) => {
           renderInput={(props) => (
             <TextField
               {...props}
-              variant="outlined"
-              margin="none"
-              helperText=""
-            ></TextField>
+              id="datetime-local"
+              type="datetime-local"
+              defaultValue="2017-05-24T10:30"
+              InputLabelProps={{
+                shrink: false
+              }}
+            />
           )}
           inputFormat={dateFormat}
           value={new Date(value)}
           onChange={handleChange}
         />
+        <TextField />
       </div>
     </LocalizationProvider>
   );

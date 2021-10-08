@@ -126,7 +126,7 @@ const ControlButtons = () => {
 const BlockName = () => {
   return (
     <div className="grid grid-cols-3 gap-2 p-2 ">
-      <div className="bg-gray-500 rounded shadow-md text-center pt-3">
+      <div className="bg-gray-500 rounded shadow-md text-center pt-2">
         Crimson
       </div>
       <div className="bg-gray-500 rounded shadow-md p-2 flex">
@@ -139,37 +139,43 @@ const BlockName = () => {
           }}
         />
       </div>
-      <div className="bg-gray-500 rounded shadow-md pt-3">200min</div>
+      <div className="bg-gray-500 rounded shadow-md pt-2">200min</div>
     </div>
   );
 };
 const TanksNames = () => {
   return (
-    <div>
-      <div className="">
-        <div className="grid grid-rows-5 align-right">
-          <div>Tank: A</div>
-          <div>Tank: B</div>
-          <div>Tank: C</div>
-          <div>Tank: D</div>
-          <div>Tank: E</div>
-        </div>
-      </div>
+    <div className="grid grid-rows-6 align-right">
+      <div className="text-2xl font-bold mb-1">Name</div>
+      <div className="text-lg font-bold">Tank: A</div>
+      <div className="text-lg font-bold">Tank: B</div>
+      <div className="text-lg font-bold">Tank: C</div>
+      <div className="text-lg font-bold">Tank: D</div>
+      <div className="text-lg font-bold">Tank: E</div>
     </div>
   );
 };
 const TanksValues = () => {
   return (
-    <div>
-      <div className="">
-        <div className="grid grid-rows-5">
-          <div>122.3l</div>
-          <div>211.1l</div>
-          <div>333.3l</div>
-          <div>333.3l</div>
-          <div>333.3l</div>
-        </div>
-      </div>
+    <div className="grid grid-rows-6">
+      <div className="text-2xl font-bold mb-1">Flow rate ℓ/mᶟ</div>
+      <div className="text-lg font-bold">122.3</div>
+      <div className="text-lg font-bold">211.1</div>
+      <div className="text-lg font-bold">333.3</div>
+      <div className="text-lg font-bold">333.3</div>
+      <div className="text-lg font-bold">333.3</div>
+    </div>
+  );
+};
+const TanksEC = () => {
+  return (
+    <div className="grid grid-rows-6">
+      <div className="text-2xl font-bold mb-1">EC Setpoint µS</div>
+      <div className="text-lg font-bold">274</div>
+      <div className="text-lg font-bold">166</div>
+      <div className="text-lg font-bold">165</div>
+      <div className="text-lg font-bold">66</div>
+      <div className="text-lg font-bold">47</div>
     </div>
   );
 };
@@ -177,8 +183,9 @@ const TanksValues = () => {
 const Tanks = () => {
   return (
     <div className="bg-gray-500 rounded">
-      <div className="grid grid-cols-2 p-2">
+      <div className="grid grid-cols-3 p-2">
         <TanksNames />
+        <TanksEC />
         <TanksValues />
       </div>
     </div>
