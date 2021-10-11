@@ -24,12 +24,20 @@ import { useRefetch } from "../components/Timer";
 
 const EquipmentStatus = ({ data }) => {
   var image;
+  var timeLeft = "";
 
   if (data.status === "Opened") {
     image = greendrop;
   } else {
     image = fertilizer;
   }
+
+  if (data.time_left == null) {
+    timeLeft = null;
+  } else {
+    timeLeft = data.time_left + " time left";
+  }
+
   return (
     <div className="-py-2 px-2 pb-2">
       <div className="font-bold text-2xl mb-2">{data.name}</div>
@@ -41,6 +49,9 @@ const EquipmentStatus = ({ data }) => {
           </div>
           <div className="text-green-800 text-lg font-bold text-md">
             {data.total_flow}
+          </div>
+          <div className="text-green-800 text-lg font-bold text-md">
+            {timeLeft}
           </div>
           <div className="font-bold text-sm text-red-400">{data.alarm}</div>
         </div>

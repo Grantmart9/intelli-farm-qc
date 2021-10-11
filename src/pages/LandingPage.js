@@ -22,23 +22,21 @@ const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 p-1">
       <div className="shadow-md flex align-center justify-center rounded text-justify text-center p-1">
-        <div className="p-1 mt-2">
-        <img width={70} src={drop} alt={drop} />
+        <div className="p-1 mt-3">
+          <img width={50} src={drop} alt={drop} />
         </div>
         <div className="font-bold text-md mt-3 mr-2">{farm.name}</div>
       </div>
       <div className="inline-block shadow-md text-center rounded p-1">
         <div className="font-bold rounded text-xl">
-          Water Total <div>{farm.water_total} m³</div>
+          Water Supply <div>{farm.water_total} m³/h</div>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-2 p-1">
       <div className="p-2 shadow-md text-center rounded ">
         <div className="font-bold text-xl pb-3">Irrigation</div>
-        <div className="font-bold text-sm">
-          Time left: {farm.irrigation_time_left} min
-        </div>
+
         <div className="p-2">
           <ProgressBar
             variant="success"
@@ -48,11 +46,9 @@ const FarmsData = ({ farm }) => (
         </div>
       </div>
       <div className="p-2 shadow-md text-center rounded">
-        <div className="font-bold text-xl pb-3">Backwash</div>
-        <div className="font-bold text-sm">Status: {farm.backwash_status}</div>
-        <div className="p-2">
-          <ProgressBar variant="info" animated now={farm.backwash_percentage} />
-        </div>
+        <div className="font-bold text-xl pb-2">EC</div>
+        <div className="font-bold text-sm">Value: {farm.ec_value} µS</div>
+        <div className="font-bold text-sm">Target: {farm.ec_target} µS</div>
       </div>
     </div>
   </div>

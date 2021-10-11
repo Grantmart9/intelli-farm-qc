@@ -48,9 +48,8 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-xl font-bold">Irrigation Time Left</div>
-    <div className="font-bold text-3xl">{data.irrigation_time_left} min</div>
-
+    <div className="text-xl font-bold">Next Start time</div>
+    <div className="font-bold text-2xl">{data.next_start_time}</div>
   </div>
 );
 
@@ -147,7 +146,7 @@ export const HomeFlowWaterUsage = ({ data }) => {
 export const Dashboard = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }, refetch] = useApi(
-    `${API_URL}/${farmId}/dashboard`
+    `${API_URL}/-${farmId}/dashboard`
   );
 
   useRefetch(refetch);

@@ -173,53 +173,6 @@ export const Sidebar = ({ items }) => {
         className="sidebar-inner min-h-full p-3 flex flex-col flex-nowrap pt-3 pb-3"
       >
         {items.map(toNavItem)}
-        <Link to="/denau/users">
-          <Button
-            className="border-1 border-white text-left"
-            style={{
-              display: "inline-block",
-              alignContent: "center",
-              backgroundColor: "#1e96ff",
-              fontFamily: "Nunito Sans",
-              fontSize: "1rem",
-              width: "100%",
-              marginBottom: "0.2rem"
-            }}
-          >
-            Users
-          </Button>
-        </Link>
-        <Link to="/denau/control">
-          <Button
-            className="border-1 border-white text-left"
-            style={{
-              display: "inline-block",
-              alignContent: "center",
-              backgroundColor: "#1e96ff",
-              fontFamily: "Nunito Sans",
-              fontSize: "1rem",
-              width: "100%",
-              marginBottom: "0.2rem"
-            }}
-          >
-            Control
-          </Button>
-        </Link>
-        <Link to="/denau/moisture">
-          <Button
-            className="border-1 border-white text-left"
-            style={{
-              display: "inline-block",
-              alignContent: "center",
-              backgroundColor: "#1e96ff",
-              fontFamily: "Nunito Sans",
-              fontSize: "1rem",
-              width: "100%"
-            }}
-          >
-            Moisture
-          </Button>
-        </Link>
       </Nav>
     </div>
   );

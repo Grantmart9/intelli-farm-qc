@@ -57,12 +57,24 @@ const useSize = (target) => {
 
 const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
 
+const takeWhile = (p, arr) => {
+  var idx = arr.findIndex((x) => !p(x));
+  return arr.slice(0, idx == -1 ? arr.length : idx);
+};
+
 export const LineChart = ({ data }) => {
   const [target, setTarget] = useState(null);
   const { width } = useSize(target);
-  const maxData = 400;
+  const dateStart = useMemo(() => {
+    const now = new Date();
+    now.setDate(now.getDate() - 2);
+    return now;
+  }, []);
 
-  const truncatedData = useMemo(() => data.slice(0, maxData), [data]);
+  const truncatedData = useMemo(
+    () => takeWhile(({ x }) => +dateStart < +x, data),
+    [data]
+  );
   const domain = useMemo(
     () =>
       truncatedData

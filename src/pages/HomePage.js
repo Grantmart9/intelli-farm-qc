@@ -48,7 +48,7 @@ const farm_pages = {
     page: Dashboard
   },
   schedule: {
-    name: "Schedule",
+    name: "AI Schedule",
     path: "/schedule",
     page: IrrigationSchedule
   },
@@ -58,7 +58,7 @@ const farm_pages = {
     page: Fertilizer
   },
   irrigation: {
-    name: "Irrigation Valves",
+    name: "Irrigation",
     path: "/irrigation",
     page: IrrigationControl
   },
@@ -81,16 +81,6 @@ const farm_pages = {
     name: "Report",
     path: "/report",
     page: Report
-  },
-  control: {
-    name: "Control",
-    path: "/control",
-    page: Control
-  },
-  moisture: {
-    name: "Moisture",
-    path: "/moisture",
-    page: Moisture
   }
 };
 
@@ -101,8 +91,6 @@ const farm_order = [
   "irrigation",
   "pumps",
   "backwash",
-  "control",
-  "moisture",
   "notifications",
   "report"
 ];
@@ -153,19 +141,29 @@ const getFarmItems = (prefix, layout) =>
 
 const spacerItem = { action: { type: "spacer" } };
 
-const getLogoutItem = (prefix) => ({
-  title: "Logout",
-  action: {
-    type: "link",
-    path: `${prefix}/logout`
+const getBottomItems = (prefix) => [
+  {
+    title: "Users",
+    action: {
+      type: "link",
+      path: `${prefix}/users`
+    }
+  },
+  {
+    title: "Logout",
+    action: {
+      type: "link",
+      path: `${prefix}/logout`
+    }
   }
-});
+];
 
 const getNavItems = (prefix, layout) =>
   [
     [getBrandItem(prefix, layout && layout.company_name)],
     getFarmItems(prefix, layout),
-    [spacerItem, getLogoutItem(prefix)]
+    [spacerItem],
+    getBottomItems(prefix)
   ].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {

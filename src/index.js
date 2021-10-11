@@ -24,11 +24,17 @@ import "tailwind.css";
 
 import { HomePage } from "pages/HomePage";
 import { ScrollToTop } from "components/ScrollToTop";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+
+const theme = createTheme({});
+window.theme = theme;
 
 ReactDOM.render(
-  <HashRouter>
-    <ScrollToTop />
-    <HomePage />
-  </HashRouter>,
+  <ThemeProvider theme={theme}>
+    <HashRouter>
+      <ScrollToTop />
+      <HomePage />
+    </HashRouter>
+  </ThemeProvider>,
   document.getElementById("root")
 );

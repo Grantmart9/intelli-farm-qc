@@ -61,7 +61,8 @@ export const Login = ({ loginUrl }) => {
         }
       })
       .catch((error) => {
-        setMessage(error.response.data.message);
+        const data = error.data || error.response.data;
+        setMessage(data.message);
       });
   }
 

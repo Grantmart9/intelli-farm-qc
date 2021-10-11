@@ -1,15 +1,27 @@
+/**
+ * @description      :
+ * @author           : Grant
+ * @group            :
+ * @created          : 11/10/2021 - 09:50:03
+ *
+ * MODIFICATION LOG
+ * - Version         : 1.0.0
+ * - Date            : 11/10/2021
+ * - Author          : Grant
+ * - Modification    :
+ **/
 import useAxios from "axios-hooks";
 import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
 
-export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
+export const API_URL = "https://lodicon-api-qc.herokuapp.com/api/v1";
 
 export const useApi = (url, config) => {
   const normalizedUrl = typeof url == "string" ? { url } : url;
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const token = localStorage.getItem("token");
   const decoratedUrl = Object.assign({}, normalizedUrl, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    headers: token ? { Authorization: `Bearer ${token}` } : {}
   });
   const [result, fetch] = useAxios(decoratedUrl, config);
   const [retry, setRetry] = useState(null);
@@ -62,8 +74,8 @@ export const useApi = (url, config) => {
   return [
     Object.assign({}, result, {
       loading: !authorized(error) || loading,
-      error: authorized(error) ? error : null,
+      error: authorized(error) ? error : null
     }),
-    decoratedFetch,
+    decoratedFetch
   ];
 };
