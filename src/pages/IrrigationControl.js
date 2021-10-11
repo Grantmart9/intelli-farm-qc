@@ -39,7 +39,7 @@ const EquipmentStatus = ({ data }) => {
   }
 
   return (
-    <div className="-py-2 px-2 pb-2">
+    <div className="px-2 pb-2">
       <div className="font-bold text-2xl mb-2">{data.name}</div>
       <div className="grid grid-cols-2 -mb-2">
         <div className="grid grid-rows-3">
@@ -55,8 +55,8 @@ const EquipmentStatus = ({ data }) => {
           </div>
           <div className="font-bold text-sm text-red-400">{data.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-20 md:ml-10">
-          <img src={image} alt={image} width={100} height={100} />
+        <div className="ml-24 2xl:ml-28 md:ml-10">
+          <img src={image} alt={image} width={70} height={70} />
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@ export const IrrigationControl = () => {
               data.map((irrigation_valve, i) => (
                 <div
                   key={i}
-                  className="bg-gray-300 shadow-md rounded flex mt-3"
+                  className="bg-gray-300 shadow-md rounded flex mt-2"
                 >
                   <EquipmentStatus data={irrigation_valve} />
                 </div>

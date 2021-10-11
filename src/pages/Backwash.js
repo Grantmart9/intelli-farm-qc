@@ -44,15 +44,15 @@ const WashBack = ({ backwash }) => {
       </div>
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-1">
-          <div className="font-bold text-green-800 text-xl">
+          <div className="font-bold text-green-800 text-xl mt-1">
             {backwash.status}
           </div>
           <div key={backwash.alarm} className="font-bold text-sm text-red-400">
             {backwash.alarm}
           </div>
         </div>
-        <div style={{marginLeft:"6rem"}} className="-mt-4">
-          <img src={fertilizer} alt={fertilizer} width={100} height={100} />
+        <div className="ml-24 2xl:ml-28 md:ml-10">
+          <img src={fertilizer} alt={fertilizer} width={70} height={70} />
         </div>
       </div>
     </div>
