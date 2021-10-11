@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import fertilizer from "images/fertilizer.png";
+import backwash from "images/backwash.gif";
 import { useRefetch } from "../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({

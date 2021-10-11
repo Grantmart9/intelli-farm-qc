@@ -39,8 +39,8 @@ const FertilizerValve = ({ valve }) => {
           </div>
           <div className="text-red-400 font-bold text-sm">{valve.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-20 md:ml-10">
-          <img width={100} height={100} src={image} alt={image} />
+        <div className="ml-24 2xl:ml-28 md:ml-10 mb-2">
+          <img width={80} height={80} src={image} alt={image} />
         </div>
       </div>
     </div>

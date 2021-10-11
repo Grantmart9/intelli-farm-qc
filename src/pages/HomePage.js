@@ -18,6 +18,7 @@ import { Navbar } from "components/Navbar";
 import { Login, Logout, LoginContext } from "components/Login";
 import { Users } from "pages/Users";
 import { LandingPage } from "pages/LandingPage";
+import { Control } from "pages/Control";
 import { IrrigationControl } from "pages/IrrigationControl";
 import { Fertilizer } from "pages/Fertilizer";
 import { IrrigationSchedule } from "pages/IrrigationSchedule";
@@ -28,6 +29,7 @@ import { Notifications } from "pages/Notifications";
 import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
 import { SidebarContext } from "../components/Sidebar";
+import Moisture from "pages/Moisture";
 import { useMd } from "media-query";
 import {
   Nav,
@@ -79,6 +81,16 @@ const farm_pages = {
     name: "Report",
     path: "/report",
     page: Report
+  },
+  control: {
+    name: "Control",
+    path: "/control",
+    page: Control
+  },
+  moisture: {
+    name: "Moisture",
+    path: "/moisture",
+    page: Moisture
   }
 };
 
@@ -89,6 +101,8 @@ const farm_order = [
   "irrigation",
   "pumps",
   "backwash",
+  "control",
+  "moisture",
   "notifications",
   "report"
 ];
@@ -213,6 +227,16 @@ const RouteInner = () => {
           component={() => <p>Not Found</p>}
         />
         <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
+        <RouteWithSidebar
+          exact
+          path={Routes.Moisture.path}
+          component={Moisture}
+        />
+        <RouteWithSidebar
+          exact
+          path={Routes.Control.path}
+          component={Control}
+        />
         <RouteWithSidebar
           exact
           path={Routes.Logout.path}
