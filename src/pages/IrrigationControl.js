@@ -35,7 +35,7 @@ const EquipmentStatus = ({ data }) => {
   if (data.time_left == null) {
     timeLeft = null;
   } else {
-    timeLeft = data.time_left + " time left";
+    timeLeft = data.time_left + " min left";
   }
 
   return (
