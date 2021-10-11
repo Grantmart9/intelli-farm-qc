@@ -14,7 +14,7 @@ import useAxios from "axios-hooks";
 import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
 
-export const API_URL = "https://lodicon-api-qc.herokuapp.com/api/v1";
+export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
 
 export const useApi = (url, config) => {
   const normalizedUrl = typeof url == "string" ? { url } : url;
