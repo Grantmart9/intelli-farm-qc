@@ -63,8 +63,9 @@ const RegUser = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
       <h1 className="text-center font-bold text-lg">Register New User</h1>
+     
       <div className="grid grid-rows-3 p-2 gap-2">
-        <div>
+        <div className="flex align-center justify-center items-center">
           <TextField
             onInput={(e) => setUsername(e.target.value)}
             type="username"
@@ -73,7 +74,7 @@ const RegUser = () => {
             variant="outlined"
           ></TextField>
         </div>
-        <div>
+        <div className="flex align-center justify-center items-center">
           <TextField
             onInput={(e) => setPassword(e.target.value)}
             type="password"
@@ -82,7 +83,7 @@ const RegUser = () => {
             variant="outlined"
           ></TextField>
         </div>
-        <div>
+        <div className="flex align-center justify-center items-center">
           <TextField
             type="password"
             onInput={(e) => setConfirmPassword(e.target.value)}
@@ -92,30 +93,36 @@ const RegUser = () => {
             variant="outlined"
           ></TextField>
         </div>
+        <div className="flex align-center justify-center items-center">
         <Button
-          variant="contained"
+          variant="primary"
           type="submit"
           disabled={!valid}
-          className="border-1 border-white text-center"
+          className="border-1 border-white text-center "
           style={{
             display: "inline-block",
             alignContent: "center",
             justifyContent: "center",
             fontFamily: "Nunito Sans",
+            backgroundColor:"steelblue",
             color: "white",
             fontSize: "1rem",
-            width: "100%"
+            width: "50%"
           }}
         >
           Save
         </Button>
+        </div>
         <div className="text-gray-800 text-center">{message}</div>
+        <div className="flex align-center justify-center items-center">
         <img
           style={{ visibility: loading ? "visible" : "hidden" }}
           width={50}
           height={50}
           src={PreloaderBar}
+          alt={PreloaderBar}
         />
+        </div>
       </div>
     </form>
   );
@@ -165,7 +172,7 @@ const ChangeUser = () => {
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
       <h1 className="text-center font-bold text-lg">Change User Credentials</h1>
       <div className="grid grid-rows-3 p-2 gap-2">
-        <div>
+        <div className="flex align-center justify-center items-center">
           <TextField
             onInput={(e) => setPassword(e.target.value)}
             value={password}
@@ -174,7 +181,7 @@ const ChangeUser = () => {
             variant="outlined"
           ></TextField>
         </div>
-        <div>
+        <div className="flex align-center justify-center items-center">
           <TextField
             onInput={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
@@ -184,8 +191,9 @@ const ChangeUser = () => {
             variant="outlined"
           ></TextField>
         </div>
+        <div className="flex align-center justify-center items-center">
         <Button
-          variant="contained"
+        
           disabled={!valid}
           type="submit"
           className="border-1 border-white text-center"
@@ -195,19 +203,24 @@ const ChangeUser = () => {
             justifyContent: "center",
             fontFamily: "Nunito Sans",
             color: "white",
+            backgroundColor:"steelblue",
             fontSize: "1rem",
-            width: "100%"
+            width: "50%"
           }}
         >
           Save
         </Button>
+        </div>
         <div className="text-gray-800 text-center">{message}</div>
+        <div className="flex align-center justify-center items-center">
         <img
           style={{ visibility: loading ? "visible" : "hidden" }}
           width={50}
           height={50}
           src={PreloaderBar}
+          alt={PreloaderBar}
         />
+        </div>
       </div>
     </form>
   );
