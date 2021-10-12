@@ -28,14 +28,14 @@ const FarmsData = ({ farm }) => (
         <div className="font-bold text-md mt-2">{farm.name}</div>
       </div>
       <div className="inline-block shadow-md text-center rounded p-1">
-        <div className="font-bold rounded text-xl">
+        <div className="font-bold rounded text-md mt-2 ">
           Water Supply <div>{farm.water_total} m³/h</div>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-2 p-1">
       <div className="p-2 shadow-md text-center rounded ">
-        <div className="font-bold text-xl pb-2">Irrigation</div>
+        <div className="font-bold text-md pb-2">Irrigation</div>
 
         <div className="p-2">
           <ProgressBar
@@ -46,7 +46,7 @@ const FarmsData = ({ farm }) => (
         </div>
       </div>
       <div className="p-2 shadow-md text-center rounded">
-        <div className="font-bold text-xl pb-2">EC</div>
+        <div className="font-bold text-md pb-2">EC</div>
         <div className="font-bold text-sm">Value: {farm.ec_value} µS</div>
         <div className="font-bold text-sm">Target: {farm.ec_target} µS</div>
       </div>

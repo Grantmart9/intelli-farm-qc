@@ -63,7 +63,7 @@ const RegUser = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
       <h1 className="text-center font-bold text-lg">Register New User</h1>
-     
+
       <div className="grid grid-rows-3 p-2 gap-2">
         <div className="flex align-center justify-center items-center">
           <TextField
@@ -93,35 +93,35 @@ const RegUser = () => {
             variant="outlined"
           ></TextField>
         </div>
-        <div className="flex align-center justify-center items-center">
-        <Button
-          variant="primary"
-          type="submit"
-          disabled={!valid}
-          className="border-1 border-white text-center "
-          style={{
-            display: "inline-block",
-            alignContent: "center",
-            justifyContent: "center",
-            fontFamily: "Nunito Sans",
-            backgroundColor:"steelblue",
-            color: "white",
-            fontSize: "1rem",
-            width: "50%"
-          }}
-        >
-          Save
-        </Button>
-        </div>
         <div className="text-gray-800 text-center">{message}</div>
         <div className="flex align-center justify-center items-center">
-        <img
-          style={{ visibility: loading ? "visible" : "hidden" }}
-          width={50}
-          height={50}
-          src={PreloaderBar}
-          alt={PreloaderBar}
-        />
+          <img
+            style={{ visibility: loading ? "visible" : "hidden" }}
+            width={50}
+            height={50}
+            src={PreloaderBar}
+            alt={PreloaderBar}
+          />
+        </div>
+        <div className="flex align-center justify-center items-center">
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={!valid}
+            className="border-1 border-white text-center"
+            style={{
+              display: "inline-block",
+              alignContent: "center",
+              justifyContent: "center",
+              fontFamily: "Nunito Sans",
+              backgroundColor: "steelblue",
+              color: "white",
+              fontSize: "1rem",
+              width: "50%"
+            }}
+          >
+            Save
+          </Button>
         </div>
       </div>
     </form>
@@ -191,35 +191,34 @@ const ChangeUser = () => {
             variant="outlined"
           ></TextField>
         </div>
-        <div className="flex align-center justify-center items-center">
-        <Button
-        
-          disabled={!valid}
-          type="submit"
-          className="border-1 border-white text-center"
-          style={{
-            display: "inline-block",
-            alignContent: "center",
-            justifyContent: "center",
-            fontFamily: "Nunito Sans",
-            color: "white",
-            backgroundColor:"steelblue",
-            fontSize: "1rem",
-            width: "50%"
-          }}
-        >
-          Save
-        </Button>
-        </div>
         <div className="text-gray-800 text-center">{message}</div>
         <div className="flex align-center justify-center items-center">
-        <img
-          style={{ visibility: loading ? "visible" : "hidden" }}
-          width={50}
-          height={50}
-          src={PreloaderBar}
-          alt={PreloaderBar}
-        />
+          <img
+            style={{ visibility: loading ? "visible" : "hidden" }}
+            width={50}
+            height={50}
+            src={PreloaderBar}
+            alt={PreloaderBar}
+          />
+        </div>
+        <div className="flex align-center justify-center items-center">
+          <Button
+            disabled={!valid}
+            type="submit"
+            className="border-1 border-white text-center"
+            style={{
+              display: "inline-block",
+              alignContent: "center",
+              justifyContent: "center",
+              fontFamily: "Nunito Sans",
+              color: "white",
+              backgroundColor: "steelblue",
+              fontSize: "1rem",
+              width: "50%"
+            }}
+          >
+            Save
+          </Button>
         </div>
       </div>
     </form>

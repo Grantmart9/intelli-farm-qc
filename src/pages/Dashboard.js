@@ -48,7 +48,7 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-xl font-bold">Next Start time</div>
+    <div className="text-xl font-bold">Next Start Time</div>
     <div className="font-bold text-2xl">{data.next_start_time}</div>
   </div>
 );
