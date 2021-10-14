@@ -32,11 +32,11 @@ export const Login = ({ loginUrl }) => {
       url: loginUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -67,7 +67,7 @@ export const Login = ({ loginUrl }) => {
   }
 
   return (
-    <Dialog open={loginOpen} onClose={onClose}>
+    <Dialog open={loginOpen}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
         <div className="font-bold align-self-center">Credentials</div>
         <TextField
@@ -100,11 +100,11 @@ export const Logout = ({ logoutUrl, redirect }) => {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -117,7 +117,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out."
+          message: "Something happened when logging out.",
         })
       );
   }, [postLogout]);
