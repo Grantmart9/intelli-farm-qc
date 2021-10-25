@@ -63,6 +63,27 @@ const EquipmentStatus = ({ data }) => {
   );
 };
 
+const RenderFertilizer1 = ({ data }) =>
+  data.map((irrigation_valve, i) => (
+    <div key={i} className="bg-gray-300 shadow-md rounded flex mt-2">
+      <EquipmentStatus data={irrigation_valve} />
+    </div>
+  ));
+
+const RenderFertilizer2 = ({ data }) => (
+  <BrushChart
+    data={data.map(({ datetime, y, ...rest }) => ({
+      ...rest,
+      x: new Date(datetime),
+      y: Number(y),
+    }))}
+  />
+);
+
+const RenderFertilizer3 = ({ data }) => (
+  <HomeFlowFertilizerBarChartV data={data} />
+);
+
 export const IrrigationControl = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }, refetch] = useApi(
@@ -86,40 +107,21 @@ export const IrrigationControl = () => {
         <div className="xl:grid grid-cols-4 p-4 gap-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
-            renderData={({ data }) =>
-              data.map((irrigation_valve, i) => (
-                <div
-                  key={i}
-                  className="bg-gray-300 shadow-md rounded flex mt-2"
-                >
-                  <EquipmentStatus data={irrigation_valve} />
-                </div>
-              ))
-            }
+            renderData={RenderFertilizer1}
           />
         </div>
         <div className="bg-gray-300 rounded shadow-md ml-6 mr-6">
           <div className="w-full h-full">
             <AxiosSpinner
               callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
-              renderData={({ data }) => (
-                <HomeFlowFertilizerBarChartV data={data} />
-              )}
+              renderData={RenderFertilizer3}
             />
           </div>
         </div>
         <div className="col-span-3 bg-gray-300  rounded shadow-md m-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
-            renderData={({ data }) => (
-              <BrushChart
-                data={data.map(({ datetime, y, ...rest }) => ({
-                  ...rest,
-                  x: new Date(datetime),
-                  y: Number(y)
-                }))}
-              />
-            )}
+            renderData={RenderFertilizer2}
           />
         </div>
       </div>

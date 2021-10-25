@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Logo from "images/Logo.png";
-import { Navbar as Nav, Button } from "@themesberg/react-bootstrap";
 import { SidebarContext } from "components/Sidebar";
 
 export const Navbar = () => {

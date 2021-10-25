@@ -13,6 +13,7 @@
 import useAxios from "axios-hooks";
 import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
+import { usePropertyAccessor } from "@nivo/core";
 
 export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
 
@@ -21,7 +22,7 @@ export const useApi = (url, config) => {
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const token = localStorage.getItem("token");
   const decoratedUrl = Object.assign({}, normalizedUrl, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {}
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
   const [result, fetch] = useAxios(decoratedUrl, config);
   const [retry, setRetry] = useState(null);
@@ -74,8 +75,21 @@ export const useApi = (url, config) => {
   return [
     Object.assign({}, result, {
       loading: !authorized(error) || loading,
-      error: authorized(error) ? error : null
+      error: authorized(error) ? error : null,
     }),
-    decoratedFetch
+    decoratedFetch,
   ];
 };
+
+export const post = (url) => [
+  {
+    url,
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+  },
+  {
+    manual: true,
+  },
+];

@@ -36,7 +36,7 @@ import {
   Badge,
   Image,
   Button,
-  Accordion
+  Accordion,
 } from "@themesberg/react-bootstrap";
 
 const AppLayout = createContext();
@@ -45,43 +45,48 @@ const farm_pages = {
   dashboard: {
     name: "Dashboard",
     path: "/dashboard",
-    page: Dashboard
+    page: Dashboard,
   },
   schedule: {
     name: "AI Schedule",
     path: "/schedule",
-    page: IrrigationSchedule
+    page: IrrigationSchedule,
   },
   fertilizer: {
     name: "Fertilizer",
     path: "/fertilizer",
-    page: Fertilizer
+    page: Fertilizer,
   },
   irrigation: {
     name: "Irrigation",
     path: "/irrigation",
-    page: IrrigationControl
+    page: IrrigationControl,
   },
   pumps: {
     name: "Pumps",
     path: "/pumps",
-    page: Pumps
+    page: Pumps,
   },
   backwash: {
     name: "Backwash",
     path: "/backwash",
-    page: Backwash
+    page: Backwash,
   },
   notifications: {
     name: "Notifications",
     path: "/notifications",
-    page: Notifications
+    page: Notifications,
   },
   report: {
     name: "Report",
     path: "/report",
-    page: Report
-  }
+    page: Report,
+  },
+  control: {
+    name: "Control",
+    path: "/controller_state",
+    page: Control,
+  },
 };
 
 const farm_order = [
@@ -92,7 +97,8 @@ const farm_order = [
   "pumps",
   "backwash",
   "notifications",
-  "report"
+  "report",
+  "control",
 ];
 
 const FarmRoutes = () => (
@@ -112,8 +118,8 @@ const getBrandItem = (prefix, title) => ({
   title: title,
   action: {
     type: "brand",
-    path: `${prefix}/`
-  }
+    path: `${prefix}/`,
+  },
 });
 
 const getFarmItems = (prefix, layout) =>
@@ -132,11 +138,11 @@ const getFarmItems = (prefix, layout) =>
                 title: farmPage.name,
                 action: {
                   type: "link",
-                  path: `${prefix}/${path}`
-                }
+                  path: `${prefix}/${path}`,
+                },
               };
-            })
-        }
+            }),
+        },
       }));
 
 const spacerItem = { action: { type: "spacer" } };
@@ -146,16 +152,16 @@ const getBottomItems = (prefix) => [
     title: "Users",
     action: {
       type: "link",
-      path: `${prefix}/users`
-    }
+      path: `${prefix}/users`,
+    },
   },
   {
     title: "Logout",
     action: {
       type: "link",
-      path: `${prefix}/logout`
-    }
-  }
+      path: `${prefix}/logout`,
+    },
+  },
 ];
 
 const getNavItems = (prefix, layout) =>
@@ -163,7 +169,7 @@ const getNavItems = (prefix, layout) =>
     [getBrandItem(prefix, layout && layout.company_name)],
     getFarmItems(prefix, layout),
     [spacerItem],
-    getBottomItems(prefix)
+    getBottomItems(prefix),
   ].flat();
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
@@ -182,7 +188,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <Navbar />
           <div
             style={{
-              height: "calc(100vh - 60px)"
+              height: "calc(100vh - 60px)",
             }}
             className="flex"
           >
@@ -190,7 +196,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 
             <main
               style={{
-                width: show ? "calc(100vw - 300px)" : "calc(100vw)"
+                width: show ? "calc(100vw - 300px)" : "calc(100vw)",
               }}
               className={`relative ${
                 fullSidebar ? "hidden" : ""

@@ -17,7 +17,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
 import useAxios from "axios-hooks";
-import { useApi } from "api";
+import { useApi, post } from "api";
 
 export const LoginContext = createContext();
 
@@ -27,18 +27,7 @@ export const Login = ({ loginUrl }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const [, postLogin] = useAxios(
-    {
-      url: loginUrl,
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-    },
-    {
-      manual: true,
-    }
-  );
+  const [, postLogin] = useAxios(...post(loginUrl));
 
   const onClose = () => setLoginOpen(false);
 
@@ -95,18 +84,7 @@ export const Login = ({ loginUrl }) => {
 
 export const Logout = ({ logoutUrl, redirect }) => {
   const [state, setState] = useState({ type: "message", message: "" });
-  const [, postLogout] = useApi(
-    {
-      url: logoutUrl,
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-    },
-    {
-      manual: true,
-    }
-  );
+  const [, postLogout] = useApi(...post(logoutUrl));
 
   useEffect(() => {
     postLogout()

@@ -15,6 +15,6 @@ export const Routes = {
   Logout: { path: "/:clientId/logout" },
   NotFound: { path: "/:clientId/notfound" },
   Users: { path: "/:clientId/users" },
-  Control: { path: "/:clientId/control" },
-  Moisture: { path: "/:clientId/moisture" }
+  Control: { path: "/:clientId/controller_state" },
+  Moisture: { path: "/:clientId/moisture" },
 };

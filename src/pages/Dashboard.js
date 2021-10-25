@@ -24,16 +24,16 @@ import { useRefetch } from "components/Timer";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
+    backgroundColor: "#05ab24",
+  },
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
@@ -82,13 +82,13 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           enabled: true,
           formatter: function (val) {
             return val.toFixed(2) + "%";
-          }
+          },
         },
         labels: labels,
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom"
+          position: "bottom",
         },
         title: {
           text: "Fertilizer Ratio",
@@ -96,9 +96,9 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
@@ -111,33 +111,33 @@ export const HomeFlowWaterUsage = ({ data }) => {
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
-        }
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
+        },
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
         },
         subtitle: {
           text: data.name,
-          offsetX: 30
+          offsetX: 30,
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30
-        }
+          offsetX: 30,
+        },
       }}
     />
   );
@@ -158,7 +158,6 @@ export const Dashboard = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
-  console.log(data);
 
   return (
     <div className="p-1">

@@ -12,7 +12,7 @@
  **/
 import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL, useApi } from "api";
+import { API_URL, useApi, post } from "api";
 import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
@@ -65,7 +65,7 @@ const SaveButton = () => {
         borderRadius: "0.2cm",
         color: "white",
         width: "5rem",
-        height: "2rem"
+        height: "2rem",
       }}
     >
       Send
@@ -79,16 +79,7 @@ export const Report = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [{ data, loading, error }, postReport] = useApi(
-    {
-      url: `${API_URL}/-${farmId}/report`,
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      }
-    },
-    {
-      manual: true
-    }
+    ...post(`${API_URL}/-${farmId}/report`)
   );
 
   const handleSubmit = useCallback(
@@ -97,8 +88,8 @@ export const Report = () => {
       postReport({
         data: {
           start_date: moment(date).format(dateFormat),
-          email: email
-        }
+          email: email,
+        },
       }).catch((e) => setMessage(e.toString()));
     },
     [date, email]

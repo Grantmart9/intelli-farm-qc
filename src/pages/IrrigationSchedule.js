@@ -13,7 +13,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
-import { API_URL, useApi } from "api";
+import { API_URL, useApi, post } from "api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
@@ -21,7 +21,7 @@ import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import {
   MobileDateTimePicker,
-  LocalizationProvider
+  LocalizationProvider,
 } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
@@ -67,28 +67,28 @@ const sectionColumns = [
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: false
+    editable: false,
   },
   {
     field: "run_time",
     headerName: "Run time",
     type: "number",
-    editable: false
+    editable: false,
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: false
+    editable: false,
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: false
-  }
+    editable: false,
+  },
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
@@ -123,20 +123,20 @@ const fertilizerColumns = [
     field: "name",
     headerName: "Name",
     type: "text",
-    editable: false
+    editable: false,
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint µS",
     type: "number",
-    editable: true
+    editable: true,
   },
   {
     field: "flow_rate",
     headerName: "Flow rate ℓ/m³",
     type: "number",
-    editable: true
-  }
+    editable: true,
+  },
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
@@ -148,7 +148,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
       const editedFertilizers = [
         ...fertilizers.slice(0, id),
         editedFertilizer,
-        ...fertilizers.slice(id + 1)
+        ...fertilizers.slice(id + 1),
       ];
       const editedSection = { ...section, fertilizer: editedFertilizers };
       if (onChange) {
@@ -201,18 +201,7 @@ export const IrrigationSchedule = () => {
     }
   }, [data]);
 
-  const [, postSchedule] = useApi(
-    {
-      url: `${API_URL}/-${farmId}/schedule`,
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      }
-    },
-    {
-      manual: true
-    }
-  );
+  const [, postSchedule] = useApi(...post(`${API_URL}/-${farmId}/schedule`));
 
   if (loading || !schedule) return <Preloader />;
   if (error) return <img src={ErrorGif} alt={ErrorGif} />;

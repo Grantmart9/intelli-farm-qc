@@ -14,7 +14,7 @@ import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useApi, API_URL } from "api";
+import { useApi, API_URL, post } from "api";
 import PreloaderBar from "images/PreloaderBar.gif";
 
 const convertMessage = (message) =>
@@ -22,25 +22,17 @@ const convertMessage = (message) =>
 
 const RegUser = () => {
   const { clientId } = useParams();
-
   const [{ loading }, postRegistration] = useApi(
-    {
-      url: `${API_URL}/${clientId}/app1/registration`,
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      }
-    },
-    {
-      manual: true
-    }
+    ...post(`${API_URL}/${clientId}/app1/registration`)
   );
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+
   const valid = password == confirmPassword;
   const validConfirm = confirmPassword == "" || valid;
-  const [message, setMessage] = useState("");
 
   const handleSubmit = useCallback(
     (e) => {
@@ -105,7 +97,7 @@ const RegUser = () => {
         </div>
         <div className="flex align-center justify-center items-center">
           <Button
-            variant="primary"
+            variant="contained"
             type="submit"
             disabled={!valid}
             className="border-1 border-white text-center"
@@ -117,7 +109,7 @@ const RegUser = () => {
               backgroundColor: "steelblue",
               color: "white",
               fontSize: "1rem",
-              width: "50%"
+              width: "50%",
             }}
           >
             Save
@@ -131,16 +123,7 @@ const RegUser = () => {
 const ChangeUser = () => {
   const { clientId } = useParams();
   const [{ loading }, postPassword] = useApi(
-    {
-      url: `${API_URL}/${clientId}/app1/password`,
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      }
-    },
-    {
-      manual: true
-    }
+    ...post(`${API_URL}/${clientId}/app1/password`)
   );
 
   const [password, setPassword] = useState("");
@@ -214,7 +197,7 @@ const ChangeUser = () => {
               color: "white",
               backgroundColor: "steelblue",
               fontSize: "1rem",
-              width: "50%"
+              width: "50%",
             }}
           >
             Save
