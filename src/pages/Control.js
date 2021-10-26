@@ -12,175 +12,79 @@
  **/
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { Chip, TextField } from "@material-ui/core";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useApi, API_URL, post } from "api";
 import { Preloader } from "components/Preloader";
 import { Button } from "@mui/material";
 
-// const ControlPanel = () => {
-//   return (
-//     <div className="grid grid-cols-3 gap-2 p-2">
-//       <div className="bg-gray-400 rounded shadow-md p-2">
-//         <div className="flex align-center justify-center text-xl font-bold mb-2">
-//           Control Mode
-//         </div>
-//         <div className=" bg-gray-500 rounded flex align-center justify-center text-sm font-bold">
-//           AI
-//         </div>
-//       </div>
-//       <div className="bg-gray-400 rounded shadow-md p-2">
-//         <div className="flex align-center justify-center text-xl font-bold mb-2">
-//           State
-//         </div>
-//         <div className="bg-gray-500 rounded flex align-center justify-center text-sm font-bold">
-//           Running
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
 const ControlPanel = ({
   value,
   onMode,
+  onMode1,
   onBlockControl,
+  onBlockControl1,
   onProcessHold,
   onAlarmReset,
-  onStop,
+  onStop
 }) => {
-  const { timestamp, mode, block_control, state, alarms } = value;
+  const { timestamp, mode, mode1, block_control, state, alarms } = value;
+
   return (
     <div className="flex flex-col items-center space-y-2">
-      <div className="grid grid-cols-2 gap-2 text-left m-4">
-        <div className="text-sm ">Controller Time</div>
-        <Chip label={timestamp} />
-        <div className="text-sm">Alarms</div>
-        <Chip label={alarms} />
-        <div className="text-sm">State</div>
-        <Chip label={state} />
+      <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md">
+        <div className="text-2xl ">Controller Time</div>
+        <div className="text-md">{timestamp}</div>
+        <div className="text-2xl">Alarms</div>
+        <div className="text-md">{alarms}</div>
+        <div className="text-2xl">State</div>
+        <div className="text-md">{state}</div>
       </div>
-      <ToggleButtonGroup name="mode" value={mode} onChange={onMode} exclusive>
-        <ToggleButton value={"Automatic"}>Automatic</ToggleButton>
-        <ToggleButton value={"Manual"}>Manual</ToggleButton>
-      </ToggleButtonGroup>
-      <ToggleButtonGroup
-        name="block_control"
-        value={block_control}
-        onChange={onBlockControl}
-        exclusive
-      >
-        <ToggleButton value={"AI Control"}>AI Control</ToggleButton>
-        <ToggleButton value={"Manual Date Time"}>Manual Date Time</ToggleButton>
-      </ToggleButtonGroup>
-      <Button variant="outlined" onClick={onProcessHold}>
-        Process Hold
-      </Button>
-      <Button variant="outlined" onClick={onAlarmReset}>
-        Alarm Reset
-      </Button>
-      <Button variant="outlined" onClick={onStop}>
-        Stop
-      </Button>
-    </div>
-  );
-};
+      <div className="bg-gray-400 rounded shadow-md p-2">
+        <div className="items-center align-center justify-center flex">
+          <div className="inline-flex gap-2">
+            <ToggleButtonGroup onChange={onMode} value={mode} exclusive>
+              <ToggleButton value={"Manual"}>Manual</ToggleButton>
+            </ToggleButtonGroup>
 
-const BlockName = () => {
-  return (
-    <div className="grid grid-cols-3 gap-2 p-2 ">
-      <div className="bg-gray-500 rounded shadow-md text-center pt-2">
-        Crimson
-      </div>
-      <div className="bg-gray-500 rounded shadow-md p-2 flex">
-        <TextField
-          id="datetime-local"
-          type="datetime-local"
-          defaultValue="2017-05-24T10:30"
-          InputLabelProps={{
-            shrink: false,
-          }}
-        />
-      </div>
-      <div className="bg-gray-500 rounded shadow-md pt-2">200min</div>
-    </div>
-  );
-};
-const TanksNames = () => {
-  return (
-    <div className="grid grid-rows-6 align-right">
-      <div className="text-2xl font-bold mb-1">Name</div>
-      <div className="text-lg font-bold">Tank: A</div>
-      <div className="text-lg font-bold">Tank: B</div>
-      <div className="text-lg font-bold">Tank: C</div>
-      <div className="text-lg font-bold">Tank: D</div>
-      <div className="text-lg font-bold">Tank: E</div>
-    </div>
-  );
-};
-const TanksValues = () => {
-  return (
-    <div className="grid grid-rows-6">
-      <div className="text-2xl font-bold mb-1">Flow rate ℓ/mᶟ</div>
-      <div className="text-lg font-bold">122.3</div>
-      <div className="text-lg font-bold">211.1</div>
-      <div className="text-lg font-bold">333.3</div>
-      <div className="text-lg font-bold">333.3</div>
-      <div className="text-lg font-bold">333.3</div>
-    </div>
-  );
-};
-const TanksEC = () => {
-  return (
-    <div className="grid grid-rows-6">
-      <div className="text-2xl font-bold mb-1">EC Setpoint µS</div>
-      <div className="text-lg font-bold">274</div>
-      <div className="text-lg font-bold">166</div>
-      <div className="text-lg font-bold">165</div>
-      <div className="text-lg font-bold">66</div>
-      <div className="text-lg font-bold">47</div>
-    </div>
-  );
-};
+            <ToggleButtonGroup onChange={onMode1} value={mode1} exclusive>
+              <ToggleButton value={"Automatic"}>Automatic</ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+          <div className="inline-flex  gap-2 ml-2">
+            <ToggleButtonGroup
+              value={block_control}
+              onChange={onBlockControl}
+              exclusive
+            >
+              <ToggleButton value={"AI Control"}>AI Control</ToggleButton>
+            </ToggleButtonGroup>
 
-const Tanks = () => {
-  return (
-    <div className="bg-gray-500 rounded">
-      <div className="grid grid-cols-3 p-2">
-        <TanksNames />
-        <TanksEC />
-        <TanksValues />
+            <ToggleButtonGroup
+              value={block_control}
+              onChange={onBlockControl1}
+              exclusive
+            >
+              <ToggleButton value={"Manual Date Time"}>
+                Manual Date Time
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-1 p-2">
+          <Button color="primary" variant="contained" onClick={onProcessHold}>
+            Process Hold
+          </Button>
+          <Button color="primary" variant="contained" onClick={onAlarmReset}>
+            Alarm Reset
+          </Button>
+          <Button color="primary" variant="contained" onClick={onStop}>
+            Stop
+          </Button>
+        </div>
       </div>
     </div>
   );
-};
-
-const ControlStartStop = () => {
-  return (
-    <div className="rounded shadow-lg p-3 mt-2">
-      <div className="grid grid-cols-3">
-        <div>Name</div>
-        <div>Start Time</div>
-        <div>Run Time</div>
-      </div>
-      <div>
-        <BlockName />
-      </div>
-      <div className="">
-        <Tanks />
-      </div>
-    </div>
-  );
-};
-
-const MODE = {
-  Automatic: 1,
-  Manual: 2,
-};
-const BLOCK_CONTROL = {
-  AI: 1,
-  "Manual Date Time": 2,
 };
 
 const usePost = (handle, refetch, set) =>
@@ -199,11 +103,12 @@ export const Control = () => {
   const { farmId } = useParams();
   const prefix = `${API_URL}/-${farmId}`;
 
-  const [{ data, loading: loadingData, error }, refetch] = useApi(
+  const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
-
+  const [, postMode1] = useApi(...post(`${prefix}/mode`));
   const [, postMode] = useApi(...post(`${prefix}/mode`));
+  const [, postBlockControl1] = useApi(...post(`${prefix}/block_control`));
   const [, postBlockControl] = useApi(...post(`${prefix}/block_control`));
   const [, postProcessHold] = useApi(...post(`${prefix}/process_hold`));
   const [, postAlarmReset] = useApi(...post(`${prefix}/alarm_reset`));
@@ -215,18 +120,26 @@ export const Control = () => {
 
   const d = (key, value) => ({ data: { [key]: value } });
 
-  const handleMode = usePost(
-    (e, mode) => postMode(d("mode", MODE[mode])),
+  const handleMode = usePost(() => postMode(d("mode", 2)), refetch, setPosting);
+  ///
+  const handleMode1 = usePost(
+    () => postMode1(d("mode", 1)),
     refetch,
     setPosting
   );
-
+  ///
   const handleBlockControl = usePost(
-    (e, blockControl) =>
-      postBlockControl(d("block_control", BLOCK_CONTROL[blockControl])),
+    () => postBlockControl(d("block_control", 1)),
     refetch,
     setPosting
   );
+  ///
+  const handleBlockControl1 = usePost(
+    () => postBlockControl1(d("block_control", 2)),
+    refetch,
+    setPosting
+  );
+  ///
 
   const handleProcessHold = usePost(
     () => postProcessHold(d("process_hold", 1)),
@@ -239,7 +152,6 @@ export const Control = () => {
     refetch,
     setPosting
   );
-
   const handleStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
   if (!data || loading) return <Preloader />;
@@ -248,19 +160,16 @@ export const Control = () => {
     <div className="p-4">
       <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
         <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
-          Control
           <ControlPanel
             value={data}
             onMode={handleMode}
+            onMode1={handleMode1}
             onBlockControl={handleBlockControl}
+            onBlockControl1={handleBlockControl1}
             onProcessHold={handleProcessHold}
             onAlarmReset={handleAlarmReset}
             onStop={handleStop}
           />
-        </div>
-        <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
-          Manual Date&Time
-          <ControlStartStop />
         </div>
       </div>
     </div>
