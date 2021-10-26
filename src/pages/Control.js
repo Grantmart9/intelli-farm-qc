@@ -10,10 +10,8 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useApi, API_URL, post } from "api";
 import { Preloader } from "components/Preloader";
 import { Button } from "@mui/material";
@@ -28,8 +26,7 @@ const ControlPanel = ({
   onAlarmReset,
   onStop
 }) => {
-  const { timestamp, mode, mode1, block_control, state, alarms } = value;
-
+  const { timestamp, mode, block_control, state, alarms } = value;
   return (
     <div className="flex flex-col items-center space-y-2">
       <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md">
@@ -43,42 +40,22 @@ const ControlPanel = ({
       <div className="bg-gray-400 rounded shadow-md p-2">
         <div className="items-center align-center justify-center flex">
           <div className="inline-flex gap-2">
-            <ToggleButtonGroup onChange={onMode} value={mode} exclusive>
-              <ToggleButton value={"Manual"}>Manual</ToggleButton>
-            </ToggleButtonGroup>
-
-            <ToggleButtonGroup onChange={onMode1} value={mode1} exclusive>
-              <ToggleButton value={"Automatic"}>Automatic</ToggleButton>
-            </ToggleButtonGroup>
-          </div>
+              <Button onClick={onMode} value={mode} variant="contained" color="primary">Manual</Button>
+              <Button onClick={onMode1} value={mode} variant="contained" color="success">Automatic</Button>
+          </div>{onMode}
           <div className="inline-flex  gap-2 ml-2">
-            <ToggleButtonGroup
-              value={block_control}
-              onChange={onBlockControl}
-              exclusive
-            >
-              <ToggleButton value={"AI Control"}>AI Control</ToggleButton>
-            </ToggleButtonGroup>
-
-            <ToggleButtonGroup
-              value={block_control}
-              onChange={onBlockControl1}
-              exclusive
-            >
-              <ToggleButton value={"Manual Date Time"}>
-                Manual Date Time
-              </ToggleButton>
-            </ToggleButtonGroup>
+            <Button onClick={onBlockControl} value={block_control} variant="contained" color="primary">AI Control</Button>
+            <Button onClick={onBlockControl1} value={block_control} variant="contained" color="success">Manual Date & Time</Button>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-1 p-2">
-          <Button color="primary" variant="contained" onClick={onProcessHold}>
+          <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
-          <Button color="primary" variant="contained" onClick={onAlarmReset}>
+          <Button color="warning" variant="contained" onClick={onAlarmReset}>
             Alarm Reset
           </Button>
-          <Button color="primary" variant="contained" onClick={onStop}>
+          <Button color="error" variant="contained" onClick={onStop}>
             Stop
           </Button>
         </div>
@@ -152,6 +129,7 @@ export const Control = () => {
     refetch,
     setPosting
   );
+
   const handleStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
   if (!data || loading) return <Preloader />;
