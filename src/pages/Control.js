@@ -39,8 +39,8 @@ const ControlPanel = ({
         <div className="text-md">{state}</div>
       </div>
       <div className="bg-gray-400 rounded shadow-md p-2">
-        <div className="items-center align-center justify-center flex">
-          <div className="inline-flex gap-2">
+        <div className="block align-center">
+          <div className="ml-2">
             <Button
               onClick={onMode}
               value={mode}
@@ -49,6 +49,8 @@ const ControlPanel = ({
             >
               Manual
             </Button>
+          </div>
+          <div className="ml-2">
             <Button
               onClick={onMode1}
               value={mode}
@@ -58,8 +60,7 @@ const ControlPanel = ({
               Automatic
             </Button>
           </div>
-          {onMode}
-          <div className="inline-flex gap-2 ml-2">
+          <div className="mt-2 ml-2">
             <Button
               onClick={onBlockControl1}
               value={block_control}
@@ -68,6 +69,8 @@ const ControlPanel = ({
             >
               Manual Date & Time
             </Button>
+          </div>
+          <div className="ml-2">
             <Button
               onClick={onBlockControl}
               value={block_control}
