@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import { useApi, API_URL, post } from "api";
 import { Preloader } from "components/Preloader";
 import { Button } from "@mui/material";
+import FarmTable from "./ControlGrid";
 
 const ControlPanel = ({
   value,
@@ -28,8 +29,8 @@ const ControlPanel = ({
 }) => {
   const { timestamp, mode, block_control, state, alarms } = value;
   return (
-    <div className="flex flex-col items-center space-y-2">
-      <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md">
+    <div className="block items-center p-1">
+      <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
         <div className="text-2xl ">Controller Time</div>
         <div className="text-md">{timestamp}</div>
         <div className="text-2xl">Alarms</div>
@@ -40,12 +41,41 @@ const ControlPanel = ({
       <div className="bg-gray-400 rounded shadow-md p-2">
         <div className="items-center align-center justify-center flex">
           <div className="inline-flex gap-2">
-              <Button onClick={onMode} value={mode} variant="contained" color="primary">Manual</Button>
-              <Button onClick={onMode1} value={mode} variant="contained" color="success">Automatic</Button>
-          </div>{onMode}
-          <div className="inline-flex  gap-2 ml-2">
-            <Button onClick={onBlockControl} value={block_control} variant="contained" color="primary">AI Control</Button>
-            <Button onClick={onBlockControl1} value={block_control} variant="contained" color="success">Manual Date & Time</Button>
+            <Button
+              onClick={onMode}
+              value={mode}
+              variant="contained"
+              color="primary"
+            >
+              Manual
+            </Button>
+            <Button
+              onClick={onMode1}
+              value={mode}
+              variant="contained"
+              color="success"
+            >
+              Automatic
+            </Button>
+          </div>
+          {onMode}
+          <div className="inline-flex gap-2 ml-2">
+            <Button
+              onClick={onBlockControl1}
+              value={block_control}
+              variant="contained"
+              color="primary"
+            >
+              Manual Date & Time
+            </Button>
+            <Button
+              onClick={onBlockControl}
+              value={block_control}
+              variant="contained"
+              color="success"
+            >
+              AI Control
+            </Button>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-1 p-2">
@@ -135,8 +165,8 @@ export const Control = () => {
   if (!data || loading) return <Preloader />;
 
   return (
-    <div className="p-4">
-      <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
+    <div className="flex flex-col p-4">
+      <div className="align-items-center align-content-center justify-content-center p-1">
         <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
           <ControlPanel
             value={data}
@@ -148,6 +178,11 @@ export const Control = () => {
             onAlarmReset={handleAlarmReset}
             onStop={handleStop}
           />
+        </div>
+        <div className="p-2">
+          <div className="bg-gray-400 rounded shadow-md p-2">
+            <FarmTable />
+          </div>
         </div>
       </div>
     </div>
