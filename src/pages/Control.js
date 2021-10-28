@@ -17,7 +17,6 @@ import { Button } from "@mui/material";
 import { AxiosSpinner } from "components/AxiosSpinner";
 import { Preloader } from "components/Preloader";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -39,59 +38,52 @@ const ControlPanel = ({
   return (
     <div className="block items-center p-1">
       <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
-        <div className="text-2xl ">Controller Time</div>
-        <div className="text-md">{timestamp}</div>
-        <div className="text-2xl">Alarms</div>
-        <div className="text-md">{alarms}</div>
-        <div className="text-2xl">State</div>
-        <div className="text-md">{state}</div>
+        <div className="text-2xl ">Controller Time:</div>
+        <div className="text-md"> {timestamp}</div>
+        <div className="text-2xl">Alarms:</div>
+        <div className="text-md"> {alarms}</div>
+        <div className="text-2xl">State:</div>
+        <div className="text-md"> {state}</div>
       </div>
-      <div className="bg-gray-400 rounded shadow-md p-2">
-        <div className="inline-flex">
-          <div className="ml-2">
-            <Button
-              onClick={onMode}
-              value={mode}
-              variant="contained"
-              color="primary"
-            >
-              Manual
-            </Button>
-          </div>
-          <div className="ml-2">
-            <Button
-              onClick={onMode1}
-              value={mode}
-              variant="contained"
-              color="success"
-            >
-              Automatic
-            </Button>
-          </div>
+      <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
+        <div className="grid grid-rows-2 gap-2">
+          <Button
+            onClick={onMode}
+            value={mode}
+            variant="contained"
+            color="primary"
+          >
+            Manual
+          </Button>
+          <Button
+            onClick={onMode1}
+            value={mode}
+            variant="contained"
+            color="success"
+          >
+            Automatic
+          </Button>
         </div>
-        <div className="inline-flex">
-          <div className="ml-2">
-            <Button
-              onClick={onBlockControl1}
-              value={block_control}
-              variant="contained"
-              color="primary"
-            >
-              Manual Date & Time
-            </Button>
-          </div>
-          <div className="ml-2">
-            <Button
-              onClick={onBlockControl}
-              value={block_control}
-              variant="contained"
-              color="success"
-            >
-              AI Control
-            </Button>
-          </div>
+        <div className="grid grid-rows-2 gap-2">
+          <Button
+            onClick={onBlockControl1}
+            value={block_control}
+            variant="contained"
+            color="primary"
+          >
+            Manual Date & Time
+          </Button>
+
+          <Button
+            onClick={onBlockControl}
+            value={block_control}
+            variant="contained"
+            color="success"
+          >
+            AI Control
+          </Button>
         </div>
-        <div className="grid grid-cols-3 gap-1 p-2">
+        <div className="grid grid-rows-3 gap-1 p-2">
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
