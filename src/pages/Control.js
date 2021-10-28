@@ -13,9 +13,16 @@
 import React, { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useApi, API_URL, post } from "api";
-import { Preloader } from "components/Preloader";
 import { Button } from "@mui/material";
-import FarmTable from "./ControlGrid";
+import { AxiosSpinner } from "components/AxiosSpinner";
+import { Preloader } from "components/Preloader";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const ControlPanel = ({
   value,
@@ -28,6 +35,7 @@ const ControlPanel = ({
   onStop
 }) => {
   const { timestamp, mode, block_control, state, alarms } = value;
+
   return (
     <div className="block items-center p-1">
       <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
@@ -39,7 +47,7 @@ const ControlPanel = ({
         <div className="text-md">{state}</div>
       </div>
       <div className="bg-gray-400 rounded shadow-md p-2">
-        <div className="block align-center">
+        <div className="inline-flex">
           <div className="ml-2">
             <Button
               onClick={onMode}
@@ -60,7 +68,9 @@ const ControlPanel = ({
               Automatic
             </Button>
           </div>
-          <div className="mt-2 ml-2">
+        </div>
+        <div className="inline-flex">
+          <div className="ml-2">
             <Button
               onClick={onBlockControl1}
               value={block_control}
@@ -85,10 +95,10 @@ const ControlPanel = ({
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
-          <Button color="warning" variant="contained" onClick={onAlarmReset}>
+          <Button color="info" variant="contained" onClick={onAlarmReset}>
             Alarm Reset
           </Button>
-          <Button color="error" variant="contained" onClick={onStop}>
+          <Button color="info" variant="contained" onClick={onStop}>
             Stop
           </Button>
         </div>
@@ -109,10 +119,198 @@ const usePost = (handle, refetch, set) =>
     [handle, refetch, set]
   );
 
+const Tab = ({ data }) => {
+  return (
+    <div className="px-2 pb-2">
+      <div className="bg-white flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
+        {data.name}
+      </div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 200 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Start Time: {data.start_time_01}</TableCell>
+              <TableCell align="right">Run Time: {data.runtime_01}</TableCell>
+              <TableCell align="right">EC Setpoint: {data.ec_01}</TableCell>
+            </TableRow>
+          </TableHead>
+        </Table>
+      </TableContainer>
+      <div>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Flow m³/h</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank A</TableCell>
+                <TableCell align="right">{data.tank_a_flow_01}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank B</TableCell>
+                <TableCell align="right">{data.tank_b_flow_01}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank C</TableCell>
+                <TableCell align="right">{data.tank_c_flow_01}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank D</TableCell>
+                <TableCell align="right">{data.tank_d_flow_01}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank E</TableCell>
+                <TableCell align="right">{data.tank_e_flow_01}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+      <div className="mt-2">
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Start Time: {data.start_time_02}</TableCell>
+                <TableCell align="right">Run Time: {data.runtime_02}</TableCell>
+                <TableCell align="right">EC Setpoint: {data.ec_02}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Flow m³/h</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank A</TableCell>
+                <TableCell align="right">{data.tank_a_flow_02}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank B</TableCell>
+                <TableCell align="right">{data.tank_b_flow_02}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank C</TableCell>
+                <TableCell align="right">{data.tank_c_flow_02}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank D</TableCell>
+                <TableCell align="right">{data.tank_d_flow_02}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank E</TableCell>
+                <TableCell align="right">{data.tank_e_flow_02}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+      <div className="mt-2">
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Start Time: {data.start_time_03}</TableCell>
+                <TableCell align="right">Run Time: {data.runtime_03}</TableCell>
+                <TableCell align="right">EC Setpoint: {data.ec_03}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Flow m³/h</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank A</TableCell>
+                <TableCell align="right">{data.tank_a_flow_03}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank B</TableCell>
+                <TableCell align="right">{data.tank_b_flow_03}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank C</TableCell>
+                <TableCell align="right">{data.tank_c_flow_03}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank D</TableCell>
+                <TableCell align="right">{data.tank_d_flow_03}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank E</TableCell>
+                <TableCell align="right">{data.tank_e_flow_03}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+      <div className="mt-2">
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Start Time: {data.start_time_04}</TableCell>
+                <TableCell align="right">Run Time: {data.runtime_04}</TableCell>
+                <TableCell align="right">EC Setpoint: {data.ec_04}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Flow m³/h</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank A</TableCell>
+                <TableCell align="right">{data.tank_a_flow_04}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank B</TableCell>
+                <TableCell align="right">{data.tank_b_flow_04}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank C</TableCell>
+                <TableCell align="right">{data.tank_c_flow_04}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank D</TableCell>
+                <TableCell align="right">{data.tank_d_flow_04}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tank E</TableCell>
+                <TableCell align="right">{data.tank_e_flow_04}</TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+    </div>
+  );
+};
+
+const Tables = ({ data }) =>
+  data.map((name, i) => (
+    <div key={i} className="block mt-2">
+      <Tab data={name} />
+    </div>
+  ));
+
 export const Control = () => {
   const { farmId } = useParams();
   const prefix = `${API_URL}/-${farmId}`;
-
   const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
@@ -184,7 +382,14 @@ export const Control = () => {
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">
-            <FarmTable />
+            <div>
+              <AxiosSpinner
+                callHook={(use) =>
+                  use(`${API_URL}/${farmId}/manual_datetime_settings`)
+                }
+                renderData={Tables}
+              />
+            </div>
           </div>
         </div>
       </div>
