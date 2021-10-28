@@ -87,10 +87,10 @@ const ControlPanel = ({
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
-          <Button color="info" variant="contained" onClick={onAlarmReset}>
+          <Button color="warning" variant="contained" onClick={onAlarmReset}>
             Alarm Reset
           </Button>
-          <Button color="info" variant="contained" onClick={onStop}>
+          <Button color="error" variant="contained" onClick={onStop}>
             Stop
           </Button>
         </div>
