@@ -39,15 +39,26 @@ const BorderLinearProgress = withStyles((theme) => ({
 const WashBack = ({ backwash }) => {
   return (
     <div className="bg-gray-300 rounded shadow-md p-1">
-      <div key={backwash.name} className="font-bold text-2xl mb-2">
+      <div
+        key={backwash.name}
+        style={{ fontFamily: "Helvetica Neue" }}
+        className="font-bold text-2xl mb-2"
+      >
         {backwash.name}
       </div>
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-1">
-          <div className="font-bold text-green-800 text-xl mt-1">
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="font-bold text-green-800 text-xl mt-1"
+          >
             {backwash.status}
           </div>
-          <div key={backwash.alarm} className="font-bold text-sm text-red-400">
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            key={backwash.alarm}
+            className="font-bold text-sm text-red-400"
+          >
             {backwash.alarm}
           </div>
         </div>
@@ -86,10 +97,16 @@ export const Backwash = () => {
       <div className="p-4">
         <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
           <div className="inline-block p-1">
-            <div className="font-bold text-xl">
+            <div
+              style={{ fontFamily: "Helvetica Neue" }}
+              className="font-bold text-xl "
+            >
               Status : {data.backwash_status.status}
             </div>
-            <div className="font-bold text-xl ">
+            <div
+              style={{ fontFamily: "Helvetica Neue" }}
+              className="font-bold text-xl "
+            >
               Progress : {data.backwash_status.percentage_left.toFixed(2)} %
             </div>
           </div>

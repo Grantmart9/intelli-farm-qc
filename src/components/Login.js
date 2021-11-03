@@ -58,7 +58,12 @@ export const Login = ({ loginUrl }) => {
   return (
     <Dialog open={loginOpen}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
-        <div className="font-bold align-self-center">Credentials</div>
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="font-bold align-self-center"
+        >
+          Credentials
+        </div>
         <TextField
           label="User Name"
           type="text"
@@ -74,9 +79,16 @@ export const Login = ({ loginUrl }) => {
           variant="outlined"
         />
         <Button type="submit" variant="contained" color="primary">
-          <div style={{ color: "white" }}>Login</div>
+          <div style={{ color: "white", fontFamily: "Helvetica Neue" }}>
+            Login
+          </div>
         </Button>
-        <div className="text-gray-800 text-center">{message}</div>
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="text-gray-800 text-center"
+        >
+          {message}
+        </div>
       </form>
     </Dialog>
   );
@@ -95,7 +107,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out.",
+          message: "Something happened when logging out."
         })
       );
   }, [postLogout]);

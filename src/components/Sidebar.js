@@ -113,7 +113,7 @@ const toNavItem = (item, i) => {
             alignItems: "center",
             fontSize: "2.5rem",
             fontWeight: "bold",
-            fontFamily: "'Noto Sans JP', sans-serif",
+            fontFamily: "Helvetica Neue",
             gap: "0.5rem",
             padding: "0.5rem",
             marginBottom: "2.5rem"

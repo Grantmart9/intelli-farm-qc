@@ -11,6 +11,7 @@
  * - Modification    :
  **/
 import React, { useState, useMemo } from "react";
+import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
 import { useApi, API_URL, post } from "api";
 import { Button } from "@mui/material";
@@ -22,6 +23,60 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { DataGrid } from "@mui/x-data-grid";
+
+const columns2 = [
+  {
+    field: "name",
+    headerName: "Name",
+    type: "name",
+    width: 180,
+    editable: false
+  },
+  {
+    field: "flow",
+    headerName: "Flow ℓ/h",
+    type: "number",
+    width: 180,
+    editable: true
+  }
+];
+
+const rows2 = [
+  {
+    id: 1,
+    name: "Tank A",
+    flow: 25.322
+  },
+  {
+    id: 2,
+    name: "Tank B",
+    flow: 25.322
+  },
+  {
+    id: 3,
+    name: "Tank C",
+    flow: 25.322
+  },
+  {
+    id: 4,
+    name: "Tank D",
+    flow: 25.322
+  },
+  {
+    id: 5,
+    name: "Tank E",
+    flow: 25.322
+  }
+];
+
+const BasicEditingGrid2 = () => {
+  return (
+    <div style={{ height: 300, width: "100%" }}>
+      <DataGrid rows={rows2} columns={columns2} />
+    </div>
+  );
+};
 
 const ControlPanel = ({
   value,
@@ -38,15 +93,52 @@ const ControlPanel = ({
   return (
     <div className="block items-center p-1">
       <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
-        <div className="text-2xl ">Controller Time:</div>
-        <div className="text-md"> {timestamp}</div>
-        <div className="text-2xl">Alarms:</div>
-        <div className="text-md"> {alarms}</div>
-        <div className="text-2xl">State:</div>
-        <div className="text-md"> {state}</div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl ">
+          Controller Time:
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
+          {" "}
+          {timestamp}
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
+          Alarms:
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
+          {"  "}
+          {alarms}
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
+          State:
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
+          {" "}
+          {state}
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
+          Mode:
+        </div>
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="text-2xl font-sans"
+        >
+          {mode}
+        </div>
+        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
+          Block Control:
+        </div>
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="text-md font-sans"
+        >
+          {" "}
+          {block_control}
+        </div>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
-        <div className="grid grid-rows-2 gap-2">
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="grid grid-rows-2 gap-2"
+        >
           <Button
             onClick={onMode}
             value={mode}
@@ -64,7 +156,10 @@ const ControlPanel = ({
             Automatic
           </Button>
         </div>
-        <div className="grid grid-rows-2 gap-2">
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="grid grid-rows-2 gap-2"
+        >
           <Button
             onClick={onBlockControl1}
             value={block_control}
@@ -83,7 +178,10 @@ const ControlPanel = ({
             AI Control
           </Button>
         </div>
-        <div className="grid grid-rows-3 gap-1 p-2">
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="grid grid-rows-3 gap-2"
+        >
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
@@ -117,12 +215,18 @@ const Tab = ({ data }) => {
       <div className="bg-white flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
         {data.name}
       </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Start Time: {data.start_time_01}</TableCell>
-              <TableCell align="right">Run Time: {data.runtime_01}</TableCell>
+              <TableCell>
+                Start Time:{" "}
+                <input type="text" placeHolder={data.start_time_01}></input>
+              </TableCell>
+              <TableCell align="right" children="data.start_time_01">
+                Run Time: {data.runtime_01}
+              </TableCell>
               <TableCell align="right">EC Setpoint: {data.ec_01}</TableCell>
             </TableRow>
           </TableHead>
@@ -383,6 +487,9 @@ export const Control = () => {
               />
             </div>
           </div>
+        </div>
+        <div className="bg-gray-400 flex rounded shadow-md p-2">
+          <BasicEditingGrid2 />
         </div>
       </div>
     </div>

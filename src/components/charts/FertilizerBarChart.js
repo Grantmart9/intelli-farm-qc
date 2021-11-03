@@ -85,7 +85,8 @@ export const FertilizerBarChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            fontFamily: "Helvetica Neue"
           }
         }
       }}

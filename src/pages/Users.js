@@ -54,7 +54,12 @@ const RegUser = () => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
-      <h1 className="text-center font-bold text-lg">Register New User</h1>
+      <h1
+        style={{ fontFamily: "Helvetica Neue" }}
+        className="text-center font-bold text-lg"
+      >
+        Register New User
+      </h1>
 
       <div className="grid grid-rows-3 p-2 gap-2">
         <div className="flex align-center justify-center items-center">
@@ -105,11 +110,11 @@ const RegUser = () => {
               display: "inline-block",
               alignContent: "center",
               justifyContent: "center",
-              fontFamily: "Nunito Sans",
+              fontFamily: "Helvetica Neue",
               backgroundColor: "steelblue",
               color: "white",
               fontSize: "1rem",
-              width: "50%",
+              width: "50%"
             }}
           >
             Save
@@ -153,7 +158,12 @@ const ChangeUser = () => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
-      <h1 className="text-center font-bold text-lg">Change User Credentials</h1>
+      <h1
+        style={{ fontFamily: "Helvetica Neue" }}
+        className="text-center font-bold text-lg"
+      >
+        Change User Credentials
+      </h1>
       <div className="grid grid-rows-3 p-2 gap-2">
         <div className="flex align-center justify-center items-center">
           <TextField
@@ -193,11 +203,11 @@ const ChangeUser = () => {
               display: "inline-block",
               alignContent: "center",
               justifyContent: "center",
-              fontFamily: "Nunito Sans",
+              fontFamily: "Helvetica Neue",
               color: "white",
               backgroundColor: "steelblue",
               fontSize: "1rem",
-              width: "50%",
+              width: "50%"
             }}
           >
             Save

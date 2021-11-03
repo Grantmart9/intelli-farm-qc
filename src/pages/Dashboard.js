@@ -24,22 +24,29 @@ import { useRefetch } from "components/Timer";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6,
+    borderRadius: 6
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24",
-  },
+    backgroundColor: "#05ab24"
+  }
 }))(LinearProgress);
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="font-bold text-xl">Irrigation</div>
-    <div className="font-bold text-3xl">Cycle Progress</div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold text-xl">
+      Irrigation
+    </div>
+    <div
+      style={{ fontFamily: "Helvetica Neue" }}
+      className="font-bold text-3xl"
+    >
+      Cycle Progress
+    </div>
     <div className="mt-3">
       <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
@@ -48,24 +55,49 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-xl font-bold">Next Start Time</div>
-    <div className="font-bold text-2xl">{data.next_start_time}</div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="text-xl font-bold">
+      Next Start Time
+    </div>
+    <div
+      style={{ fontFamily: "Helvetica Neue" }}
+      className="font-bold text-2xl"
+    >
+      {data.next_start_time}
+    </div>
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
-    <div className="text-xl font-bold">EC</div>
-    <div className="text-2xl font-bold">Value: {data.ec_data.value} µS</div>
-    <div className="font-bold">Target: {data.ec_data.setpoint} µS</div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="text-xl font-bold">
+      EC
+    </div>
+    <div
+      style={{ fontFamily: "Helvetica Neue" }}
+      className="text-2xl font-bold"
+    >
+      Value: {data.ec_data.value} µS
+    </div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold">
+      Target: {data.ec_data.setpoint} µS
+    </div>
   </div>
 );
 
 const Pump = ({ pump }) => (
   <div className="p-4 h-full">
-    <div className="font-bold text-xl">Water Pump</div>
-    <div className="font-bold text-3xl">{pump.status}</div>
-    <div className="font-bold">{pump.main_flow}</div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold text-xl">
+      Water Pump
+    </div>
+    <div
+      style={{ fontFamily: "Helvetica Neue" }}
+      className="font-bold text-3xl"
+    >
+      {pump.status}
+    </div>
+    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold">
+      {pump.main_flow}
+    </div>
   </div>
 );
 
@@ -82,13 +114,13 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           enabled: true,
           formatter: function (val) {
             return val.toFixed(2) + "%";
-          },
+          }
         },
         labels: labels,
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom",
+          position: "bottom"
         },
         title: {
           text: "Fertilizer Ratio",
@@ -97,8 +129,9 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           style: {
             fontSize: "17px",
             fontWeight: "bold",
-          },
-        },
+            fontFamily: "Helvetica Neue"
+          }
+        }
       }}
     />
   );
@@ -111,33 +144,34 @@ export const HomeFlowWaterUsage = ({ data }) => {
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
-        },
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
+        }
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true,
-          },
+            enabled: true
+          }
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            },
-          },
+            }
+          }
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
         },
         subtitle: {
           text: data.name,
           offsetX: 30,
+          fontFamily: "Helvetica Neue"
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30,
-        },
+          offsetX: 30
+        }
       }}
     />
   );

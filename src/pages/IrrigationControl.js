@@ -40,20 +40,44 @@ const EquipmentStatus = ({ data }) => {
 
   return (
     <div className="px-2 pb-2">
-      <div className="font-bold text-2xl mb-2">{data.name}</div>
+      <div
+        style={{ fontFamily: "Helvetica Neue" }}
+        className="font-bold text-2xl mb-2"
+      >
+        {data.name}
+      </div>
       <div className="grid grid-cols-2 -mb-2">
         <div className="grid grid-rows-3">
-          <div className="text-green-800 text-xl font-bold">{data.status}</div>
-          <div className="text-green-800 text-lg font-bold">
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="text-green-800 text-xl font-bold"
+          >
+            {data.status}
+          </div>
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="text-green-800 text-lg font-bold"
+          >
             {data.real_time_flow}
           </div>
-          <div className="text-green-800 text-lg font-bold text-md">
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="text-green-800 text-lg font-bold text-md"
+          >
             {data.total_flow}
           </div>
-          <div className="text-green-800 text-lg font-bold text-md">
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="text-green-800 text-lg font-bold text-md"
+          >
             {timeLeft}
           </div>
-          <div className="font-bold text-sm text-red-400">{data.alarm}</div>
+          <div
+            style={{ fontFamily: "Helvetica Neue" }}
+            className="font-bold text-sm text-red-400"
+          >
+            {data.alarm}
+          </div>
         </div>
         <div className="ml-24 2xl:ml-28 md:ml-10">
           <img src={image} alt={image} width={70} height={70} />
@@ -75,7 +99,7 @@ const RenderFertilizer2 = ({ data }) => (
     data={data.map(({ datetime, y, ...rest }) => ({
       ...rest,
       x: new Date(datetime),
-      y: Number(y),
+      y: Number(y)
     }))}
   />
 );

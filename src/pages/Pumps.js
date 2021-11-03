@@ -37,30 +37,44 @@ export const Pumps = () => {
     );
 
   return (
-      <div className="p-4 ml-2 mt-2">
-        <div className="grid xl:grid-cols-4 gap-3">
-          {data.map((data, i) => (
-            <div key={i} className="p-1.5 pb-2 bg-gray-300 rounded shadow-md ">
-              <div className="font-bold text-2xl mb-2">{data.name}</div>
-              <div className="grid grid-cols-2 -mb-2">
-                <div className="grid grid-rows-2">
-                  <div className="font-bold text-green-800 text-xl">
-                    {data.pressure}
-                  </div>
-                  <div className="font-bold text-green-800 text-xl">
-                    {data.status}
-                  </div>
-                  <div className="font-bold text-sm text-red-400 mb-2">
-                    {data.alarm}
-                  </div>
+    <div className="p-4 ml-2 mt-2">
+      <div className="grid xl:grid-cols-4 gap-3">
+        {data.map((data, i) => (
+          <div key={i} className="p-1.5 pb-2 bg-gray-300 rounded shadow-md ">
+            <div
+              style={{ fontFamily: "Helvetica Neue" }}
+              className="font-bold text-2xl mb-2"
+            >
+              {data.name}
+            </div>
+            <div className="grid grid-cols-2 -mb-2">
+              <div className="grid grid-rows-2">
+                <div
+                  style={{ fontFamily: "Helvetica Neue" }}
+                  className="font-bold text-green-800 text-xl"
+                >
+                  {data.pressure}
                 </div>
-                <div className="flex ml-10 align-center justify-center">
-                  <img width={95} height={95} src={pump} alt={pump} />
+                <div
+                  style={{ fontFamily: "Helvetica Neue" }}
+                  className="font-bold text-green-800 text-xl"
+                >
+                  {data.status}
+                </div>
+                <div
+                  style={{ fontFamily: "Helvetica Neue" }}
+                  className="font-bold text-sm text-red-400 mb-2"
+                >
+                  {data.alarm}
                 </div>
               </div>
+              <div className="flex ml-10 align-center justify-center">
+                <img width={95} height={95} src={pump} alt={pump} />
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+    </div>
   );
 };

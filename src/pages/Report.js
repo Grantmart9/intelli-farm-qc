@@ -17,8 +17,6 @@ import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import PreloaderBar from "images/PreloaderBar.gif";
-import ErrorGif from "images/ErrorGif.gif";
-import blank from "images/blank.png";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -66,6 +64,7 @@ const SaveButton = () => {
         color: "white",
         width: "5rem",
         height: "2rem",
+        fontFamily: "Helvetica Neue"
       }}
     >
       Send
@@ -88,24 +87,12 @@ export const Report = () => {
       postReport({
         data: {
           start_date: moment(date).format(dateFormat),
-          email: email,
-        },
+          email: email
+        }
       }).catch((e) => setMessage(e.toString()));
     },
     [date, email]
   );
-  var preload = blank;
-
-  if (loading) {
-    preload = PreloaderBar;
-  } else preload = blank;
-
-  if (error)
-    return (
-      <div>
-        <img src={ErrorGif} alt={ErrorGif} width="100%" />
-      </div>
-    );
 
   return (
     <div className="flex justify-content-center p-4">
@@ -119,8 +106,13 @@ export const Report = () => {
         <div>
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
-        <div className="text-gray-900 text-center">{data}</div>
-        <img width={50} height={50} src={preload} />
+        <div
+          style={{ fontFamily: "Helvetica Neue" }}
+          className="text-gray-900 text-center"
+        >
+          {data}
+        </div>
+        {loading ? <img width={50} height={50} src={PreloaderBar} /> : null}
         <SaveButton />
       </form>
     </div>

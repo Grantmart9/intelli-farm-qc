@@ -21,7 +21,7 @@ import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import {
   MobileDateTimePicker,
-  LocalizationProvider,
+  LocalizationProvider
 } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
@@ -29,6 +29,7 @@ import ErrorGif from "images/ErrorGif.gif";
 import play from "images/play.png";
 import pause from "images/pause.png";
 import stop from "images/stop.png";
+import { useRefetch } from "components/Timer";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
@@ -67,28 +68,28 @@ const sectionColumns = [
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: false,
+    editable: false
   },
   {
     field: "run_time",
     headerName: "Run time",
     type: "number",
-    editable: false,
+    editable: false
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: false,
+    editable: false
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: false,
-  },
+    editable: false
+  }
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
@@ -108,6 +109,7 @@ const SectionTable = ({ editable, section, onChange = null }) => {
     <div className="flex">
       <DataGrid
         hideFooter={true}
+        classes={{ fontFamily: "Helvetica Neue" }}
         autoHeight
         rows={[{ id, ...section }]}
         columns={sectionColumns}
@@ -123,20 +125,20 @@ const fertilizerColumns = [
     field: "name",
     headerName: "Name",
     type: "text",
-    editable: false,
+    editable: false
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint µS",
     type: "number",
-    editable: true,
+    editable: false
   },
   {
     field: "flow_rate",
     headerName: "Flow rate ℓ/m³",
     type: "number",
-    editable: true,
-  },
+    editable: false
+  }
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
@@ -148,7 +150,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
       const editedFertilizers = [
         ...fertilizers.slice(0, id),
         editedFertilizer,
-        ...fertilizers.slice(id + 1),
+        ...fertilizers.slice(id + 1)
       ];
       const editedSection = { ...section, fertilizer: editedFertilizers };
       if (onChange) {
@@ -160,7 +162,10 @@ const FertilizerTable = ({ section, onChange = null }) => {
 
   return (
     <div>
-      <div className="bg-blue-200 align-center justify-center flex font-bold">
+      <div
+        style={{ fontFamily: "Helvetica Neue" }}
+        className="bg-blue-200 align-center justify-center flex font-bold"
+      >
         Fertilizer
       </div>
       <DataGrid
@@ -176,7 +181,10 @@ const FertilizerTable = ({ section, onChange = null }) => {
 
 const SectionRow = ({ editable, section, onChange = null }) => (
   <div className="w-full p-2 bg-gray-200 rounded">
-    <div className="flex bg-blue-200 rounded-1 justify-content-center font-bold">
+    <div
+      style={{ fontFamily: "Helvetica Neue" }}
+      className="flex bg-blue-200 rounded-1 justify-content-center font-bold"
+    >
       {section.name}
     </div>
     <SectionTable editable={editable} section={section} onChange={onChange} />
@@ -190,7 +198,9 @@ const SectionRow = ({ editable, section, onChange = null }) => (
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useApi(`${API_URL}/-${farmId}/schedule`);
+  const [{ data, loading, error }, refetch] = useApi(
+    `${API_URL}/-${farmId}/schedule`
+  );
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [schedule, setSchedule] = useState();
@@ -237,22 +247,12 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div className="flex align-center justify-center items-center mb-3">
-            <OverlayTrigger
-              placement="bottom"
-              trigger={["hover", "focus"]}
-              overlay={<Tooltip>Save All settings</Tooltip>}
-            >
-              <Button className="m-0" onClick={handleSave} disabled={!dirty}>
-                <FontAwesomeIcon icon={faSave} /> Save
-              </Button>
-            </OverlayTrigger>
-          </div>
-          <div className="w-full">
+          <div style={{ fontFamily: "Helvetica Neue" }} className="w-full">
             {schedule.map((section, i) => {
               return (
                 <div
                   key={i}
+                  style={{ fontFamily: "Helvetica Neue" }}
                   className="bg-gray-200 rounded shadow-md w-full mb-4 p-2"
                 >
                   <SectionRow

@@ -123,9 +123,10 @@ export const LineChart = ({ data }) => {
         <div
           style={{
             display: "inline-flex",
-            color: "#373738",
+            color: "#373d3f",
             marginTop: "0.5rem",
-            marginBottom: "0.5rem"
+            marginBottom: "0.5rem",
+            fontFamily: "Helvetica Neue"
           }}
         >
           EC History in µS
