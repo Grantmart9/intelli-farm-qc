@@ -14,7 +14,7 @@ import React, { useState, useMemo } from "react";
 import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
 import { useApi, API_URL, post } from "api";
-import { Button } from "@mui/material";
+import { Button} from "@mui/material";
 import { AxiosSpinner } from "components/AxiosSpinner";
 import { Preloader } from "components/Preloader";
 import Table from "@mui/material/Table";
@@ -23,60 +23,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DataGrid } from "@mui/x-data-grid";
-
-const columns2 = [
-  {
-    field: "name",
-    headerName: "Name",
-    type: "name",
-    width: 180,
-    editable: false
-  },
-  {
-    field: "flow",
-    headerName: "Flow ℓ/h",
-    type: "number",
-    width: 180,
-    editable: true
-  }
-];
-
-const rows2 = [
-  {
-    id: 1,
-    name: "Tank A",
-    flow: 25.322
-  },
-  {
-    id: 2,
-    name: "Tank B",
-    flow: 25.322
-  },
-  {
-    id: 3,
-    name: "Tank C",
-    flow: 25.322
-  },
-  {
-    id: 4,
-    name: "Tank D",
-    flow: 25.322
-  },
-  {
-    id: 5,
-    name: "Tank E",
-    flow: 25.322
-  }
-];
-
-const BasicEditingGrid2 = () => {
-  return (
-    <div style={{ height: 300, width: "100%" }}>
-      <DataGrid rows={rows2} columns={columns2} />
-    </div>
-  );
-};
 
 const ControlPanel = ({
   value,
@@ -93,52 +39,19 @@ const ControlPanel = ({
   return (
     <div className="block items-center p-1">
       <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl ">
-          Controller Time:
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
-          {" "}
-          {timestamp}
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
-          Alarms:
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
-          {"  "}
-          {alarms}
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
-          State:
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
-          {" "}
-          {state}
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-2xl">
-          Mode:
-        </div>
-        <div
-          style={{ fontFamily: "Helvetica Neue" }}
-          className="text-2xl font-sans"
-        >
-          {mode}
-        </div>
-        <div style={{ fontFamily: "Helvetica Neue" }} className="text-md">
-          Block Control:
-        </div>
-        <div
-          style={{ fontFamily: "Helvetica Neue" }}
-          className="text-md font-sans"
-        >
-          {" "}
-          {block_control}
-        </div>
+        <div className="text-2xl ">Controller Time:</div>
+        <div className="text-md"> {timestamp}</div>
+        <div className="text-2xl">Alarms:</div>
+        <div className="text-md"> {alarms}</div>
+        <div className="text-2xl">State:</div>
+        <div className="text-md"> {state}</div>
+        <div className="text-2xl">Mode:</div>
+        <div className="text-md"> Manual</div>
+        <div className="text-2xl font-sans">{mode}</div>
+        <div className="text-md font-sans"> {block_control}</div>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
-        <div
-          style={{ fontFamily: "Helvetica Neue" }}
-          className="grid grid-rows-2 gap-2"
-        >
+        <div className="grid grid-rows-2 gap-2">
           <Button
             onClick={onMode}
             value={mode}
@@ -156,10 +69,7 @@ const ControlPanel = ({
             Automatic
           </Button>
         </div>
-        <div
-          style={{ fontFamily: "Helvetica Neue" }}
-          className="grid grid-rows-2 gap-2"
-        >
+        <div className="grid grid-rows-2 gap-2">
           <Button
             onClick={onBlockControl1}
             value={block_control}
@@ -178,10 +88,7 @@ const ControlPanel = ({
             AI Control
           </Button>
         </div>
-        <div
-          style={{ fontFamily: "Helvetica Neue" }}
-          className="grid grid-rows-3 gap-2"
-        >
+        <div className="grid grid-rows-3 gap-1 p-2">
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
@@ -210,24 +117,89 @@ const usePost = (handle, refetch, set) =>
   );
 
 const Tab = ({ data }) => {
+  const { farmId } = useParams();
+  const prefix = `${API_URL}/-${farmId}`;
+  const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
+  
+  const [posting, setPosting] = useState(0);
+
+  const d = (key, value) => ({ data: { [key]: value } });
+
+  const name = data.name;
+  const [start_time_01, SetStartTime01] = useState(data.start_time_01);
+  const [start_time_02, SetStartTime02] = useState(data.start_time_02);
+  const [start_time_03, SetStartTime03] = useState(data.start_time_03);
+  const [start_time_04, SetStartTime04] = useState(data.start_time_04);
+
+  const [runtime_01, SetRunTime01] = useState(data.runtime_01);
+  const [runtime_02, SetRunTime02] = useState(data.runtime_02);
+  const [runtime_03, SetRunTime03] = useState(data.runtime_03);
+  const [runtime_04, SetRunTime04] = useState(data.runtime_04);
+
+  const [ec_01, SetEc01] = useState(data.ec_01);
+  const [ec_02, SetEc02] = useState(data.ec_02);
+  const [ec_03, SetEc03] = useState(data.ec_03);
+  const [ec_04, SetEc04] = useState(data.ec_04);
+
+  var dict = [];
+  dict.push({
+    name: name,
+    start_time_01: start_time_01,
+    start_time_02: start_time_02,
+    start_time_03: start_time_03,
+    start_time_04: start_time_04,
+    runtime_01: runtime_01,
+    runtime_02: runtime_02,
+    runtime_03: runtime_03,
+    runtime_04: runtime_04,
+    ec_01:ec_01,
+    ec_02:ec_02,
+    ec_03:ec_03,
+    ec_04:ec_04
+  });
+
+  const handleSave = () => postMode(d("manual_datetime_settings", dict));
+
+  console.log(dict);
+
   return (
     <div className="px-2 pb-2">
+      <div className="flex align-center justify-center p-2 rounded mb-2">
+      <Button onClick={handleSave} color="primary" variant="contained">Save</Button></div>
       <div className="bg-white flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
         {data.name}
       </div>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>
-                Start Time:{" "}
-                <input type="text" placeHolder={data.start_time_01}></input>
+              <TableCell style={{ fontWeight: "bold" }}>
+                Start Time:
+                <input
+                  type="text"
+                  value={start_time_01}
+                  onChange={(e) => SetStartTime01(e.target.value)}
+                />
               </TableCell>
-              <TableCell align="right" children="data.start_time_01">
-                Run Time: {data.runtime_01}
+              <TableCell
+                align="right"
+                style={{ fontWeight: "bold" }}
+                children="data.start_time_01"
+              >
+                Run Time:{" "}
+                <input
+                  type="text"
+                  value={runtime_01}
+                  onChange={(e) => SetRunTime01(e.target.value)}
+                />
               </TableCell>
-              <TableCell align="right">EC Setpoint: {data.ec_01}</TableCell>
+              <TableCell style={{ fontWeight: "bold" }} align="right">
+                EC Setpoint: <input
+                  type="text"
+                  value={ec_01}
+                  onChange={(e) => SetEc01(e.target.value)}
+                />
+              </TableCell>
             </TableRow>
           </TableHead>
         </Table>
@@ -269,9 +241,21 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: {data.start_time_02}</TableCell>
-                <TableCell align="right">Run Time: {data.runtime_02}</TableCell>
-                <TableCell align="right">EC Setpoint: {data.ec_02}</TableCell>
+                <TableCell>Start Time: <input
+                  type="text"
+                  value={start_time_02}
+                  onChange={(e) => SetStartTime02(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">Run Time: <input
+                  type="text"
+                  value={runtime_02}
+                  onChange={(e) => SetRunTime02(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">EC Setpoint: <input
+                  type="text"
+                  value={ec_02}
+                  onChange={(e) => SetEc02(e.target.value)}
+                /></TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -312,9 +296,21 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: {data.start_time_03}</TableCell>
-                <TableCell align="right">Run Time: {data.runtime_03}</TableCell>
-                <TableCell align="right">EC Setpoint: {data.ec_03}</TableCell>
+                <TableCell>Start Time: <input
+                  type="text"
+                  value={start_time_03}
+                  onChange={(e) => SetStartTime03(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">Run Time: <input
+                  type="text"
+                  value={runtime_03}
+                  onChange={(e) => SetRunTime03(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">EC Setpoint: <input
+                  type="text"
+                  value={ec_03}
+                  onChange={(e) => SetEc03(e.target.value)}
+                /></TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -355,9 +351,21 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: {data.start_time_04}</TableCell>
-                <TableCell align="right">Run Time: {data.runtime_04}</TableCell>
-                <TableCell align="right">EC Setpoint: {data.ec_04}</TableCell>
+                <TableCell>Start Time: <input
+                  type="text"
+                  value={start_time_04}
+                  onChange={(e) => SetStartTime04(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">Run Time: <input
+                  type="text"
+                  value={runtime_04}
+                  onChange={(e) => SetRunTime04(e.target.value)}
+                /></TableCell>
+                <TableCell align="right">EC Setpoint: <input
+                  type="text"
+                  value={ec_04}
+                  onChange={(e) => SetEc04(e.target.value)}
+                /></TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -410,6 +418,7 @@ export const Control = () => {
   const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
+  useRefetch(refetch);
   const [, postMode1] = useApi(...post(`${prefix}/mode`));
   const [, postMode] = useApi(...post(`${prefix}/mode`));
   const [, postBlockControl1] = useApi(...post(`${prefix}/block_control`));
@@ -487,9 +496,6 @@ export const Control = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="bg-gray-400 flex rounded shadow-md p-2">
-          <BasicEditingGrid2 />
         </div>
       </div>
     </div>
