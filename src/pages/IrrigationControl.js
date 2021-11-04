@@ -89,7 +89,7 @@ const EquipmentStatus = ({ data }) => {
 
 const RenderFertilizer1 = ({ data }) =>
   data.map((irrigation_valve, i) => (
-    <div key={i} className="bg-gray-300 shadow-md rounded flex mt-2">
+    <div key={i} className="bg-gray-300 shadow-md rounded mr-1 ml-1 flex mt-2">
       <EquipmentStatus data={irrigation_valve} />
     </div>
   ));
@@ -128,7 +128,7 @@ export const IrrigationControl = () => {
   return (
     <div>
       <div className="p-2">
-        <div className="xl:grid grid-cols-4 p-4 gap-4">
+        <div className="xl:grid grid-cols-4 p-4 gap-1">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={RenderFertilizer1}

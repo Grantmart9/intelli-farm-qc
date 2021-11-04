@@ -172,7 +172,7 @@ export const Fertilizer = () => {
           ))}
         </div>
       </div>
-      <div className="p-2 mt-2">
+      <div className="p-2 mt-1">
         <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
           <LineChart
             data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
@@ -183,7 +183,7 @@ export const Fertilizer = () => {
           />
         </div>
       </div>
-      <div className="xl:grid grid-cols-2 gap-2 p-2">
+      <div className="xl:grid grid-cols-2 gap-3 p-2">
         <div className="bg-gray-300 rounded shadow-md mb-4">
           <FertilizerBarChart data={data.fertilizer_bargraph} />
         </div>

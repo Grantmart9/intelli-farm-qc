@@ -192,7 +192,7 @@ const TimeControl = ({ index, value, onChange }) => {
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>
+            <TableCell align="left">
               Start Time:{" "}
               <input
                 type="text"
@@ -208,10 +208,11 @@ const TimeControl = ({ index, value, onChange }) => {
                 onChange={(e) => handleRunTime(e.target.value)}
               />
             </TableCell>
-            <TableCell align="right">
+            <TableCell align="right" >
               EC Setpoint:{" "}
               <input
                 type="text"
+               
                 value={value[ec]}
                 onChange={(e) => handleEC(e.target.value)}
               />
@@ -223,9 +224,6 @@ const TimeControl = ({ index, value, onChange }) => {
   );
 };
 const Tank = ({ index, value, onChange }) => {
-  // [start_time, runtime, ec] = ["start_time", "runtime", "ec"].map(
-  //   (k) => `${k}_${zeroPad(index, 2)}`
-  // );
 
   const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
     name: `Tank ${letter.toUpperCase()}`,

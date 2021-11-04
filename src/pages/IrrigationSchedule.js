@@ -164,7 +164,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
     <div>
       <div
         style={{ fontFamily: "'Raleway', sans-serif" }}
-        className="bg-blue-200 align-center justify-center flex font-bold"
+        className="bg-blue-200 align-center text-xl justify-center flex font-bold p-2"
       >
         Fertilizer
       </div>
@@ -183,7 +183,7 @@ const SectionRow = ({ editable, section, onChange = null }) => (
   <div className="w-full p-2 bg-gray-200 rounded">
     <div
       style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="flex bg-blue-200 rounded-1 justify-content-center font-bold"
+      className="flex bg-blue-200 rounded-1 text-xl justify-content-center font-bold p-2"
     >
       {section.name}
     </div>
