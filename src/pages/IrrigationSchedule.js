@@ -109,7 +109,7 @@ const SectionTable = ({ editable, section, onChange = null }) => {
     <div className="flex">
       <DataGrid
         hideFooter={true}
-        classes={{ fontFamily: "Helvetica Neue" }}
+        classes={{ fontFamily: "'Raleway', sans-serif" }}
         autoHeight
         rows={[{ id, ...section }]}
         columns={sectionColumns}
@@ -163,7 +163,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
   return (
     <div>
       <div
-        style={{ fontFamily: "Helvetica Neue" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="bg-blue-200 align-center justify-center flex font-bold"
       >
         Fertilizer
@@ -182,7 +182,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
 const SectionRow = ({ editable, section, onChange = null }) => (
   <div className="w-full p-2 bg-gray-200 rounded">
     <div
-      style={{ fontFamily: "Helvetica Neue" }}
+      style={{ fontFamily: "'Raleway', sans-serif" }}
       className="flex bg-blue-200 rounded-1 justify-content-center font-bold"
     >
       {section.name}
@@ -247,12 +247,12 @@ export const IrrigationSchedule = () => {
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          <div style={{ fontFamily: "Helvetica Neue" }} className="w-full">
+          <div style={{ fontFamily: "'Raleway', sans-serif" }} className="w-full">
             {schedule.map((section, i) => {
               return (
                 <div
                   key={i}
-                  style={{ fontFamily: "Helvetica Neue" }}
+                  style={{ fontFamily: "'Raleway', sans-serif" }}
                   className="bg-gray-200 rounded shadow-md w-full mb-4 p-2"
                 >
                   <SectionRow

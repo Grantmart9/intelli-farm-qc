@@ -41,7 +41,7 @@ const EquipmentStatus = ({ data }) => {
   return (
     <div className="px-2 pb-2">
       <div
-        style={{ fontFamily: "Helvetica Neue" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="font-bold text-2xl mb-2"
       >
         {data.name}
@@ -49,31 +49,31 @@ const EquipmentStatus = ({ data }) => {
       <div className="grid grid-cols-2 -mb-2">
         <div className="grid grid-rows-3">
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="text-green-800 text-xl font-bold"
           >
             {data.status}
           </div>
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="text-green-800 text-lg font-bold"
           >
             {data.real_time_flow}
           </div>
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="text-green-800 text-lg font-bold text-md"
           >
             {data.total_flow}
           </div>
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="text-green-800 text-lg font-bold text-md"
           >
             {timeLeft}
           </div>
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="font-bold text-sm text-red-400"
           >
             {data.alarm}

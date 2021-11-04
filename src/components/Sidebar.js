@@ -113,7 +113,7 @@ const toNavItem = (item, i) => {
             alignItems: "center",
             fontSize: "2.5rem",
             fontWeight: "bold",
-            fontFamily: "Helvetica Neue",
+            fontFamily: "'Raleway', sans-serif",
             gap: "0.5rem",
             padding: "0.5rem",
             marginBottom: "2.5rem"
@@ -169,7 +169,7 @@ export const Sidebar = ({ items }) => {
       } flex-shrink-0 text-white overflow-y-auto h-full`}
     >
       <Nav
-        style={{ fontFamily: "Times New Roman" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="sidebar-inner min-h-full p-3 flex flex-col flex-nowrap pt-3 pb-3"
       >
         {items.map(toNavItem)}

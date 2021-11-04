@@ -64,7 +64,7 @@ const SaveButton = () => {
         color: "white",
         width: "5rem",
         height: "2rem",
-        fontFamily: "Helvetica Neue"
+        fontFamily: "'Raleway', sans-serif"
       }}
     >
       Send
@@ -107,7 +107,7 @@ export const Report = () => {
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
         <div
-          style={{ fontFamily: "Helvetica Neue" }}
+          style={{ fontFamily: "'Raleway', sans-serif" }}
           className="text-gray-900 text-center"
         >
           {data}

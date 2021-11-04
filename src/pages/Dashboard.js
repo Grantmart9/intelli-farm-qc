@@ -38,11 +38,11 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold text-xl">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold text-xl">
       Irrigation
     </div>
     <div
-      style={{ fontFamily: "Helvetica Neue" }}
+      style={{ fontFamily: "'Raleway', sans-serif" }}
       className="font-bold text-3xl"
     >
       Cycle Progress
@@ -55,11 +55,11 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "Helvetica Neue" }} className="text-xl font-bold">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="text-xl font-bold">
       Next Start Time
     </div>
     <div
-      style={{ fontFamily: "Helvetica Neue" }}
+      style={{ fontFamily: "'Raleway', sans-serif" }}
       className="font-bold text-2xl"
     >
       {data.next_start_time}
@@ -69,16 +69,16 @@ const IrrigationTimeLeft = ({ data }) => (
 
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "Helvetica Neue" }} className="text-xl font-bold">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="text-xl font-bold">
       EC
     </div>
     <div
-      style={{ fontFamily: "Helvetica Neue" }}
+      style={{ fontFamily: "'Raleway', sans-serif" }}
       className="text-2xl font-bold"
     >
       Value: {data.ec_data.value} µS
     </div>
-    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold">
       Target: {data.ec_data.setpoint} µS
     </div>
   </div>
@@ -86,16 +86,16 @@ const IrrigationEC = ({ data }) => (
 
 const Pump = ({ pump }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold text-xl">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold text-xl">
       Water Pump
     </div>
     <div
-      style={{ fontFamily: "Helvetica Neue" }}
+      style={{ fontFamily: "'Raleway', sans-serif" }}
       className="font-bold text-3xl"
     >
       {pump.status}
     </div>
-    <div style={{ fontFamily: "Helvetica Neue" }} className="font-bold">
+    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold">
       {pump.main_flow}
     </div>
   </div>
@@ -129,7 +129,7 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           style: {
             fontSize: "17px",
             fontWeight: "bold",
-            fontFamily: "Helvetica Neue"
+            fontFamily: "'Raleway', sans-serif"
           }
         }
       }}
@@ -166,7 +166,7 @@ export const HomeFlowWaterUsage = ({ data }) => {
         subtitle: {
           text: data.name,
           offsetX: 30,
-          fontFamily: "Helvetica Neue"
+          fontFamily: "'Raleway', sans-serif"
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,

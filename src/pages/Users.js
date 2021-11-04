@@ -55,7 +55,7 @@ const RegUser = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
       <h1
-        style={{ fontFamily: "Helvetica Neue" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="text-center font-bold text-lg"
       >
         Register New User
@@ -110,7 +110,7 @@ const RegUser = () => {
               display: "inline-block",
               alignContent: "center",
               justifyContent: "center",
-              fontFamily: "Helvetica Neue",
+              fontFamily: "'Raleway', sans-serif",
               backgroundColor: "steelblue",
               color: "white",
               fontSize: "1rem",
@@ -159,7 +159,7 @@ const ChangeUser = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded p-2">
       <h1
-        style={{ fontFamily: "Helvetica Neue" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="text-center font-bold text-lg"
       >
         Change User Credentials
@@ -203,7 +203,7 @@ const ChangeUser = () => {
               display: "inline-block",
               alignContent: "center",
               justifyContent: "center",
-              fontFamily: "Helvetica Neue",
+              fontFamily: "'Raleway', sans-serif",
               color: "white",
               backgroundColor: "steelblue",
               fontSize: "1rem",

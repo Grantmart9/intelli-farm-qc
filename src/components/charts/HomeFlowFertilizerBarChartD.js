@@ -86,7 +86,7 @@ export const HomeFlowFertilizerBarChartD = ({ data }) => {
           style: {
             fontSize: "17px",
             fontWeight: "bold",
-            fontFamily: "Helvetica Neue"
+            fontFamily: "'Raleway', sans-serif"
           }
         }
       }}

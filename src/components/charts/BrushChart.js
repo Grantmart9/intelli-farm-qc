@@ -108,7 +108,7 @@ export const BrushChart = ({ data }) => {
             color: "#373738",
             marginTop: "0.5rem",
             marginBottom: "0.5rem",
-            fontFamily: "Helvetica Neue"
+            fontFamily: "'Raleway', sans-serif"
           }}
         >
           Overall Water Usage in m³

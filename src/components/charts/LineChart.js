@@ -126,7 +126,7 @@ export const LineChart = ({ data }) => {
             color: "#373d3f",
             marginTop: "0.5rem",
             marginBottom: "0.5rem",
-            fontFamily: "Helvetica Neue"
+            fontFamily: "'Raleway', sans-serif"
           }}
         >
           EC History in µS

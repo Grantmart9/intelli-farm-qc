@@ -41,7 +41,7 @@ const WashBack = ({ backwash }) => {
     <div className="bg-gray-300 rounded shadow-md p-1">
       <div
         key={backwash.name}
-        style={{ fontFamily: "Helvetica Neue" }}
+        style={{ fontFamily: "'Raleway', sans-serif" }}
         className="font-bold text-2xl mb-2"
       >
         {backwash.name}
@@ -49,13 +49,13 @@ const WashBack = ({ backwash }) => {
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-1">
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             className="font-bold text-green-800 text-xl mt-1"
           >
             {backwash.status}
           </div>
           <div
-            style={{ fontFamily: "Helvetica Neue" }}
+            style={{ fontFamily: "'Raleway', sans-serif" }}
             key={backwash.alarm}
             className="font-bold text-sm text-red-400"
           >
@@ -98,13 +98,13 @@ export const Backwash = () => {
         <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
           <div className="inline-block p-1">
             <div
-              style={{ fontFamily: "Helvetica Neue" }}
+              style={{ fontFamily: "'Raleway', sans-serif" }}
               className="font-bold text-xl "
             >
               Status : {data.backwash_status.status}
             </div>
             <div
-              style={{ fontFamily: "Helvetica Neue" }}
+              style={{ fontFamily: "'Raleway', sans-serif" }}
               className="font-bold text-xl "
             >
               Progress : {data.backwash_status.percentage_left.toFixed(2)} %

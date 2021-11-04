@@ -88,7 +88,7 @@ const ControlPanel = ({
             AI Control
           </Button>
         </div>
-        <div className="grid grid-rows-3 gap-1 p-2">
+        <div className="grid grid-rows-3 gap-2">
           <Button color="info" variant="contained" onClick={onProcessHold}>
             Process Hold
           </Button>
@@ -120,12 +120,9 @@ const Tab = ({ data }) => {
   const { farmId } = useParams();
   const prefix = `${API_URL}/-${farmId}`;
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
-  
-  const [posting, setPosting] = useState(0);
 
   const d = (key, value) => ({ data: { [key]: value } });
 
-  const name = data.name;
   const [start_time_01, SetStartTime01] = useState(data.start_time_01);
   const [start_time_02, SetStartTime02] = useState(data.start_time_02);
   const [start_time_03, SetStartTime03] = useState(data.start_time_03);
@@ -143,7 +140,6 @@ const Tab = ({ data }) => {
 
   var dict = [];
   dict.push({
-    name: name,
     start_time_01: start_time_01,
     start_time_02: start_time_02,
     start_time_03: start_time_03,
@@ -158,7 +154,7 @@ const Tab = ({ data }) => {
     ec_04:ec_04
   });
 
-  const handleSave = () => postMode(d("manual_datetime_settings", dict));
+  const handleSave = () => postMode(d(data.name, dict));
 
   console.log(dict);
 
