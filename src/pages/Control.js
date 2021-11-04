@@ -14,7 +14,7 @@ import React, { useState, useMemo } from "react";
 import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
 import { useApi, API_URL, post } from "api";
-import { Button} from "@mui/material";
+import { Button } from "@mui/material";
 import { AxiosSpinner } from "components/AxiosSpinner";
 import { Preloader } from "components/Preloader";
 import Table from "@mui/material/Table";
@@ -23,6 +23,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { number } from "prop-types";
 
 const ControlPanel = ({
   value,
@@ -118,11 +119,10 @@ const usePost = (handle, refetch, set) =>
 
 const Tab = ({ data }) => {
   const { farmId } = useParams();
-  const prefix = `${API_URL}/-${farmId}`;
+  const prefix = `${API_URL}/${farmId}`;
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
-
-  const d = (key, value) => ({ data: { [key]: value } });
-
+  
+  var names = data.name;
   const [start_time_01, SetStartTime01] = useState(data.start_time_01);
   const [start_time_02, SetStartTime02] = useState(data.start_time_02);
   const [start_time_03, SetStartTime03] = useState(data.start_time_03);
@@ -137,32 +137,51 @@ const Tab = ({ data }) => {
   const [ec_02, SetEc02] = useState(data.ec_02);
   const [ec_03, SetEc03] = useState(data.ec_03);
   const [ec_04, SetEc04] = useState(data.ec_04);
+  
 
-  var dict = [];
-  dict.push({
-    start_time_01: start_time_01,
-    start_time_02: start_time_02,
-    start_time_03: start_time_03,
-    start_time_04: start_time_04,
-    runtime_01: runtime_01,
-    runtime_02: runtime_02,
-    runtime_03: runtime_03,
-    runtime_04: runtime_04,
-    ec_01:ec_01,
-    ec_02:ec_02,
-    ec_03:ec_03,
-    ec_04:ec_04
-  });
+  var dict={
+    name: names,
+    start_time_01: data.start_time_01,
+    runtime_01: data.runtime_01,
+    tank_a_flow_01: data.tank_a_flow_01,
+    tank_b_flow_01: data.tank_b_flow_01,
+    tank_c_flow_01: data.tank_c_flow_01,
+    tank_e_flow_01: data.tank_e_flow_01,
+    ec_01: data.ec_01,
+    start_time_02: data.start_time_02,
+    runtime_02: data.runtime_02,
+    tank_a_flow_02: data.tank_a_flow_02,
+    tank_b_flow_02: data.tank_b_flow_02,
+    tank_c_flow_02: data.tank_c_flow_02,
+    tank_e_flow_02: data.tank_e_flow_02,
+    start_time_03: data.start_time_03,
+    runtime_03: data.runtime_03,
+    start_time_04: data.start_time_04,
+    runtime_04: data.runtime_04,
+    ec_02 : data.ec_02,
+    ec_03 : data.ec_03,
+    ec_04 : data.ec_04,
+    tank_a_flow_03: data.tank_a_flow_03,
+    tank_a_flow_04: data.tank_a_flow_04,
+    tank_b_flow_03: data.tank_b_flow_03,
+    tank_b_flow_04: data.tank_b_flow_04,
+    tank_c_flow_03: data.tank_c_flow_03,
+    tank_c_flow_04: data.tank_c_flow_04,
+    tank_e_flow_03: data.tank_e_flow_03,
+    tank_e_flow_04: data.tank_e_flow_04
+  };
+  console.log(dict)
 
-  const handleSave = () => postMode(d(data.name, dict));
-
-  console.log(dict);
+  const handleSave = () => postMode({key:"hello"},{data:dict});
 
   return (
     <div className="px-2 pb-2">
       <div className="flex align-center justify-center p-2 rounded mb-2">
-      <Button onClick={handleSave} color="primary" variant="contained">Save</Button></div>
-      <div className="bg-white flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
+        <Button onClick={handleSave} color="primary" variant="contained">
+          Save
+        </Button>
+      </div>
+      <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
         {data.name}
       </div>
       <TableContainer component={Paper}>
@@ -190,7 +209,8 @@ const Tab = ({ data }) => {
                 />
               </TableCell>
               <TableCell style={{ fontWeight: "bold" }} align="right">
-                EC Setpoint: <input
+                EC Setpoint:{" "}
+                <input
                   type="text"
                   value={ec_01}
                   onChange={(e) => SetEc01(e.target.value)}
@@ -237,21 +257,30 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: <input
-                  type="text"
-                  value={start_time_02}
-                  onChange={(e) => SetStartTime02(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">Run Time: <input
-                  type="text"
-                  value={runtime_02}
-                  onChange={(e) => SetRunTime02(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">EC Setpoint: <input
-                  type="text"
-                  value={ec_02}
-                  onChange={(e) => SetEc02(e.target.value)}
-                /></TableCell>
+                <TableCell>
+                  Start Time:{" "}
+                  <input
+                    type="text"
+                    value={start_time_02}
+                    onChange={(e) => SetStartTime02(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  Run Time:{" "}
+                  <input
+                    type="text"
+                    value={runtime_02}
+                    onChange={(e) => SetRunTime02(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  EC Setpoint:{" "}
+                  <input
+                    type="text"
+                    value={ec_02}
+                    onChange={(e) => SetEc02(e.target.value)}
+                  />
+                </TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -292,21 +321,30 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: <input
-                  type="text"
-                  value={start_time_03}
-                  onChange={(e) => SetStartTime03(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">Run Time: <input
-                  type="text"
-                  value={runtime_03}
-                  onChange={(e) => SetRunTime03(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">EC Setpoint: <input
-                  type="text"
-                  value={ec_03}
-                  onChange={(e) => SetEc03(e.target.value)}
-                /></TableCell>
+                <TableCell>
+                  Start Time:{" "}
+                  <input
+                    type="text"
+                    value={start_time_03}
+                    onChange={(e) => SetStartTime03(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  Run Time:{" "}
+                  <input
+                    type="text"
+                    value={runtime_03}
+                    onChange={(e) => SetRunTime03(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  EC Setpoint:{" "}
+                  <input
+                    type="text"
+                    value={ec_03}
+                    onChange={(e) => SetEc03(e.target.value)}
+                  />
+                </TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -347,21 +385,30 @@ const Tab = ({ data }) => {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Start Time: <input
-                  type="text"
-                  value={start_time_04}
-                  onChange={(e) => SetStartTime04(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">Run Time: <input
-                  type="text"
-                  value={runtime_04}
-                  onChange={(e) => SetRunTime04(e.target.value)}
-                /></TableCell>
-                <TableCell align="right">EC Setpoint: <input
-                  type="text"
-                  value={ec_04}
-                  onChange={(e) => SetEc04(e.target.value)}
-                /></TableCell>
+                <TableCell>
+                  Start Time:{" "}
+                  <input
+                    type="text"
+                    value={start_time_04}
+                    onChange={(e) => SetStartTime04(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  Run Time:{" "}
+                  <input
+                    type="text"
+                    value={runtime_04}
+                    onChange={(e) => SetRunTime04(e.target.value)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  EC Setpoint:{" "}
+                  <input
+                    type="text"
+                    value={ec_04}
+                    onChange={(e) => SetEc04(e.target.value)}
+                  />
+                </TableCell>
               </TableRow>
             </TableHead>
           </Table>
@@ -469,17 +516,19 @@ export const Control = () => {
   return (
     <div className="flex flex-col p-4">
       <div className="align-items-center align-content-center justify-content-center p-1">
-        <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
-          <ControlPanel
-            value={data}
-            onMode={handleMode}
-            onMode1={handleMode1}
-            onBlockControl={handleBlockControl}
-            onBlockControl1={handleBlockControl1}
-            onProcessHold={handleProcessHold}
-            onAlarmReset={handleAlarmReset}
-            onStop={handleStop}
-          />
+        <div className="p-2">
+          <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
+            <ControlPanel
+              value={data}
+              onMode={handleMode}
+              onMode1={handleMode1}
+              onBlockControl={handleBlockControl}
+              onBlockControl1={handleBlockControl1}
+              onProcessHold={handleProcessHold}
+              onAlarmReset={handleAlarmReset}
+              onStop={handleStop}
+            />
+          </div>
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">
@@ -488,6 +537,7 @@ export const Control = () => {
                 callHook={(use) =>
                   use(`${API_URL}/${farmId}/manual_datetime_settings`)
                 }
+                
                 renderData={Tables}
               />
             </div>
