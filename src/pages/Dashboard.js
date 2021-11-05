@@ -60,7 +60,7 @@ const IrrigationTimeLeft = ({ data }) => (
     </div>
     <div
       style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="font-bold text-2xl"
+      className="font-bold text-3xl"
     >
       {data.next_start_time}
     </div>
@@ -74,7 +74,7 @@ const IrrigationEC = ({ data }) => (
     </div>
     <div
       style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="text-2xl font-bold"
+      className="font-bold text-3xl"
     >
       Value: {data.ec_data.value} µS
     </div>
@@ -125,7 +125,7 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
         title: {
           text: "Fertilizer Ratio",
           offsetX: 30,
-          offsetY: 10,
+          offsetY: 2,
           style: {
             fontSize: "17px",
             fontWeight: "bold",
@@ -194,7 +194,7 @@ export const Dashboard = () => {
     );
 
   return (
-    <div className="p-1">
+    <div>
       <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
         <div className="bg-gray-300 rounded shadow-md">
           <IrrigationProgress data={data.irrigation_data} />
@@ -211,27 +211,27 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 p-2 pt-0">
+      <div className="grid lg:grid-cols-3 grid-rows-1 p-2 -mt-4">
         {data.water_usage.map((waterUsageData, i) => (
           <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
             <HomeFlowWaterUsage data={waterUsageData} />
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-5 ">
-        <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
+      <div className="grid lg:grid-cols-2 grid-rows-1 gap-4 p-4 -mt-4">
+        <div className="flex bg-gray-300 rounded shadow-md p-4 ">
           <div className="w-full h-full">
             <HomeFlowFertilizerBarChartD
               data={data.fertilizer_usage.bar_graph}
             />
-          </div>
+            </div>
         </div>
-        <div className="col-span-2 bg-gray-300 rounded shadow-md flex-grow m-4 flex align-items">
-          <div className="w-full">
+        <div className="flex bg-gray-300 rounded shadow-md p-4 ">
+          <div className="w-full h-full">
             <HomeFlowFertilizerPieChart
               data={data.fertilizer_usage.pie_chart}
             />
-          </div>
+            </div>
         </div>
       </div>
     </div>

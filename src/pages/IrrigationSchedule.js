@@ -14,9 +14,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import { API_URL, useApi, post } from "api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import {
@@ -26,10 +23,6 @@ import {
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import ErrorGif from "images/ErrorGif.gif";
-import play from "images/play.png";
-import pause from "images/pause.png";
-import stop from "images/stop.png";
-import { useRefetch } from "components/Timer";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
@@ -135,6 +128,7 @@ const fertilizerColumns = [
   },
   {
     field: "flow_rate",
+ 
     headerName: "Flow rate ℓ/m³",
     type: "number",
     editable: false

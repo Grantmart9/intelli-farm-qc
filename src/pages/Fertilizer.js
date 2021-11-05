@@ -26,14 +26,14 @@ import { useRefetch } from "../components/Timer";
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
   return (
-    <div className="px-2 pb-2">
+    <div className="p-2">
       <div
         style={{ fontFamily: "'Raleway', sans-serif" }}
         className="font-bold text-2xl mb-2"
       >
         {valve.name}
       </div>
-      <div className="grid grid-cols-2 mb-2">
+      <div className="grid grid-cols-2">
         <div className="grid grid-rows-3">
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
@@ -60,8 +60,10 @@ const FertilizerValve = ({ valve }) => {
             {valve.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
-          <img width={70} height={70} src={image} alt={image} />
+        <div>
+          <div className="flex align-center justify-center p-1">
+            <img width={70} height={70} src={image} alt={image} />
+          </div>
         </div>
       </div>
     </div>
@@ -81,13 +83,13 @@ const ECValve = ({ ec }) => {
         <div className="grid grid-rows-2">
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
-            className="text-green-800 text-lg font-bold"
+            className="text-green-800 text-md font-bold"
           >
             Target: {ec.setpoint}
           </div>
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
-            className="text-green-800 text-lg font-bold"
+            className="text-green-800 text-md font-bold"
           >
             Value: {ec.value}
           </div>
@@ -98,8 +100,10 @@ const ECValve = ({ ec }) => {
             {ec.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
+        <div>
+          <div className="flex align-center justify-center bg-gra-400 p-2">
           <img src={fertilizerEc} alt={fertilizerEc} width={70} height={70} />
+          </div>
         </div>
       </div>
     </div>
@@ -155,16 +159,16 @@ export const Fertilizer = () => {
   console.log(ec);
 
   return (
-    <div className="p-4">
-      <div className="grid xl:grid-cols-4 gap-3 p-2">
+    <div className="p-3">
+      <div className="grid xl:grid-cols-4 gap-4 p-2">
         {data.fertilizer_valves.map((valve, i) => (
           <div key={i} className="bg-gray-300 rounded shadow-md">
             <FertilizerValve valve={valve} />
           </div>
         ))}
       </div>
-      <div className="p-2">
-        <div className="grid xl:grid-cols-4 gap-3">
+      <div className="p-2 mt-2">
+        <div className="grid xl:grid-cols-4 gap-4">
           {data.ec_values.map((ec, i) => (
             <div key={i} className="bg-gray-300 rounded shadow-md">
               <ECValve ec={ec} />
@@ -172,7 +176,7 @@ export const Fertilizer = () => {
           ))}
         </div>
       </div>
-      <div className="p-2 mt-1">
+      <div className="p-2 mt-2">
         <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
           <LineChart
             data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
@@ -183,13 +187,15 @@ export const Fertilizer = () => {
           />
         </div>
       </div>
-      <div className="xl:grid grid-cols-2 gap-3 p-2">
+      <div className="-mt-4">
+      <div className="xl:grid grid-cols-2 gap-4 p-2">
         <div className="bg-gray-300 rounded shadow-md mb-4">
           <FertilizerBarChart data={data.fertilizer_bargraph} />
         </div>
         <div className="bg-gray-300 rounded shadow-md mb-4">
           <FertilizerPieChart data={data.fertilizer_pie_chart} />
         </div>
+      </div>
       </div>
     </div>
   );

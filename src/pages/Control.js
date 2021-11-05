@@ -83,17 +83,21 @@ const ControlPanel = ({}) => {
 
   return (
     <div className="block items-center p-1">
-      <div className="grid grid-cols-2 gap-2 text-left p-2 bg-gray-400 rounded shadow-md mb-2">
-        <div className="text-2xl ">Controller Time:</div>
-        <div className="text-md"> {timestamp}</div>
-        <div className="text-2xl">Alarms:</div>
-        <div className="text-md"> {alarms}</div>
-        <div className="text-2xl">State:</div>
-        <div className="text-md"> {state}</div>
-        <div className="text-2xl">Mode:</div>
-        <div className="text-md"> Manual</div>
-        <div className="text-2xl font-sans">{mode}</div>
-        <div className="text-md font-sans"> {block_control}</div>
+      <div className="grid grid-cols-2 bg-gray-400 shadow-md rounded  mb-2 p-2">
+        <div className="grid grid-rows-5">
+          <div className="text-lg ">Controller Time:</div>
+          <div className="text-lg">Alarms:</div>
+          <div className="text-lg">State:</div>
+          <div className="text-lg">Mode:</div>
+          <div className="text-lg">Block Control:</div>
+        </div>
+        <div className="grid grid-rows-5">
+          <div className="text-sm"> {timestamp}</div>
+          <div className="text-sm"> {alarms}</div>
+          <div className="text-sm"> {state}</div>
+          <div className="text-sm">{mode}</div>
+          <div className="text-sm"> {block_control}</div>
+        </div>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
         <div className="grid grid-rows-2 gap-2">
@@ -208,11 +212,10 @@ const TimeControl = ({ index, value, onChange }) => {
                 onChange={(e) => handleRunTime(e.target.value)}
               />
             </TableCell>
-            <TableCell align="right" >
+            <TableCell align="right">
               EC Setpoint:{" "}
               <input
                 type="text"
-               
                 value={value[ec]}
                 onChange={(e) => handleEC(e.target.value)}
               />
@@ -224,10 +227,9 @@ const TimeControl = ({ index, value, onChange }) => {
   );
 };
 const Tank = ({ index, value, onChange }) => {
-
   const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
     name: `Tank ${letter.toUpperCase()}`,
-    field: `tank_${letter}_flow_${zeroPad(index, 2)}`,
+    field: `tank_${letter}_flow_${zeroPad(index, 2)}`
   }));
 
   const handleFlowRate = (field, d) => {
@@ -331,7 +333,7 @@ const Tables = () => {
 
 export const Control = () => {
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-3">
       <div className="align-items-center align-content-center justify-content-center p-1">
         <div className="p-2">
           <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">

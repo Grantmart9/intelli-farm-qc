@@ -37,8 +37,8 @@ export const Pumps = () => {
     );
 
   return (
-    <div className="p-4 ml-2 mt-2">
-      <div className="grid xl:grid-cols-4 gap-3">
+    <div className="p-4">
+      <div className="grid xl:grid-cols-4 gap-4">
         {data.map((data, i) => (
           <div key={i} className="p-1.5 pb-2 bg-gray-300 rounded shadow-md ">
             <div

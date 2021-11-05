@@ -95,7 +95,7 @@ export const Report = () => {
   );
 
   return (
-    <div className="flex justify-content-center p-4">
+    <div className="flex justify-content-left p-4">
       <form
         className="flex flex-col align-items-center bg-gray-300 shadow-md rounded p-5 space-y-5 block"
         onSubmit={handleSubmit}

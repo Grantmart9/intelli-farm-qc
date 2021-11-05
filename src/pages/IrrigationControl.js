@@ -15,7 +15,6 @@ import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
 import { API_URL, useApi } from "api";
 import { AxiosSpinner } from "components/AxiosSpinner";
-import { HomeFlowFertilizerBarChartV } from "components/charts/HomeFlowFertilizerBarChartV";
 import fertilizer from "images/fertilizer.png";
 import greendrop from "images/greendrop.gif";
 import ErrorGif from "images/ErrorGif.gif";
@@ -39,14 +38,14 @@ const EquipmentStatus = ({ data }) => {
   }
 
   return (
-    <div className="px-2 pb-2">
+    <div className="p-2">
       <div
         style={{ fontFamily: "'Raleway', sans-serif" }}
         className="font-bold text-2xl mb-2"
       >
         {data.name}
       </div>
-      <div className="grid grid-cols-2 -mb-2">
+      <div className="grid grid-cols-2 gap-8">
         <div className="grid grid-rows-3">
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
@@ -56,19 +55,19 @@ const EquipmentStatus = ({ data }) => {
           </div>
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
-            className="text-green-800 text-lg font-bold"
+            className="text-green-800 text-md font-bold"
           >
             {data.real_time_flow}
           </div>
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
-            className="text-green-800 text-lg font-bold text-md"
+            className="text-green-800 text-md font-bold text-md"
           >
             {data.total_flow}
           </div>
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
-            className="text-green-800 text-lg font-bold text-md"
+            className="text-green-800 text-md font-bold text-md"
           >
             {timeLeft}
           </div>
@@ -79,8 +78,10 @@ const EquipmentStatus = ({ data }) => {
             {data.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
+        <div>
+          <div className="flex align-center justify-center p-1">
           <img src={image} alt={image} width={70} height={70} />
+          </div>
         </div>
       </div>
     </div>
@@ -89,8 +90,10 @@ const EquipmentStatus = ({ data }) => {
 
 const RenderFertilizer1 = ({ data }) =>
   data.map((irrigation_valve, i) => (
-    <div key={i} className="bg-gray-300 shadow-md rounded mr-1 ml-1 flex mt-2">
+    <div className="xl:mb-0 lg:mb-2 mb-4">
+    <div key={i} className="bg-gray-300 shadow-md rounded">
       <EquipmentStatus data={irrigation_valve} />
+      </div>
     </div>
   ));
 
@@ -102,10 +105,6 @@ const RenderFertilizer2 = ({ data }) => (
       y: Number(y)
     }))}
   />
-);
-
-const RenderFertilizer3 = ({ data }) => (
-  <HomeFlowFertilizerBarChartV data={data} />
 );
 
 export const IrrigationControl = () => {
@@ -126,29 +125,23 @@ export const IrrigationControl = () => {
     );
 
   return (
-    <div>
-      <div className="p-2">
-        <div className="xl:grid grid-cols-4 p-4 gap-1">
+      <div>
+        <div className="p-4">
+        <div className="xl:grid grid-cols-4 gap-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={RenderFertilizer1}
           />
         </div>
-        <div className="bg-gray-300 rounded shadow-md ml-6 mr-6">
-          <div className="w-full h-full">
-            <AxiosSpinner
-              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
-              renderData={RenderFertilizer3}
-            />
-          </div>
         </div>
-        <div className="col-span-3 bg-gray-300  rounded shadow-md m-4">
+        <div className="p-4 -mt-6">
+        <div className="bg-gray-300 rounded shadow-md">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
             renderData={RenderFertilizer2}
           />
         </div>
+        </div>
       </div>
-    </div>
   );
 };

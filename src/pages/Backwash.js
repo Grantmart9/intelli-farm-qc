@@ -18,7 +18,6 @@ import { useParams } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import fertilizer from "images/fertilizer.png";
-import backwash from "images/backwash.gif";
 import { useRefetch } from "../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -47,7 +46,7 @@ const WashBack = ({ backwash }) => {
         {backwash.name}
       </div>
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-1">
+        <div className="grid grid-rows-2">
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
             className="font-bold text-green-800 text-xl mt-1"
@@ -62,8 +61,10 @@ const WashBack = ({ backwash }) => {
             {backwash.alarm}
           </div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
+        <div >
+        <div className="flex align-center justify-center">
           <img src={fertilizer} alt={fertilizer} width={70} height={70} />
+        </div>
         </div>
       </div>
     </div>
