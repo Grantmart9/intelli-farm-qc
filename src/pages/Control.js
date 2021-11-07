@@ -263,7 +263,7 @@ const Tank = ({ index, value, onChange }) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Flow m³/h</TableCell>
+            <TableCell align="right">Flow ℓ/m³</TableCell>
           </TableRow>
           {tanks.map((tank, i) => (
             <TableRow key={i}>
