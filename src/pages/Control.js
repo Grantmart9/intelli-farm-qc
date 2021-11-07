@@ -214,7 +214,7 @@ const TimeControl = ({ index, value, onChange }) => {
               </div>
             </TableCell>
             <TableCell align="right">
-            <div style={{minWidth:"20rem"}}>
+            <div style={{minWidth:"25rem"}}>
             <div className="grid grid-rows-2 gap-1 bg-white p-2">
               <div className="text-center mb-2">Run Time</div>
               <div className="text-xs flex align-center justify-center">
