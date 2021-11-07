@@ -46,7 +46,7 @@ const EquipmentStatus = ({ data }) => {
         {data.name}
       </div>
       <div className="grid grid-cols-2 gap-8">
-        <div className="grid grid-rows-3">
+        <div className="grid grid-rows-4">
           <div
             style={{ fontFamily: "'Raleway', sans-serif" }}
             className="text-green-800 text-xl font-bold"
@@ -90,8 +90,8 @@ const EquipmentStatus = ({ data }) => {
 
 const RenderFertilizer1 = ({ data }) =>
   data.map((irrigation_valve, i) => (
-    <div className="xl:mb-0 lg:mb-2 mb-4">
-    <div key={i} className="bg-gray-300 shadow-md rounded">
+    <div className="mb-0">
+    <div key={i} className="bg-gray-300 shadow-md rounded flex">
       <EquipmentStatus data={irrigation_valve} />
       </div>
     </div>
@@ -127,7 +127,7 @@ export const IrrigationControl = () => {
   return (
       <div>
         <div className="p-4">
-        <div className="xl:grid grid-cols-4 gap-4">
+        <div className="xl:grid xl:grid-cols-4 gap-4">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
             renderData={RenderFertilizer1}

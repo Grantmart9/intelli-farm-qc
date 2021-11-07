@@ -24,6 +24,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { number } from "prop-types";
+import TextField from "@mui/material/TextField";
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
@@ -107,7 +108,7 @@ const ControlPanel = ({}) => {
             variant="contained"
             color="primary"
           >
-            Manual
+            <div className="text-xs">Manual</div>
           </Button>
           <Button
             onClick={onMode1}
@@ -115,7 +116,7 @@ const ControlPanel = ({}) => {
             variant="contained"
             color="success"
           >
-            Automatic
+            <div className="text-xs">Automatic</div>
           </Button>
         </div>
         <div className="grid grid-rows-2 gap-2">
@@ -125,7 +126,7 @@ const ControlPanel = ({}) => {
             variant="contained"
             color="primary"
           >
-            Manual Date & Time
+            <div className="text-xs">Manual Date & Time</div>
           </Button>
 
           <Button
@@ -134,18 +135,18 @@ const ControlPanel = ({}) => {
             variant="contained"
             color="success"
           >
-            AI Control
+            <div className="text-xs">AI Control</div>
           </Button>
         </div>
         <div className="grid grid-rows-3 gap-2">
           <Button color="info" variant="contained" onClick={onProcessHold}>
-            Process Hold
+            <div className="text-xs">Process Hold</div>
           </Button>
           <Button color="warning" variant="contained" onClick={onAlarmReset}>
-            Alarm Reset
+            <div className="text-xs">Alarm Reset</div>
           </Button>
           <Button color="error" variant="contained" onClick={onStop}>
-            Stop
+            <div className="text-xs">Stop</div>
           </Button>
         </div>
       </div>
@@ -198,10 +199,14 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableRow>
             <TableCell align="left">
               Start Time:{" "}
-              <input
-                type="text"
+              <TextField
+                type="datetime-local"
                 value={value[start_time]}
                 onChange={(e) => handleStartTime(e.target.value)}
+                sx={{ minWidth: 25 }}
+                InputLabelProps={{
+                  shrink: true
+                }}
               />
             </TableCell>
             <TableCell align="right">
@@ -336,7 +341,7 @@ export const Control = () => {
     <div className="flex flex-col p-3">
       <div className="align-items-center align-content-center justify-content-center p-1">
         <div className="p-2">
-          <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center mt-2 p-2">
+          <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center p-2">
             <ControlPanel />
           </div>
         </div>
