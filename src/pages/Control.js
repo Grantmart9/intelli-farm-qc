@@ -198,32 +198,48 @@ const TimeControl = ({ index, value, onChange }) => {
         <TableHead>
           <TableRow>
             <TableCell align="left">
-              Start Time:{" "}
+              <div className="grid grid-rows-2 gap-1 bg-white p-2">
+              <div className="text-center mb-2">
+              Start Time</div>
+              <div className="text-xs flex align-center justify-center">
               <TextField
                 type="datetime-local"
                 value={value[start_time]}
                 onChange={(e) => handleStartTime(e.target.value)}
-                sx={{ minWidth: 25 }}
+                sx={{ minWidth:  21}}
                 InputLabelProps={{
                   shrink: true
                 }}
-              />
+              /></div>
+              </div>
             </TableCell>
             <TableCell align="right">
-              Run Time:{" "}
-              <input
+            <div style={{minWidth:"20rem"}}>
+            <div className="grid grid-rows-2 gap-1 bg-white p-2">
+              <div className="text-center mb-2">Run Time</div>
+              <div className="text-xs flex align-center justify-center">
+              <TextField
                 type="text"
                 value={value[runtime]}
                 onChange={(e) => handleRunTime(e.target.value)}
               />
+              </div>
+              </div>
+              </div>
             </TableCell>
             <TableCell align="right">
-              EC Setpoint:{" "}
-              <input
+            <div style={{minWidth:"20rem"}}>
+            <div className="grid grid-rows-2 gap-1 bg-white p-2">
+            <div className="text-center mb-2">EC Setpoint</div>
+            <div className="text-xs flex align-center justify-center">
+              <TextField
                 type="text"
                 value={value[ec]}
                 onChange={(e) => handleEC(e.target.value)}
               />
+              </div>
+              </div>
+              </div>
             </TableCell>
           </TableRow>
         </TableHead>
