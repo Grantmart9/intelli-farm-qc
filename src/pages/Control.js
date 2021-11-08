@@ -197,52 +197,51 @@ const TimeControl = ({ index, value, onChange }) => {
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+          <TableCell align="right">
+              <div className="text-center">EC Setpoint</div>
+            </TableCell>
+            <TableCell align="right">
+              <div className="text-center">Run Time</div>
+            </TableCell>
             <TableCell align="left">
-              <div className="grid grid-rows-2 gap-1 bg-white p-2">
-              <div className="text-center mb-2">
-              Start Time</div>
-              <div className="text-xs flex align-center justify-center">
-              <TextField
-                type="datetime-local"
-                value={value[start_time]}
-                onChange={(e) => handleStartTime(e.target.value)}
-                sx={{ minWidth:  21}}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              /></div>
-              </div>
-            </TableCell>
-            <TableCell align="right">
-            <div style={{minWidth:"25rem"}}>
-            <div className="grid grid-rows-2 gap-1 bg-white p-2">
-              <div className="text-center mb-2">Run Time</div>
-              <div className="text-xs flex align-center justify-center">
-              <TextField
-                type="text"
-                value={value[runtime]}
-                onChange={(e) => handleRunTime(e.target.value)}
-              />
-              </div>
-              </div>
-              </div>
-            </TableCell>
-            <TableCell align="right">
-            <div style={{minWidth:"20rem"}}>
-            <div className="grid grid-rows-2 gap-1 bg-white p-2">
-            <div className="text-center mb-2">EC Setpoint</div>
-            <div className="text-xs flex align-center justify-center">
-              <TextField
-                type="text"
-                value={value[ec]}
-                onChange={(e) => handleEC(e.target.value)}
-              />
-              </div>
-              </div>
-              </div>
+              <div className="text-center">Start Time</div>
             </TableCell>
           </TableRow>
         </TableHead>
+        <TableCell>
+          <div className="text-xs flex align-center justify-center">
+            <TextField
+              variant="standard"
+              type="text"
+              value={value[ec]}
+              onChange={(e) => handleEC(e.target.value)}
+            />
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="text-xs flex align-center justify-center">
+            <TextField
+              variant="standard"
+              type="number"
+              value={value[runtime]}
+              onChange={(e) => handleRunTime(e.target.value)}
+            />
+          </div>
+        </TableCell>
+        <TableCell>
+            <div className="text-xs flex align-center justify-center">
+              <TextField
+                variant="standard"
+                type="datetime-local"
+                value={value[start_time]}
+                onChange={(e) => handleStartTime(e.target.value)}
+                sx={{ minWidth: 21 }}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </div>
+        </TableCell>
       </Table>
     </TableContainer>
   );
@@ -258,10 +257,13 @@ const Tank = ({ index, value, onChange }) => {
   };
 
   return (
+    <div>
+    <div className="bg-blue-200 align-center text-xl justify-center flex font-bold p-2">Fertilizer</div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+            
             <TableCell>Name</TableCell>
             <TableCell align="right">Flow ℓ/m³</TableCell>
           </TableRow>
@@ -281,6 +283,7 @@ const Tank = ({ index, value, onChange }) => {
         </TableHead>
       </Table>
     </TableContainer>
+    </div>
   );
 };
 

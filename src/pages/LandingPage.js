@@ -18,6 +18,8 @@ import { useRefetch } from "../components/Timer";
 import { ProgressBar } from "@themesberg/react-bootstrap";
 import drop from "images/drop.png";
 
+var Font = "'Raleway', sans-serif";
+
 const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 gap-2 p-1">
@@ -26,15 +28,16 @@ const FarmsData = ({ farm }) => (
           <img width={40} height={40} src={drop} alt={drop} />
         </div>
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
-          className="font-bold text-sm flex items-center"
+          style={{ fontFamily: {Font} }}
+          className="font-bold rounded text-md mt-2 "
+
         >
           {farm.name}
         </div>
       </div>
       <div className="inline-block shadow-md text-center rounded p-1">
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
+          style={{ fontFamily: {Font} }}
           className="font-bold rounded text-md mt-2 "
         >
           Water Supply <div>{farm.water_total} m³/h</div>
@@ -44,7 +47,7 @@ const FarmsData = ({ farm }) => (
     <div className="grid grid-cols-2 gap-2 p-1">
       <div className="p-2 shadow-md text-center rounded ">
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
+          style={{ fontFamily: {Font} }}
           className="font-bold text-md pb-2"
         >
           Irrigation
@@ -60,20 +63,20 @@ const FarmsData = ({ farm }) => (
       </div>
       <div className="p-2 shadow-md text-center rounded">
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
+          style={{ fontFamily: {Font} }}
           className="font-bold text-md pb-2"
         >
           EC
         </div>
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
+          style={{ fontFamily: {Font}}}
           className="font-bold text-sm"
         >
           Value: {farm.ec_value} µS
         </div>
         <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
-          classNme="font-bold text-sm"
+          style={{ fontFamily: {Font} }}
+          className="font-bold text-sm"
         >
           Target: {farm.ec_target} µS
         </div>
