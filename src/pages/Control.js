@@ -197,7 +197,7 @@ const TimeControl = ({ index, value, onChange }) => {
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-          <TableCell align="right">
+            <TableCell align="right">
               <div className="text-center">EC Setpoint</div>
             </TableCell>
             <TableCell align="right">
@@ -229,18 +229,18 @@ const TimeControl = ({ index, value, onChange }) => {
           </div>
         </TableCell>
         <TableCell>
-            <div className="text-xs flex align-center justify-center">
-              <TextField
-                variant="standard"
-                type="datetime-local"
-                value={value[start_time]}
-                onChange={(e) => handleStartTime(e.target.value)}
-                sx={{ minWidth: 21 }}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-            </div>
+          <div className="text-xs flex align-center justify-center">
+            <TextField
+              variant="standard"
+              type="datetime-local"
+              value={value[start_time]}
+              onChange={(e) => handleStartTime(e.target.value)}
+              sx={{ minWidth: 21 }}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </div>
         </TableCell>
       </Table>
     </TableContainer>
@@ -258,31 +258,32 @@ const Tank = ({ index, value, onChange }) => {
 
   return (
     <div>
-    <div className="bg-blue-200 align-center text-xl justify-center flex font-bold p-2">Fertilizer</div>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 200 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Flow ℓ/m³</TableCell>
-          </TableRow>
-          {tanks.map((tank, i) => (
-            <TableRow key={i}>
-              <TableCell>{tank.name}</TableCell>
-              <TableCell align="right">
-                <input
-                  type="text"
-                  className="text-right"
-                  value={value[tank.field]}
-                  onChange={(e) => handleFlowRate(tank.field, e.target.value)}
-                />
-              </TableCell>
+      <div className="bg-blue-200 align-center text-xl justify-center flex font-bold p-2">
+        Fertilizer
+      </div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 200 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Flow ℓ/m³</TableCell>
             </TableRow>
-          ))}
-        </TableHead>
-      </Table>
-    </TableContainer>
+            {tanks.map((tank, i) => (
+              <TableRow key={i}>
+                <TableCell>{tank.name}</TableCell>
+                <TableCell align="right">
+                  <input
+                    type="text"
+                    className="text-right"
+                    value={value[tank.field]}
+                    onChange={(e) => handleFlowRate(tank.field, e.target.value)}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableHead>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
@@ -296,7 +297,7 @@ const Tab = ({ value, onChange, onSave }) => {
           Save
         </Button>
       </div>
-      <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-2 rounded mb-2">
+      <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-2 rounded">
         {value.name}
       </div>
       {CONTROL_GROUPS.map((i) => (
@@ -345,7 +346,7 @@ const Tables = () => {
   if (!value || loading) return <Preloader />;
 
   return value.map((datum, i) => (
-    <div key={i} className="block mt-2">
+    <div key={i} className="block ">
       <Tab
         value={{ ...datum, index: i }}
         onChange={handleChange}

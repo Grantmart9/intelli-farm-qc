@@ -59,7 +59,7 @@ export const Login = ({ loginUrl }) => {
     <Dialog open={loginOpen}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
         <div
-          style={{ fontFamily: "Helvetica Neue" }}
+          style={{ fontFamily: "'Raleway', sans-serif" }}
           className="font-bold align-self-center"
         >
           Credentials
@@ -84,7 +84,7 @@ export const Login = ({ loginUrl }) => {
           </div>
         </Button>
         <div
-          style={{ fontFamily: "Helvetica Neue" }}
+          style={{ fontFamily: "'Raleway', sans-serif" }}
           className="text-gray-800 text-center"
         >
           {message}
