@@ -20,6 +20,7 @@ import greendrop from "images/greendrop.gif";
 import ErrorGif from "images/ErrorGif.gif";
 import { Preloader } from "components/Preloader";
 import { useRefetch } from "../components/Timer";
+import {HomeFlowFertilizerBarChartV} from "components/charts/HomeFlowFertilizerBarChartV";
 
 const EquipmentStatus = ({ data }) => {
   var image;
@@ -90,7 +91,7 @@ const EquipmentStatus = ({ data }) => {
 
 const RenderFertilizer1 = ({ data }) =>
   data.map((irrigation_valve, i) => (
-    <div className="mb-0">
+    <div className="mb-3">
     <div key={i} className="bg-gray-300 shadow-md rounded flex">
       <EquipmentStatus data={irrigation_valve} />
       </div>
@@ -133,15 +134,26 @@ export const IrrigationControl = () => {
             renderData={RenderFertilizer1}
           />
         </div>
+        <div className="bg-gray-300 rounded shadow-md mt-4">
+          <div className="w-full h-full">
+            <AxiosSpinner
+              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
+              refresh={false}
+              renderData={({ data }) => (
+                <HomeFlowFertilizerBarChartV data={data} />
+              )}
+            />
+          </div>
         </div>
-        <div className="p-4 -mt-6">
-        <div className="bg-gray-300 rounded shadow-md">
+        <div className="bg-gray-300 rounded shadow-md mt-4">
+        <div className="w-full h-full">
           <AxiosSpinner
             callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
             renderData={RenderFertilizer2}
           />
+          </div>
         </div>
-        </div>
+      </div>
       </div>
   );
 };
