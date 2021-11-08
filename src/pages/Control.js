@@ -84,15 +84,15 @@ const ControlPanel = ({}) => {
 
   return (
     <div className="block items-center p-1">
-      <div className="grid grid-cols-2 bg-gray-400 shadow-md rounded  mb-2 p-2">
-        <div className="grid grid-rows-5">
-          <div className="text-lg ">Controller Time:</div>
-          <div className="text-lg">Alarms:</div>
-          <div className="text-lg">State:</div>
-          <div className="text-lg">Mode:</div>
-          <div className="text-lg">Block Control:</div>
+      <div className="grid grid-cols-2 bg-gray-400 shadow-md rounded mb-2 p-2">
+        <div className="grid grid-rows-5 text-center">
+          <div className="text-sm">Controller Time:</div>
+          <div className="text-sm">Alarms:</div>
+          <div className="text-sm">State:</div>
+          <div className="text-sm">Mode:</div>
+          <div className="text-sm">Block Control:</div>
         </div>
-        <div className="grid grid-rows-5">
+        <div className="grid grid-rows-5 text-center">
           <div className="text-sm"> {timestamp}</div>
           <div className="text-sm"> {alarms}</div>
           <div className="text-sm"> {state}</div>
