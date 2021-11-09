@@ -90,11 +90,11 @@ const ControlPanel = ({}) => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead >
           <TableRow >
-            <TableCell  align="center">Controller Time</TableCell>
-            <TableCell   align="center">Alarms</TableCell>
-            <TableCell   align="center">State</TableCell>
-            <TableCell    align="center">Mode</TableCell>
-            <TableCell   align="center">Control</TableCell>
+            <TableCell  align="center">Controller Time |</TableCell>
+            <TableCell   align="center">Alarms |</TableCell>
+            <TableCell   align="center">State |</TableCell>
+            <TableCell    align="center">Mode |</TableCell>
+            <TableCell   align="center">Control |</TableCell>
           </TableRow>
         </TableHead>
           <TableCell align="center">
