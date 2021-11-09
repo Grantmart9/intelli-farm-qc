@@ -38,15 +38,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold text-xl">
-      Irrigation
-    </div>
-    <div
-      style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="font-bold text-3xl"
-    >
-      Cycle Progress
-    </div>
+    <div className="font-bold text-xl">Irrigation</div>
+    <div className="font-bold text-3xl">Cycle Progress</div>
     <div className="mt-3">
       <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
     </div>
@@ -55,49 +48,24 @@ const IrrigationProgress = ({ data }) => (
 
 const IrrigationTimeLeft = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="text-xl font-bold">
-      Next Start Time
-    </div>
-    <div
-      style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="font-bold text-3xl"
-    >
-      {data.next_start_time}
-    </div>
+    <div className="text-xl font-bold">Next Start Time</div>
+    <div className="font-bold text-2xl">{data.next_start_time}</div>
   </div>
 );
 
 const IrrigationEC = ({ data }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="text-xl font-bold">
-      EC
-    </div>
-    <div
-      style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="font-bold text-3xl"
-    >
-      Value: {data.ec_data.value} µS
-    </div>
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold">
-      Target: {data.ec_data.setpoint} µS
-    </div>
+    <div className="text-xl font-bold">EC</div>
+    <div className="text-2xl font-bold">Value: {data.ec_data.value} µS</div>
+    <div className="font-bold">Target: {data.ec_data.setpoint} µS</div>
   </div>
 );
 
 const Pump = ({ pump }) => (
   <div className="p-4 h-full">
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold text-xl">
-      Water Pump
-    </div>
-    <div
-      style={{ fontFamily: "'Raleway', sans-serif" }}
-      className="font-bold text-3xl"
-    >
-      {pump.status}
-    </div>
-    <div style={{ fontFamily: "'Raleway', sans-serif" }} className="font-bold">
-      {pump.main_flow}
-    </div>
+    <div className="font-bold text-xl">Water Pump</div>
+    <div className="font-bold text-3xl">{pump.status}</div>
+    <div className="font-bold">{pump.main_flow}</div>
   </div>
 );
 
@@ -125,11 +93,10 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
         title: {
           text: "Fertilizer Ratio",
           offsetX: 30,
-          offsetY: 2,
+          offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-            fontFamily: "'Raleway', sans-serif"
+            fontWeight: "bold"
           }
         }
       }}
@@ -165,8 +132,7 @@ export const HomeFlowWaterUsage = ({ data }) => {
         },
         subtitle: {
           text: data.name,
-          offsetX: 30,
-          fontFamily: "'Raleway', sans-serif"
+          offsetX: 30
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
@@ -192,9 +158,10 @@ export const Dashboard = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
+  console.log(data);
 
   return (
-    <div>
+    <div className="p-1">
       <div className="grid grid-cols-1 lg:grid-cols-4 p-4 gap-4">
         <div className="bg-gray-300 rounded shadow-md">
           <IrrigationProgress data={data.irrigation_data} />
@@ -211,27 +178,27 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className="grid lg:grid-cols-3 grid-rows-1 p-2 -mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 p-2 pt-0">
         {data.water_usage.map((waterUsageData, i) => (
           <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
             <HomeFlowWaterUsage data={waterUsageData} />
           </div>
         ))}
       </div>
-      <div className="grid lg:grid-cols-2 grid-rows-1 gap-4 p-4 -mt-4">
-        <div className="flex bg-gray-300 rounded shadow-md p-4 ">
+      <div className="grid grid-cols-1 lg:grid-cols-5 ">
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
           <div className="w-full h-full">
             <HomeFlowFertilizerBarChartD
               data={data.fertilizer_usage.bar_graph}
             />
-            </div>
+          </div>
         </div>
-        <div className="flex bg-gray-300 rounded shadow-md p-4 ">
-          <div className="w-full h-full">
+        <div className="col-span-2 bg-gray-300 rounded shadow-md flex-grow m-4 flex align-items">
+          <div className="w-full">
             <HomeFlowFertilizerPieChart
               data={data.fertilizer_usage.pie_chart}
             />
-            </div>
+          </div>
         </div>
       </div>
     </div>
