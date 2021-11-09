@@ -90,11 +90,11 @@ const ControlPanel = ({}) => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead >
           <TableRow >
-            <TableCell  align="center">Controller Time |</TableCell>
-            <TableCell   align="center">Alarms |</TableCell>
-            <TableCell   align="center">State |</TableCell>
-            <TableCell    align="center">Mode |</TableCell>
-            <TableCell   align="center">Control |</TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Controller Time  |</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Alarms   |</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>State  |</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Mode  |</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Control   |</div></TableCell>
           </TableRow>
         </TableHead>
           <TableCell align="center">
@@ -215,9 +215,9 @@ const TimeControl = ({ index, value, onChange }) => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead >
           <TableRow >
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> EC Setpoint   |</TableCell>
-            <TableCell  variant="head"  align="center"><ArrowDownwardIcon fontSize="small" /> Run Time   |</TableCell>
-            <TableCell   variant="head"  align="center"><ArrowDownwardIcon fontSize="small" /> Start Time   |</TableCell>
+            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>EC Setpoint   |</div></TableCell>
+            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Run Time   |</div></TableCell>
+            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Start Time</div></TableCell>
           </TableRow>
         </TableHead>
           <TableCell>
@@ -240,7 +240,7 @@ const TimeControl = ({ index, value, onChange }) => {
               />
             </div>
           </TableCell>
-          <TableCell align="center">
+          <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
                 variant="standard"
@@ -271,8 +271,8 @@ const Tank = ({ index, value, onChange }) => {
 
   return (
     <div>
-      <div className="bg-blue-200 align-center text-xl justify-center flex font-bold p-1">
-        Fertilizer
+      <div className="bg-blue-200 align-center text-2xl justify-center flex font-bold p-1">
+        <div style={{fontFamily:"Nunito Sans"}}>Fertilizer</div>
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
@@ -303,8 +303,6 @@ const Tank = ({ index, value, onChange }) => {
 
 const Tab = ({ value, onChange, onSave }) => {
 
-
-   
   const CONTROL_GROUPS = [1, 2, 3, 4];
 
   return (
@@ -315,7 +313,7 @@ const Tab = ({ value, onChange, onSave }) => {
         </Button>
       </div>
       <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-1 rounded">
-        {value.name}
+        <div style={{fontFamily:"Nunito Sans"}}>{value.name}</div>
       </div>
       {CONTROL_GROUPS.map((i) => (
         <ControlGroup
