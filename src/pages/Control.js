@@ -79,7 +79,7 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  if (!data || loading) return <Preloader />;
+  if (!data || onMode ==1) return <Preloader />;
 
   const { timestamp, mode, block_control, state, alarms } = data;
 
@@ -342,6 +342,7 @@ const Tables = () => {
   );
 
   useRefetch(refetch);
+  
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
 
   const [value, setValue] = useState(null);
