@@ -16,5 +16,4 @@ export const Routes = {
   NotFound: { path: "/:clientId/notfound" },
   Users: { path: "/:clientId/users" },
   Control: { path: "/:clientId/controller_state" },
-  Moisture: { path: "/:clientId/moisture" },
 };
