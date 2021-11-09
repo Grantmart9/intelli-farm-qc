@@ -85,21 +85,35 @@ const ControlPanel = ({}) => {
 
   return (
     <div className="block items-center p-1">
-      <div className="grid grid-cols-2 bg-gray-400 shadow-md rounded mb-2 p-2">
-        <div className="grid grid-rows-5 text-center">
-          <div className="text-sm">Controller Time:</div>
-          <div className="text-sm">Alarms:</div>
-          <div className="text-sm">State:</div>
-          <div className="text-sm">Mode:</div>
-          <div className="text-sm">Block Control:</div>
-        </div>
-        <div className="grid grid-rows-5 text-center">
-          <div className="text-sm"> {timestamp}</div>
-          <div className="text-sm"> {alarms}</div>
-          <div className="text-sm"> {state}</div>
-          <div className="text-sm">{mode}</div>
-          <div className="text-sm"> {block_control}</div>
-        </div>
+    <div className="mb-2 ">
+      <TableContainer component={Paper} sx={{backgroundColor:"#eaedf2"}}>
+        <Table sx={{ minWidth: 200 }} aria-label="simple table">
+        <TableHead >
+          <TableRow >
+            <TableCell  align="center">Controller Time</TableCell>
+            <TableCell   align="center">Alarms</TableCell>
+            <TableCell   align="center">State</TableCell>
+            <TableCell    align="center">Mode</TableCell>
+            <TableCell   align="center">Control</TableCell>
+          </TableRow>
+        </TableHead>
+          <TableCell align="center">
+            {timestamp}
+          </TableCell>
+          <TableCell align="center">
+          {alarms}
+          </TableCell>
+          <TableCell align="center">
+           {state}
+          </TableCell>
+          <TableCell align="center">
+            {mode}
+          </TableCell>
+          <TableCell align="center">
+            {block_control}
+          </TableCell>
+        </Table>
+      </TableContainer>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
         <div className="grid grid-rows-2 gap-2">
@@ -201,9 +215,9 @@ const TimeControl = ({ index, value, onChange }) => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead >
           <TableRow >
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon /> EC Setpoint   |</TableCell>
-            <TableCell  variant="head"  align="center"><ArrowDownwardIcon /> Run Time   |</TableCell>
-            <TableCell   variant="head"  align="center"><ArrowDownwardIcon /> Start Time   |</TableCell>
+            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> EC Setpoint   |</TableCell>
+            <TableCell  variant="head"  align="center"><ArrowDownwardIcon fontSize="small" /> Run Time   |</TableCell>
+            <TableCell   variant="head"  align="center"><ArrowDownwardIcon fontSize="small" /> Start Time   |</TableCell>
           </TableRow>
         </TableHead>
           <TableCell>
