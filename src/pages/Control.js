@@ -90,11 +90,11 @@ const ControlPanel = ({}) => {
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead >
           <TableRow >
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Controller Time  |</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Alarms   |</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>State  |</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Mode  |</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Control   |</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Controller Time</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Alarms</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>State</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Mode</div></TableCell>
+            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Control</div></TableCell>
           </TableRow>
         </TableHead>
           <TableCell align="center">
@@ -217,7 +217,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableRow >
             <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>EC Setpoint   |</div></TableCell>
             <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Run Time   |</div></TableCell>
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Start Time</div></TableCell>
+            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Start Time |</div></TableCell>
           </TableRow>
         </TableHead>
           <TableCell>
