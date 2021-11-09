@@ -15,10 +15,12 @@ import { useEffect } from "react";
 
 const INTERVAL = 60000;
 
-export const useRefetch = (refetch) =>
+export const useRefetch = (refetch, refresh = true) =>
   useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, INTERVAL);
-    return () => clearInterval(interval);
-  }, [refetch]);
+    if (refresh) {
+      const interval = setInterval(() => {
+        refetch();
+      }, INTERVAL);
+      return () => clearInterval(interval);
+    }
+  }, [refetch, refresh]);

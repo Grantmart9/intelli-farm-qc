@@ -223,6 +223,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
+              style={{display:"flex",textAlign:"center"}}
                 variant="standard"
                 type="text"
                 value={value[ec]}
@@ -233,6 +234,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
+              style={{display:"flex",textAlign:"center"}}
                 variant="standard"
                 type="number"
                 value={value[runtime]}
@@ -243,6 +245,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
+              style={{display:"flex",textAlign:"center"}}
                 variant="standard"
                 type="datetime-local"
                 value={value[start_time]}

@@ -91,7 +91,7 @@ export const BrushChart = ({ data }) => {
     bar: {
       style: {
         data: {
-          fill: "#5aa0a3"
+          fill: "steelblue"
         }
       }
     }
@@ -107,8 +107,7 @@ export const BrushChart = ({ data }) => {
             display: "inline-flex",
             color: "#373738",
             marginTop: "0.5rem",
-            marginBottom: "0.5rem",
-            fontFamily: "'Raleway', sans-serif"
+            marginBottom: "0.5rem"
           }}
         >
           Overall Water Usage in m³

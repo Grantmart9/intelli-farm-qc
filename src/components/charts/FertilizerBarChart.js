@@ -85,8 +85,7 @@ export const FertilizerBarChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-            fontFamily: "'Raleway', sans-serif"
+            fontWeight: "bold"
           }
         }
       }}

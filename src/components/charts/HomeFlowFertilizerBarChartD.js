@@ -82,11 +82,10 @@ export const HomeFlowFertilizerBarChartD = ({ data }) => {
         title: {
           text: "Fertilizer Usage",
           offsetX: 30,
-          offsetY: 2,
+          offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold",
-            fontFamily: "'Raleway', sans-serif"
+            fontWeight: "bold"
           }
         }
       }}

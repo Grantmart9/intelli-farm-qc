@@ -12,6 +12,7 @@
  **/
 import React, { useEffect } from "react";
 import { useApi } from "api";
+import { useRefetch } from "./Timer";
 
 const RenderErrorLogger = ({ error, refetch }) => {
   useEffect((error) => console.error(error), [error]);
@@ -21,15 +22,11 @@ const RenderErrorLogger = ({ error, refetch }) => {
 export const AxiosSpinner = ({
   renderData: RenderData,
   callHook,
+  refresh = true,
   renderError: RenderError = RenderErrorLogger,
 }) => {
   const [{ data, loading, error }, refetch] = callHook(useApi);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [refetch]);
+  useRefetch(refetch, refresh);
 
   if (error) {
     return <RenderError {...{ error, refetch }} />;

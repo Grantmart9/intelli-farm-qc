@@ -17,7 +17,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
 import useAxios from "axios-hooks";
-import { useApi, post } from "api";
+import { useApi } from "api";
 
 export const LoginContext = createContext();
 
@@ -27,7 +27,18 @@ export const Login = ({ loginUrl }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const [, postLogin] = useAxios(...post(loginUrl));
+  const [, postLogin] = useAxios(
+    {
+      url: loginUrl,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      }
+    },
+    {
+      manual: true
+    }
+  );
 
   const onClose = () => setLoginOpen(false);
 
@@ -56,14 +67,9 @@ export const Login = ({ loginUrl }) => {
   }
 
   return (
-    <Dialog open={loginOpen}>
+    <Dialog open={loginOpen} onClose={onClose}>
       <form className="flex flex-col space-y-4 p-4" onSubmit={handleSubmit}>
-        <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
-          className="font-bold align-self-center"
-        >
-          Credentials
-        </div>
+        <div className="font-bold align-self-center">Credentials</div>
         <TextField
           label="User Name"
           type="text"
@@ -79,16 +85,9 @@ export const Login = ({ loginUrl }) => {
           variant="outlined"
         />
         <Button type="submit" variant="contained" color="primary">
-          <div style={{ color: "white", fontFamily: "Helvetica Neue" }}>
-            Login
-          </div>
+          <div style={{ color: "white" }}>Login</div>
         </Button>
-        <div
-          style={{ fontFamily: "'Raleway', sans-serif" }}
-          className="text-gray-800 text-center"
-        >
-          {message}
-        </div>
+        <div className="text-gray-800 text-center">{message}</div>
       </form>
     </Dialog>
   );
@@ -96,7 +95,18 @@ export const Login = ({ loginUrl }) => {
 
 export const Logout = ({ logoutUrl, redirect }) => {
   const [state, setState] = useState({ type: "message", message: "" });
-  const [, postLogout] = useApi(...post(logoutUrl));
+  const [, postLogout] = useApi(
+    {
+      url: logoutUrl,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      }
+    },
+    {
+      manual: true
+    }
+  );
 
   useEffect(() => {
     postLogout()
