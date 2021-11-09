@@ -340,6 +340,8 @@ const Tables = () => {
   const [{ data, loading }, refetch] = useApi(
     `${API_URL}/${farmId}/manual_datetime_settings`
   );
+
+  useRefetch(refetch);
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
 
   const [value, setValue] = useState(null);
