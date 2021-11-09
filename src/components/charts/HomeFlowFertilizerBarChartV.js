@@ -16,7 +16,7 @@ import moment from "moment";
 
 export const HomeFlowFertilizerBarChartV = ({ data }) => {
   const today = useMemo(() => new Date(), []);
-  const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
+  const dates = [ -2, -1, 0].map((d) => {
     const date = new Date(today);
     date.setDate(date.getDate() + d);
     return date;

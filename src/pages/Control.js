@@ -363,7 +363,7 @@ const Tables = () => {
     [value]
   );
 
-  if (!value || loading) return <Preloader />;
+  if (!value || loading) return null;
 
   return value.map((datum, i) => (
     <div key={i} className="block ">
