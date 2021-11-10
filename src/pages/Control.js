@@ -34,6 +34,7 @@ const ControlPanel = ({}) => {
     `${prefix}/controller_state`
   );
   useRefetch(refetch);
+
   const [, postMode1] = useApi(...post(`${prefix}/mode`));
   const [, postMode] = useApi(...post(`${prefix}/mode`));
   const [, postBlockControl1] = useApi(...post(`${prefix}/block_control`));
@@ -79,7 +80,7 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  if (!data ||loading) return <Preloader />;
+  if (!data) return <Preloader />;
 
   const { timestamp, mode, block_control, state, alarms } = data;
 
@@ -342,6 +343,8 @@ const Tables = () => {
   );
 
   useRefetch(refetch);
+
+  
   
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
 
@@ -364,7 +367,7 @@ const Tables = () => {
     [value]
   );
 
-  if (!value || loading) return null;
+  if (!value||loading ) return <Preloader />;
 
   return value.map((datum, i) => (
     <div key={i} className="block ">
