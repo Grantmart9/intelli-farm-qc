@@ -30,13 +30,6 @@ import { Pumps } from "pages/Pumps";
 import { API_URL, useApi } from "api";
 import { SidebarContext } from "../components/Sidebar";
 import { useMd } from "media-query";
-import {
-  Nav,
-  Badge,
-  Image,
-  Button,
-  Accordion,
-} from "@themesberg/react-bootstrap";
 
 const AppLayout = createContext();
 

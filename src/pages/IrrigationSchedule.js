@@ -14,9 +14,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import { API_URL, useApi } from "api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { Button, Tooltip, OverlayTrigger } from "@themesberg/react-bootstrap";
 import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import {
@@ -26,9 +23,6 @@ import {
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import ErrorGif from "images/ErrorGif.gif";
-import play from "images/play.png";
-import pause from "images/pause.png";
-import stop from "images/stop.png";
 
 const DateTimeEditInputCell = (props) => {
   const { id, field, value, api } = props;
@@ -191,8 +185,8 @@ const SectionRow = ({ editable, section, onChange = null }) => (
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
   const [{ data, loading, error }] = useApi(`${API_URL}/-${farmId}/schedule`);
-  const [dirty, setDirty] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [, setDirty] = useState(false);
+
   const [schedule, setSchedule] = useState();
 
   useEffect(() => {
@@ -201,18 +195,7 @@ export const IrrigationSchedule = () => {
     }
   }, [data]);
 
-  const [, postSchedule] = useApi(
-    {
-      url: `${API_URL}/-${farmId}/schedule`,
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      }
-    },
-    {
-      manual: true
-    }
-  );
+  
 
   if (loading || !schedule) return <Preloader />;
   if (error) return <img src={ErrorGif} alt={ErrorGif} />;
@@ -225,24 +208,8 @@ export const IrrigationSchedule = () => {
     setSchedule(editedSchedule);
   };
 
-  const showMessage = (msg) => {
-    console.log(msg); // Leave it at this for now
-  };
-
-  const handleSave = async () => {
-    if (saving) return;
-    try {
-      setSaving(true);
-      setDirty(false);
-      let newSchedule = (await postSchedule({ data: schedule })).data;
-      setSchedule(newSchedule);
-    } catch (e) {
-      setDirty(true);
-      showMessage("Failed to save");
-    } finally {
-      setSaving(false);
-    }
-  };
+ 
+  
 
   return (
     <div>
@@ -257,7 +224,6 @@ export const IrrigationSchedule = () => {
                   className="bg-gray-200 rounded shadow-md w-full mb-4 p-2"
                 >
                   <SectionRow
-                    editable={!saving}
                     section={section}
                     onChange={handleChange}
                   />

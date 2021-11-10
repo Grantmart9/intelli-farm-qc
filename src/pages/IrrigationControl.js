@@ -13,7 +13,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
-import { API_URL, useApi } from "api";
+import { API_URL } from "api";
 import { AxiosSpinner } from "components/AxiosSpinner";
 import { HomeFlowFertilizerBarChartV } from "components/charts/HomeFlowFertilizerBarChartV";
 import fertilizer from "images/fertilizer.png";

@@ -22,10 +22,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import { DataGrid } from "@mui/x-data-grid";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
@@ -83,7 +80,6 @@ const ControlPanel = ({}) => {
   const defaultData = {timestamp:"2021-11-10-14:28:11", mode:"Manual", block_control:"Manual Date Time", state:"unknown", alarms:"Inactive"}
 
   const { timestamp, mode, block_control, state, alarms } = data || defaultData;
-
 
   return (
     <div className="block items-center p-1">
