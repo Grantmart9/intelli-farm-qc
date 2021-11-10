@@ -80,8 +80,10 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  const { timestamp, mode, block_control, state, alarms } = data;
+  const defaultData = {timestamp:1, mode:1, block_control:1, state:1, alarms:"no alarms"}
 
+  const { timestamp, mode, block_control, state, alarms } = data || defaultData;
+  
 
   return (
     <div className="block items-center p-1">
