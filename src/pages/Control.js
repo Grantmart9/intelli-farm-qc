@@ -82,7 +82,6 @@ const ControlPanel = ({}) => {
 
   const { timestamp, mode, block_control, state, alarms } = data;
 
-   if (!data) return <Preloader />;
 
   return (
     <div className="block items-center p-1">
