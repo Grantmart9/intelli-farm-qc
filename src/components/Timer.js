@@ -13,7 +13,7 @@
 
 import { useEffect } from "react";
 
-const INTERVAL = 60000;
+const INTERVAL = 10000;
 
 export const useRefetch = (refetch, refresh = true) =>
   useEffect(() => {

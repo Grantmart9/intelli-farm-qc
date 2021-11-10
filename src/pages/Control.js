@@ -80,9 +80,9 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  if (!data) return <Preloader />;
-
   const { timestamp, mode, block_control, state, alarms } = data;
+
+   if (!data ||loading) return <Preloader />;
 
   return (
     <div className="block items-center p-1">
