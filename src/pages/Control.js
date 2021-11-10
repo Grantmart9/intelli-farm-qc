@@ -82,7 +82,7 @@ const ControlPanel = ({}) => {
 
   const { timestamp, mode, block_control, state, alarms } = data;
 
-   if (!data ||loading) return <Preloader />;
+   if (!data) return <Preloader />;
 
   return (
     <div className="block items-center p-1">
@@ -344,8 +344,6 @@ const Tables = () => {
 
   useRefetch(refetch);
 
-  
-  
   const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
 
   const [value, setValue] = useState(null);
