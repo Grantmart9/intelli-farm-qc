@@ -79,7 +79,7 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  if (!data || onMode ==1) return <Preloader />;
+  if (!data ||loading) return <Preloader />;
 
   const { timestamp, mode, block_control, state, alarms } = data;
 
