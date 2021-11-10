@@ -22,7 +22,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
@@ -77,41 +77,92 @@ const ControlPanel = ({}) => {
 
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
 
-  const defaultData = {timestamp:"2021-11-10-14:28:11", mode:"Manual", block_control:"Manual Date Time", state:"unknown", alarms:"Inactive"}
+  const defaultData = {
+    timestamp: "2021-11-10-14:28:11",
+    mode: "Manual",
+    block_control: "Manual Date Time",
+    state: "unknown",
+    alarms: "Inactive"
+  };
 
   const { timestamp, mode, block_control, state, alarms } = data || defaultData;
 
   return (
     <div className="block items-center p-1">
-    <div className="mb-2 ">
-      <TableContainer component={Paper} sx={{backgroundColor:"#eaedf2"}}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
-        <TableHead >
-          <TableRow >
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Controller Time</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Alarms</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>State</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Mode</div></TableCell>
-            <TableCell align="center"><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Control</div></TableCell>
-          </TableRow>
-        </TableHead>
-          <TableCell align="center">
-            {timestamp}
-          </TableCell>
-          <TableCell align="center">
-          {alarms}
-          </TableCell>
-          <TableCell align="center">
-           {state}
-          </TableCell>
-          <TableCell align="center">
-            {mode}
-          </TableCell>
-          <TableCell align="center">
-            {block_control}
-          </TableCell>
-        </Table>
-      </TableContainer>
+      <div className="mb-2 ">
+        <TableContainer component={Paper} sx={{ backgroundColor: "#eaedf2" }}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      display: "inline-flex",
+                      fontFamily: "Nunito Sans"
+                    }}
+                  >
+                    Controller Time
+                  </div>
+                </TableCell>
+                <TableCell align="center">
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      display: "inline-flex",
+                      fontFamily: "Nunito Sans"
+                    }}
+                  >
+                    Alarms
+                  </div>
+                </TableCell>
+                <TableCell align="center">
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      display: "inline-flex",
+                      fontFamily: "Nunito Sans"
+                    }}
+                  >
+                    State
+                  </div>
+                </TableCell>
+                <TableCell align="center">
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      display: "inline-flex",
+                      fontFamily: "Nunito Sans"
+                    }}
+                  >
+                    Mode
+                  </div>
+                </TableCell>
+                <TableCell align="center">
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "0.8rem",
+                      display: "inline-flex",
+                      fontFamily: "Nunito Sans"
+                    }}
+                  >
+                    Control
+                  </div>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableCell align="center">{timestamp}</TableCell>
+            <TableCell align="center">{alarms}</TableCell>
+            <TableCell align="center">{state}</TableCell>
+            <TableCell align="center">{mode}</TableCell>
+            <TableCell align="center">{block_control}</TableCell>
+          </Table>
+        </TableContainer>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-400 rounded shadow-md p-2">
         <div className="grid grid-rows-2 gap-2">
@@ -182,8 +233,6 @@ const usePost = (handle, refetch, set) =>
 const zeroPad = (number, zeros) => number.toString().padStart(zeros, "0");
 
 const ControlGroup = ({ index, value, onChange }) => {
-
-  
   return (
     <div className="mt-2">
       <TimeControl index={index} value={value} onChange={onChange} />
@@ -211,17 +260,53 @@ const TimeControl = ({ index, value, onChange }) => {
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
-        <TableHead >
-          <TableRow >
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>EC Setpoint   |</div></TableCell>
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /> <div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Run Time   |</div></TableCell>
-            <TableCell  variant="head" align="center"><ArrowDownwardIcon fontSize="small" /><div style={{fontWeight:"bold",fontSize:"0.8rem",display:"inline-flex",fontFamily:"Nunito Sans"}}>Start Time |</div></TableCell>
-          </TableRow>
-        </TableHead>
+          <TableHead>
+            <TableRow>
+              <TableCell variant="head" align="center">
+                <ArrowDownwardIcon fontSize="small" />{" "}
+                <div
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    display: "inline-flex",
+                    fontFamily: "Nunito Sans"
+                  }}
+                >
+                  EC Setpoint |
+                </div>
+              </TableCell>
+              <TableCell variant="head" align="center">
+                <ArrowDownwardIcon fontSize="small" />{" "}
+                <div
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    display: "inline-flex",
+                    fontFamily: "Nunito Sans"
+                  }}
+                >
+                  Run Time |
+                </div>
+              </TableCell>
+              <TableCell variant="head" align="center">
+                <ArrowDownwardIcon fontSize="small" />
+                <div
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    display: "inline-flex",
+                    fontFamily: "Nunito Sans"
+                  }}
+                >
+                  Start Time |
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableHead>
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
-              style={{display:"flex",textAlign:"center"}}
+                style={{ display: "flex", textAlign: "center" }}
                 variant="standard"
                 type="text"
                 value={value[ec]}
@@ -232,7 +317,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
-              style={{display:"flex",textAlign:"center"}}
+                style={{ display: "flex", textAlign: "center" }}
                 variant="standard"
                 type="number"
                 value={value[runtime]}
@@ -243,7 +328,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableCell>
             <div className="text-sm flex align-center justify-center">
               <input
-              style={{display:"flex",textAlign:"center"}}
+                style={{ display: "flex", textAlign: "center" }}
                 variant="standard"
                 type="datetime-local"
                 value={value[start_time]}
@@ -273,7 +358,7 @@ const Tank = ({ index, value, onChange }) => {
   return (
     <div>
       <div className="bg-blue-200 align-center text-2xl justify-center flex font-bold p-1">
-        <div style={{fontFamily:"Nunito Sans"}}>Fertilizer</div>
+        <div style={{ fontFamily: "Nunito Sans" }}>Fertilizer</div>
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
@@ -303,7 +388,6 @@ const Tank = ({ index, value, onChange }) => {
 };
 
 const Tab = ({ value, onChange, onSave }) => {
-
   const CONTROL_GROUPS = [1, 2, 3, 4];
 
   return (
@@ -314,7 +398,7 @@ const Tab = ({ value, onChange, onSave }) => {
         </Button>
       </div>
       <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-1 rounded">
-        <div style={{fontFamily:"Nunito Sans"}}>{value.name}</div>
+        <div style={{ fontFamily: "Nunito Sans" }}>{value.name}</div>
       </div>
       {CONTROL_GROUPS.map((i) => (
         <ControlGroup
@@ -362,11 +446,10 @@ const Tables = () => {
     [value]
   );
 
-  if (!value||loading ) return <Preloader />;
+  if (!value) return <Preloader />;
 
   return value.map((datum, i) => (
     <div key={i} className="block ">
-     
       <Tab
         value={{ ...datum, index: i }}
         onChange={handleChange}
