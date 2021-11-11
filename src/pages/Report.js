@@ -19,7 +19,6 @@ import moment from "moment";
 import PreloaderBar from "images/PreloaderBar.gif";
 import ErrorGif from "images/ErrorGif.gif";
 import blank from "images/blank.png";
-
 import TextField from "@material-ui/core/TextField";
 
 const dateFormat = "YYYY-MM-DD";
@@ -103,18 +102,6 @@ export const Report = () => {
     },
     [date, email]
   );
-  var preload = blank;
-
-  if (loading) {
-    preload = PreloaderBar;
-  } else preload = blank;
-
-  if (error)
-    return (
-      <div>
-        <img src={ErrorGif} alt={ErrorGif} width="100%" />
-      </div>
-    );
 
   return (
     <div className="flex justify-content-center p-4">
@@ -129,7 +116,7 @@ export const Report = () => {
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
         <div className="text-gray-900 text-center">{data}</div>
-        <img width={50} height={50} src={preload} />
+        {loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}
         <SaveButton />
       </form>
     </div>
