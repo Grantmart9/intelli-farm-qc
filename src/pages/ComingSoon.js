@@ -49,9 +49,6 @@ export const ComingSoon = () => {
   const handleChange4 = (event) => {
     setUser4(event.target.value);
   };
-  const handleChange5 = (event) => {
-    setUser5(event.target.value);
-  };
 
   return (
     <div className="flex align-center justify-center">

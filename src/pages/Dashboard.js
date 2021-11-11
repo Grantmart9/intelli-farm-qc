@@ -14,34 +14,22 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { withStyles } from "@material-ui/core/styles";
 import { API_URL, useApi } from "api";
 import { HomeFlowFertilizerBarChartD } from "components/charts/HomeFlowFertilizerBarChartD";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "components/Timer";
-
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 10,
-    borderRadius: 6
-  },
-  colorPrimary: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
-  },
-  bar: {
-    borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
-}))(LinearProgress);
+import { ProgressBar } from "@themesberg/react-bootstrap";
 
 const IrrigationProgress = ({ data }) => (
   <div className="p-4 h-full">
     <div className="font-bold text-xl">Irrigation</div>
     <div className="font-bold text-3xl">Cycle Progress</div>
     <div className="mt-3">
-      <BorderLinearProgress variant="determinate" value={data.cycle_progress} />
+    <ProgressBar
+            variant="success"
+            animated
+            now={data.cycle_progress}
+          />
     </div>
   </div>
 );

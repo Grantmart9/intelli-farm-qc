@@ -15,6 +15,7 @@ import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "../components/Timer";
+import { ProgressBar } from "@themesberg/react-bootstrap";
 import drop from "images/drop.png";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
@@ -67,9 +68,13 @@ const FarmsData = ({ farm }) => (
         >
           Irrigation
         </div>
-        <div className="mt-3">
-      <BorderLinearProgress variant="determinate" value={farm.irrigation_percentage} />
-    </div>
+        <div className="p-2">
+          <ProgressBar
+            variant="success"
+            animated
+            now={farm.irrigation_percentage}
+          />
+        </div>
       </div>
       <div className="p-2 shadow-md text-center rounded">
         <div
