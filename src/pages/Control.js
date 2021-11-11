@@ -347,7 +347,7 @@ const TimeControl = ({ index, value, onChange }) => {
 };
 const Tank = ({ index, value, onChange }) => {
   const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
-    name: `Tank ${letter.toUpperCase()}`,
+    name: `${letter.toUpperCase()}-Tank `,
     field: `tank_${letter}_flow_${zeroPad(index, 2)}`
   }));
 
