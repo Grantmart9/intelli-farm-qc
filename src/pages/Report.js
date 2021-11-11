@@ -17,8 +17,6 @@ import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
 import PreloaderBar from "images/PreloaderBar.gif";
-import ErrorGif from "images/ErrorGif.gif";
-import blank from "images/blank.png";
 import TextField from "@material-ui/core/TextField";
 
 const dateFormat = "YYYY-MM-DD";

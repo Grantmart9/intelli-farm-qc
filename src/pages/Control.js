@@ -263,7 +263,7 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableHead>
             <TableRow>
               <TableCell variant="head" align="center">
-                <ArrowDownwardIcon fontSize="small" />{" "}
+        
                 <div
                   style={{
                     fontWeight: "bold",
@@ -276,7 +276,7 @@ const TimeControl = ({ index, value, onChange }) => {
                 </div>
               </TableCell>
               <TableCell variant="head" align="center">
-                <ArrowDownwardIcon fontSize="small" />{" "}
+           
                 <div
                   style={{
                     fontWeight: "bold",
@@ -289,7 +289,7 @@ const TimeControl = ({ index, value, onChange }) => {
                 </div>
               </TableCell>
               <TableCell variant="head" align="center">
-                <ArrowDownwardIcon fontSize="small" />
+               
                 <div
                   style={{
                     fontWeight: "bold",
@@ -357,7 +357,7 @@ const Tank = ({ index, value, onChange }) => {
 
   return (
     <div>
-      <div className="bg-blue-200 align-center text-2xl justify-center flex font-bold p-1">
+      <div className="bg-blue-200 align-center text-md text-gray-900 justify-center flex font-bold">
         <div style={{ fontFamily: "Nunito Sans" }}>Fertilizer</div>
       </div>
       <TableContainer component={Paper}>
@@ -365,7 +365,7 @@ const Tank = ({ index, value, onChange }) => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell align="right">Flow ℓ/m³</TableCell>
+              <TableCell align="right">Flow rate ℓ/m³</TableCell>
             </TableRow>
             {tanks.map((tank, i) => (
               <TableRow key={i}>
@@ -397,7 +397,7 @@ const Tab = ({ value, onChange, onSave }) => {
           Save
         </Button>
       </div>
-      <div className="bg-blue-200 flex align-center justify-center font-bold text-2xl p-1 rounded">
+      <div className="bg-blue-200 flex align-center justify-center text-gray-900 font-bold text-md rounded-md -mb-2">
         <div style={{ fontFamily: "Nunito Sans" }}>{value.name}</div>
       </div>
       {CONTROL_GROUPS.map((i) => (
