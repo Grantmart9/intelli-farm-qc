@@ -54,9 +54,10 @@ export const ComingSoon = () => {
   };
 
   return (
-        <div className="xl:grid grid-cols-5 rounded gap-1 p-4">
+    <div className="flex align-center justify-center">
+        <div className="xl:grid grid-cols-4 gap-4 rounded p-4">
           <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4 ">
+            <div className="bg-gray-200 rounded shadow-md p-4">
               <div className="font-bold flex justify-center mb-2">User: 1</div>
               <div className="grid grid-row-2 gap-2">
                   <TextField label="User email" variant="outlined" />
@@ -159,32 +160,7 @@ export const ComingSoon = () => {
               </div>
             </div>
           </div>
-          <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4 ">
-              <div className="font-bold flex justify-center mb-2">User: 5</div>
-              <div className="grid grid-row-2 gap-2">
-                  <TextField label="User email" variant="outlined" />
-                  <TextField label="Contact Number" variant="outlined" />
-              </div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">
-                  Contact Method
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={User5}
-                  onChange={handleChange5}
-                >
-                  <MenuItem value={10}>SMS</MenuItem>
-                  <MenuItem value={20}>Email</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="flex justify-center bg-blue-400 rounded">
-                <Button><div style={{color:"white"}}>Save</div></Button>
-              </div>
-            </div>
-          </div>
+        </div>
         </div>
   );
 };
