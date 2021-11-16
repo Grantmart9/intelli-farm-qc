@@ -10,154 +10,125 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+import { useApi, API_URL, post } from "api";
+import { useRefetch } from "components/Timer";
+import { useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-}));
+import { Preloader } from "components/Preloader";
+import ErrorGif from "images/ErrorGif.gif";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 export const ComingSoon = () => {
-  const classes = useStyles();
-  const [age, setAge] = React.useState("");
-  const [User2, setUser2] = React.useState("");
-  const [User3, setUser3] = React.useState("");
-  const [User4, setUser4] = React.useState("");
-  const [User5, setUser5] = React.useState("");
+  const { farmId } = useParams();
+  const prefix = `${API_URL}/-${farmId}`;
+  const [{ data, loading, error }, refetch] = useApi(`${prefix}/notifications`);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  useRefetch(refetch);
+
+  const defaultData = {
+    email_address: "2021-11-10-14:28:11",
+    cellphone_number: "Manual",
+    notification_type: "Manual Date Time",
+    alarms_enabled: "unknown",
+    start_enabled: "Inactive",
+    schedule_enabled: "Inactive",
+    whatsapp_api_key : "Inactive",
   };
-  const handleChange2 = (event) => {
-    setUser2(event.target.value);
-  };
-  const handleChange3 = (event) => {
-    setUser3(event.target.value);
-  };
-  const handleChange4 = (event) => {
-    setUser4(event.target.value);
-  };
+
+  const { order,
+    email_address,
+    cellphone_number,
+    notification_type,
+    alarms_enabled,
+    start_enabled,
+    schedule_enabled,
+    whatsapp_api_key } = data || defaultData;
+
+
+    console.log(data);
+
+  if (!data && loading) return <Preloader />;
+  if (error)
+    return (
+      <div className="p-4">
+        <img src={ErrorGif} alt={ErrorGif} width="100%" />
+      </div>
+    );
 
   return (
+    <div className="bg-gray-400 rounded shadow-md p-2 m-4">
     <div className="flex align-center justify-center">
-        <div className="xl:grid grid-cols-4 gap-4 rounded p-4">
-          <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4">
-              <div className="font-bold flex justify-center mb-2">User: 1</div>
-              <div className="grid grid-row-2 gap-2">
-                  <TextField label="User email" variant="outlined" />
-                  <TextField label="Contact Number" variant="outlined" />
-              </div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">
-                  Contact Method
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>SMS</MenuItem>
-                  <MenuItem value={20}>Email</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="flex justify-center bg-blue-400 rounded">
-              <Button><div style={{color:"white"}}>Save</div></Button>
-              </div>
-            </div>
-          </div>
-          <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4 ">
-              <div className="font-bold flex justify-center mb-2">User: 2</div>
-              <div className="grid grid-row-2 gap-2">
-                  <TextField label="User email" variant="outlined" />
-                  <TextField label="Contact Number" variant="outlined" />
-              </div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">
-                  Contact Method
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={User2}
-                  onChange={handleChange2}
-                >
-                  <MenuItem value={10}>SMS</MenuItem>
-                  <MenuItem value={20}>Email</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="flex justify-center bg-blue-400 rounded">
-              <Button><div style={{color:"white"}}>Save</div></Button>
+      <div className="xl:grid grid-cols-4 gap-4 rounded p-4">
+      {data.map(
+          ({
+            order,
+            email_address,
+            cellphone_number,
+            notification_type,
+            alarms_enabled,
+            start_enabled,
+            schedule_enabled,
+            whatsapp_api_key
+          }) => (
+            <div className="mt-2">
+              <div className="bg-gray-200 rounded shadow-md p-4">
+                <div className="font-bold flex justify-center mb-2">
+                  User:{order}
+                </div>
+                <div className="grid grid-row-2 gap-2">
+                  <TextField variant="outlined"  value={email_address}  />
+                  <TextField variant="outlined" value={cellphone_number}/>
+                </div>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Alarms"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Start Time"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Schedule"
+                  />
+                </FormGroup>
+                <FormControl>
+                  <InputLabel id="demo-simple-select-label" variant="outlined">Method</InputLabel>
+                  <Select
+                    value={notification_type}
+                   
+                  >
+                    <MenuItem value={"None"}>None</MenuItem>
+                    <MenuItem value={"WhatsApp"}>WhatsApp</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
-          </div>
-          <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4 ">
-              <div className="font-bold flex justify-center mb-2">User: 3</div>
-              <div className="grid grid-row-2 gap-2">
-                  <TextField label="User email" variant="outlined" />
-                  <TextField label="Contact Number" variant="outlined" />
-              </div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">
-                  Contact Method
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={User3}
-                  onChange={handleChange3}
-                >
-                  <MenuItem value={10}>SMS</MenuItem>
-                  <MenuItem value={20}>Email</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="flex justify-center bg-blue-400 rounded">
-              <Button><div style={{color:"white"}}>Save</div></Button>
-              </div>
-            </div>
-          </div>
-          <div className="flex mt-2">
-            <div className="bg-gray-200 rounded shadow-md p-4 ">
-              <div className="font-bold flex justify-center mb-2">User: 4</div>
-              <div className="grid grid-row-2 gap-2">
-                  <TextField label="User email" variant="outlined" />
-                  <TextField label="Contact Number" variant="outlined" />
-              </div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">
-                  Contact Method
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={User4}
-                  onChange={handleChange4}
-                >
-                  <MenuItem value={10}>SMS</MenuItem>
-                  <MenuItem value={20}>Email</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="flex justify-center bg-blue-400 rounded">
-              <Button><div style={{color:"white"}}>Save</div></Button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
+          ),[order,
+            email_address,
+            cellphone_number,
+            notification_type,
+            alarms_enabled,
+            start_enabled,
+            schedule_enabled,
+            whatsapp_api_key]
+        )}
+      </div>
+    </div>
+    <div className="flex align-center justify-center mb-2">
+    <Button variant="contained" color="primary">
+      <div style={{ color: "white" }}>Save</div>
+    </Button>
+  </div>
+  </div>
   );
 };
