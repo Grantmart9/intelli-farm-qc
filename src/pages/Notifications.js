@@ -21,7 +21,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { Preloader } from "components/Preloader";
+import PreloaderBar from "images/PreloaderBar.gif";
 import ErrorGif from "images/ErrorGif.gif";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -68,7 +68,6 @@ const UserForm = ({ value, onChange }) => {
   const handleAlarmsEnabled = useChecked("alarms_enabled", value, onChange);
   const handleStartEnabled = useChecked("start_enabled", value, onChange);
   const handleScheduleEnabled = useChecked("schedule_enabled", value, onChange);
-
   return (
     <div className="mt-2">
       <div className="bg-gray-200 rounded shadow-md p-4">
@@ -76,16 +75,19 @@ const UserForm = ({ value, onChange }) => {
         <div className="grid grid-row-2 gap-2">
           <TextField
             variant="outlined"
+            label="email address"
             value={email_address}
             onInput={handleEmailAddress}
           />
           <TextField
             variant="outlined"
+            label="cellphone number"
             value={cellphone_number}
             onInput={handleCellphoneNumber}
           />
           <TextField
             variant="outlined"
+            label="whatsApp API key"
             value={whatsapp_api_key}
             onInput={handleWhatsapp_api_key}
           />
@@ -131,7 +133,6 @@ const UserForm = ({ value, onChange }) => {
 export const Notifications = () => {
   const { farmId } = useParams();
   const prefix = `${API_URL}/-${farmId}`;
-
   const [{ data, loading, error }, refetch] = useApi(`${prefix}/notifications`);
   const [{ loading: postLoading }, postNotification] = useApi(
     ...post(`${prefix}/notifications`)
@@ -155,7 +156,7 @@ export const Notifications = () => {
     postNotification({ data: state }).finally(() => refetch());
   });
 
-  if (!state) return <Preloader />;
+  if (!state) return <PreloaderBar />;
   if (error)
     return (
       <div className="p-4">
@@ -179,6 +180,7 @@ export const Notifications = () => {
           ))}
         </div>
       </div>
+      <div className="flex align-center justify-center mb-4">{loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}</div>
       <div className="flex align-center justify-center mb-2">
         <Button
           type="submit"
