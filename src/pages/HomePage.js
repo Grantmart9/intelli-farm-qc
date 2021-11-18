@@ -159,6 +159,7 @@ const getBottomItems = (prefix) => [
 const getNavItems = (prefix, layout) =>
   [
     [getBrandItem(prefix, layout && layout.company_name)],
+    
     getFarmItems(prefix, layout),
     [spacerItem],
     getBottomItems(prefix),

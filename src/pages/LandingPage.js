@@ -95,6 +95,7 @@ const FarmsData = ({ farm }) => (
 );
 export const LandingPage = () => {
   const { clientId } = useParams();
+  console.log(clientId);
   const [{ data, loading, error }, refetch] = useApi(
     `${API_URL}/${clientId}/landing`
   );

@@ -21,7 +21,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import PreloaderBar from "images/PreloaderBar.gif";
+import { Preloader } from "components/Preloader";
 import ErrorGif from "images/ErrorGif.gif";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -156,7 +156,7 @@ export const Notifications = () => {
     postNotification({ data: state }).finally(() => refetch());
   });
 
-  if (!state) return <PreloaderBar />;
+  if (!state) return <Preloader />;
   if (error)
     return (
       <div className="p-4">
@@ -180,7 +180,6 @@ export const Notifications = () => {
           ))}
         </div>
       </div>
-      <div className="flex align-center justify-center mb-4">{loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}</div>
       <div className="flex align-center justify-center mb-2">
         <Button
           type="submit"
