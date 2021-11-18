@@ -49,7 +49,7 @@ const UserForm = ({ value, onChange }) => {
     alarms_enabled,
     start_enabled,
     schedule_enabled,
-    whatsapp_api_key,
+    whatsapp_api_key
   } = value;
 
   const handleEmailAddress = useHandler("email_address", value, onChange);
@@ -59,12 +59,15 @@ const UserForm = ({ value, onChange }) => {
     value,
     onChange
   );
-  const handleWhatsapp_api_key = useHandler("whatsapp_api_key", value, onChange);
+  const handleWhatsapp_api_key = useHandler(
+    "whatsapp_api_key",
+    value,
+    onChange
+  );
 
   const handleAlarmsEnabled = useChecked("alarms_enabled", value, onChange);
   const handleStartEnabled = useChecked("start_enabled", value, onChange);
   const handleScheduleEnabled = useChecked("schedule_enabled", value, onChange);
-  
 
   return (
     <div className="mt-2">
