@@ -22,7 +22,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { setAt } from "immutable";
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
@@ -82,7 +82,7 @@ const ControlPanel = ({}) => {
     mode: "Manual",
     block_control: "Manual Date Time",
     state: "unknown",
-    alarms: "Inactive"
+    alarms: "Inactive",
   };
 
   const { timestamp, mode, block_control, state, alarms } = data || defaultData;
@@ -100,7 +100,7 @@ const ControlPanel = ({}) => {
                       fontWeight: "bold",
                       fontSize: "0.8rem",
                       display: "inline-flex",
-                      fontFamily: "Nunito Sans"
+                      fontFamily: "Nunito Sans",
                     }}
                   >
                     Controller Time
@@ -112,7 +112,7 @@ const ControlPanel = ({}) => {
                       fontWeight: "bold",
                       fontSize: "0.8rem",
                       display: "inline-flex",
-                      fontFamily: "Nunito Sans"
+                      fontFamily: "Nunito Sans",
                     }}
                   >
                     Alarms
@@ -124,7 +124,7 @@ const ControlPanel = ({}) => {
                       fontWeight: "bold",
                       fontSize: "0.8rem",
                       display: "inline-flex",
-                      fontFamily: "Nunito Sans"
+                      fontFamily: "Nunito Sans",
                     }}
                   >
                     State
@@ -136,7 +136,7 @@ const ControlPanel = ({}) => {
                       fontWeight: "bold",
                       fontSize: "0.8rem",
                       display: "inline-flex",
-                      fontFamily: "Nunito Sans"
+                      fontFamily: "Nunito Sans",
                     }}
                   >
                     Mode
@@ -148,7 +148,7 @@ const ControlPanel = ({}) => {
                       fontWeight: "bold",
                       fontSize: "0.8rem",
                       display: "inline-flex",
-                      fontFamily: "Nunito Sans"
+                      fontFamily: "Nunito Sans",
                     }}
                   >
                     Control
@@ -263,39 +263,36 @@ const TimeControl = ({ index, value, onChange }) => {
           <TableHead>
             <TableRow>
               <TableCell variant="head" align="center">
-        
                 <div
                   style={{
                     fontWeight: "bold",
                     fontSize: "0.8rem",
                     display: "inline-flex",
-                    fontFamily: "Nunito Sans"
+                    fontFamily: "Nunito Sans",
                   }}
                 >
                   EC Setpoint |
                 </div>
               </TableCell>
               <TableCell variant="head" align="center">
-           
                 <div
                   style={{
                     fontWeight: "bold",
                     fontSize: "0.8rem",
                     display: "inline-flex",
-                    fontFamily: "Nunito Sans"
+                    fontFamily: "Nunito Sans",
                   }}
                 >
                   Run Time |
                 </div>
               </TableCell>
               <TableCell variant="head" align="center">
-               
                 <div
                   style={{
                     fontWeight: "bold",
                     fontSize: "0.8rem",
                     display: "inline-flex",
-                    fontFamily: "Nunito Sans"
+                    fontFamily: "Nunito Sans",
                   }}
                 >
                   Start Time |
@@ -335,7 +332,7 @@ const TimeControl = ({ index, value, onChange }) => {
                 onChange={(e) => handleStartTime(e.target.value)}
                 sx={{ minWidth: 21 }}
                 InputLabelProps={{
-                  shrink: true
+                  shrink: true,
                 }}
               />
             </div>
@@ -348,7 +345,7 @@ const TimeControl = ({ index, value, onChange }) => {
 const Tank = ({ index, value, onChange }) => {
   const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
     name: `${letter.toUpperCase()}-Tank `,
-    field: `tank_${letter}_flow_${zeroPad(index, 2)}`
+    field: `tank_${letter}_flow_${zeroPad(index, 2)}`,
   }));
 
   const handleFlowRate = (field, d) => {
@@ -411,9 +408,6 @@ const Tab = ({ value, onChange, onSave }) => {
     </div>
   );
 };
-
-const setAt = (arr, idx, val) =>
-  [arr.slice(0, idx), [val], arr.slice(idx + 1, arr.length)].flat();
 
 const Tables = () => {
   const { farmId } = useParams();
