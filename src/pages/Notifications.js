@@ -12,6 +12,7 @@
  **/
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
+import PreloaderBar from "images/PreloaderBar.gif";
 import { useApi, API_URL, post } from "api";
 import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
@@ -180,6 +181,7 @@ export const Notifications = () => {
           ))}
         </div>
       </div>
+      <div className="flex align-center justify-center">{loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}</div>
       <div className="flex align-center justify-center mb-2">
         <Button
           type="submit"
