@@ -59,9 +59,12 @@ const UserForm = ({ value, onChange }) => {
     value,
     onChange
   );
+  const handleWhatsapp_api_key = useHandler("whatsapp_api_key", value, onChange);
+
   const handleAlarmsEnabled = useChecked("alarms_enabled", value, onChange);
   const handleStartEnabled = useChecked("start_enabled", value, onChange);
   const handleScheduleEnabled = useChecked("schedule_enabled", value, onChange);
+  
 
   return (
     <div className="mt-2">
@@ -77,6 +80,11 @@ const UserForm = ({ value, onChange }) => {
             variant="outlined"
             value={cellphone_number}
             onInput={handleCellphoneNumber}
+          />
+          <TextField
+            variant="outlined"
+            value={whatsapp_api_key}
+            onInput={handleWhatsapp_api_key}
           />
         </div>
         <FormGroup>
