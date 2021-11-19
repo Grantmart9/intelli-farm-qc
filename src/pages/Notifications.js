@@ -88,7 +88,7 @@ const UserForm = ({ value, onChange }) => {
           />
           <TextField
             variant="outlined"
-            label="whatsApp API key"
+            label="WhatsApp API key"
             value={whatsapp_api_key}
             onInput={handleWhatsapp_api_key}
           />

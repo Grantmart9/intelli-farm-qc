@@ -146,7 +146,6 @@ export const Dashboard = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
-  console.log(data);
 
   return (
     <div className="p-1">
