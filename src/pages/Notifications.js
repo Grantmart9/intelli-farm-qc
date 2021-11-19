@@ -109,15 +109,6 @@ const UserForm = ({ value, onChange }) => {
             }
             label="Start Time"
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={schedule_enabled}
-                onChange={handleScheduleEnabled}
-              />
-            }
-            label="Schedule"
-          />
         </FormGroup>
         <FormControl>
           <InputLabel variant="outlined">Method</InputLabel>
