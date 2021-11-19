@@ -107,7 +107,7 @@ const UserForm = ({ value, onChange }) => {
             control={
               <Checkbox checked={start_enabled} onChange={handleStartEnabled} />
             }
-            label="Start Time"
+            label="Start Notification"
           />
         </FormGroup>
         <FormControl>
