@@ -159,10 +159,10 @@ export const Notifications = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-400 rounded shadow-md p-2 m-4"
+      className="bg-gray-400 rounded shadow-md p-1 m-4"
     >
       <div className="flex align-center justify-center">
-        <div className="xl:grid grid-cols-4 gap-4 rounded p-4">
+        <div className="xl:grid grid-cols-4 gap-4 rounded p-2">
           {state.map((user, i) => (
             <UserForm
               key={i}
