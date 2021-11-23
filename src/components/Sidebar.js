@@ -13,61 +13,24 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import leaf from "images/leaf.png";
-import {
-  Nav,
-  Badge,
-  Image,
-  Button,
-  Accordion
-} from "@themesberg/react-bootstrap";
+import { Nav, Image, Button, Accordion } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 import { useMd } from "media-query";
 
 export const SidebarContext = createContext();
 
-const NavItem = ({
-  title,
-  link,
-  external,
-  target,
-  icon,
-  image,
-  badgeText,
-  badgeBg = "secondary",
-  badgeColor = "primary"
-}) => {
+const NavItem = ({ title, link, external, target, image }) => {
   const { pathname } = useLocation();
-  const classNames = badgeText
-    ? "d-flex justify-content-start align-items-center justify-content-between"
-    : "";
   const navItemClassName = link === pathname ? "active" : "";
   const linkProps = external ? { href: link } : { as: Link, to: link };
 
   return (
     <Nav.Item className={navItemClassName}>
-      <Nav.Link {...linkProps} target={target} className={classNames}>
-        <span>
-          {icon ? <span className="sidebar-icon"></span> : null}
-          {image ? (
-            <Image
-              src={image}
-              width={100}
-              height={20}
-              className="sidebar-icon svg-icon"
-            />
-          ) : null}
+      <Nav.Link {...linkProps} target={target}>
+        <span className="flex">
+          {image && <Image src={image} width="40rem" />}
           <span className="sidebar-text">{title}</span>
         </span>
-        {badgeText ? (
-          <Badge
-            pill
-            bg={badgeBg}
-            text={badgeColor}
-            className="badge-md notification-count ms-2"
-          >
-            {badgeText}
-          </Badge>
-        ) : null}
       </Nav.Link>
     </Nav.Item>
   );
@@ -102,27 +65,25 @@ const toNavItem = (item, i) => {
   switch (item.action.type) {
     case "brand":
       return (
-        <Button
-          key={i}
-          className="border-1 border-white"
-          style={{
-            display: "flex",
-            alignContent: "center",
-            backgroundColor: "#1e96ff",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            fontFamily: "'Raleway', sans-serif",
-            gap: "0.5rem",
-            padding: "0.5rem",
-            marginBottom: "2.5rem"
-          }}
-          href={item.action.path}
-        >
-          <img src={leaf} width="40rem" alt={leaf} />
-          {item.title}
-        </Button>
+        <div key={i} className="border-1 border-white rounded">
+          <Nav.Link as={Link} to={item.action.path} className="h-full w-full">
+            <div
+              className="flex justify-center"
+              style={{
+                gap: "0.5rem",
+                padding: "0.5rem",
+              }}
+            >
+              <img src={leaf} width="40rem" alt={leaf} />
+              <span
+                class="font-bold text-4xl ml-3"
+                style={{ fontFamily: "'Raleway', sans-serif" }}
+              >
+                {item.title}
+              </span>
+            </div>
+          </Nav.Link>
+        </div>
       );
     case "link":
       return (
@@ -144,8 +105,10 @@ const toNavItem = (item, i) => {
           {item.action.items.map(toNavItem)}
         </CollapsableNavItem>
       );
-    case "spacer":
+    case "grow":
       return <div key={i} className="flex-grow-1" />;
+    case "spacer":
+      return <div key={i} style={{ height: "2.5rem" }} />;
     default:
       throw Error("impossible");
   }

@@ -138,6 +138,7 @@ const getFarmItems = (prefix, layout) =>
       }));
 
 const spacerItem = { action: { type: "spacer" } };
+const growItem = { action: { type: "grow" } };
 
 const getBottomItems = (prefix) => [
   {
@@ -159,9 +160,9 @@ const getBottomItems = (prefix) => [
 const getNavItems = (prefix, layout) =>
   [
     [getBrandItem(prefix, layout && layout.company_name)],
-    
-    getFarmItems(prefix, layout),
     [spacerItem],
+    getFarmItems(prefix, layout),
+    [growItem],
     getBottomItems(prefix),
   ].flat();
 
@@ -172,6 +173,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const fullSidebar = show && isMd;
   const appLayout = useContext(AppLayout);
   const prefix = `/${clientId}`;
+  const navItems = getNavItems(prefix, appLayout);
 
   return (
     <Route
@@ -185,7 +187,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
             }}
             className="flex"
           >
-            <Sidebar items={getNavItems(prefix, appLayout)}></Sidebar>
+            <Sidebar items={navItems}></Sidebar>
 
             <main
               style={{
@@ -224,7 +226,7 @@ const RouteInner = () => {
           component={() => <p>Not Found</p>}
         />
         <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
-     
+
         <RouteWithSidebar
           exact
           path={Routes.Control.path}
