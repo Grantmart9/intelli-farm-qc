@@ -166,7 +166,7 @@ export const Dashboard = () => {
           <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
             <HomeFlowWaterUsage
               data={waterUsageData}
-              type={waterUsageData.name == "Water Usage Today" ? "line" : "bar"}
+              type={waterUsageData.name == "Water Usage Today" ? "area" : "bar"}
             />
           </div>
         ))}
