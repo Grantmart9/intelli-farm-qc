@@ -25,11 +25,7 @@ const IrrigationProgress = ({ data }) => (
     <div className="font-bold text-xl">Irrigation</div>
     <div className="font-bold text-3xl">Cycle Progress</div>
     <div className="mt-3">
-    <ProgressBar
-            variant="success"
-            animated
-            now={data.cycle_progress}
-          />
+      <ProgressBar variant="success" animated now={data.cycle_progress} />
     </div>
   </div>
 );
@@ -70,13 +66,13 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           enabled: true,
           formatter: function (val) {
             return val.toFixed(2) + "%";
-          }
+          },
         },
         labels: labels,
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom"
+          position: "bottom",
         },
         title: {
           text: "Fertilizer Ratio",
@@ -84,48 +80,48 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
 };
 
-export const HomeFlowWaterUsage = ({ data }) => {
+export const HomeFlowWaterUsage = ({ data, type }) => {
   return (
     <ApexChart
-      type="bar"
+      type={type}
       series={[
         {
           name: data.name,
-          data: data.sensor_total_flow_bar_graph.map(({ y }) => y)
-        }
+          data: data.sensor_total_flow_bar_graph.map(({ y }) => y),
+        },
       ]}
       options={{
         chart: {
           sparkline: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         tooltip: {
           y: {
             formatter: (y) => {
               return `${y} ${data.unit}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
-          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x)
+          categories: data.sensor_total_flow_bar_graph.map(({ x }) => x),
         },
         subtitle: {
           text: data.name,
-          offsetX: 30
+          offsetX: 30,
         },
         title: {
           text: `${data.sensor_daily_total_flow} ${data.unit}`,
-          offsetX: 30
-        }
+          offsetX: 30,
+        },
       }}
     />
   );
@@ -168,7 +164,10 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 p-2 pt-0">
         {data.water_usage.map((waterUsageData, i) => (
           <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
-            <HomeFlowWaterUsage data={waterUsageData} />
+            <HomeFlowWaterUsage
+              data={waterUsageData}
+              type={waterUsageData.name == "Water Usage Today" ? "line" : "bar"}
+            />
           </div>
         ))}
       </div>
