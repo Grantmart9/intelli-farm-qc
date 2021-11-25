@@ -105,13 +105,14 @@ export const LandingPage = () => {
   if (error) return <img src={ErrorGif} alt={ErrorGif} />;
 
   return (
-    <div className="flex flex-wrap p-2">
+    <div
+      style={{
+        gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr)",
+      }}
+      className="grid p-2"
+    >
       {data.landing_page.farms.map((farm, i) => (
-        <div
-          key={i}
-          style={{ minWidth: 350 }}
-          className="flex-1 bg-gray-300 rounded shadow-md m-3 pt-1"
-        >
+        <div key={i} className="flex-1 bg-gray-300 rounded shadow-md m-3 pt-1">
           <FarmsData farm={farm} />
         </div>
       ))}
