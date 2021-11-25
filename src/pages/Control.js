@@ -30,7 +30,7 @@ const ControlPanel = ({}) => {
   const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
-  useRefetch(refetch);
+  useRefetch(refetch, true, 10000);
 
   const [, postMode1] = useApi(...post(`${prefix}/mode`));
   const [, postMode] = useApi(...post(`${prefix}/mode`));
