@@ -15,7 +15,7 @@ import { API_URL, useApi } from "api";
 import { Preloader } from "components/Preloader";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "../components/Timer";
-import { ProgressBar } from "@themesberg/react-bootstrap";
+import { Image, ProgressBar } from "@themesberg/react-bootstrap";
 import drop from "images/drop.png";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
@@ -23,16 +23,16 @@ import { withStyles } from "@material-ui/core/styles";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
+    backgroundColor: "#05ab24",
+  },
 }))(LinearProgress);
 
 var Font = "'Raleway', sans-serif";
@@ -40,15 +40,17 @@ var Font = "'Raleway', sans-serif";
 const FarmsData = ({ farm }) => (
   <div className="p-2">
     <div className="grid grid-cols-2 gap-2 p-1">
-      <div className="inline-flex align-center justify-center shadow-md rounded p-1 ">
-        <div className="flex items-center">
-          <img width={40} height={40} src={drop} alt={drop} />
+      <div className="inline-flex align-center justify-start shadow-md rounded p-1 ">
+        <div style={{ width: 40 }} className="flex-shrink-0 flex items-center">
+          <Image width={40} height={40} src={drop} />
         </div>
-        <div
-          style={{ fontFamily: { Font } }}
-          className="font-bold rounded text-md mt-2 "
-        >
-          {farm.name}
+        <div className="flex-grow-1 flex flex-col justify-center">
+          <span
+            style={{ fontFamily: { Font } }}
+            className="font-bold text-md text-center"
+          >
+            {farm.name}
+          </span>
         </div>
       </div>
       <div className="inline-block shadow-md text-center rounded p-1">
@@ -107,7 +109,7 @@ export const LandingPage = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
       {data.landing_page.farms.map((farm, i) => (
-        <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-1">
+        <div key={i} className="bg-gray-300 rounded shadow-md m-3 pt-1">
           <FarmsData farm={farm} />
         </div>
       ))}
