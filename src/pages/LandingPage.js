@@ -39,7 +39,7 @@ var Font = "'Raleway', sans-serif";
 
 const FarmsData = ({ farm }) => (
   <div className="p-2">
-    <div className="grid grid-cols-2 gap-2 p-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-1">
       <div className="inline-flex align-center justify-start shadow-md rounded p-1 ">
         <div style={{ width: 40 }} className="flex-shrink-0 flex items-center">
           <Image width={40} height={40} src={drop} />
@@ -61,8 +61,6 @@ const FarmsData = ({ farm }) => (
           Water Supply <div>{farm.water_total} m³/h</div>
         </div>
       </div>
-    </div>
-    <div className="grid grid-cols-2 gap-2 p-1">
       <div className="p-2 shadow-md text-center rounded ">
         <div
           style={{ fontFamily: { Font } }}
@@ -107,9 +105,13 @@ export const LandingPage = () => {
   if (error) return <img src={ErrorGif} alt={ErrorGif} />;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 p-2">
+    <div className="flex flex-wrap p-2">
       {data.landing_page.farms.map((farm, i) => (
-        <div key={i} className="bg-gray-300 rounded shadow-md m-3 pt-1">
+        <div
+          key={i}
+          style={{ minWidth: 350 }}
+          className="flex-1 bg-gray-300 rounded shadow-md m-3 pt-1"
+        >
           <FarmsData farm={farm} />
         </div>
       ))}
