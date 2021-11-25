@@ -39,7 +39,7 @@ var Font = "'Raleway', sans-serif";
 
 const FarmsData = ({ farm }) => (
   <div className="p-2">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-1">
+    <div className="grid grid-cols-2 gap-2 p-1">
       <div className="inline-flex align-center justify-start shadow-md rounded p-1 ">
         <div style={{ width: 40 }} className="flex-shrink-0 flex items-center">
           <Image width={40} height={40} src={drop} />
