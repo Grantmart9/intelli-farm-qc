@@ -13,7 +13,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
-import { useApi, API_URL, post } from "api";
+import { useApi, post } from "api";
 import { Button } from "@mui/material";
 import { Preloader } from "components/Preloader";
 import Table from "@mui/material/Table";
@@ -26,7 +26,7 @@ import { setAt } from "immutable";
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
-  const prefix = `${API_URL}/-${farmId}`;
+  const prefix = `/-${farmId}`;
   const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
@@ -411,10 +411,10 @@ const Tab = ({ value, onChange, onSave }) => {
 
 const Tables = () => {
   const { farmId } = useParams();
-  const prefix = `${API_URL}/${farmId}`;
+  const prefix = `/${farmId}`;
 
   const [{ data, loading }, refetch] = useApi(
-    `${API_URL}/${farmId}/manual_datetime_settings`
+    `/${farmId}/manual_datetime_settings`
   );
 
   useRefetch(refetch);

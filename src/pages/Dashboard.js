@@ -14,7 +14,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { HomeFlowFertilizerBarChartD } from "components/charts/HomeFlowFertilizerBarChartD";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "components/Timer";
@@ -129,9 +129,7 @@ export const HomeFlowWaterUsage = ({ data, type }) => {
 
 export const Dashboard = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useApi(
-    `${API_URL}/-${farmId}/dashboard`
-  );
+  const [{ data, loading, error }, refetch] = useApi(`/-${farmId}/dashboard`);
 
   useRefetch(refetch);
 

@@ -11,7 +11,7 @@
  * - Modification    :
  **/
 import { useParams } from "react-router";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { Preloader } from "components/Preloader";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "../components/Timer";
@@ -95,9 +95,7 @@ const FarmsData = ({ farm }) => (
 );
 export const LandingPage = () => {
   const { clientId } = useParams();
-  const [{ data, loading, error }, refetch] = useApi(
-    `${API_URL}/${clientId}/landing`
-  );
+  const [{ data, loading, error }, refetch] = useApi(`/${clientId}/landing`);
 
   useRefetch(refetch);
 

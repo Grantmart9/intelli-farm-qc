@@ -14,7 +14,7 @@ import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useApi, API_URL } from "api";
+import { useApi } from "api";
 import PreloaderBar from "images/PreloaderBar.gif";
 
 const convertMessage = (message) =>
@@ -25,14 +25,14 @@ const RegUser = () => {
 
   const [{ loading }, postRegistration] = useApi(
     {
-      url: `${API_URL}/${clientId}/app1/registration`,
+      url: `/${clientId}/app1/registration`,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
   const [username, setUsername] = useState("");
@@ -117,7 +117,7 @@ const RegUser = () => {
               backgroundColor: "steelblue",
               color: "white",
               fontSize: "1rem",
-              width: "50%"
+              width: "50%",
             }}
           >
             Save
@@ -132,14 +132,14 @@ const ChangeUser = () => {
   const { clientId } = useParams();
   const [{ loading }, postPassword] = useApi(
     {
-      url: `${API_URL}/${clientId}/app1/password`,
+      url: `/${clientId}/app1/password`,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -214,7 +214,7 @@ const ChangeUser = () => {
               color: "white",
               backgroundColor: "steelblue",
               fontSize: "1rem",
-              width: "50%"
+              width: "50%",
             }}
           >
             Save

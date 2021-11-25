@@ -14,14 +14,26 @@ import useAxios from "axios-hooks";
 import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
 
-export const API_URL = "https://lodicon-api.herokuapp.com/api/v1";
+const API_URLS = {
+  "intelli-farm": "https://lodicon-api.herokuapp.com/api/v1",
+  "intelli-farm-qc": "https://lodicon-api-qc.herokuapp.com/api/v1",
+};
 
-export const useApi = (url, config) => {
+const getApiUrl = () => {
+  const { hostname } = window.location;
+  const [name] = hostname.split(".", 2);
+  const url = API_URLS[name] || API_URLS["intelli-farm-qc"];
+  return url;
+};
+
+export const useApi = (path, config) => {
+  const apiUrl = getApiUrl();
+  const url = `${apiUrl}${path}`;
   const normalizedUrl = typeof url == "string" ? { url } : url;
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const token = localStorage.getItem("token");
   const decoratedUrl = Object.assign({}, normalizedUrl, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {}
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
   const [result, fetch] = useAxios(decoratedUrl, config);
   const [retry, setRetry] = useState(null);
@@ -74,9 +86,9 @@ export const useApi = (url, config) => {
   return [
     Object.assign({}, result, {
       loading: !authorized(error) || loading,
-      error: authorized(error) ? error : null
+      error: authorized(error) ? error : null,
     }),
-    decoratedFetch
+    decoratedFetch,
   ];
 };
 

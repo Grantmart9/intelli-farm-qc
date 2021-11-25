@@ -13,7 +13,7 @@
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import PreloaderBar from "images/PreloaderBar.gif";
-import { useApi, API_URL, post } from "api";
+import { useApi, post } from "api";
 import { useRefetch } from "components/Timer";
 import { useParams } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
@@ -50,7 +50,7 @@ const UserForm = ({ value, onChange }) => {
     alarms_enabled,
     start_enabled,
     schedule_enabled,
-    whatsapp_api_key
+    whatsapp_api_key,
   } = value;
 
   const handleEmailAddress = useHandler("email_address", value, onChange);
@@ -124,7 +124,7 @@ const UserForm = ({ value, onChange }) => {
 
 export const Notifications = () => {
   const { farmId } = useParams();
-  const prefix = `${API_URL}/-${farmId}`;
+  const prefix = `/-${farmId}`;
   const [{ data, loading, error }, refetch] = useApi(`${prefix}/notifications`);
   const [{ loading: postLoading }, postNotification] = useApi(
     ...post(`${prefix}/notifications`)
@@ -172,7 +172,11 @@ export const Notifications = () => {
           ))}
         </div>
       </div>
-      <div className="flex align-center justify-center">{loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}</div>
+      <div className="flex align-center justify-center">
+        {loading ? (
+          <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar} />
+        ) : null}
+      </div>
       <div className="flex align-center justify-center mb-2">
         <Button
           type="submit"

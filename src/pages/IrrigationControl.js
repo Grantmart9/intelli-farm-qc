@@ -13,7 +13,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
-import { API_URL } from "api";
 import { AxiosSpinner } from "components/AxiosSpinner";
 import { HomeFlowFertilizerBarChartV } from "components/charts/HomeFlowFertilizerBarChartV";
 import fertilizer from "images/fertilizer.png";
@@ -67,7 +66,7 @@ export const IrrigationControl = () => {
       <div className="p-2">
         <div className="xl:grid grid-cols-4 p-4 gap-4">
           <AxiosSpinner
-            callHook={(use) => use(`${API_URL}/${farmId}/irrigation_1`)}
+            callHook={(use) => use(`/${farmId}/irrigation_1`)}
             renderData={({ data }) =>
               data.map((irrigation_valve, i) => (
                 <div
@@ -83,7 +82,7 @@ export const IrrigationControl = () => {
         <div className="bg-gray-300 rounded shadow-md ml-6 mr-6">
           <div className="w-full h-full">
             <AxiosSpinner
-              callHook={(use) => use(`${API_URL}/${farmId}/irrigation_3`)}
+              callHook={(use) => use(`/${farmId}/irrigation_3`)}
               refresh={false}
               renderData={({ data }) => (
                 <HomeFlowFertilizerBarChartV data={data} />
@@ -93,7 +92,7 @@ export const IrrigationControl = () => {
         </div>
         <div className="col-span-3 bg-gray-300  rounded shadow-md m-4">
           <AxiosSpinner
-            callHook={(use) => use(`${API_URL}/${farmId}/irrigation_2`)}
+            callHook={(use) => use(`/${farmId}/irrigation_2`)}
             renderData={({ data }) => (
               <BrushChart
                 data={data.map(({ datetime, y, ...rest }) => ({

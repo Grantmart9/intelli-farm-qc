@@ -17,7 +17,7 @@ import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "components/charts/FertilizerBarChart";
 import ErrorGif from "images/ErrorGif.gif";
 import fertilizerEc from "images/fertilizerEc.png";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import greendrop from "images/greendrop.gif";
 import { LineChart } from "components/charts/LineChart";
 import fertilizer from "images/fertilizer.png";
@@ -100,9 +100,7 @@ export const FertilizerPieChart = ({ data }) => {
 
 export const Fertilizer = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useApi(
-    `${API_URL}/${farmId}/fertilizer`
-  );
+  const [{ data, loading, error }, refetch] = useApi(`/${farmId}/fertilizer`);
 
   useRefetch(refetch);
 

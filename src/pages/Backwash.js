@@ -12,7 +12,7 @@
  **/
 import React from "react";
 import ErrorGif from "images/ErrorGif.gif";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { Preloader } from "components/Preloader";
 import { useParams } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -24,16 +24,16 @@ import { useRefetch } from "../components/Timer";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
-    borderRadius: 6
+    borderRadius: 6,
   },
   colorPrimary: {
     backgroundColor:
-      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700]
+      theme.palette.grey[theme.palette.type === "dark" ? 200 : 700],
   },
   bar: {
     borderRadius: 6,
-    backgroundColor: "#05ab24"
-  }
+    backgroundColor: "#05ab24",
+  },
 }))(LinearProgress);
 
 const WashBack = ({ backwash }) => {
@@ -61,9 +61,7 @@ const WashBack = ({ backwash }) => {
 
 export const Backwash = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }, refetch] = useApi(
-    `${API_URL}/${farmId}/backwash`
-  );
+  const [{ data, loading, error }, refetch] = useApi(`/${farmId}/backwash`);
 
   useRefetch(refetch);
 

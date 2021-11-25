@@ -13,12 +13,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import {
   MobileDateTimePicker,
-  LocalizationProvider
+  LocalizationProvider,
 } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
@@ -61,28 +61,28 @@ const sectionColumns = [
     field: "ec_setpoint",
     headerName: "EC Setpoint",
     type: "number",
-    editable: false
+    editable: false,
   },
   {
     field: "run_time",
     headerName: "Run time",
     type: "number",
-    editable: false
+    editable: false,
   },
   {
     field: "start_time",
     headerName: "Start time",
     type: "string",
     renderEditCell: (props) => <DateTimeEditInputCell {...props} />,
-    editable: false
+    editable: false,
   },
   {
     field: "end_time",
     headerName: "End time",
     type: "string",
     renderEditCell: DateTimeEditInputCell,
-    editable: false
-  }
+    editable: false,
+  },
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const SectionTable = ({ editable, section, onChange = null }) => {
@@ -117,20 +117,20 @@ const fertilizerColumns = [
     field: "name",
     headerName: "Name",
     type: "text",
-    editable: false
+    editable: false,
   },
   {
     field: "ec_setpoint",
     headerName: "EC Setpoint µS",
     type: "number",
-    editable: true
+    editable: true,
   },
   {
     field: "flow_rate",
     headerName: "Flow rate ℓ/m³",
     type: "number",
-    editable: true
-  }
+    editable: true,
+  },
 ].map((column) => ({ ...column, flex: 0.5 }));
 
 const FertilizerTable = ({ section, onChange = null }) => {
@@ -142,7 +142,7 @@ const FertilizerTable = ({ section, onChange = null }) => {
       const editedFertilizers = [
         ...fertilizers.slice(0, id),
         editedFertilizer,
-        ...fertilizers.slice(id + 1)
+        ...fertilizers.slice(id + 1),
       ];
       const editedSection = { ...section, fertilizer: editedFertilizers };
       if (onChange) {
@@ -184,7 +184,7 @@ const SectionRow = ({ editable, section, onChange = null }) => (
 
 export const IrrigationSchedule = () => {
   const { farmId } = useParams();
-  const [{ data, loading, error }] = useApi(`${API_URL}/-${farmId}/schedule`);
+  const [{ data, loading, error }] = useApi(`/-${farmId}/schedule`);
   const [, setDirty] = useState(false);
 
   const [schedule, setSchedule] = useState();
@@ -194,8 +194,6 @@ export const IrrigationSchedule = () => {
       setSchedule(data);
     }
   }, [data]);
-
-  
 
   if (loading || !schedule) return <Preloader />;
   if (error) return <img src={ErrorGif} alt={ErrorGif} />;
@@ -208,14 +206,10 @@ export const IrrigationSchedule = () => {
     setSchedule(editedSchedule);
   };
 
- 
-  
-
   return (
     <div>
       <div className="p-4">
         <div className="flex flex-col align-items-center align-content-center justify-content-center p-1">
-          
           <div className="w-full">
             {schedule.map((section, i) => {
               return (
@@ -223,10 +217,7 @@ export const IrrigationSchedule = () => {
                   key={i}
                   className="bg-gray-200 rounded shadow-md w-full mb-4 p-2"
                 >
-                  <SectionRow
-                    section={section}
-                    onChange={handleChange}
-                  />
+                  <SectionRow section={section} onChange={handleChange} />
                 </div>
               );
             })}

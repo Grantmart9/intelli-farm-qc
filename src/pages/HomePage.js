@@ -27,7 +27,7 @@ import { Report } from "pages/Report";
 import { Backwash } from "pages/Backwash";
 import { Notifications } from "pages/Notifications";
 import { Pumps } from "pages/Pumps";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { SidebarContext } from "../components/Sidebar";
 import { useMd } from "media-query";
 
@@ -197,7 +197,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
                 fullSidebar ? "hidden" : ""
               } content flex-grow-1 bg-gray-500 overflow-auto`}
             >
-              <Login loginUrl={`${API_URL}/${clientId}/intellifarm/login`} />
+              <Login loginUrl={`/${clientId}/intellifarm/login`} />
               <Component {...props} />
             </main>
           </div>
@@ -210,7 +210,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 const RouteInner = () => {
   const { clientId } = useParams();
 
-  const [{ data: appLayout }] = useApi(`${API_URL}/${clientId}/get_app_layout`);
+  const [{ data: appLayout }] = useApi(`/${clientId}/get_app_layout`);
 
   return (
     <AppLayout.Provider value={appLayout}>
@@ -237,7 +237,7 @@ const RouteInner = () => {
           path={Routes.Logout.path}
           component={() => (
             <Logout
-              logoutUrl={`${API_URL}/${clientId}/intellifarm/logout`}
+              logoutUrl={`/${clientId}/intellifarm/logout`}
               redirect={Routes.LandingPage.path.replace(":clientId", clientId)}
             />
           )}

@@ -12,7 +12,7 @@
  **/
 import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL, useApi } from "api";
+import { useApi } from "api";
 import { DatePicker, LocalizationProvider } from "@material-ui/pickers";
 import MomentUtils from "@material-ui/pickers/adapter/moment";
 import moment from "moment";
@@ -62,7 +62,7 @@ const SaveButton = () => {
         borderRadius: "0.2cm",
         color: "white",
         width: "5rem",
-        height: "2rem"
+        height: "2rem",
       }}
     >
       Send
@@ -77,14 +77,14 @@ export const Report = () => {
   const [message, setMessage] = useState("");
   const [{ data, loading, error }, postReport] = useApi(
     {
-      url: `${API_URL}/-${farmId}/report`,
+      url: `/-${farmId}/report`,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -94,8 +94,8 @@ export const Report = () => {
       postReport({
         data: {
           start_date: moment(date).format(dateFormat),
-          email: email
-        }
+          email: email,
+        },
       }).catch((e) => setMessage(e.toString()));
     },
     [date, email]
@@ -114,7 +114,9 @@ export const Report = () => {
           <DatePickers value={date} onChange={(date) => setDate(date)} />
         </div>
         <div className="text-gray-900 text-center">{data}</div>
-        {loading? <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar}/>:null}
+        {loading ? (
+          <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar} />
+        ) : null}
         <SaveButton />
       </form>
     </div>
