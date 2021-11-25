@@ -17,7 +17,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
 import useAxios from "axios-hooks";
-import { useApi } from "api";
+import { useApi, getApiUrl } from "api";
 
 export const LoginContext = createContext();
 
@@ -29,14 +29,14 @@ export const Login = ({ loginUrl }) => {
 
   const [, postLogin] = useAxios(
     {
-      url: loginUrl,
+      url: `${getApiUrl()}${loginUrl}`,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -100,11 +100,11 @@ export const Logout = ({ logoutUrl, redirect }) => {
       url: logoutUrl,
       method: "POST",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     },
     {
-      manual: true
+      manual: true,
     }
   );
 
@@ -117,7 +117,7 @@ export const Logout = ({ logoutUrl, redirect }) => {
       .catch(() =>
         setState({
           type: "message",
-          message: "Something happened when logging out."
+          message: "Something happened when logging out.",
         })
       );
   }, [postLogout]);

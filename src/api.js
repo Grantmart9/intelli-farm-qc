@@ -19,7 +19,7 @@ const API_URLS = {
   "intelli-farm-qc": "https://lodicon-api-qc.herokuapp.com/api/v1",
 };
 
-const getApiUrl = () => {
+export const getApiUrl = () => {
   const { hostname } = window.location;
   const [name] = hostname.split(".", 2);
   const url = API_URLS[name] || API_URLS["intelli-farm-qc"];
@@ -28,11 +28,14 @@ const getApiUrl = () => {
 
 export const useApi = (path, config) => {
   const apiUrl = getApiUrl();
-  const url = `${apiUrl}${path}`;
-  const normalizedUrl = typeof url == "string" ? { url } : url;
+  const urlFromPath = (path) => `${apiUrl}${path}`;
+  const url =
+    typeof path == "string"
+      ? { url: urlFromPath(path) }
+      : { ...path, url: urlFromPath(path.url) };
   const [loginOpen, setLoginOpen] = useContext(LoginContext);
   const token = localStorage.getItem("token");
-  const decoratedUrl = Object.assign({}, normalizedUrl, {
+  const decoratedUrl = Object.assign({}, url, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
   const [result, fetch] = useAxios(decoratedUrl, config);
