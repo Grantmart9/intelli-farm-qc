@@ -17,7 +17,8 @@ import {
   VictoryBrushContainer,
   VictoryChart,
   VictoryTooltip,
-  VictoryLine
+  VictoryLegend,
+  VictoryLine,
 } from "victory";
 import useResizeObserver from "@react-hook/resize-observer";
 import moment from "moment";
@@ -87,32 +88,49 @@ export const LineChart = ({ data }) => {
   );
   const [zoomDomain, setZoomDomain] = useState(domain);
 
-  let brushCallback = ({ x }) => setZoomDomain(x);
+  const brushCallback = ({ x }) => setZoomDomain(x);
 
-  let theme = {
+  const series = useMemo(
+    () => [
+      {
+        name: "Value",
+        color: "blue",
+        data: truncatedData.map(({ x, y }) => ({ x, y })),
+        tooltip: true,
+      },
+      {
+        name: "Target",
+        color: "green",
+        data: truncatedData.map(({ x, z }) => ({ x, y: z })),
+        tooltip: false,
+      },
+    ],
+    [truncatedData]
+  );
+
+  const theme = {
     axis: {
       style: {
         axis: {
           stroke: "gray",
-          strokeWidth: 2
+          strokeWidth: 2,
         },
         tickLabels: {},
         grid: {
           stroke: "blue",
           strokeDasharray: "5,5",
-          strokeWidth: 0.5
-        }
-      }
+          strokeWidth: 0.5,
+        },
+      },
     },
     line: {
       style: {
         data: {
           stroke: "blue",
-          strokeWidth: "2",
-          fill: "#dae1ed"
-        }
-      }
-    }
+          strokeWidth: "1",
+        },
+      },
+    },
   };
 
   return (
@@ -126,13 +144,14 @@ export const LineChart = ({ data }) => {
             color: "#373d3f",
             marginTop: "0.5rem",
             marginBottom: "0.5rem",
-            fontFamily: "'Raleway', sans-serif"
+            fontFamily: "'Raleway', sans-serif",
           }}
         >
           EC History in µS
         </div>
       </div>
       <VictoryChart
+        style={{ overflow: "visible" }}
         theme={theme}
         height={300}
         width={width}
@@ -142,7 +161,7 @@ export const LineChart = ({ data }) => {
         containerComponent={
           <VictoryZoomVoronoiContainer
             style={{
-              touchAction: "auto"
+              touchAction: "auto",
             }}
             zoomDimension="x"
             voronoiDimension="x"
@@ -154,13 +173,22 @@ export const LineChart = ({ data }) => {
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
         <VictoryAxis dependentAxis />
-        <VictoryLine
-          sortKey="datetime"
-          interpolation="linear"
-          labels={({ datum: { x, y } }) => `${formatDate(x)}-${y}`}
-          labelComponent={<BrushChartTooltip />}
-          data={truncatedData}
-        />
+        {series.map(({ data, tooltip, color }, i) => {
+          const tooltipOptions = tooltip && {
+            labels: ({ datum: { x, y } }) => `${formatDate(x)}-${y}`,
+            labelComponent: <BrushChartTooltip />,
+          };
+          return (
+            <VictoryLine
+              key={i}
+              sortKey="datetime"
+              interpolation="linear"
+              {...tooltipOptions}
+              style={{ data: { stroke: color } }}
+              data={data}
+            />
+          );
+        })}
       </VictoryChart>
       <VictoryChart
         theme={theme}
@@ -178,7 +206,15 @@ export const LineChart = ({ data }) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        <VictoryLine interpolation="linear" data={truncatedData} sortKey="x" />
+        {series.map(({ data, color }, i) => (
+          <VictoryLine
+            key={i}
+            interpolation="linear"
+            style={{ data: { stroke: color } }}
+            data={data}
+            sortKey="x"
+          />
+        ))}
       </VictoryChart>
     </div>
   );

@@ -82,7 +82,7 @@ export const FertilizerPieChart = ({ data }) => {
         legend: {
           formatter: (label, { seriesIndex }) =>
             `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom"
+          position: "bottom",
         },
         title: {
           text: "Fertilizer Ratio",
@@ -90,9 +90,9 @@ export const FertilizerPieChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
@@ -113,7 +113,7 @@ export const Fertilizer = () => {
         <img src={ErrorGif} alt={ErrorGif} width="100%" />
       </div>
     );
-    
+
   return (
     <div className="p-4">
       <div className="grid xl:grid-cols-4 gap-3 p-2">
@@ -135,10 +135,10 @@ export const Fertilizer = () => {
       <div className="p-2 mt-2">
         <div className="bg-gray-300 rounded shadow-md mb-4 p-2">
           <LineChart
-            data={data.ec_history.map(({ datetime, x, y, ...rest }) => ({
-              ...rest,
+            data={data.ec_history.map(({ datetime, x, y, z }) => ({
               x: new Date(datetime + " " + x),
-              y: Number(y)
+              y: Number(y),
+              z: Number(z),
             }))}
           />
         </div>
