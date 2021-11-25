@@ -10,7 +10,13 @@
  * - Author          : Grant
  * - Modification    :
  **/
-import React, { useState, useContext, createContext, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useEffect,
+  useCallback,
+} from "react";
 import { useLocation } from "react-router-dom";
 import leaf from "images/leaf.png";
 import { Nav, Image, Button, Accordion } from "@themesberg/react-bootstrap";
@@ -19,14 +25,14 @@ import { useMd } from "media-query";
 
 export const SidebarContext = createContext();
 
-const NavItem = ({ title, link, external, target, image }) => {
+const NavItem = ({ title, link, external, target, image, onClick }) => {
   const { pathname } = useLocation();
   const navItemClassName = link === pathname ? "active" : "";
   const linkProps = external ? { href: link } : { as: Link, to: link };
 
   return (
     <Nav.Item className={navItemClassName}>
-      <Nav.Link {...linkProps} target={target}>
+      <Nav.Link {...linkProps} target={target} onClick={onClick}>
         <span className="flex">
           {image && <Image src={image} width="40rem" />}
           <span className="sidebar-text">{title}</span>
@@ -61,12 +67,17 @@ const CollapsableNavItem = (props) => {
   );
 };
 
-const toNavItem = (item, i) => {
+const toNavItem = (item, i, onLinkClick) => {
   switch (item.action.type) {
     case "brand":
       return (
         <div key={i} className="border-1 border-white rounded">
-          <Nav.Link as={Link} to={item.action.path} className="h-full w-full">
+          <Nav.Link
+            as={Link}
+            to={item.action.path}
+            className="h-full w-full"
+            onClick={onLinkClick}
+          >
             <div
               className="flex justify-center"
               style={{
@@ -76,7 +87,7 @@ const toNavItem = (item, i) => {
             >
               <img src={leaf} width="40rem" alt={leaf} />
               <span
-                class="font-bold text-4xl ml-3"
+                className="font-bold text-4xl ml-3"
                 style={{ fontFamily: "'Raleway', sans-serif" }}
               >
                 {item.title}
@@ -92,6 +103,7 @@ const toNavItem = (item, i) => {
           title={item.title}
           link={item.action.path}
           image={item.image}
+          onClick={onLinkClick}
         />
       );
     case "accordion":
@@ -102,7 +114,7 @@ const toNavItem = (item, i) => {
           eventKey={item.title}
           image={item.image}
         >
-          {item.action.items.map(toNavItem)}
+          {item.action.items.map((item, i) => toNavItem(item, i, onLinkClick))}
         </CollapsableNavItem>
       );
     case "grow":
@@ -119,11 +131,11 @@ export const Sidebar = ({ items }) => {
   const isMd = useMd();
   const [show, setShow] = useContext(SidebarContext);
 
-  useEffect(() => {
+  const onLinkClick = useCallback(() => {
     if (isMd) {
       setShow(false);
     }
-  }, [location]);
+  });
 
   return (
     <div
@@ -135,7 +147,7 @@ export const Sidebar = ({ items }) => {
         style={{ fontFamily: "'Raleway', sans-serif" }}
         className="sidebar-inner min-h-full p-3 flex flex-col flex-nowrap pt-3 pb-3"
       >
-        {items.map(toNavItem)}
+        {items.map((item, i) => toNavItem(item, i, onLinkClick))}
       </Nav>
     </div>
   );
