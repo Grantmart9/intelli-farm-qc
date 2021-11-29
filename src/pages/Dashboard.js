@@ -15,7 +15,8 @@ import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
 import { useApi } from "api";
-import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import { FertilizerBarChart } from "components/charts/FertilizerBarChart";
+import { FertilizerPieChart } from "components/charts/FertilizerPieChart";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "components/Timer";
 import { ProgressBar } from "@themesberg/react-bootstrap";
@@ -52,41 +53,6 @@ const Pump = ({ pump }) => (
     <div className="font-bold">{pump.main_flow}</div>
   </div>
 );
-
-export const HomeFlowFertilizerPieChart = ({ data, title }) => {
-  const series = data.map(({ ratio }) => Number(ratio));
-  const labels = data.map(({ name }) => name);
-  return (
-    <ApexChart
-      type="donut"
-      height={300}
-      series={series}
-      options={{
-        dataLabels: {
-          enabled: true,
-          formatter: function (val) {
-            return val.toFixed(2) + "%";
-          },
-        },
-        labels: labels,
-        legend: {
-          formatter: (label, { seriesIndex }) =>
-            `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom",
-        },
-        title: {
-          text: title,
-          offsetX: 30,
-          offsetY: 10,
-          style: {
-            fontSize: "17px",
-            fontWeight: "bold",
-          },
-        },
-      }}
-    />
-  );
-};
 
 export const HomeFlowWaterUsage = ({ data, type }) => {
   return (
@@ -169,23 +135,23 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-6">
-        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
-          <HomeFlowFertilizerBarChart
+      <div className="grid grid-cols-6">
+        <div className="col-span-6 bg-gray-300 rounded shadow-md m-3">
+          <FertilizerBarChart
             title="Fertilizer Usage"
             data={data.fertilizer_usage.bar_graph}
           />
         </div>
-        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
-          <HomeFlowFertilizerPieChart
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-3">
+          <FertilizerPieChart
             data={data.fertilizer_usage.pie_chart}
-            title="Fertilizer Ratio"
+            title="Actual Ratio"
           />
         </div>
-        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
-          <HomeFlowFertilizerPieChart
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-3">
+          <FertilizerPieChart
             data={data.fertilizer_usage.pie_chart_recommended}
-            title="Fertilizer Ratio Recommended"
+            title="Recommended Ratio"
           />
         </div>
       </div>

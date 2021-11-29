@@ -14,7 +14,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
 import { AxiosSpinner } from "components/AxiosSpinner";
-import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import { FertilizerBarChart } from "components/charts/FertilizerBarChart";
 import citrus from "images/citrus.png";
 import greendrop from "images/greendrop.gif";
 import valve from "images/valve.png";
@@ -29,12 +29,12 @@ const images = {
 };
 
 const getImageFor = (data) => {
-  if (data.type === "main valve") {
-    return images.main_valve;
-  }
-
   if (data.status === "Opened") {
     return images.opened;
+  }
+
+  if (data.type === "main valve") {
+    return images.main_valve;
   }
 
   return images[data.cultivar];
@@ -97,10 +97,7 @@ export const IrrigationControl = () => {
               callHook={(use) => use(`/${farmId}/irrigation_3`)}
               refresh={false}
               renderData={({ data }) => (
-                <HomeFlowFertilizerBarChart
-                  title="Field Water Usage"
-                  data={data}
-                />
+                <FertilizerBarChart title="Field Water Usage" data={data} />
               )}
             />
           </div>
