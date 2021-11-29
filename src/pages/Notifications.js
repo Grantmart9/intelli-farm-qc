@@ -70,54 +70,53 @@ const UserForm = ({ value, onChange }) => {
   const handleStartEnabled = useChecked("start_enabled", value, onChange);
   const handleScheduleEnabled = useChecked("schedule_enabled", value, onChange);
   return (
-    <div className="mt-2">
-      <div className="bg-gray-200 rounded shadow-md p-4">
-        <div className="font-bold flex justify-center mb-2">User:{order}</div>
-        <div className="grid grid-row-2 gap-2">
-          <TextField
-            variant="outlined"
-            label="email address"
-            value={email_address}
-            onInput={handleEmailAddress}
-          />
-          <TextField
-            variant="outlined"
-            label="cellphone number"
-            value={cellphone_number}
-            onInput={handleCellphoneNumber}
-          />
-          <TextField
-            variant="outlined"
-            label="WhatsApp API key"
-            value={whatsapp_api_key}
-            onInput={handleWhatsapp_api_key}
-          />
-        </div>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={alarms_enabled}
-                onChange={handleAlarmsEnabled}
-              />
-            }
-            label="Alarms"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={start_enabled} onChange={handleStartEnabled} />
-            }
-            label="Start Notification"
-          />
-        </FormGroup>
-        <FormControl>
-          <InputLabel variant="outlined">Method</InputLabel>
-          <Select value={notification_type} onChange={handleNotificationType}>
-            <MenuItem value={"None"}>None</MenuItem>
-            <MenuItem value={"WhatsApp"}>WhatsApp</MenuItem>
-          </Select>
-        </FormControl>
+    <div className="flex flex-col space-y-4 bg-gray-200 rounded shadow-md p-4">
+      <div className="font-bold flex justify-center mb-2">
+        User:&nbsp;{order}
       </div>
+      <TextField
+        variant="outlined"
+        label="Email address"
+        value={email_address}
+        onInput={handleEmailAddress}
+      />
+      <TextField
+        variant="outlined"
+        label="Cellphone number"
+        value={cellphone_number}
+        onInput={handleCellphoneNumber}
+      />
+      <TextField
+        variant="outlined"
+        label="WhatsApp API key"
+        value={whatsapp_api_key}
+        onInput={handleWhatsapp_api_key}
+      />
+      <FormControl>
+        <InputLabel variant="outlined">Method</InputLabel>
+        <Select
+          value={notification_type}
+          onChange={handleNotificationType}
+          variant="outlined"
+        >
+          <MenuItem value={"None"}>None</MenuItem>
+          <MenuItem value={"WhatsApp"}>WhatsApp</MenuItem>
+        </Select>
+      </FormControl>
+      <FormGroup row={true} className="flex justify-center">
+        <FormControlLabel
+          control={
+            <Checkbox checked={alarms_enabled} onChange={handleAlarmsEnabled} />
+          }
+          label="Alarms"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox checked={start_enabled} onChange={handleStartEnabled} />
+          }
+          label="Start Notification"
+        />
+      </FormGroup>
     </div>
   );
 };
@@ -157,20 +156,20 @@ export const Notifications = () => {
     );
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-gray-400 rounded shadow-md p-1 m-4"
-    >
-      <div className="flex align-center justify-center">
-        <div className="xl:grid grid-cols-4 gap-4 rounded p-2">
-          {state.map((user, i) => (
-            <UserForm
-              key={i}
-              value={{ ...user, index: i }}
-              onChange={handleChange}
-            />
-          ))}
-        </div>
+    <form onSubmit={handleSubmit} className="m-4">
+      <div
+        style={{
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr)",
+        }}
+        className="grid gap-4"
+      >
+        {state.map((user, i) => (
+          <UserForm
+            key={i}
+            value={{ ...user, index: i }}
+            onChange={handleChange}
+          />
+        ))}
       </div>
       <div className="flex align-center justify-center">
         {loading ? (
