@@ -14,31 +14,41 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { BrushChart } from "components/charts/BrushChart";
 import { AxiosSpinner } from "components/AxiosSpinner";
-import { HomeFlowFertilizerBarChartV } from "components/charts/HomeFlowFertilizerBarChartV";
-import fertilizer from "images/fertilizer.png";
+import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
+import citrus from "images/citrus.png";
 import greendrop from "images/greendrop.gif";
+import valve from "images/valve.png";
+import grapes from "images/grapes.png";
 
-const EquipmentStatus = ({ data }) => {
-  var image;
-  var timeLeft = "";
+const images = {
+  main_valve: valve,
+  opened: greendrop,
+  citrus: citrus,
+  grape: grapes,
+  unknown: null,
+};
+
+const getImageFor = (data) => {
+  if (data.type === "main valve") {
+    return images.main_valve;
+  }
 
   if (data.status === "Opened") {
-    image = greendrop;
-  } else {
-    image = fertilizer;
+    return images.opened;
   }
 
-  if (data.time_left == null) {
-    timeLeft = null;
-  } else {
-    timeLeft = data.time_left + " min left";
-  }
+  return images[data.cultivar];
+};
+
+const EquipmentStatus = ({ data }) => {
+  const image = getImageFor(data);
+  const timeLeft = data.time_left && data.time_left + " min left";
 
   return (
-    <div className="px-2 pb-2">
+    <div className="p-2">
       <div className="font-bold text-2xl mb-2">{data.name}</div>
-      <div className="grid grid-cols-2 -mb-2">
-        <div className="grid grid-rows-3">
+      <div className="flex justify-between mb-2">
+        <div className="flex flex-col">
           <div className="text-green-800 text-xl font-bold">{data.status}</div>
           <div className="text-green-800 text-lg font-bold">
             {data.real_time_flow}
@@ -51,8 +61,8 @@ const EquipmentStatus = ({ data }) => {
           </div>
           <div className="font-bold text-sm text-red-400">{data.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
-          <img src={image} alt={image} width={70} height={70} />
+        <div>
+          <img src={image} width={70} />
         </div>
       </div>
     </div>
@@ -64,15 +74,17 @@ export const IrrigationControl = () => {
   return (
     <div>
       <div className="p-2">
-        <div className="xl:grid grid-cols-4 p-4 gap-4">
+        <div
+          style={{
+            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+          }}
+          className="grid p-4 gap-4"
+        >
           <AxiosSpinner
             callHook={(use) => use(`/${farmId}/irrigation_1`)}
             renderData={({ data }) =>
               data.map((irrigation_valve, i) => (
-                <div
-                  key={i}
-                  className="bg-gray-300 shadow-md rounded flex mt-2"
-                >
+                <div key={i} className="bg-gray-300 shadow-md rounded mt-2">
                   <EquipmentStatus data={irrigation_valve} />
                 </div>
               ))
@@ -85,7 +97,10 @@ export const IrrigationControl = () => {
               callHook={(use) => use(`/${farmId}/irrigation_3`)}
               refresh={false}
               renderData={({ data }) => (
-                <HomeFlowFertilizerBarChartV data={data} />
+                <HomeFlowFertilizerBarChart
+                  title="Field Water Usage"
+                  data={data}
+                />
               )}
             />
           </div>

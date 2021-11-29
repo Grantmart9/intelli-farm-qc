@@ -94,13 +94,19 @@ export const LineChart = ({ data }) => {
     () => [
       {
         name: "Value",
-        color: "blue",
+        style: {
+          stroke: "blue",
+          strokeWidth: 1.5,
+        },
         data: truncatedData.map(({ x, y }) => ({ x, y })),
         tooltip: true,
       },
       {
         name: "Target",
-        color: "green",
+        style: {
+          stroke: "green",
+          strokeWidth: 1,
+        },
         data: truncatedData.map(({ x, z }) => ({ x, y: z })),
         tooltip: false,
       },
@@ -126,8 +132,7 @@ export const LineChart = ({ data }) => {
     line: {
       style: {
         data: {
-          stroke: "blue",
-          strokeWidth: "1",
+          strokeWidth: "1.5",
         },
       },
     },
@@ -173,7 +178,7 @@ export const LineChart = ({ data }) => {
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
         <VictoryAxis dependentAxis />
-        {series.map(({ data, tooltip, color }, i) => {
+        {series.map(({ data, tooltip, style }, i) => {
           const tooltipOptions = tooltip && {
             labels: ({ datum: { x, y } }) => `${formatDate(x)}-${y}`,
             labelComponent: <BrushChartTooltip />,
@@ -184,7 +189,7 @@ export const LineChart = ({ data }) => {
               sortKey="datetime"
               interpolation="linear"
               {...tooltipOptions}
-              style={{ data: { stroke: color } }}
+              style={{ data: style }}
               data={data}
             />
           );
@@ -206,11 +211,11 @@ export const LineChart = ({ data }) => {
         }
       >
         <VictoryAxis fixLabelOverlap gridComponent={<></>} />
-        {series.map(({ data, color }, i) => (
+        {series.map(({ data, style }, i) => (
           <VictoryLine
             key={i}
             interpolation="linear"
-            style={{ data: { stroke: color } }}
+            style={{ data: style }}
             data={data}
             sortKey="x"
           />

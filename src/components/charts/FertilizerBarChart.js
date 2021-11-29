@@ -36,7 +36,7 @@ export const FertilizerBarChart = ({ data }) => {
           dayUsage.name === seriesName
       );
       return dayUsage ? dayUsage.value : 0;
-    })
+    }),
   }));
 
   return (
@@ -47,8 +47,8 @@ export const FertilizerBarChart = ({ data }) => {
       options={{
         chart: {
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         tooltip: {
           x: {
@@ -57,27 +57,27 @@ export const FertilizerBarChart = ({ data }) => {
                 "YYYY-MM-DD ddd"
               );
               return date;
-            }
+            },
           },
           y: {
             formatter: (y, { dataPointIndex }) => {
               const unit = data[dataPointIndex].unit;
               return `${y} ${unit}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
           categories: days,
-          style: { fontSize: "40px" }
+          style: { fontSize: "40px" },
         },
         plotOptions: {
           bar: {
             endingShape: "rounded",
-            columnWidth: "55%"
-          }
+            columnWidth: "55%",
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         title: {
           text: "Fertilizer Usage",
@@ -85,9 +85,9 @@ export const FertilizerBarChart = ({ data }) => {
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );

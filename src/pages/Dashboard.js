@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
 import { useApi } from "api";
-import { HomeFlowFertilizerBarChartD } from "components/charts/HomeFlowFertilizerBarChartD";
+import { HomeFlowFertilizerBarChart } from "components/charts/HomeFlowFertilizerBarChart";
 import ErrorGif from "images/ErrorGif.gif";
 import { useRefetch } from "components/Timer";
 import { ProgressBar } from "@themesberg/react-bootstrap";
@@ -53,7 +53,7 @@ const Pump = ({ pump }) => (
   </div>
 );
 
-export const HomeFlowFertilizerPieChart = ({ data }) => {
+export const HomeFlowFertilizerPieChart = ({ data, title }) => {
   const series = data.map(({ ratio }) => Number(ratio));
   const labels = data.map(({ name }) => name);
   return (
@@ -75,7 +75,7 @@ export const HomeFlowFertilizerPieChart = ({ data }) => {
           position: "bottom",
         },
         title: {
-          text: "Fertilizer Ratio",
+          text: title,
           offsetX: 30,
           offsetY: 10,
           style: {
@@ -169,20 +169,24 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-5 ">
-        <div className="col-span-3 bg-gray-300 rounded shadow-md m-4">
-          <div className="w-full h-full">
-            <HomeFlowFertilizerBarChartD
-              data={data.fertilizer_usage.bar_graph}
-            />
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-6">
+        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
+          <HomeFlowFertilizerBarChart
+            title="Fertilizer Usage"
+            data={data.fertilizer_usage.bar_graph}
+          />
         </div>
-        <div className="col-span-2 bg-gray-300 rounded shadow-md flex-grow m-4 flex align-items">
-          <div className="w-full">
-            <HomeFlowFertilizerPieChart
-              data={data.fertilizer_usage.pie_chart}
-            />
-          </div>
+        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
+          <HomeFlowFertilizerPieChart
+            data={data.fertilizer_usage.pie_chart}
+            title="Fertilizer Ratio"
+          />
+        </div>
+        <div className="col-span-2 bg-gray-300 rounded shadow-md m-3">
+          <HomeFlowFertilizerPieChart
+            data={data.fertilizer_usage.pie_chart_recommended}
+            title="Fertilizer Ratio Recommended"
+          />
         </div>
       </div>
     </div>

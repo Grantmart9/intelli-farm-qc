@@ -16,12 +16,13 @@ import { Preloader } from "components/Preloader";
 import ApexChart from "react-apexcharts";
 import { FertilizerBarChart } from "components/charts/FertilizerBarChart";
 import ErrorGif from "images/ErrorGif.gif";
-import fertilizerEc from "images/fertilizerEc.png";
 import { useApi } from "api";
-import greendrop from "images/greendrop.gif";
 import { LineChart } from "components/charts/LineChart";
-import fertilizer from "images/fertilizer.png";
 import { useRefetch } from "../components/Timer";
+import { FertilizerPieChart } from "components/charts/FertilizerPieChart";
+import fertilizer from "images/fertilizer.png";
+import ec_valve from "images/ec_valve.png";
+import greendrop from "images/greendrop.gif";
 
 const FertilizerValve = ({ valve }) => {
   var image = valve.status === "Opened" ? greendrop : fertilizer;
@@ -29,7 +30,7 @@ const FertilizerValve = ({ valve }) => {
     <div className="px-2 pb-2">
       <div className="font-bold text-2xl mb-2">{valve.name}</div>
       <div className="flex justify-between mb-2">
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-end">
           <div className="text-green-800 text-xl font-bold">{valve.status}</div>
           <div className="text-green-800 text-lg font-bold">
             {valve.real_time_flow}
@@ -52,7 +53,7 @@ const ECValve = ({ ec }) => {
     <div className="p-2">
       <div className="text-2xl font-bold mb-2">{ec.name}</div>
       <div className="flex justify-between mb-2">
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-end">
           <div className="text-green-800 text-lg font-bold">
             Target: {ec.setpoint}
           </div>
@@ -62,39 +63,10 @@ const ECValve = ({ ec }) => {
           <div className="text-red-400 font-bold text-sm">{ec.alarm}</div>
         </div>
         <div>
-          <img src={fertilizerEc} width={70} />
+          <img src={ec_valve} width={70} />
         </div>
       </div>
     </div>
-  );
-};
-
-export const FertilizerPieChart = ({ data }) => {
-  const series = data.map(({ ratio }) => ratio);
-  const labels = data.map(({ name }) => name);
-  return (
-    <ApexChart
-      type="donut"
-      height={300}
-      series={series}
-      options={{
-        labels: labels,
-        legend: {
-          formatter: (label, { seriesIndex }) =>
-            `${label} - ${data[seriesIndex].value} ${data[seriesIndex].unit}`,
-          position: "bottom",
-        },
-        title: {
-          text: "Fertilizer Ratio",
-          offsetX: 30,
-          offsetY: 10,
-          style: {
-            fontSize: "17px",
-            fontWeight: "bold",
-          },
-        },
-      }}
-    />
   );
 };
 
@@ -116,7 +88,7 @@ export const Fertilizer = () => {
     <div className="p-4">
       <div
         style={{ gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}
-        className="grid gap-3 p-2"
+        className="grid gap-4 p-2"
       >
         {data.fertilizer_valves.map((valve, i) => (
           <div key={i} className="bg-gray-300 rounded shadow-md">
@@ -140,12 +112,21 @@ export const Fertilizer = () => {
           />
         </div>
       </div>
-      <div className="xl:grid grid-cols-2 gap-2 p-2">
-        <div className="bg-gray-300 rounded shadow-md mb-4">
+      <div className="grid grid-cols-6">
+        <div className="col-span-6 bg-gray-300 rounded shadow-md m-3">
           <FertilizerBarChart data={data.fertilizer_bargraph} />
         </div>
-        <div className="bg-gray-300 rounded shadow-md mb-4">
-          <FertilizerPieChart data={data.fertilizer_pie_chart} />
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-3">
+          <FertilizerPieChart
+            data={data.fertilizer_pie_chart}
+            title="Actual Ratio"
+          />
+        </div>
+        <div className="col-span-3 bg-gray-300 rounded shadow-md m-3">
+          <FertilizerPieChart
+            data={data.fertilizer_pie_chart_recommended}
+            title="Recommended Ratio"
+          />
         </div>
       </div>
     </div>

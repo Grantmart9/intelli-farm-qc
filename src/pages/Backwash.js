@@ -17,8 +17,7 @@ import { Preloader } from "components/Preloader";
 import { useParams } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import fertilizer from "images/fertilizer.png";
-import backwash from "images/backwash.gif";
+import water_filter from "images/water_filter.png";
 import { useRefetch } from "../components/Timer";
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -36,23 +35,19 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-const WashBack = ({ backwash }) => {
+const BackwashItem = ({ backwash }) => {
   return (
     <div className="bg-gray-300 rounded shadow-md p-1">
-      <div key={backwash.name} className="font-bold text-2xl mb-2">
-        {backwash.name}
-      </div>
-      <div className="grid grid-cols-2">
-        <div className="grid grid-rows-1">
-          <div className="font-bold text-green-800 text-xl mt-1">
+      <div className="font-bold text-2xl mb-2">{backwash.name}</div>
+      <div className="flex justify-between mb-2">
+        <div className="flex flex-col justify-end">
+          <div className="font-bold text-green-800 text-xl">
             {backwash.status}
           </div>
-          <div key={backwash.alarm} className="font-bold text-sm text-red-400">
-            {backwash.alarm}
-          </div>
+          <div className="font-bold text-sm text-red-400">{backwash.alarm}</div>
         </div>
-        <div className="ml-24 2xl:ml-28 md:ml-10">
-          <img src={fertilizer} alt={fertilizer} width={70} height={70} />
+        <div>
+          <img src={water_filter} width={70} />
         </div>
       </div>
     </div>
@@ -101,10 +96,13 @@ export const Backwash = () => {
           </div>
         </div>
       </div>
-      <div className="xl:grid grid-cols-4 rounded ml-6 mr-6 gap-4">
+      <div
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}
+        className="grid gap-4 p-4"
+      >
         {data.backwash_valves.map((backwash, i) => (
-          <div key={i} className="mt-2 mb-3">
-            <WashBack backwash={backwash} />
+          <div key={i}>
+            <BackwashItem backwash={backwash} />
           </div>
         ))}
       </div>

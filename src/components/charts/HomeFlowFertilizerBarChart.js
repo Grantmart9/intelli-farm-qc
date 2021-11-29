@@ -14,7 +14,7 @@ import React, { useMemo } from "react";
 import ApexChart from "react-apexcharts";
 import moment from "moment";
 
-export const HomeFlowFertilizerBarChartD = ({ data }) => {
+export const HomeFlowFertilizerBarChart = ({ title, data }) => {
   const today = useMemo(() => new Date(), []);
   const dates = [-6, -5, -4, -3, -2, -1, 0].map((d) => {
     const date = new Date(today);
@@ -36,7 +36,7 @@ export const HomeFlowFertilizerBarChartD = ({ data }) => {
           dayUsage.name === seriesName
       );
       return dayUsage ? dayUsage.value : 0;
-    })
+    }),
   }));
 
   return (
@@ -47,8 +47,8 @@ export const HomeFlowFertilizerBarChartD = ({ data }) => {
       options={{
         chart: {
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         tooltip: {
           x: {
@@ -57,37 +57,37 @@ export const HomeFlowFertilizerBarChartD = ({ data }) => {
                 "YYYY-MM-DD ddd"
               );
               return date;
-            }
+            },
           },
           y: {
             formatter: (y, { dataPointIndex }) => {
               const unit = data[dataPointIndex].unit;
               return `${y} ${unit}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
           categories: days,
-          style: { fontSize: "40px" }
+          style: { fontSize: "40px" },
         },
         plotOptions: {
           bar: {
             endingShape: "rounded",
-            columnWidth: "55%"
-          }
+            columnWidth: "55%",
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         title: {
-          text: "Fertilizer Usage",
+          text: title,
           offsetX: 30,
           offsetY: 10,
           style: {
             fontSize: "17px",
-            fontWeight: "bold"
-          }
-        }
+            fontWeight: "bold",
+          },
+        },
       }}
     />
   );
