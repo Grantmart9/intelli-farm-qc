@@ -30,12 +30,24 @@ export const FertilizerBarChart = ({ data }) => {
   const series = seriesNames.map((seriesName) => ({
     name: seriesName,
     data: dates.map((date) => {
-      const dayUsage = data.find(
+      const datum = data.find(
         (dayUsage) =>
           new Date(dayUsage.date).getDay() === date.getDay() &&
           dayUsage.name === seriesName
-      );
-      return dayUsage ? dayUsage.value : 0;
+      ) || { date, value: 0 };
+      return {
+        x: datum.date,
+        y: datum.value,
+        goals: [
+          {
+            name: "Target",
+            value: datum.target,
+            strokeWidth: 8,
+            strokeHeight: 3,
+            strokeColor: "#775DD0",
+          },
+        ],
+      };
     }),
   }));
 
