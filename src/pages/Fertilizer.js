@@ -112,8 +112,8 @@ export const Fertilizer = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-6">
-        <div className="col-span-6 bg-gray-300 rounded shadow-md m-3">
+      <div className="grid grid-cols-3 sm:grid-cols-6">
+        <div className="col-span-3 sm:col-span-6 bg-gray-300 rounded shadow-md m-3">
           <FertilizerBarChart data={data.fertilizer_bargraph} />
         </div>
         <div className="col-span-3 bg-gray-300 rounded shadow-md m-3">
