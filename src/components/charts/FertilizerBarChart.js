@@ -38,7 +38,7 @@ export const FertilizerBarChart = ({ data }) => {
       return {
         x: datum.date,
         y: datum.value,
-        goals: [
+        goals: datum.target != null && [
           {
             name: "Target",
             value: datum.target,
