@@ -19,6 +19,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import water_filter from "images/water_filter.png";
 import { useRefetch } from "../components/Timer";
+import { ProgressBar } from "@themesberg/react-bootstrap";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -37,9 +38,9 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const BackwashItem = ({ backwash }) => {
   return (
-    <div className="bg-gray-300 rounded shadow-md p-1">
+    <div className="bg-gray-300 rounded shadow-md p-2">
       <div className="font-bold text-2xl mb-2">{backwash.name}</div>
-      <div className="flex justify-between mb-2">
+      <div className="flex justify-between">
         <div className="flex flex-col justify-end">
           <div className="font-bold text-green-800 text-xl">
             {backwash.status}
@@ -53,6 +54,23 @@ const BackwashItem = ({ backwash }) => {
     </div>
   );
 };
+
+const BackwashProgress = ({ data }) => (
+  <div className="bg-gray-300 rounded shadow-md p-2 flex flex-col justify-between">
+    <span className="text-2xl font-bold">Progress</span>
+    <div className="mt-3 mx-4">
+      <ProgressBar
+        variant="success"
+        animated
+        now={data.backwash_status.percentage_left}
+      />
+    </div>
+    <div className="flex justify-between text-xl font-bold">
+      <span>{data.backwash_status.status}</span>
+      <span>{data.backwash_status.percentage_left.toFixed(2)}%</span>
+    </div>
+  </div>
+);
 
 export const Backwash = () => {
   const { farmId } = useParams();
@@ -76,30 +94,11 @@ export const Backwash = () => {
 
   return (
     <div>
-      <div className="p-4">
-        <div className="bg-gray-300 rounded shadow-md font-bold block text-gray-800 text-center p-4">
-          <div className="inline-block p-1">
-            <div className="font-bold text-xl">
-              Status : {data.backwash_status.status}
-            </div>
-            <div className="font-bold text-xl ">
-              Progress : {data.backwash_status.percentage_left.toFixed(2)} %
-            </div>
-          </div>
-          <div className="mt-1">
-            <div className="xl:mt-4 mt-4 xl:ml-20 xl:mr-20 p-1">
-              <BorderLinearProgress
-                variant="determinate"
-                value={data.backwash_status.percentage_left}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
       <div
         style={{ gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}
         className="grid gap-4 p-4"
       >
+        <BackwashProgress data={data} />
         {data.backwash_valves.map((backwash, i) => (
           <div key={i}>
             <BackwashItem backwash={backwash} />
