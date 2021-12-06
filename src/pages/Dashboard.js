@@ -127,7 +127,10 @@ export const Dashboard = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 p-2 pt-0">
         {data.water_usage.map((waterUsageData, i) => (
-          <div key={i} className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2">
+          <div
+            key={i}
+            className="bg-gray-300  rounded shadow-md m-3 pt-4 pb-2 overflow-hidden"
+          >
             <HomeFlowWaterUsage
               data={waterUsageData}
               type={waterUsageData.name == "Water Usage Today" ? "area" : "bar"}
