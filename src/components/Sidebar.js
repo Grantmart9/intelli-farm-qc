@@ -25,13 +25,12 @@ import { useMd } from "media-query";
 
 export const SidebarContext = createContext();
 
-const NavItem = ({ title, link, external, target, image, onClick }) => {
-  const { pathname } = useLocation();
-  const navItemClassName = link === pathname ? "active" : "";
+const NavItem = ({ title, link, external, target, image, onClick, active }) => {
+  const activeClassName = active ? "active" : "";
   const linkProps = external ? { href: link } : { as: Link, to: link };
 
   return (
-    <Nav.Item className={navItemClassName}>
+    <Nav.Item className={activeClassName}>
       <Nav.Link {...linkProps} target={target} onClick={onClick}>
         <span className="flex">
           {image && <Image src={image} width="40rem" />}
@@ -43,13 +42,11 @@ const NavItem = ({ title, link, external, target, image, onClick }) => {
 };
 
 const CollapsableNavItem = (props) => {
-  const { pathname } = useLocation();
-  const { eventKey, title, children = null } = props;
-  const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
-
+  const { eventKey, title, active, children = null } = props;
+  const activeClassName = active ? "active" : "";
   return (
-    <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
-      <Accordion.Item className="border-0 bg-blue-500" eventKey={eventKey}>
+    <Accordion as={Nav.Item} className={activeClassName}>
+      <Accordion.Item className={`border-0 bg-blue-500`} eventKey={eventKey}>
         <Accordion.Button
           as={Nav.Link}
           className="d-flex justify-content-between align-items-center bg-red-900"
@@ -67,7 +64,20 @@ const CollapsableNavItem = (props) => {
   );
 };
 
-const toNavItem = (item, i, onLinkClick) => {
+const navItemToLinks = (item) => {
+  switch (item.action.type) {
+    case "link":
+      return [item.action.path];
+    case "accordion":
+      return item.action.items.flatMap((item) => navItemToLinks(item));
+    default:
+      return [];
+  }
+};
+
+const toNavItem = (item, i, props) => {
+  const links = navItemToLinks(item);
+  const active = links.some((link) => link == props.pathname);
   switch (item.action.type) {
     case "brand":
       return (
@@ -76,7 +86,7 @@ const toNavItem = (item, i, onLinkClick) => {
             as={Link}
             to={item.action.path}
             className="h-full w-full"
-            onClick={onLinkClick}
+            onClick={props.onLinkClick}
           >
             <div
               className="flex justify-center"
@@ -103,7 +113,8 @@ const toNavItem = (item, i, onLinkClick) => {
           title={item.title}
           link={item.action.path}
           image={item.image}
-          onClick={onLinkClick}
+          onClick={props.onLinkClick}
+          active={active}
         />
       );
     case "accordion":
@@ -113,8 +124,9 @@ const toNavItem = (item, i, onLinkClick) => {
           title={item.title}
           eventKey={item.title}
           image={item.image}
+          active={active}
         >
-          {item.action.items.map((item, i) => toNavItem(item, i, onLinkClick))}
+          {item.action.items.map((item, i) => toNavItem(item, i, props))}
         </CollapsableNavItem>
       );
     case "grow":
@@ -127,7 +139,7 @@ const toNavItem = (item, i, onLinkClick) => {
 };
 
 export const Sidebar = ({ items }) => {
-  const { location } = useLocation();
+  const { location, pathname } = useLocation();
   const isMd = useMd();
   const [show, setShow] = useContext(SidebarContext);
 
@@ -147,7 +159,7 @@ export const Sidebar = ({ items }) => {
         style={{ fontFamily: "'Raleway', sans-serif" }}
         className="sidebar-inner min-h-full p-3 flex flex-col flex-nowrap pt-3 pb-3"
       >
-        {items.map((item, i) => toNavItem(item, i, onLinkClick))}
+        {items.map((item, i) => toNavItem(item, i, { onLinkClick, pathname }))}
       </Nav>
     </div>
   );

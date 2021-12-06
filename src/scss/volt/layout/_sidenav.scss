@@ -19,7 +19,8 @@
   .nav-item {
     border: $border-width solid transparent;
     &.active {
-      & > .nav-link {
+      & > .nav-link,
+      & > .accordion-item > .nav-link {
         color: $light;
         background-color: #1b425c;
       }
