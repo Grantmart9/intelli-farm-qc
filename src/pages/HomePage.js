@@ -96,7 +96,7 @@ const farm_order = [
 const FarmRoutes = () => (
   <>
     {Object.values(farm_pages).map((page, i) => (
-      <RouteWithSidebar
+      <Route
         key={i}
         exact
         path={`/:clientId/:farmId${page.path}`}
@@ -166,7 +166,7 @@ const getNavItems = (prefix, layout) =>
     getBottomItems(prefix),
   ].flat();
 
-const RouteWithSidebar = ({ component: Component, ...rest }) => {
+const WithSidebar = ({ children }) => {
   const { clientId } = useParams();
   const isMd = useMd();
   const [show] = useContext(SidebarContext);
@@ -176,34 +176,30 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const navItems = getNavItems(prefix, appLayout);
 
   return (
-    <Route
-      {...rest}
-      render={(props) => (
-        <div className="absolute w-full vh-100 flex flex-col overflow-hidden">
-          <Navbar />
-          <div
-            style={{
-              height: "calc(100vh - 60px)",
-            }}
-            className="flex"
-          >
-            <Sidebar items={navItems}></Sidebar>
+    <div className="absolute w-full vh-100 flex flex-col overflow-hidden">
+      <Navbar />
+      <div
+        style={{
+          height: "calc(100vh - 60px)",
+        }}
+        className="flex"
+      >
+        <Sidebar items={navItems}></Sidebar>
 
-            <main
-              style={{
-                width: show ? "calc(100vw - 300px)" : "calc(100vw)",
-              }}
-              className={`relative ${
-                fullSidebar ? "hidden" : ""
-              } content flex-grow-1 bg-gray-500 overflow-auto`}
-            >
-              <Login loginUrl={`/${clientId}/intellifarm/login`} />
-              <Component {...props} />
-            </main>
-          </div>
-        </div>
-      )}
-    />
+        {/* TODO: Simplify this shit without breaking anything */}
+        <main
+          style={{
+            width: show ? "calc(100vw - 300px)" : "calc(100vw)",
+          }}
+          className={`relative ${
+            fullSidebar ? "hidden" : ""
+          } content flex-grow-1 bg-gray-500 overflow-auto`}
+        >
+          <Login loginUrl={`/${clientId}/intellifarm/login`} />
+          {children}
+        </main>
+      </div>
+    </div>
   );
 };
 
@@ -214,37 +210,34 @@ const RouteInner = () => {
 
   return (
     <AppLayout.Provider value={appLayout}>
-      <Switch>
-        <RouteWithSidebar
-          exact
-          path={Routes.LandingPage.path}
-          component={LandingPage}
-        />
-        <RouteWithSidebar
-          exact
-          path={Routes.NotFound.path}
-          component={() => <p>Not Found</p>}
-        />
-        <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
+      <WithSidebar>
+        <Switch>
+          <Route exact path={Routes.LandingPage.path} component={LandingPage} />
+          <Route
+            exact
+            path={Routes.NotFound.path}
+            component={() => <p>Not Found</p>}
+          />
+          <Route exact path={Routes.Users.path} component={Users} />
 
-        <RouteWithSidebar
-          exact
-          path={Routes.Control.path}
-          component={Control}
-        />
-        <RouteWithSidebar
-          exact
-          path={Routes.Logout.path}
-          component={() => (
-            <Logout
-              logoutUrl={`/${clientId}/intellifarm/logout`}
-              redirect={Routes.LandingPage.path.replace(":clientId", clientId)}
-            />
-          )}
-        />
-        <FarmRoutes />
-        <Redirect to={Routes.NotFound.path} />
-      </Switch>
+          <Route exact path={Routes.Control.path} component={Control} />
+          <Route
+            exact
+            path={Routes.Logout.path}
+            component={() => (
+              <Logout
+                logoutUrl={`/${clientId}/intellifarm/logout`}
+                redirect={Routes.LandingPage.path.replace(
+                  ":clientId",
+                  clientId
+                )}
+              />
+            )}
+          />
+          <FarmRoutes />
+          <Redirect to={Routes.NotFound.path} />
+        </Switch>
+      </WithSidebar>
     </AppLayout.Provider>
   );
 };
