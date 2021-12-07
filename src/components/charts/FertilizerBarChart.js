@@ -22,9 +22,9 @@ export const FertilizerBarChart = ({ data }) => {
     return date;
   });
 
-  const days = dates.map(
-    (date) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
-  );
+  const getDayName = (date) =>
+    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()];
+  const days = dates.map((date) => getDayName(date));
 
   const seriesNames = Array.from(new Set(data.map(({ name }) => name)));
   const series = seriesNames.map((seriesName) => ({
@@ -34,20 +34,25 @@ export const FertilizerBarChart = ({ data }) => {
         (dayUsage) =>
           new Date(dayUsage.date).getDay() === date.getDay() &&
           dayUsage.name === seriesName
-      ) || { date, value: 0 };
-      return {
-        x: datum.date,
-        y: datum.value,
-        goals: datum.target != null && [
-          {
-            name: "Target",
-            value: datum.target,
-            strokeWidth: 8,
-            strokeHeight: 3,
-            strokeColor: "#775DD0",
-          },
-        ],
-      };
+      );
+      return datum == null
+        ? null
+        : {
+            x: getDayName(date),
+            y: datum.value,
+            goals:
+              datum.target != null
+                ? [
+                    {
+                      name: "Target",
+                      value: datum.target,
+                      strokeWidth: 8,
+                      strokeHeight: 3,
+                      strokeColor: "#775DD0",
+                    },
+                  ]
+                : null,
+          };
     }),
   }));
 
