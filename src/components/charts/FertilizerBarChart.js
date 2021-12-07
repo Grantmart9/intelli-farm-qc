@@ -34,25 +34,23 @@ export const FertilizerBarChart = ({ data }) => {
         (dayUsage) =>
           new Date(dayUsage.date).getDay() === date.getDay() &&
           dayUsage.name === seriesName
-      );
-      return datum == null
-        ? null
-        : {
-            x: getDayName(date),
-            y: datum.value,
-            goals:
-              datum.target != null
-                ? [
-                    {
-                      name: "Target",
-                      value: datum.target,
-                      strokeWidth: 8,
-                      strokeHeight: 3,
-                      strokeColor: "#775DD0",
-                    },
-                  ]
-                : null,
-          };
+      ) || { value: 0 };
+      return {
+        x: getDayName(date),
+        y: datum.value,
+        goals:
+          datum.target != null
+            ? [
+                {
+                  name: "Target",
+                  value: datum.target,
+                  strokeWidth: 8,
+                  strokeHeight: 3,
+                  strokeColor: "#775DD0",
+                },
+              ]
+            : null,
+      };
     }),
   }));
 
