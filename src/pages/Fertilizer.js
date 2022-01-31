@@ -33,10 +33,17 @@ const FertilizerValve = ({ valve }) => {
         <div className="flex flex-col justify-end">
           <div className="text-green-800 text-xl font-bold">{valve.status}</div>
           <div className="text-green-800 text-lg font-bold">
-            {valve.real_time_flow}
+            Value: {valve.real_time_flow}
           </div>
+          {
+            (valve.real_time_flow_target = "null" ? null : (
+              <div className="text-green-800 text-lg font-bold">
+                Target: {valve.real_time_flow_target}
+              </div>
+            ))
+          }
           <div className="text-green-800 text-lg font-bold text-md">
-            {valve.total_flow}
+            Total: {valve.total_flow}
           </div>
           <div className="text-red-400 font-bold text-sm">{valve.alarm}</div>
         </div>

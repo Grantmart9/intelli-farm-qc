@@ -51,10 +51,17 @@ const EquipmentStatus = ({ data }) => {
         <div className="flex flex-col">
           <div className="text-green-800 text-xl font-bold">{data.status}</div>
           <div className="text-green-800 text-lg font-bold">
-            {data.real_time_flow}
+            Value: {data.real_time_flow}
           </div>
+          {
+            (data.real_time_flow_target = "null" ? null : (
+              <div className="text-green-800 text-lg font-bold">
+                Target: {data.real_time_flow_target}
+              </div>
+            ))
+          }
           <div className="text-green-800 text-lg font-bold text-md">
-            {data.total_flow}
+            Total: {data.total_flow}
           </div>
           <div className="text-green-800 text-lg font-bold text-md">
             {timeLeft}

@@ -176,7 +176,7 @@ export const Notifications = () => {
           <img width={50} height={50} src={PreloaderBar} alt={PreloaderBar} />
         ) : null}
       </div>
-      <div className="flex align-center justify-center mb-2">
+      <div className="flex align-center justify-center mt-4">
         <Button
           type="submit"
           variant="contained"

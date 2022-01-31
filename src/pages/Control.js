@@ -24,6 +24,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { setAt } from "immutable";
 
+import TableBody from "@mui/material/TableBody";
+import TextField from "@mui/material/TextField";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
   const prefix = `/-${farmId}`;
@@ -454,6 +463,115 @@ const Tables = () => {
 };
 
 export const Control = () => {
+  const [popShow, popState] = useState(false);
+
+  /////// Fake Data ///////////////////////////////////////////////////
+  const mixRows = [
+    {
+      tank: "Tank A",
+      flow: "2.3",
+      volume: "234",
+    },
+    {
+      tank: "Tank B",
+      flow: "2.3",
+      volume: "234",
+    },
+    {
+      tank: "Tank C",
+      flow: "2.3",
+      volume: "234",
+    },
+    {
+      tank: "Tank D",
+      flow: "2.3",
+      volume: "234",
+    },
+    {
+      tank: "Tank E",
+      flow: "2.3",
+      volume: "234",
+    },
+  ];
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const MixManager = () => {
+    return (
+      <div>
+        <div
+          style={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+          className="mt-2"
+        >
+          <Accordion sx={{ width: "20rem" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>List</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <div className="grid grid-rows-4 p-2 gap-1">
+                  <Button variant="contained" color="primary">
+                    Number: 1
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    Number: 2
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    Number: 3
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    Number: 4
+                  </Button>
+                </div>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+        <div className="grid grid-cols-4 p-2 gap-1">
+          <Button color="primary" variant="contained">
+            ADD
+          </Button>
+          <Button color="primary" variant="contained">
+            EDIT
+          </Button>
+          <Button color="primary" variant="contained">
+            SAVE
+          </Button>
+          <Button color="primary" variant="contained">
+            DELETE
+          </Button>
+        </div>
+        <TableContainer sx={{borderRadius:"0.4rem"}} component={Paper}>
+          <Table sx={{backgroundColor:"#f5fafa"}}>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>Feritlizer</TableCell>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>Flow (ℓ/m3)</TableCell>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>Volume (ℓ)</TableCell>
+              </TableRow>
+            </TableHead>
+            {mixRows.map((row, i) => (
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}>{row.tank}</TableCell>
+                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}><TextField variant="standard"/></TableCell>
+                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}><TextField variant="standard"/></TableCell>
+                </TableRow>
+              </TableBody>
+            ))}
+          </Table>
+        </TableContainer>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col p-3">
       <div className="align-items-center align-content-center justify-content-center p-1">
@@ -462,8 +580,25 @@ export const Control = () => {
             <ControlPanel />
           </div>
         </div>
+
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">
+            <div className="flex align-center justify-center">
+              <Button
+                onClick={() => popState(!popShow)}
+                sx={{ maxWidth: "10rem", marginTop: "1rem" }}
+                color="primary"
+                variant="contained"
+              >
+                Mix Manager
+              </Button>
+            </div>
+            {popShow ? (
+              <div className="flex align-center justify-center">
+                <MixManager />
+              </div>
+            ) : null}
+
             <div>
               <Tables />
             </div>

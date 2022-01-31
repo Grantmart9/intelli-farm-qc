@@ -21,6 +21,14 @@ import water_filter from "images/water_filter.png";
 import { useRefetch } from "../components/Timer";
 import { ProgressBar } from "@themesberg/react-bootstrap";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 10,
@@ -54,6 +62,22 @@ const BackwashItem = ({ backwash }) => {
     </div>
   );
 };
+/////////////////////////////////////////////////////////////////////////////////////////////
+const backwashdata = [
+  {
+    timestamp: "31-01-22 12:34",
+    backwashtype: "backwash valve 3",
+  },
+  {
+    timestamp: "31-01-22 12:35",
+    backwashtype: "backwash valve 4",
+  },
+  {
+    timestamp: "31-01-22 12:36",
+    backwashtype: "backwash valve 5",
+  },
+];
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 const BackwashProgress = ({ data }) => (
   <div className="bg-gray-300 rounded shadow-md p-2 flex flex-col justify-between">
@@ -104,6 +128,26 @@ export const Backwash = () => {
             <BackwashItem backwash={backwash} />
           </div>
         ))}
+      </div>
+      <div className="pl-6 pr-6">
+        <TableContainer sx={{borderRadius:"0.4rem"}} component={Paper}>
+          <Table sx={{backgroundColor:"#f5fafa"}}>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>TimeStamp</TableCell>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem"}}>Backwash Type</TableCell>
+              </TableRow>
+            </TableHead>
+            {backwashdata.map((row, i) => (
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}>{row.timestamp}</TableCell>
+                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}>{row.backwashtype}</TableCell>
+                </TableRow>
+              </TableBody>
+            ))}
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );
