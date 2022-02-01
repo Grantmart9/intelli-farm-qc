@@ -135,7 +135,7 @@ export const Backwash = () => {
             <TableHead>
               <TableRow>
                 <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>TimeStamp</TableCell>
-                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem"}}>Backwash Type</TableCell>
+                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>Backwash Type</TableCell>
               </TableRow>
             </TableHead>
             {backwashdata.map((row, i) => (
