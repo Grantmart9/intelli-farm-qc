@@ -129,26 +129,7 @@ export const Backwash = () => {
           </div>
         ))}
       </div>
-      <div className="pl-6 pr-6">
-        <TableContainer sx={{borderRadius:"0.4rem"}} component={Paper}>
-          <Table sx={{backgroundColor:"#f5fafa"}}>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>TimeStamp</TableCell>
-                <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold",fontSize:"1.5rem",fontFamily:"'Noto Sans JP', sans-serif",color:"#54548f"}}>Backwash Type</TableCell>
-              </TableRow>
-            </TableHead>
-            {backwashdata.map((row, i) => (
-              <TableBody>
-                <TableRow>
-                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}>{row.timestamp}</TableCell>
-                  <TableCell align="center" sx={{backgroundColor:"#f5fafa",fontWeight:"bold"}}>{row.backwashtype}</TableCell>
-                </TableRow>
-              </TableBody>
-            ))}
-          </Table>
-        </TableContainer>
-      </div>
+      
     </div>
   );
 };
