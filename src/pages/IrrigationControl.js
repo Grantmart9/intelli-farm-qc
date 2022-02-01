@@ -19,6 +19,7 @@ import citrus from "images/citrus.png";
 import greendrop from "images/greendrop.gif";
 import valve from "images/valve.png";
 import grapes from "images/grapes.png";
+import { normalizeUnits } from "moment";
 
 const images = {
   main_valve: valve,
@@ -54,7 +55,7 @@ const EquipmentStatus = ({ data }) => {
             Value: {data.real_time_flow}
           </div>
           {
-            (data.real_time_flow_target = null ? null : (
+            (!data.real_time_flow_target ? null : (
               <div className="text-green-800 text-lg font-bold">
                 Target: {data.real_time_flow_target}
               </div>
