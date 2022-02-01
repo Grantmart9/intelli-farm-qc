@@ -54,7 +54,7 @@ const EquipmentStatus = ({ data }) => {
             Value: {data.real_time_flow}
           </div>
           {
-            (data.real_time_flow_target = "null" ? null : (
+            (data.real_time_flow_target = null ? null : (
               <div className="text-green-800 text-lg font-bold">
                 Target: {data.real_time_flow_target}
               </div>
