@@ -36,7 +36,7 @@ const FertilizerValve = ({ valve }) => {
             Value: {valve.real_time_flow}
           </div>
           {
-            (valve.real_time_flow_target = "null" ? null : (
+            (!valve.real_time_flow_target ? null : (
               <div className="text-green-800 text-lg font-bold">
                 Target: {valve.real_time_flow_target}
               </div>
