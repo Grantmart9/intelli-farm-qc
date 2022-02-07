@@ -47,7 +47,7 @@ export const FertilizerBarChart = ({ data }) => {
                   strokeWidth: 0,
                   strokeHeight: 8,
                   strokeLineCap:"round",
-                  strokeColor: "#775DD0",
+                  strokeColor: "#de6231",
                 },
               ]
             : null,
