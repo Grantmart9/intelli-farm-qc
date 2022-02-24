@@ -597,9 +597,7 @@ const Mix = () => {
     `${prefix}/irrigation_schedule_manual`
   );
 
-  const [, postMode] = useApi(
-    ...post(`${prefix}/irrigation_schedule_manual`)
-  );
+  const [, postMode] = useApi(...post(`${prefix}/irrigation_schedule_manual`));
 
   const [New, setNew] = useState();
 
@@ -631,7 +629,7 @@ const Mix = () => {
               <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2">
                 {value.fertilizer_mix}
               </div>
-              <div className="grid grid-cols-3 gap-1">
+              <div className="flex">
                 <div style={{ display: "block" }}>
                   <div className="flex-box mb-2">
                     <div className="bg-gray-300 rounded shadow-md p-2">
@@ -849,7 +847,7 @@ const Mix = () => {
                     </Accordion>
                   </div>
                 </div>
-                <div style={{ display: "block" }}>
+                <div className="flex align-center justify-center w-56">
                   <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                       Start Times
@@ -1168,7 +1166,8 @@ const Mix = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="block  bg-gray-300 rounded shadow-md p-2">
+                  <div className="block w-20">
+                  <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                       Setpoint
                     </div>
@@ -1314,6 +1313,7 @@ const Mix = () => {
                         />
                       </div>
                     </div>
+                  </div>
                   </div>
                 </div>
               </div>
