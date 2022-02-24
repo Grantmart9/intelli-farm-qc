@@ -591,16 +591,17 @@ const Tank = ({ index, value, onChange }) => {
 };
 
 const Mix = () => {
+  const { farmId } = useParams();
+  const prefix = `/${farmId}`;
   const [{ data, loading }, refetch] = useApi(
-    `/-2147482685/irrigation_schedule_manual`
+    `${prefix}/irrigation_schedule_manual`
   );
 
   const [, postMode] = useApi(
-    ...post(`/-2147482685/irrigation_schedule_manual`)
+    ...post(`${prefix}/irrigation_schedule_manual`)
   );
 
   const [New, setNew] = useState();
-  const datas = New || defaultData;
 
   const handleSave = useCallback(() => {
     postMode({ data: New }).then(() => refetch());
