@@ -590,7 +590,7 @@ const Tank = ({ index, value, onChange }) => {
   );
 };
 
-const Mix = () => {
+const Mix = ({}) => {
   const { farmId } = useParams();
   const prefix = `/${farmId}`;
   const [{ data, loading }, refetch] = useApi(
@@ -629,8 +629,8 @@ const Mix = () => {
               <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2">
                 {value.fertilizer_mix}
               </div>
-              <div className="flex">
-                <div style={{ display: "block" }}>
+              <div className="inline md:flex align-center justify-center">
+                <div className="block md:w-36 w-fit mt-2 mr-1">
                   <div className="flex-box mb-2">
                     <div className="bg-gray-300 rounded shadow-md p-2">
                       <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
@@ -847,7 +847,7 @@ const Mix = () => {
                     </Accordion>
                   </div>
                 </div>
-                <div className="flex align-center justify-center w-56">
+                <div className="flex align-center justify-center md:w-56 w-fit mt-2 mr-1">
                   <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                       Start Times
@@ -1166,154 +1166,156 @@ const Mix = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="block w-20">
-                  <div className="bg-gray-300 rounded shadow-md p-2">
-                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
-                      Setpoint
+                  <div className="block md:w-24 w-fit mt-2">
+                    <div className="bg-gray-300 rounded shadow-md p-2">
+                      <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                        Setpoint
+                      </div>
+                      <div className="flex align-center justify-center">
+                      <div className="grid grid-rows-7 gap-2 mt-2">
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[0]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[0] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[1]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[1] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[2]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[2] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[3]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[3] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[4]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[4] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[5]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[5] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            type="number"
+                            size="small"
+                            defaultValue={value.mode_setpoint[6]}
+                            onChange={(e) => {
+                              // 1. Make a shallow copy of the array
+                              let temp_state = [...New];
+                              // 2. Make a shallow copy of the element you want to mutate
+                              let temp_element = { ...temp_state[index] };
+                              // 3. Update the property you're interested in
+                              temp_element.mode_setpoint[6] = e.target.value;
+                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                              temp_state[index] = temp_element;
+                              // 5. Set the state to our new copy
+                              setNew(temp_state);
+                              console.log(temp_state);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      </div>
                     </div>
-                    <div className="grid grid-rows-7 gap-2 mt-2">
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[0]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[0] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[1]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[1] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[2]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[2] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[3]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[3] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[4]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[4] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[5]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[5] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          type="number"
-                          size="small"
-                          defaultValue={value.mode_setpoint[6]}
-                          onChange={(e) => {
-                            // 1. Make a shallow copy of the array
-                            let temp_state = [...New];
-                            // 2. Make a shallow copy of the element you want to mutate
-                            let temp_element = { ...temp_state[index] };
-                            // 3. Update the property you're interested in
-                            temp_element.mode_setpoint[6] = e.target.value;
-                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                            temp_state[index] = temp_element;
-                            // 5. Set the state to our new copy
-                            setNew(temp_state);
-                            console.log(temp_state);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
                   </div>
                 </div>
               </div>
