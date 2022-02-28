@@ -426,8 +426,6 @@ const MixManager2 = () => {
 
   if (!New || loading) return <Preloader />;
 
-  const buttonActiveColor = "#2a58bd";
-
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
@@ -511,7 +509,6 @@ const MixManager2 = () => {
                     </div>
                   <div className="flex align-center justify-center">
                     <TextField
-                      sx={{ minWidth: "4rem" }}
                       size="small"
                       type="number"
                       defaultValue={value.ph_target}
@@ -620,8 +617,6 @@ const MixManager1 = () => {
   const [, postMode] = useApi(...post(`${prefix}/irrigation_schedule_manual`));
 
   const [New, setNew] = useState(data);
-
-  console.log(New);
 
   const handleSave = useCallback(() => {
     postMode({ data: New }).then(() => refetch());
