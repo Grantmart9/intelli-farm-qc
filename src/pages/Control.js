@@ -1371,10 +1371,6 @@ const Tables = () => {
 };
 
 export const Control = () => {
-  const { farmId } = useParams();
-  const prefix = `/-${farmId}`;
-  const [{ data, loading }, refetch] = useApi(`${prefix}/fertilizer_manager`);
-
   return (
     <div className="flex flex-col p-3">
       <div className="align-items-center align-content-center justify-content-center p-1">
