@@ -438,7 +438,8 @@ const MixManager2 = () => {
                 {value.fertilizer_mix_name}
               </div>
             </div>
-            <div className="bg-gray-400 rounded shadow-md grid grid-cols-2 gap-3 p-2">
+            <div className="grid grid-cols-2 gap-2">
+            <div className="bg-gray-400 rounded shadow-md grid grid-rows-4 gap-3 p-2">
               <div className="block">
                 <div className="flex align-center justify-center">
                   EC Enable
@@ -455,8 +456,6 @@ const MixManager2 = () => {
                   <Switch inputProps={{ "aria-label": "controlled" }} />
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-400 rounded shadow-md mt-2 p-1 grid grid-cols-2 gap-2">
               <div>
                 <span className="flex align-center justify-center">
                   pH Target
@@ -478,17 +477,19 @@ const MixManager2 = () => {
                 />
               </div>
             </div>
-            <div className="bg-gray-400 rounded shadow-md block mt-2">
+            <div className="bg-gray-400 rounded shadow-md block">
               <div className="flex align-center justify-center">
                 Fertilizer flow rates
               </div>
               {value.fertilizer_flow_rates.map((i, index) => (
                 <>
                   <div key={i} className="flex align-center justify-center p-1">
-                    <span className="mr-2">#{index}</span> <TextField size="small" type="number" />
+                    <span className="mr-2">#{index}</span>{" "}
+                    <TextField size="small" type="number" />
                   </div>
                 </>
               ))}
+            </div>
             </div>
           </div>
         ))}
