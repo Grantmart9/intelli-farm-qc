@@ -453,15 +453,14 @@ const MixManager2 = () => {
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-gray-300 rounded shadow-md grid grid-rows-4 gap-2 p-2">
               <div className="block">
-                <div className="grid grid-cols-3 gap-1">
+                <div className="block md:grid grid-cols-3 gap-1">
                   <div className="text-gray-700 font-bold text-md">
-                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
                       EC
                     </div>
                   </div>
                   <div className="flex align-center justify-center">
                     <TextField
-                      sx={{ maxWidth: "7rem" }}
                       size="small"
                       type="number"
                       defaultValue={value.ec_target}
@@ -482,7 +481,6 @@ const MixManager2 = () => {
                   </div>
                   <div className="flex align-center justify-center">
                     <Switch
-                      sx={{ color: "green" }}
                       inputProps={{ "aria-label": "controlled" }}
                       defaultChecked={value.ec_enable}
                       onClick={() => {
@@ -503,10 +501,10 @@ const MixManager2 = () => {
                 </div>
               </div>
               <div className="block mt-1">
-                <div className="grid grid-cols-3 gap-1">
-                <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
-                      pH
-                    </div>
+                <div className="block md:grid grid-cols-3 gap-1">
+                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
+                    pH
+                  </div>
                   <div className="flex align-center justify-center">
                     <TextField
                       size="small"
@@ -529,7 +527,6 @@ const MixManager2 = () => {
                   </div>
                   <div className="flex align-center justify-center">
                     <Switch
-                      sx={{ color: "green" }}
                       inputProps={{ "aria-label": "controlled" }}
                       defaultChecked={value.ph_enable}
                       onClick={() => {
@@ -552,9 +549,9 @@ const MixManager2 = () => {
             </div>
             <div className="bg-gray-300 rounded shadow-md block">
               <div className="flex align-center justify-center p-2">
-              <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
-                      Flow Rate ()
-                    </div>
+                <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                  Flow Rate (ℓ/m³)
+                </div>
               </div>
               {value.fertilizer_flow_rates.map((i, index2) => (
                 <>
@@ -562,9 +559,7 @@ const MixManager2 = () => {
                     key={index2}
                     className="flex align-center justify-center p-1"
                   >
-                    <span className="mr-2 flex align-center justify-center">
-                      #{index2}
-                    </span>{" "}
+                 
                     <TextField
                       type="number"
                       size="small"
