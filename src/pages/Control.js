@@ -439,57 +439,155 @@ const MixManager2 = () => {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-            <div className="bg-gray-400 rounded shadow-md grid grid-rows-4 gap-3 p-2">
-              <div className="block">
-                <div className="flex align-center justify-center">
-                  EC Enable
-                </div>
-                <div className="flex align-center justify-center">
-                  <Switch sx={{color:"green"}} inputProps={{ "aria-label": "controlled" }} />
-                </div>
-              </div>
-              <div className="block">
-                <div className="flex align-center justify-center">
-                  pH Enable
-                </div>
-                <div className="flex align-center justify-center">
-                  <Switch sx={{color:"green"}} inputProps={{ "aria-label": "controlled" }} />
-                </div>
-              </div>
-              <div>
-                <span className="flex align-center justify-center">
-                  pH Target
-                </span>
-                <TextField
-                  size="small"
-                  type="number"
-                  defaultValue={value.ph_target}
-                />
-              </div>
-              <div>
-                <span className="flex align-center justify-center">
-                  EC Target
-                </span>
-                <TextField
-                  size="small"
-                  type="number"
-                  defaultValue={value.ec_target}
-                />
-              </div>
-            </div>
-            <div className="bg-gray-400 rounded shadow-md block">
-              <div className="flex align-center justify-center">
-                Fertilizer flow rates
-              </div>
-              {value.fertilizer_flow_rates.map((i, index) => (
-                <>
-                  <div key={i} className="flex align-center justify-center p-1">
-                    <span className="mr-2 flex align-center jsutify-center">#{index}</span>{" "}
-                    <TextField defaultValue={i} size="small" type="number" />
+              <div className="bg-gray-400 rounded shadow-md grid grid-rows-4 gap-3 p-2">
+                <div className="block">
+                  <div className="flex align-center justify-center mb-1">
+                    <div className="text-gray-700 font-bold text-md">
+                      EC Target
+                    </div>
                   </div>
-                </>
-              ))}
+                  <div className="inline-flex">
+                    <div>
+                      <TextField
+                        sx={{ maxWidth: "7rem" }}
+                        size="small"
+                        type="number"
+                        defaultValue={value.ec_target}
+                        onChange={(e) => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ec_target = e.target.value;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <Switch
+                        sx={{ color: "green" }}
+                        inputProps={{ "aria-label": "controlled" }}
+                        defaultChecked={value.ec_enable}
+                        onClick={() => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ec_enable = !temp_element.ec_enabled;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="block">
+                  <div className="flex align-center justify-center mb-1">
+                    <div className="text-gray-700 font-bold text-md">
+                      pH Target
+                    </div>
+                  </div>
+                  <div className="inline-flex">
+                    <div>
+                      <TextField
+                        sx={{ maxWidth: "7rem" }}
+                        size="small"
+                        type="number"
+                        defaultValue={value.ph_target}
+                        onChange={(e) => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ph_target = e.target.value;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <Switch
+                        sx={{ color: "green" }}
+                        inputProps={{ "aria-label": "controlled" }}
+                        defaultChecked={value.ph_enable}
+                        onClick={() => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ph_enable = !temp_element.ph_enabled;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-400 rounded shadow-md block">
+                <div className="flex align-center justify-center">
+                  <div className="text-gray-700 font-bold text-md mt-2">
+                    Fertilizer flow rates
+                  </div>
+                </div>
+                {value.fertilizer_flow_rates.map((i, index2) => (
+                  <>
+                    <div
+                      key={index2}
+                      className="flex align-center justify-center p-1"
+                    >
+                      <span className="mr-2 flex align-center justify-center">
+                        #{index2}
+                      </span>{" "}
+                      <TextField
+                        type="number"
+                        size="small"
+                        defaultValue={i}
+                        onChange={(e) => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+
+                          // 3. Update the property you're interested in
+                          temp_element.fertilizer_flow_rates[index2] = e.target.value;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                  </>
+                ))}
+              </div>
             </div>
+            <div className="flex align-center justify-center mt-2">
+              <Button
+                onClick={handleSave}
+                variant="contained"
+                sx={{ color: "white" }}
+              >
+                Save
+              </Button>
             </div>
           </div>
         ))}
