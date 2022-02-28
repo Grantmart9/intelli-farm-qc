@@ -445,7 +445,7 @@ const MixManager2 = () => {
                   EC Enable
                 </div>
                 <div className="flex align-center justify-center">
-                  <Switch inputProps={{ "aria-label": "controlled" }} />
+                  <Switch sx={{color:"green"}} inputProps={{ "aria-label": "controlled" }} />
                 </div>
               </div>
               <div className="block">
@@ -453,7 +453,7 @@ const MixManager2 = () => {
                   pH Enable
                 </div>
                 <div className="flex align-center justify-center">
-                  <Switch inputProps={{ "aria-label": "controlled" }} />
+                  <Switch sx={{color:"green"}} inputProps={{ "aria-label": "controlled" }} />
                 </div>
               </div>
               <div>
@@ -484,8 +484,8 @@ const MixManager2 = () => {
               {value.fertilizer_flow_rates.map((i, index) => (
                 <>
                   <div key={i} className="flex align-center justify-center p-1">
-                    <span className="mr-2">#{index}</span>{" "}
-                    <TextField size="small" type="number" />
+                    <span className="mr-2 flex align-center jsutify-center">#{index}</span>{" "}
+                    <TextField defaultValue={i} size="small" type="number" />
                   </div>
                 </>
               ))}
