@@ -634,10 +634,10 @@ const MixManager1 = () => {
           <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2">
             {value.fertilizer_mix}
           </div>
-          <div className="flex align-center justify-center">
-            <div className="inline md:flex align-center justify-center">
-              <div className="flex-box md:w-36 w-56 w-fit mt-2 mr-1">
-                <div className="w-fit flex-box mb-2">
+          <div className="block md:grid grid-cols-3 gap-2">
+            <div className="flex align-center justify-center">
+              <div className="flex-box  align-center justify-center md:w-36 w-56 w-fit mt-2">
+                <div className="flex-box mb-2">
                   <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                       Mode
@@ -863,7 +863,9 @@ const MixManager1 = () => {
                   </Accordion>
                 </div>
               </div>
-              <div className="flex align-center justify-center md:w-56 w-fit mt-2 mr-1">
+            </div>
+            <div className="flex align-center justify-center">
+              <div className="flex align-center justify-center md:w-56 w-fit mt-2">
                 <div className="bg-gray-300 rounded shadow-md p-2">
                   <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                     Start Times
@@ -1181,7 +1183,9 @@ const MixManager1 = () => {
                   </div>
                 </div>
               </div>
-              <div>
+            </div>
+            <div>
+              <div className="flex align-center justify-center">
                 <div className="block md:w-24 w-fit mt-2">
                   <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
