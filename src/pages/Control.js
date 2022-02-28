@@ -252,113 +252,12 @@ const ControlGroup = ({ index, value, onChange }) => {
   return (
     <div className="mt-2">
       <div className="grid grid-cols-2 gap-2"></div>
-      <TimeControl index={index} value={value} onChange={onChange} />
+
       <Tank index={index} value={value} onChange={onChange} />
     </div>
   );
 };
 
-const TimeControl = ({ index, value, onChange }) => {
-  const [start_time, runtime, ec] = ["start_time", "runtime", "ec"].map(
-    (k) => `${k}_${zeroPad(index, 2)}`
-  );
-
-  const handleStartTime = (d) => {
-    onChange({ ...value, [start_time]: d });
-  };
-  const handleRunTime = (d) => {
-    onChange({ ...value, [runtime]: d });
-  };
-  const handleEC = (d) => {
-    onChange({ ...value, [ec]: d });
-  };
-
-  return (
-    <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell variant="head" align="center">
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "0.8rem",
-                    display: "inline-flex",
-                    fontFamily: "Nunito Sans",
-                  }}
-                >
-                  EC Setpoint |
-                </div>
-              </TableCell>
-              <TableCell variant="head" align="center">
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "0.8rem",
-                    display: "inline-flex",
-                    fontFamily: "Nunito Sans",
-                  }}
-                >
-                  Run Time |
-                </div>
-              </TableCell>
-              <TableCell variant="head" align="center">
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "0.8rem",
-                    display: "inline-flex",
-                    fontFamily: "Nunito Sans",
-                  }}
-                >
-                  Start Time |
-                </div>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableCell>
-            <div className="text-sm flex align-center justify-center">
-              <input
-                style={{ display: "flex", textAlign: "center" }}
-                variant="standard"
-                type="text"
-                value={value[ec]}
-                onChange={(e) => handleEC(e.target.value)}
-              />
-            </div>
-          </TableCell>
-          <TableCell>
-            <div className="text-sm flex align-center justify-center">
-              <input
-                style={{ display: "flex", textAlign: "center" }}
-                variant="standard"
-                type="number"
-                value={value[runtime]}
-                onChange={(e) => handleRunTime(e.target.value)}
-              />
-            </div>
-          </TableCell>
-          <TableCell>
-            <div className="text-sm flex align-center justify-center">
-              <input
-                style={{ display: "flex", textAlign: "center" }}
-                variant="standard"
-                type="datetime-local"
-                value={value[start_time]}
-                onChange={(e) => handleStartTime(e.target.value)}
-                sx={{ minWidth: 21 }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </div>
-          </TableCell>
-        </Table>
-      </TableContainer>
-    </>
-  );
-};
 const Tank = ({ index, value, onChange }) => {
   const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
     name: `${letter.toUpperCase()}-Tank `,
@@ -1485,7 +1384,7 @@ export const Control = () => {
           </div>
         </div>
         <div className="p-2">
-          <Mix FertilizerManager={data} />
+          <Mix  />
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">
