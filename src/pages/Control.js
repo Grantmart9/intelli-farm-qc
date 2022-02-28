@@ -431,21 +431,36 @@ const MixManager2 = () => {
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
-        <div key={index} className="bg-gray-300 rounded shadow-md p-3 ">
+        <div key={index} className="bg-gray-200 rounded shadow-md p-3 mt-2 ">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
-            <div className="text-gray-800 font-bold">
-              {value.fertilizer_mix_name}
-            </div>
+            <input
+              className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
+              type="text"
+              defaultValue={value.fertilizer_mix_name}
+              onChange={(e) => {
+                // 1. Make a shallow copy of the array
+                let temp_state = [...New];
+                // 2. Make a shallow copy of the element you want to mutate
+                let temp_element = { ...temp_state[index] };
+                // 3. Update the property you're interested in
+                temp_element.fertilizer_mix_name = e.target.value;
+                // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                temp_state[index] = temp_element;
+                // 5. Set the state to our new copy
+                setNew(temp_state);
+                console.log(temp_state);
+              }}
+            />
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div className="bg-gray-400 rounded shadow-md grid grid-rows-4 gap-3 p-2">
+            <div className="bg-gray-300 rounded shadow-md grid grid-rows-4 gap-2 p-2">
               <div className="block">
-                <div className="flex align-center justify-center mb-2">
+                <div className="grid grid-cols-3 gap-1">
                   <div className="text-gray-700 font-bold text-md">
-                    EC Target
+                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                      EC
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-2 gap-1">
                   <div className="flex align-center justify-center">
                     <TextField
                       sx={{ maxWidth: "7rem" }}
@@ -478,7 +493,7 @@ const MixManager2 = () => {
                         // 2. Make a shallow copy of the element you want to mutate
                         let temp_element = { ...temp_state[index] };
                         // 3. Update the property you're interested in
-                        temp_element.ec_enable = !temp_element.ec_enabled;
+                        temp_element.ec_enable = !temp_element.ec_enable;
                         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
                         temp_state[index] = temp_element;
                         // 5. Set the state to our new copy
@@ -489,16 +504,14 @@ const MixManager2 = () => {
                   </div>
                 </div>
               </div>
-              <div className="block mt-3">
-                <div className="flex align-center justify-center mb-2">
-                  <div className="text-gray-700 font-bold text-md">
-                    pH Target
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-1">
+              <div className="block mt-1">
+                <div className="grid grid-cols-3 gap-1">
+                <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                      pH
+                    </div>
                   <div className="flex align-center justify-center">
                     <TextField
-                      sx={{ maxWidth: "7rem" }}
+                      sx={{ minWidth: "4rem" }}
                       size="small"
                       type="number"
                       defaultValue={value.ph_target}
@@ -528,7 +541,7 @@ const MixManager2 = () => {
                         // 2. Make a shallow copy of the element you want to mutate
                         let temp_element = { ...temp_state[index] };
                         // 3. Update the property you're interested in
-                        temp_element.ph_enable = !temp_element.ph_enabled;
+                        temp_element.ph_enable = !temp_element.ph_enable;
                         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
                         temp_state[index] = temp_element;
                         // 5. Set the state to our new copy
@@ -540,11 +553,11 @@ const MixManager2 = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-gray-400 rounded shadow-md block">
-              <div className="flex align-center justify-center">
-                <div className="text-gray-700 font-bold text-md mt-2">
-                  flow rate
-                </div>
+            <div className="bg-gray-300 rounded shadow-md block">
+              <div className="flex align-center justify-center p-2">
+              <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                      Flow Rate ()
+                    </div>
               </div>
               {value.fertilizer_flow_rates.map((i, index2) => (
                 <>
