@@ -1366,7 +1366,7 @@ const MixManager1 = () => {
 };
 
 const Mix = () => {
-  const [pageState, setPageState] = useState(false);
+  const [pageState, setPageState] = useState(true);
 
   if (pageState) {
     var page = (
