@@ -1270,20 +1270,6 @@ const MixManager1 = () => {
 const Mix = () => {
   const [pageState, setPageState] = useState(true);
 
-  if (pageState) {
-    var page = (
-      <>
-        <MixManager1 />
-      </>
-    );
-  } else {
-    var page = (
-      <>
-        <MixManager2 />
-      </>
-    );
-  }
-
   return (
     <>
       <div className="bg-gray-300 rounded shadow-md p-2">
@@ -1297,7 +1283,7 @@ const Mix = () => {
               onChange={() => setPageState(!pageState)}
             />
           </Stack>
-          {page}
+          {pageState?<MixManager1/>:<MixManager2/>}
         </div>
       </div>
     </>
