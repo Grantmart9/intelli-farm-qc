@@ -1263,6 +1263,8 @@ const MixManager1 = () => {
 const Mix = () => {
   const [pageState, setPageState] = useState(true);
 
+
+
   return (
     <>
       <div className="bg-gray-300 rounded shadow-md p-2">
@@ -1276,7 +1278,7 @@ const Mix = () => {
               onChange={() => setPageState(!pageState)}
             />
           </Stack>
-          {pageState ? <MixManager1 /> : <MixManager2 />}
+          {pageState ? <MixManager1 /> : <MixManager2  />}
         </div>
       </div>
     </>
@@ -1305,50 +1307,6 @@ const Tab = ({ value, onChange, onSave }) => {
   );
 };
 
-const Tables = () => {
-  const { farmId } = useParams();
-  const prefix = `/-${farmId}`;
-
-  const [{ data, loading }, refetch] = useApi(
-    `/${farmId}/manual_datetime_settings`
-  );
-
-  useRefetch(refetch);
-
-  const [, postMode] = useApi(...post(`${prefix}/manual_datetime_settings`));
-
-  const [value, setValue] = useState(null);
-  useEffect(() => {
-    if (data) {
-      setValue(data);
-    }
-  }, [data]);
-
-  const handleSave = useCallback(() => {
-    postMode({ data: value }).then(() => refetch());
-  }, [value]);
-
-  const handleChange = useCallback(
-    (datum) => {
-      const { index } = datum;
-      setValue(setAt(value, index, datum));
-    },
-    [value]
-  );
-
-  if (!value) return <Preloader />;
-
-  return value.map((datum, i) => (
-    <div key={i} className="block ">
-      <Tab
-        value={{ ...datum, index: i }}
-        onChange={handleChange}
-        onSave={handleSave}
-      />
-    </div>
-  ));
-};
-
 export const Control = () => {
   return (
     <div className="flex flex-col p-3">
@@ -1360,13 +1318,6 @@ export const Control = () => {
         </div>
         <div className="p-2">
           <Mix />
-        </div>
-        <div className="p-2">
-          <div className="bg-gray-400 rounded shadow-md p-2">
-            <div>
-              <Tables />
-            </div>
-          </div>
         </div>
       </div>
     </div>
