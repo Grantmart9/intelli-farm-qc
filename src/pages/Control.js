@@ -328,7 +328,7 @@ const MixManager2 = () => {
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
-        <div key={index} className="bg-gray-200 rounded shadow-md p-3 mt-2 ">
+        <div key={index} className="bg-gray-200 rounded shadow-md mt-2 ">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
             <input
               className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
@@ -350,7 +350,7 @@ const MixManager2 = () => {
             />
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div className="bg-gray-300 rounded shadow-md grid grid-rows-4 gap-2 p-2">
+            <div className="bg-gray-300 rounded shadow-md grid grid-rows-2 gap-2 p-2">
               <div className="block">
                 <div className="block md:grid grid-cols-3 gap-1">
                   <div className="text-gray-700 font-bold text-md">
@@ -458,7 +458,6 @@ const MixManager2 = () => {
                     key={index2}
                     className="flex align-center justify-center p-1"
                   >
-                 
                     <TextField
                       type="number"
                       size="small"
@@ -527,7 +526,7 @@ const MixManager1 = () => {
   const buttonActiveColor = "#2a58bd";
 
   return (
-    <div className="block md:grid grid-cols-2 gap-4">
+    <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
         <div key={index} className="bg-gray-200 rounded shadow-md mb-2 p-1">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
@@ -537,237 +536,231 @@ const MixManager1 = () => {
             {value.fertilizer_mix}
           </div>
           <div className="block md:grid grid-cols-3 gap-2">
-            <div className="flex align-center justify-center">
-              <div className="flex-box  align-center justify-center md:w-36 w-56 w-fit mt-2">
-                <div className="flex-box mb-2">
-                  <div className="bg-gray-300 rounded shadow-md p-2">
-                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
-                      Mode
-                    </div>
-                    <div className="grid grid-cols-2 gap-1 mt-2">
-                      <Button
-                        sx={{
-                          backgroundColor:
-                            New[index].mode == "Time"
-                              ? buttonActiveColor
-                              : "gray",
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.mode = "Time";
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Time
-                      </Button>
-                      <Button
-                        sx={{
-                          backgroundColor:
-                            New[index].mode == "Time"
-                              ? "gray"
-                              : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.mode = "Volume";
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Volume
-                      </Button>
-                    </div>
-                  </div>
+            <div className="block md:m-auto md:w-36 w-fit mt-2">
+              <div className="bg-gray-300 rounded shadow-md p-2">
+                <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                  Mode
                 </div>
-                <div className="bg-gray-300 rounded shadow-md p-2">
-                  <Accordion sx={{ background: "#f7f5f5" }}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography>
-                        <div className="text-gray-700 font-bold">Mixes</div>
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        <div key={index} className="grid grid-rows mb-1">
-                          <Button
-                            sx={{
-                              backgroundColor:
-                                New[index].fertilizer_mix ==
-                                New[index].fertilizer_mix_names[0]
-                                  ? buttonActiveColor
-                                  : "gray",
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              // 1. Make a shallow copy of the array
-                              let temp_state = [...New];
-                              // 2. Make a shallow copy of the element you want to mutate
-                              let temp_element = {
-                                ...temp_state[index],
-                              };
-                              // 3. Update the property you're interested in
-                              temp_element.fertilizer_mix =
-                                value.fertilizer_mix_names[0];
-                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                              temp_state[index] = temp_element;
-                              // 5. Set the state to our new copy
-                              setNew(temp_state);
-                              console.log(temp_state);
-                            }}
-                          >
-                            {value.fertilizer_mix_names[0]}
-                          </Button>
-                          <Button
-                            sx={{
-                              marginTop: "0.2rem",
-                              backgroundColor:
-                                New[index].fertilizer_mix ==
-                                New[index].fertilizer_mix_names[1]
-                                  ? buttonActiveColor
-                                  : "gray",
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              // 1. Make a shallow copy of the array
-                              let temp_state = [...New];
-                              // 2. Make a shallow copy of the element you want to mutate
-                              let temp_element = {
-                                ...temp_state[index],
-                              };
-                              // 3. Update the property you're interested in
-                              temp_element.fertilizer_mix =
-                                value.fertilizer_mix_names[1];
-                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                              temp_state[index] = temp_element;
-                              // 5. Set the state to our new copy
-                              setNew(temp_state);
-                              console.log(temp_state);
-                            }}
-                          >
-                            {value.fertilizer_mix_names[1]}
-                          </Button>
-                          <Button
-                            sx={{
-                              marginTop: "0.2rem",
-                              backgroundColor:
-                                New[index].fertilizer_mix ==
-                                New[index].fertilizer_mix_names[2]
-                                  ? buttonActiveColor
-                                  : "gray",
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              // 1. Make a shallow copy of the array
-                              let temp_state = [...New];
-                              // 2. Make a shallow copy of the element you want to mutate
-                              let temp_element = {
-                                ...temp_state[index],
-                              };
-                              // 3. Update the property you're interested in
-                              temp_element.fertilizer_mix =
-                                value.fertilizer_mix_names[2];
-                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                              temp_state[index] = temp_element;
-                              // 5. Set the state to our new copy
-                              setNew(temp_state);
-                              console.log(temp_state);
-                            }}
-                          >
-                            {value.fertilizer_mix_names[2]}
-                          </Button>
-                          <Button
-                            sx={{
-                              marginTop: "0.2rem",
-                              backgroundColor:
-                                New[index].fertilizer_mix ==
-                                New[index].fertilizer_mix_names[3]
-                                  ? buttonActiveColor
-                                  : "gray",
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              // 1. Make a shallow copy of the array
-                              let temp_state = [...New];
-                              // 2. Make a shallow copy of the element you want to mutate
-                              let temp_element = {
-                                ...temp_state[index],
-                              };
-                              // 3. Update the property you're interested in
-                              temp_element.fertilizer_mix =
-                                value.fertilizer_mix_names[3];
-                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                              temp_state[index] = temp_element;
-                              // 5. Set the state to our new copy
-                              setNew(temp_state);
-                              console.log(temp_state);
-                            }}
-                          >
-                            {value.fertilizer_mix_names[3]}
-                          </Button>
-                          <Button
-                            sx={{
-                              marginTop: "0.2rem",
-                              backgroundColor:
-                                New[index].fertilizer_mix ==
-                                New[index].fertilizer_mix_names[4]
-                                  ? buttonActiveColor
-                                  : "gray",
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                              // 1. Make a shallow copy of the array
-                              let temp_state = [...New];
-                              // 2. Make a shallow copy of the element you want to mutate
-                              let temp_element = {
-                                ...temp_state[index],
-                              };
-                              // 3. Update the property you're interested in
-                              temp_element.fertilizer_mix =
-                                value.fertilizer_mix_names[4];
-                              // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                              temp_state[index] = temp_element;
-                              // 5. Set the state to our new copy
-                              setNew(temp_state);
-                              console.log(temp_state);
-                            }}
-                          >
-                            {value.fertilizer_mix_names[4]}
-                          </Button>
-                        </div>
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
+                <div className="grid grid-cols-2 gap-1 mt-2">
+                  <Button
+                    sx={{
+                      backgroundColor:
+                        New[index].mode == "Time" ? buttonActiveColor : "gray",
+                    }}
+                    variant="contained"
+                    onClick={() => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.mode = "Time";
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                      console.log(temp_state);
+                    }}
+                  >
+                    Time
+                  </Button>
+                  <Button
+                    sx={{
+                      backgroundColor:
+                        New[index].mode == "Time" ? "gray" : buttonActiveColor,
+                    }}
+                    variant="contained"
+                    onClick={() => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.mode = "Volume";
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                      console.log(temp_state);
+                    }}
+                  >
+                    Volume
+                  </Button>
                 </div>
               </div>
+
+              <div className="bg-gray-300 rounded shadow-md p-2 mt-2">
+                <Accordion sx={{ background: "#f7f5f5" }}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>
+                      <div className="text-gray-700 font-bold">Mixes</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <div key={index} className="grid grid-rows mb-1">
+                        <Button
+                          sx={{
+                            backgroundColor:
+                              New[index].fertilizer_mix ==
+                              New[index].fertilizer_mix_names[0]
+                                ? buttonActiveColor
+                                : "gray",
+                          }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = {
+                              ...temp_state[index],
+                            };
+                            // 3. Update the property you're interested in
+                            temp_element.fertilizer_mix =
+                              value.fertilizer_mix_names[0];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          {value.fertilizer_mix_names[0]}
+                        </Button>
+                        <Button
+                          sx={{
+                            marginTop: "0.2rem",
+                            backgroundColor:
+                              New[index].fertilizer_mix ==
+                              New[index].fertilizer_mix_names[1]
+                                ? buttonActiveColor
+                                : "gray",
+                          }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = {
+                              ...temp_state[index],
+                            };
+                            // 3. Update the property you're interested in
+                            temp_element.fertilizer_mix =
+                              value.fertilizer_mix_names[1];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          {value.fertilizer_mix_names[1]}
+                        </Button>
+                        <Button
+                          sx={{
+                            marginTop: "0.2rem",
+                            backgroundColor:
+                              New[index].fertilizer_mix ==
+                              New[index].fertilizer_mix_names[2]
+                                ? buttonActiveColor
+                                : "gray",
+                          }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = {
+                              ...temp_state[index],
+                            };
+                            // 3. Update the property you're interested in
+                            temp_element.fertilizer_mix =
+                              value.fertilizer_mix_names[2];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          {value.fertilizer_mix_names[2]}
+                        </Button>
+                        <Button
+                          sx={{
+                            marginTop: "0.2rem",
+                            backgroundColor:
+                              New[index].fertilizer_mix ==
+                              New[index].fertilizer_mix_names[3]
+                                ? buttonActiveColor
+                                : "gray",
+                          }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = {
+                              ...temp_state[index],
+                            };
+                            // 3. Update the property you're interested in
+                            temp_element.fertilizer_mix =
+                              value.fertilizer_mix_names[3];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          {value.fertilizer_mix_names[3]}
+                        </Button>
+                        <Button
+                          sx={{
+                            marginTop: "0.2rem",
+                            backgroundColor:
+                              New[index].fertilizer_mix ==
+                              New[index].fertilizer_mix_names[4]
+                                ? buttonActiveColor
+                                : "gray",
+                          }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = {
+                              ...temp_state[index],
+                            };
+                            // 3. Update the property you're interested in
+                            temp_element.fertilizer_mix =
+                              value.fertilizer_mix_names[4];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          {value.fertilizer_mix_names[4]}
+                        </Button>
+                      </div>
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </div>
             </div>
-            <div className="flex align-center justify-center">
-              <div className="flex align-center justify-center md:w-56 w-fit mt-2">
+
+            <div className="block align-center justify-center">
+              <div className="block md:m-auto md:w-56 w-fit mt-2">
                 <div className="bg-gray-300 rounded shadow-md p-2">
                   <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                     Start Times
@@ -1087,8 +1080,8 @@ const MixManager1 = () => {
               </div>
             </div>
             <div>
-              <div className="flex align-center justify-center">
-                <div className="block md:w-24 w-fit mt-2">
+              <div className="block align-center justify-center">
+                <div className="block md:m-auto md:w-24 w-fit mt-2">
                   <div className="bg-gray-300 rounded shadow-md p-2">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                       Setpoint
@@ -1258,7 +1251,7 @@ const MixManager1 = () => {
           </div>
           <div className="flex align-center justify-center mt-2 mb-3">
             <Button variant="contained" color="primary" onClick={handleSave}>
-              Save Changes
+              Save
             </Button>
           </div>
         </div>
@@ -1283,7 +1276,7 @@ const Mix = () => {
               onChange={() => setPageState(!pageState)}
             />
           </Stack>
-          {pageState?<MixManager1/>:<MixManager2/>}
+          {pageState ? <MixManager1 /> : <MixManager2 />}
         </div>
       </div>
     </>
@@ -1366,7 +1359,7 @@ export const Control = () => {
           </div>
         </div>
         <div className="p-2">
-          <Mix  />
+          <Mix />
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">
