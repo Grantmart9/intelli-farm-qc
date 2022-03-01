@@ -475,7 +475,7 @@ const MixManager1 = () => {
             {value.fertilizer_mix}
           </div>
           <div className="block md:flex align-center justify-center ">
-            <div className="block md:m-auto md:w-36 w-fit mt-2">
+            <div className="block md:m-auto md:w-36 w-fit mt-2 ">
               <div className="bg-gray-300 rounded shadow-md p-2 md:-mx-4">
                 <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                   Mode
