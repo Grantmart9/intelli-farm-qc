@@ -328,7 +328,7 @@ const MixManager2 = () => {
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
-        <div key={index} className="bg-gray-200 rounded shadow-md mt-2 ">
+        <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
             <input
               className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
@@ -349,9 +349,9 @@ const MixManager2 = () => {
               }}
             />
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-4 p-2">
             <div className="bg-gray-300 rounded shadow-md grid grid-rows-2 gap-2 p-2">
-              <div className="block">
+              <div className="block my-auto">
                 <div className="block md:grid grid-cols-3 gap-1">
                   <div className="text-gray-700 font-bold text-md">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
@@ -399,7 +399,7 @@ const MixManager2 = () => {
                   </div>
                 </div>
               </div>
-              <div className="block mt-1">
+              <div className="block my-auto mt-1">
                 <div className="block md:grid grid-cols-3 gap-1">
                   <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
                     pH
@@ -483,7 +483,7 @@ const MixManager2 = () => {
               ))}
             </div>
           </div>
-          <div className="flex align-center justify-center mt-2">
+          <div className="flex align-center justify-center mb-3 mt-3">
             <Button
               onClick={handleSave}
               variant="contained"
