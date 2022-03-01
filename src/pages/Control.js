@@ -22,9 +22,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { setAt } from "immutable";
 import TextField from "@mui/material/TextField";
-import TimePicker from "react-time-picker";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -34,12 +32,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Switch from "@mui/material/Switch";
-
-import axios from "axios";
-import zIndex from "@material-ui/core/styles/zIndex";
-
-const baseURL =
-  "https://lodicon-api-qc.herokuapp.com/api/v1/-2147482685/irrigation_schedule_manual";
 
 const ControlPanel = ({}) => {
   const { farmId } = useParams();
@@ -246,60 +238,6 @@ const usePost = (handle, refetch, set) =>
     [handle, refetch, set]
   );
 
-const zeroPad = (number, zeros) => number.toString().padStart(zeros, "0");
-
-const ControlGroup = ({ index, value, onChange }) => {
-  return (
-    <div className="mt-2">
-      <div className="grid grid-cols-2 gap-2"></div>
-
-      <Tank index={index} value={value} onChange={onChange} />
-    </div>
-  );
-};
-
-const Tank = ({ index, value, onChange }) => {
-  const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
-    name: `${letter.toUpperCase()}-Tank `,
-    field: `tank_${letter}_flow_${zeroPad(index, 2)}`,
-  }));
-
-  const handleFlowRate = (field, d) => {
-    onChange({ ...value, [field]: d });
-  };
-
-  return (
-    <div>
-      <div className="bg-blue-200 align-center text-md text-gray-900 justify-center flex font-bold">
-        <div style={{ fontFamily: "Nunito Sans" }}>Fertilizer</div>
-      </div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Flow rate ℓ/m³</TableCell>
-            </TableRow>
-            {tanks.map((tank, i) => (
-              <TableRow key={i}>
-                <TableCell>{tank.name}</TableCell>
-                <TableCell align="right">
-                  <input
-                    type="text"
-                    className="text-right"
-                    value={value[tank.field]}
-                    onChange={(e) => handleFlowRate(tank.field, e.target.value)}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableHead>
-        </Table>
-      </TableContainer>
-    </div>
-  );
-};
-
 const MixManager2 = () => {
   const { farmId } = useParams();
 
@@ -453,7 +391,7 @@ const MixManager2 = () => {
                 </div>
               </div>
               {value.fertilizer_flow_rates.map((i, index2) => (
-                <>
+                
                   <div
                     key={index2}
                     className="flex align-center justify-center p-1"
@@ -479,7 +417,7 @@ const MixManager2 = () => {
                       }}
                     />
                   </div>
-                </>
+              
               ))}
             </div>
           </div>
@@ -528,7 +466,7 @@ const MixManager1 = () => {
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
-        <div key={index} className="bg-gray-200 rounded shadow-md mb-2 p-1">
+        <div key={index} className="bg-gray-200 rounded shadow-md mb-2 p-1 mt-2">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
             <div className="text-gray-800 font-bold">{value.block_name}</div>
           </div>
@@ -1263,8 +1201,6 @@ const MixManager1 = () => {
 const Mix = () => {
   const [pageState, setPageState] = useState(true);
 
-
-
   return (
     <>
       <div className="bg-gray-300 rounded shadow-md p-2">
@@ -1278,32 +1214,10 @@ const Mix = () => {
               onChange={() => setPageState(!pageState)}
             />
           </Stack>
-          {pageState ? <MixManager1 /> : <MixManager2  />}
+          {pageState ? <MixManager1 /> : <MixManager2 />}
         </div>
       </div>
     </>
-  );
-};
-
-const Tab = ({ value, onChange, onSave }) => {
-  const CONTROL_GROUPS = [1, 2, 3, 4];
-
-  return (
-    <div className="px-2 pb-2">
-      <div className="flex align-center justify-center p-2 rounded mb-2">
-        <Button onClick={() => onSave()} color="primary" variant="contained">
-          Save
-        </Button>
-      </div>
-      {CONTROL_GROUPS.map((i) => (
-        <ControlGroup
-          key={i}
-          index={i}
-          value={value}
-          onChange={(d) => onChange(d)}
-        />
-      ))}
-    </div>
   );
 };
 
