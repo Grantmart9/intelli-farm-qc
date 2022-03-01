@@ -267,7 +267,7 @@ const MixManager2 = () => {
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
         <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
-          <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
+          <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 ">
             <input
               className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
               type="text"
@@ -291,12 +291,12 @@ const MixManager2 = () => {
             <div className="bg-gray-300 rounded shadow-md grid grid-rows-2 gap-2 p-2">
               <div className="block my-auto">
                 <div className="block md:grid grid-cols-3 gap-1">
-                  <div className="text-gray-700 font-bold text-md">
+                  <div className="text-gray-700 font-bold text-md my-auto">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
                       EC
                     </div>
                   </div>
-                  <div className="flex align-center justify-center">
+                  <div className="flex align-center justify-center my-auto">
                     <TextField
                       size="small"
                       type="number"
@@ -342,7 +342,7 @@ const MixManager2 = () => {
                   <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2 md:mb-0">
                     pH
                   </div>
-                  <div className="flex align-center justify-center">
+                  <div className="flex align-center justify-center my-auto">
                     <TextField
                       size="small"
                       type="number"
@@ -391,33 +391,31 @@ const MixManager2 = () => {
                 </div>
               </div>
               {value.fertilizer_flow_rates.map((i, index2) => (
-                
-                  <div
-                    key={index2}
-                    className="flex align-center justify-center p-1"
-                  >
-                    <TextField
-                      type="number"
-                      size="small"
-                      defaultValue={i}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
+                <div
+                  key={index2}
+                  className="flex align-center justify-center p-1 pb-2"
+                >
+                  <TextField
+                    type="number"
+                    size="small"
+                    defaultValue={i}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
 
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[index2] =
-                          e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-              
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[index2] =
+                        e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                      console.log(temp_state);
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -466,16 +464,19 @@ const MixManager1 = () => {
   return (
     <div className="block md:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
-        <div key={index} className="bg-gray-200 rounded shadow-md mb-2 p-1 mt-2">
+        <div
+          key={index}
+          className="bg-gray-200 rounded shadow-md mb-2 p-1 mt-2"
+        >
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 mb-2">
             <div className="text-gray-800 font-bold">{value.block_name}</div>
           </div>
           <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold mb-2">
             {value.fertilizer_mix}
           </div>
-          <div className="block md:grid grid-cols-3 gap-2">
-            <div className="block md:m-auto md:w-36 w-fit mt-2">
-              <div className="bg-gray-300 rounded shadow-md p-2">
+          <div className="block md:flex align-center justify-center ">
+            <div className="block md:m-auto md:w-36 w-fit mt-2 ">
+              <div className="bg-gray-300 rounded shadow-md p-2 md:-mx-4">
                 <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
                   Mode
                 </div>
@@ -526,8 +527,7 @@ const MixManager1 = () => {
                   </Button>
                 </div>
               </div>
-
-              <div className="bg-gray-300 rounded shadow-md p-2 mt-2">
+              <div className="bg-gray-300 rounded shadow-md p-2 mt-2 md:-mx-4">
                 <Accordion sx={{ background: "#f7f5f5" }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -696,328 +696,327 @@ const MixManager1 = () => {
                 </Accordion>
               </div>
             </div>
-
-            <div className="block align-center justify-center">
-              <div className="block md:m-auto md:w-56 w-fit mt-2">
-                <div className="bg-gray-300 rounded shadow-md p-2">
-                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
-                    Start Times
-                  </div>
-                  <div className="grid rows-1 gap-1 mt-2">
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[0]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[0] =
-                            !temp_element.start_days_array[0];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                        defaultValue={value.start_days_array[0]}
-                      >
-                        Mon
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[0]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[0] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
+            <div className="grid 3xl:grid sm:grid-cols-2">
+              <div className="block align-center justify-center">
+                <div className="block md:m-auto md:w-56 w-fit mt-2">
+                  <div className="bg-gray-300 rounded shadow-md p-2">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold">
+                      Start Times
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[1]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[1] =
-                            !temp_element.start_days_array[1];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Tue
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[1]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[1] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[2]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[2] =
-                            !temp_element.start_days_array[2];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Wed
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[2]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[2] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[3]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[3] =
-                            !temp_element.start_days_array[3];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Thu
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[3]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[3] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[4]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[4] =
-                            !temp_element.start_days_array[4];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Fri
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[4]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[4] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[5]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[5] =
-                            !temp_element.start_days_array[5];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Sat
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[5]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[5] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button
-                        sx={{
-                          backgroundColor: New[index].start_days_array[6]
-                            ? "gray"
-                            : buttonActiveColor,
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_days_array[6] =
-                            !temp_element.start_days_array[6];
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      >
-                        Sun
-                      </Button>
-                      <TextField
-                        type="time"
-                        size="small"
-                        defaultValue={value.start_times_array[6]}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.start_times_array[6] = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
+                    <div className="grid rows-1 gap-1 mt-2">
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[0]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[0] =
+                              !temp_element.start_days_array[0];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                          defaultValue={value.start_days_array[0]}
+                        >
+                          Mon
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[0]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[0] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[1]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[1] =
+                              !temp_element.start_days_array[1];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Tue
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[1]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[1] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[2]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[2] =
+                              !temp_element.start_days_array[2];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Wed
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[2]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[2] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[3]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[3] =
+                              !temp_element.start_days_array[3];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Thu
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[3]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[3] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[4]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[4] =
+                              !temp_element.start_days_array[4];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Fri
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[4]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[4] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[5]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[5] =
+                              !temp_element.start_days_array[5];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Sat
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[5]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[5] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button
+                          sx={{
+                            backgroundColor: New[index].start_days_array[6]
+                              ? "gray"
+                              : buttonActiveColor,
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_days_array[6] =
+                              !temp_element.start_days_array[6];
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        >
+                          Sun
+                        </Button>
+                        <TextField
+                          type="time"
+                          size="small"
+                          defaultValue={value.start_times_array[6]}
+                          onChange={(e) => {
+                            // 1. Make a shallow copy of the array
+                            let temp_state = [...New];
+                            // 2. Make a shallow copy of the element you want to mutate
+                            let temp_element = { ...temp_state[index] };
+                            // 3. Update the property you're interested in
+                            temp_element.start_times_array[6] = e.target.value;
+                            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                            temp_state[index] = temp_element;
+                            // 5. Set the state to our new copy
+                            setNew(temp_state);
+                            console.log(temp_state);
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
               <div className="block align-center justify-center">
                 <div className="block md:m-auto md:w-24 w-fit mt-2">
                   <div className="bg-gray-300 rounded shadow-md p-2">
