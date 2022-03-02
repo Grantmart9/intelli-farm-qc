@@ -265,7 +265,7 @@ const MixManager2 = () => {
   if (!New || loading) return <Preloader />;
 
   return (
-    <div className="block md:grid grid-cols-2 gap-2">
+    <div className="grid-rows sm:grid sm:grid-cols-2 gap-2">
       {New.map((value, index) => (
         <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 ">
@@ -288,7 +288,7 @@ const MixManager2 = () => {
               }}
             />
           </div>
-          <div className="sm:grid grid-cols-2 gap-2 p-1 ">
+          <div className="grid grid-cols-2 gap-2 p-1 ">
             <div className="block sm:grid grid-rows-2 gap-1">
               <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
                 <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
@@ -329,6 +329,7 @@ const MixManager2 = () => {
                     <Switch
                       inputProps={{ "aria-label": "controlled" }}
                       defaultChecked={value.ec_enable}
+                     
                       onClick={() => {
                         // 1. Make a shallow copy of the array
                         let temp_state = [...New];
@@ -618,7 +619,7 @@ const MixManager1 = () => {
   const buttonActiveColor = "#2a58bd";
 
   return (
-    <div className="block md:grid grid-cols-2 gap-2">
+    <div className="block lg:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
         <div
           key={index}
