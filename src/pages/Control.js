@@ -288,15 +288,15 @@ const MixManager2 = () => {
             />
           </div>
           <div className="grid grid-cols-2 gap-2 p-1">
-            <div className="bg-gray-300 rounded shadow-md grid grid-rows-2 gap-1 p-2">
-              <div className="block m-auto">
+            <div className="grid grid-rows-2 gap-1">
+              <div className="bg-gray-300 rounded shadow-md p-1">
                 <div className="block text-gray-700 font-bold text-md">
                   <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
                     EC
                   </div>
                 </div>
                 <div className="block md:grid grid-cols-2 gap-1 mt-4">
-                  <div className="block m-auto">
+                  <div className="flex align-center justify-center">
                     <TextField
                       size="small"
                       type="number"
@@ -338,55 +338,58 @@ const MixManager2 = () => {
                 </div>
               </div>
 
-              <div className="block m-auto">
-                <div className="block text-gray-700 font-bold text-md">
-                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
-                    pH
+              <div className="bg-gray-300 rounded shadow-md p-1">
+                <div className="block m-auto">
+                  <div className="block text-gray-700 font-bold text-md">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                      pH
+                    </div>
                   </div>
-                </div>
-                <div className="block md:grid grid-cols-2 gap-1 mt-4">
-                  <div className="block m-auto">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.ph_target}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ph_target = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center">
-                    <Switch
-                      inputProps={{ "aria-label": "controlled" }}
-                      defaultChecked={value.ph_enable}
-                      onClick={() => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ph_enable = !temp_element.ph_enable;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
+                  <div className="block md:grid grid-cols-2 gap-1 mt-4">
+                    <div className="flex align-center justify-center">
+                      <TextField
+                        size="small"
+                        type="number"
+                        defaultValue={value.ph_target}
+                        onChange={(e) => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ph_target = e.target.value;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
+                    <div className="flex align-center justify-center">
+                      <Switch
+                        inputProps={{ "aria-label": "controlled" }}
+                        defaultChecked={value.ph_enable}
+                        onClick={() => {
+                          // 1. Make a shallow copy of the array
+                          let temp_state = [...New];
+                          // 2. Make a shallow copy of the element you want to mutate
+                          let temp_element = { ...temp_state[index] };
+                          // 3. Update the property you're interested in
+                          temp_element.ph_enable = !temp_element.ph_enable;
+                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                          temp_state[index] = temp_element;
+                          // 5. Set the state to our new copy
+                          setNew(temp_state);
+                          console.log(temp_state);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="bg-gray-300 rounded shadow-md block">
               <div className="flex align-center justify-center p-2">
                 <div className="bg-gray-500 rounded shadow-md p-2 md:text-md text-xs flex align-center justify-center text-gray-700 font-bold">
