@@ -265,7 +265,7 @@ const MixManager2 = () => {
   if (!New || loading) return <Preloader />;
 
   return (
-    <div className="grid-rows sm:grid sm:grid-cols-2 gap-2">
+    <div className="block lg:grid grid-cols-2 gap-2">
       {New.map((value, index) => (
         <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
           <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 ">
