@@ -406,7 +406,7 @@ const MixManager2 = () => {
             </div>
             <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
                 <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
-                  <div className="block text-gray-700 font-bold text-md">
+                  <div className="block text-gray-600 font-bold text-md">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
                       Flow Rate (ℓ/m3)
                     </div>
