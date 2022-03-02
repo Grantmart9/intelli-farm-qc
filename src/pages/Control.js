@@ -25,6 +25,7 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import InputAdornment from '@mui/material/InputAdornment';
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -301,6 +302,9 @@ const MixManager2 = () => {
                       size="small"
                       type="number"
                       defaultValue={value.ec_target}
+                      InputProps={{
+                        endAdornment: <InputAdornment positionStart="end">µS</InputAdornment>,
+                      }}
                       onChange={(e) => {
                         // 1. Make a shallow copy of the array
                         let temp_state = [...New];
@@ -351,6 +355,9 @@ const MixManager2 = () => {
                         size="small"
                         type="number"
                         defaultValue={value.ph_target}
+                        InputProps={{
+                          endAdornment: <InputAdornment positionStart="end">pH</InputAdornment>,
+                        }}
                         onChange={(e) => {
                           // 1. Make a shallow copy of the array
                           let temp_state = [...New];
@@ -751,6 +758,7 @@ const MixManager1 = () => {
                         type="time"
                         size="small"
                         defaultValue={value.start_times_array[0]}
+                        
                         onChange={(e) => {
                           // 1. Make a shallow copy of the array
                           let temp_state = [...New];
@@ -1047,6 +1055,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[0]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
