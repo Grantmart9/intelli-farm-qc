@@ -1080,6 +1080,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[1]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
@@ -1102,6 +1105,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[2]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
@@ -1124,6 +1130,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[3]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
@@ -1146,6 +1155,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[4]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
@@ -1168,6 +1180,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[5]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
@@ -1190,6 +1205,9 @@ const MixManager1 = () => {
                             type="number"
                             size="small"
                             defaultValue={value.mode_setpoint[6]}
+                            InputProps={{
+                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                            }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
                               let temp_state = [...New];
