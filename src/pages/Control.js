@@ -288,7 +288,7 @@ const MixManager2 = () => {
               }}
             />
           </div>
-          <div className="grid grid-cols-2 gap-2 p-1">
+          <div className="block sm:grid grid-cols-2 gap-2 p-1 ">
             <div className="grid grid-rows-2 gap-1">
               <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
                 <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
@@ -346,8 +346,7 @@ const MixManager2 = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1 mb-2 sm:mb-0 ">
                 <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
                   <div className="block text-gray-700 font-bold text-md">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
