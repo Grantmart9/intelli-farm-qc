@@ -25,7 +25,7 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import InputAdornment from '@mui/material/InputAdornment';
+import InputAdornment from "@mui/material/InputAdornment";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -290,20 +290,24 @@ const MixManager2 = () => {
           </div>
           <div className="grid grid-cols-2 gap-2 p-1">
             <div className="grid grid-rows-2 gap-1">
-              <div className="bg-gray-300 rounded shadow-md p-1">
-                <div className="block text-gray-700 font-bold text-md">
-                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
-                    EC
+              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
+                  <div className="block text-gray-700 font-bold text-md">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                      EC
+                    </div>
                   </div>
-                </div>
-                <div className="block md:grid grid-cols-2 gap-1 mt-4">
-                  <div className="flex align-center justify-center">
+                  <div className="flex align-center justify-center mt-3">
                     <TextField
                       size="small"
                       type="number"
                       defaultValue={value.ec_target}
                       InputProps={{
-                        endAdornment: <InputAdornment positionStart="end">µS</InputAdornment>,
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            µS
+                          </InputAdornment>
+                        ),
                       }}
                       onChange={(e) => {
                         // 1. Make a shallow copy of the array
@@ -320,6 +324,7 @@ const MixManager2 = () => {
                       }}
                     />
                   </div>
+
                   <div className="flex align-center justify-center">
                     <Switch
                       inputProps={{ "aria-label": "controlled" }}
@@ -342,95 +347,234 @@ const MixManager2 = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-300 rounded shadow-md p-1">
-                <div className="block m-auto">
+              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
                   <div className="block text-gray-700 font-bold text-md">
                     <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
                       pH
                     </div>
                   </div>
-                  <div className="block md:grid grid-cols-2 gap-1 mt-4">
-                    <div className="flex align-center justify-center">
-                      <TextField
-                        size="small"
-                        type="number"
-                        defaultValue={value.ph_target}
-                        InputProps={{
-                          endAdornment: <InputAdornment positionStart="end">pH</InputAdornment>,
-                        }}
-                        onChange={(e) => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.ph_target = e.target.value;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
-                    <div className="flex align-center justify-center">
-                      <Switch
-                        inputProps={{ "aria-label": "controlled" }}
-                        defaultChecked={value.ph_enable}
-                        onClick={() => {
-                          // 1. Make a shallow copy of the array
-                          let temp_state = [...New];
-                          // 2. Make a shallow copy of the element you want to mutate
-                          let temp_element = { ...temp_state[index] };
-                          // 3. Update the property you're interested in
-                          temp_element.ph_enable = !temp_element.ph_enable;
-                          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                          temp_state[index] = temp_element;
-                          // 5. Set the state to our new copy
-                          setNew(temp_state);
-                          console.log(temp_state);
-                        }}
-                      />
-                    </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.ph_target}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            pH
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ph_target = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex align-center justify-center">
+                    <Switch
+                      inputProps={{ "aria-label": "controlled" }}
+                      defaultChecked={value.ph_enable}
+                      onClick={() => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ph_enable = !temp_element.ph_enable;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="bg-gray-300 rounded shadow-md block">
-              <div className="flex align-center justify-center p-2">
-                <div className="bg-gray-500 rounded shadow-md p-2 md:text-md text-xs flex align-center justify-center text-gray-700 font-bold">
-                  Flow Rate (ℓ/m³)
+            <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
+                  <div className="block text-gray-700 font-bold text-md">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                      Flow Rate (ℓ/m3)
+                    </div>
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[0]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[0] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[1]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[1] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[2]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[2] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[3]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[3] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[4]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[4] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.fertilizer_flow_rates[5]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            ℓ/m3
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.fertilizer_flow_rates[5] = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                        console.log(temp_state);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-              {value.fertilizer_flow_rates.map((i, index2) => (
-                <div
-                  key={index2}
-                  className="flex align-center justify-center p-1 pb-2"
-                >
-                  <TextField
-                    type="number"
-                    size="small"
-                    defaultValue={i}
-                    onChange={(e) => {
-                      // 1. Make a shallow copy of the array
-                      let temp_state = [...New];
-                      // 2. Make a shallow copy of the element you want to mutate
-                      let temp_element = { ...temp_state[index] };
-
-                      // 3. Update the property you're interested in
-                      temp_element.fertilizer_flow_rates[index2] =
-                        e.target.value;
-                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                      temp_state[index] = temp_element;
-                      // 5. Set the state to our new copy
-                      setNew(temp_state);
-                      console.log(temp_state);
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
           <div className="flex align-center justify-center mb-3 mt-3">
             <Button
@@ -758,7 +902,6 @@ const MixManager1 = () => {
                         type="time"
                         size="small"
                         defaultValue={value.start_times_array[0]}
-                        
                         onChange={(e) => {
                           // 1. Make a shallow copy of the array
                           let temp_state = [...New];
@@ -1056,7 +1199,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[0]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1081,7 +1228,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[1]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1106,7 +1257,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[2]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1131,7 +1286,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[3]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1156,7 +1315,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[4]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1181,7 +1344,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[5]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
@@ -1206,7 +1373,11 @@ const MixManager1 = () => {
                             size="small"
                             defaultValue={value.mode_setpoint[6]}
                             InputProps={{
-                              endAdornment: <InputAdornment positionStart="end">{value.mode=="Time"?"min":"l/m3"}</InputAdornment>,
+                              endAdornment: (
+                                <InputAdornment positionStart="end">
+                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                </InputAdornment>
+                              ),
                             }}
                             onChange={(e) => {
                               // 1. Make a shallow copy of the array
