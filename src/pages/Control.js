@@ -1201,8 +1201,9 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
+                                
                               ),
                             }}
                             onChange={(e) => {
@@ -1230,7 +1231,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
@@ -1259,7 +1260,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
@@ -1288,7 +1289,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
@@ -1317,7 +1318,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
@@ -1346,7 +1347,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
@@ -1375,7 +1376,7 @@ const MixManager1 = () => {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment positionStart="end">
-                                  {value.mode == "Time" ? "min" : "l/m3"}
+                                  {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
                               ),
                             }}
