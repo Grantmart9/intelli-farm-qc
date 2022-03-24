@@ -26,7 +26,6 @@ import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -35,13 +34,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Switch from "@mui/material/Switch";
 
 const ControlPanel = ({}) => {
+  /// Used to get farm id from url-route ///
   const { farmId } = useParams();
+  /// Convert farmid to suit useAPI url-structure ///
   const prefix = `/-${farmId}`;
+  /// Uses the axios library to do http/https GET requests, includes ;information about routes, header, body etc. consinsts of three parameters data=response of API,loading and refetch///
   const [{ data, loading: loadingData }, refetch] = useApi(
     `${prefix}/controller_state`
   );
+  /// Used to refetch data periodically every ///
   useRefetch(refetch, true, 10000);
-
+  /// Uses the useApi component to do post requests. ///
   const [, postMode1] = useApi(...post(`${prefix}/mode`));
   const [, postMode] = useApi(...post(`${prefix}/mode`));
   const [, postBlockControl1] = useApi(...post(`${prefix}/block_control`));
@@ -49,44 +52,50 @@ const ControlPanel = ({}) => {
   const [, postProcessHold] = useApi(...post(`${prefix}/process_hold`));
   const [, postAlarmReset] = useApi(...post(`${prefix}/alarm_reset`));
   const [, postStop] = useApi(...post(`${prefix}/stop`));
-
+  /// State variable used for POST state initial state of 0.////
   const [posting, setPosting] = useState(0);
-
+  /// State variable used for when useApi is in loading state initial state of 0.////
   const loading = loadingData || posting > 0;
-
+  /// d converts the POST request body to data:{key:value}
   const d = (key, value) => ({ data: { [key]: value } });
+  /// usePost is a function consisting of three parameters handle,refetch and set , used to handle POST requests///
+  const usePost = (handle, refetch, set) =>
+    useMemo(
+      () =>
+        (...args) => {
+          set((p) => p + 1);
+          return handle(...args)
+            .then(() => refetch())
+            .finally(() => set((p) => p - 1));
+        },
+      [handle, refetch, set]
+    );
 
+  /// Execute usePost function when onMode is called. handle,refetch,setPosting.refetch is used to fetch data from API after posting. handle=data. setPosting=state of POST ///
   const onMode = usePost(() => postMode(d("mode", 2)), refetch, setPosting);
-  ///
   const onMode1 = usePost(() => postMode1(d("mode", 1)), refetch, setPosting);
-  ///
   const onBlockControl = usePost(
     () => postBlockControl(d("block_control", 1)),
     refetch,
     setPosting
   );
-  ///
   const onBlockControl1 = usePost(
     () => postBlockControl1(d("block_control", 2)),
     refetch,
     setPosting
   );
-  ///
-
   const onProcessHold = usePost(
     () => postProcessHold(d("process_hold", 1)),
     refetch,
     setPosting
   );
-
   const onAlarmReset = usePost(
     () => postAlarmReset(d("alarm_reset", 1)),
     refetch,
     setPosting
   );
-
   const onStop = usePost(() => postStop(d("stop", 1)), refetch, setPosting);
-
+  /// constant containing default data (JSX renders first before data is fetched). ///
   const defaultData = {
     timestamp: "2021-11-10-14:28:11",
     mode: "Manual",
@@ -94,9 +103,8 @@ const ControlPanel = ({}) => {
     state: "unknown",
     alarms: "Inactive",
   };
-
+  /// dictionary containing 5 key value pairs of type any = data fetched from API or defaultData. ///
   const { timestamp, mode, block_control, state, alarms } = data || defaultData;
-
   return (
     <div className="block items-center p-1">
       <div className="mb-2 ">
@@ -166,11 +174,13 @@ const ControlPanel = ({}) => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableCell align="center">{timestamp}</TableCell>
-            <TableCell align="center">{alarms}</TableCell>
-            <TableCell align="center">{state}</TableCell>
-            <TableCell align="center">{mode}</TableCell>
-            <TableCell align="center">{block_control}</TableCell>
+            <TableRow>
+              <TableCell align="center">{timestamp}</TableCell>
+              <TableCell align="center">{alarms}</TableCell>
+              <TableCell align="center">{state}</TableCell>
+              <TableCell align="center">{mode}</TableCell>
+              <TableCell align="center">{block_control}</TableCell>
+            </TableRow>
           </Table>
         </TableContainer>
       </div>
@@ -227,395 +237,32 @@ const ControlPanel = ({}) => {
   );
 };
 
-const usePost = (handle, refetch, set) =>
-  useMemo(
-    () =>
-      (...args) => {
-        set((p) => p + 1);
-        return handle(...args)
-          .then(() => refetch())
-          .finally(() => set((p) => p - 1));
-      },
-    [handle, refetch, set]
-  );
-
-const MixManager2 = () => {
-  const { farmId } = useParams();
-
-  const prefix = `/-${farmId}`;
-
-  const [{ data, loading }, refetch] = useApi(`${prefix}/fertilizer_manager`);
-
-  const [, postMode] = useApi(...post(`${prefix}/fertilizer_manager`));
-
-  const [New, setNew] = useState(data);
-
-  console.log(New);
-
-  const handleSave = useCallback(() => {
-    postMode({ data: New }).then(() => refetch());
-  }, [New]);
-
-  useEffect(() => {
-    if (data) {
-      setNew(data);
-    }
-  }, [data]);
-
-  if (!New || loading) return <Preloader />;
-
-  return (
-    <div className="block lg:grid grid-cols-2 gap-2">
-      {New.map((value, index) => (
-        <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
-          <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 ">
-            <input
-              className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
-              type="text"
-              defaultValue={value.fertilizer_mix_name}
-              onChange={(e) => {
-                // 1. Make a shallow copy of the array
-                let temp_state = [...New];
-                // 2. Make a shallow copy of the element you want to mutate
-                let temp_element = { ...temp_state[index] };
-                // 3. Update the property you're interested in
-                temp_element.fertilizer_mix_name = e.target.value;
-                // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                temp_state[index] = temp_element;
-                // 5. Set the state to our new copy
-                setNew(temp_state);
-                console.log(temp_state);
-              }}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-2 p-1 ">
-            <div className="block sm:grid grid-rows-2 gap-1">
-              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
-                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
-                  <div className="block text-gray-700 font-bold text-md">
-                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
-                      EC
-                    </div>
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.ec_target}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            µS
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ec_target = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex align-center justify-center">
-                    <Switch
-                      inputProps={{ "aria-label": "controlled" }}
-                      defaultChecked={value.ec_enable}
-                     
-                      onClick={() => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ec_enable = !temp_element.ec_enable;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1 mb-2 sm:mb-0 ">
-                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
-                  <div className="block text-gray-700 font-bold text-md">
-                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
-                      pH
-                    </div>
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.ph_target}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            pH
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ph_target = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex align-center justify-center">
-                    <Switch
-                      inputProps={{ "aria-label": "controlled" }}
-                      defaultChecked={value.ph_enable}
-                      onClick={() => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.ph_enable = !temp_element.ph_enable;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
-                <div className="block bg-gray-500 rounded m-auto shadow-md p-3">
-                  <div className="block text-gray-600 font-bold text-md">
-                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
-                      Flow Rate (ℓ/m3)
-                    </div>
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[0]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[0] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[1]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[1] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[2]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[2] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[3]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[3] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[4]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[4] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                  <div className="flex align-center justify-center mt-3">
-                    <TextField
-                      size="small"
-                      type="number"
-                      defaultValue={value.fertilizer_flow_rates[5]}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment positionStart="end">
-                            ℓ/m3
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(e) => {
-                        // 1. Make a shallow copy of the array
-                        let temp_state = [...New];
-                        // 2. Make a shallow copy of the element you want to mutate
-                        let temp_element = { ...temp_state[index] };
-                        // 3. Update the property you're interested in
-                        temp_element.fertilizer_flow_rates[5] = e.target.value;
-                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-                        temp_state[index] = temp_element;
-                        // 5. Set the state to our new copy
-                        setNew(temp_state);
-                        console.log(temp_state);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div className="flex align-center justify-center mb-3 mt-3">
-            <Button
-              onClick={handleSave}
-              variant="contained"
-              sx={{ color: "white" }}
-            >
-              Save
-            </Button>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 const MixManager1 = () => {
+  /// Used to get farm id from url route ///
   const { farmId } = useParams();
-
+  /// Convert farmid to suit useAPI url structure ///
   const prefix = `/-${farmId}`;
-
+/// Uses the axios library to do http/https GET requests, includes ;information about routes, header, body etc. consinsts of three parameters data=response of API,loading and refetch///
   const [{ data, loading }, refetch] = useApi(
     `${prefix}/irrigation_schedule_manual`
   );
-
+/// Uses the useApi component to do post requests. ///
   const [, postMode] = useApi(...post(`${prefix}/irrigation_schedule_manual`));
-
+/// constant state variable to store edited data initial state = data from GET request. ///
   const [New, setNew] = useState(data);
-
+/// Callback function used to post Edited data to API. ///
   const handleSave = useCallback(() => {
     postMode({ data: New }).then(() => refetch());
   }, [New]);
-
+/// useEffect hook to fetch data if there is no data. ///
   useEffect(() => {
     if (data) {
       setNew(data);
     }
   }, [data]);
-
+/// If no data or if loading to be edited return preloader gif. ///
   if (!New || loading) return <Preloader />;
-
+/// Color of button in active state. ///
   const buttonActiveColor = "#2a58bd";
 
   return (
@@ -660,7 +307,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Time
@@ -687,7 +333,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Volume
@@ -734,7 +379,6 @@ const MixManager1 = () => {
                             temp_state[index] = temp_element;
                             // 5. Set the state to our new copy
                             setNew(temp_state);
-                            console.log(temp_state);
                           }}
                         >
                           {value.fertilizer_mix_names[0]}
@@ -764,7 +408,6 @@ const MixManager1 = () => {
                             temp_state[index] = temp_element;
                             // 5. Set the state to our new copy
                             setNew(temp_state);
-                            console.log(temp_state);
                           }}
                         >
                           {value.fertilizer_mix_names[1]}
@@ -794,7 +437,6 @@ const MixManager1 = () => {
                             temp_state[index] = temp_element;
                             // 5. Set the state to our new copy
                             setNew(temp_state);
-                            console.log(temp_state);
                           }}
                         >
                           {value.fertilizer_mix_names[2]}
@@ -824,7 +466,6 @@ const MixManager1 = () => {
                             temp_state[index] = temp_element;
                             // 5. Set the state to our new copy
                             setNew(temp_state);
-                            console.log(temp_state);
                           }}
                         >
                           {value.fertilizer_mix_names[3]}
@@ -854,7 +495,6 @@ const MixManager1 = () => {
                             temp_state[index] = temp_element;
                             // 5. Set the state to our new copy
                             setNew(temp_state);
-                            console.log(temp_state);
                           }}
                         >
                           {value.fertilizer_mix_names[4]}
@@ -892,7 +532,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                         defaultValue={value.start_days_array[0]}
                       >
@@ -913,7 +552,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -937,7 +575,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Tue
@@ -957,7 +594,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -981,7 +617,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Wed
@@ -1001,7 +636,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -1025,7 +659,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Thu
@@ -1045,7 +678,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -1069,7 +701,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Fri
@@ -1089,7 +720,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -1113,7 +743,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Sat
@@ -1133,7 +762,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -1157,7 +785,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       >
                         Sun
@@ -1177,7 +804,6 @@ const MixManager1 = () => {
                           temp_state[index] = temp_element;
                           // 5. Set the state to our new copy
                           setNew(temp_state);
-                          console.log(temp_state);
                         }}
                       />
                     </div>
@@ -1203,7 +829,6 @@ const MixManager1 = () => {
                                 <InputAdornment positionStart="end">
                                   {value.mode == "Time" ? "min" : "ℓ/m3"}
                                 </InputAdornment>
-                                
                               ),
                             }}
                             onChange={(e) => {
@@ -1219,7 +844,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1248,7 +872,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1277,7 +900,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1306,7 +928,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1335,7 +956,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1364,7 +984,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1393,7 +1012,6 @@ const MixManager1 = () => {
                               temp_state[index] = temp_element;
                               // 5. Set the state to our new copy
                               setNew(temp_state);
-                              console.log(temp_state);
                             }}
                           />
                         </div>
@@ -1415,9 +1033,347 @@ const MixManager1 = () => {
   );
 };
 
-const Mix = () => {
-  const [pageState, setPageState] = useState(true);
+const MixManager2 = () => {
+  /// Used to get farm id from url route ///
+  const { farmId } = useParams();
+  /// Convert farmid to suit useAPI url structure ///
+  const prefix = `/-${farmId}`;
+  /// Uses the axios library to do http/https GET requests, includes ;information about routes, header, body etc. consinsts of three parameters data=response of API,loading and refetch///
+  const [{ data, loading }, refetch] = useApi(`${prefix}/fertilizer_manager`);
+  /// Uses the useApi component to do post requests. ///
+  const [, postMode] = useApi(...post(`${prefix}/fertilizer_manager`));
+  /// constant state variable to store edited data initial state = data from GET request. ///
+  const [New, setNew] = useState(data);
+  /// Callback function used to post Edited data to API. ///
+  const handleSave = useCallback(() => {
+    postMode({ data: New }).then(() => refetch());
+  }, [New]);
+  /// useEffect hook to fetch data if there is no data. ///
+  useEffect(() => {
+    if (data) {
+      setNew(data);
+    }
+  }, [data]);
+  /// If no data to be edited return preloader gif. ///
+  if (!New || loading) return <Preloader />;
+  return (
+    <div className="block lg:grid grid-cols-2 gap-2">
+      {New.map((value, index) => (
+        <div key={index} className="bg-gray-200 rounded shadow-md mt-2 p-2">
+          <div className="bg-blue-300 rounded shadow-md p-1 flex align-center justify-center mt-2 ">
+            <input
+              className="text-gray-800 font-bold flex text-center text-justify bg-blue-300"
+              type="text"
+              defaultValue={value.fertilizer_mix_name}
+              onChange={(e) => {
+                // 1. Make a shallow copy of the array
+                let temp_state = [...New];
+                // 2. Make a shallow copy of the element you want to mutate
+                let temp_element = { ...temp_state[index] };
+                // 3. Update the property you're interested in
+                temp_element.fertilizer_mix_name = e.target.value;
+                // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                temp_state[index] = temp_element;
+                // 5. Set the state to our new copy
+                setNew(temp_state);
+              }}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-2 p-1 ">
+            <div className="block sm:grid grid-rows-2 gap-1">
+              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
+                  <div className="block text-gray-700 font-bold text-md">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                      EC
+                    </div>
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.ec_target}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            µS
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ec_target = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                      }}
+                    />
+                  </div>
 
+                  <div className="flex align-center justify-center">
+                    <Switch
+                      inputProps={{ "aria-label": "controlled" }}
+                      defaultChecked={value.ec_enable}
+                      onClick={() => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ec_enable = !temp_element.ec_enable;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex bg-gray-300 rounded m-auto shadow-md p-1 mb-2 sm:mb-0 ">
+                <div className="block bg-gray-500 rounded  m-auto shadow-md p-3">
+                  <div className="block text-gray-700 font-bold text-md">
+                    <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                      pH
+                    </div>
+                  </div>
+                  <div className="flex align-center justify-center mt-3">
+                    <TextField
+                      size="small"
+                      type="number"
+                      defaultValue={value.ph_target}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment positionStart="end">
+                            pH
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ph_target = e.target.value;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex align-center justify-center">
+                    <Switch
+                      inputProps={{ "aria-label": "controlled" }}
+                      defaultChecked={value.ph_enable}
+                      onClick={() => {
+                        // 1. Make a shallow copy of the array
+                        let temp_state = [...New];
+                        // 2. Make a shallow copy of the element you want to mutate
+                        let temp_element = { ...temp_state[index] };
+                        // 3. Update the property you're interested in
+                        temp_element.ph_enable = !temp_element.ph_enable;
+                        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                        temp_state[index] = temp_element;
+                        // 5. Set the state to our new copy
+                        setNew(temp_state);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex bg-gray-300 rounded m-auto shadow-md p-1">
+              <div className="block bg-gray-500 rounded m-auto shadow-md p-3">
+                <div className="block text-gray-600 font-bold text-md">
+                  <div className="bg-gray-500 rounded shadow-md p-2 flex align-center justify-center text-gray-700 font-bold m-auto">
+                    Flow Rate (ℓ/m3)
+                  </div>
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[0]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[0] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[1]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[1] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[2]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[2] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[3]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[3] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[4]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[4] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+                <div className="flex align-center justify-center mt-3">
+                  <TextField
+                    size="small"
+                    type="number"
+                    defaultValue={value.fertilizer_flow_rates[5]}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment positionStart="end">
+                          ℓ/m3
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => {
+                      // 1. Make a shallow copy of the array
+                      let temp_state = [...New];
+                      // 2. Make a shallow copy of the element you want to mutate
+                      let temp_element = { ...temp_state[index] };
+                      // 3. Update the property you're interested in
+                      temp_element.fertilizer_flow_rates[5] = e.target.value;
+                      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+                      temp_state[index] = temp_element;
+                      // 5. Set the state to our new copy
+                      setNew(temp_state);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex align-center justify-center mb-3 mt-3">
+            <Button
+              onClick={handleSave}
+              variant="contained"
+              sx={{ color: "white" }}
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+/// This component allows you to select between MixMgr 1 and MixMgr 2 ///
+const Mix = () => {
+  /// True or false for now but can be converted to number for more than two pages. ///
+  const [pageState, setPageState] = useState(true);
   return (
     <>
       <div className="bg-gray-300 rounded shadow-md p-2">
@@ -1437,7 +1393,7 @@ const Mix = () => {
     </>
   );
 };
-
+/// Main component rendered when control button is clicked . ////
 export const Control = () => {
   return (
     <div className="flex flex-col p-3">

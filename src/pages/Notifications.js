@@ -27,7 +27,10 @@ import ErrorGif from "images/ErrorGif.gif";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { setAt } from "immutable";
+
+const setAt = (arr, idx, val) =>
+  [arr.slice(0, idx), [val], arr.slice(idx + 1, arr.length)].flat();
+
 
 const useHandler = (field, state, setter) =>
   useCallback(
