@@ -549,7 +549,7 @@ const TimeControl = ({ index, value, onChange }) => {
   );
 };
 const Tank = ({ index, value, onChange }) => {
-  const tanks = ["a", "b", "c", "d", "e"].map((letter) => ({
+  const tanks = ["a", "b", "c", "d", "e","f"].map((letter) => ({
     name: `${letter.toUpperCase()}-Tank `,
     field: `tank_${letter}_flow_${zeroPad(index, 2)}`,
   }));
@@ -1411,9 +1411,6 @@ export const Control = () => {
           <div className="bg-gray-400 shadow-md rounded text-2xl font-bold text-center p-2">
             <ControlPanel />
           </div>
-        </div>
-        <div className="p-2">
-          <Mix />
         </div>
         <div className="p-2">
           <div className="bg-gray-400 rounded shadow-md p-2">

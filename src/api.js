@@ -15,7 +15,6 @@ import { useEffect, useContext, useState, useCallback } from "react";
 import { LoginContext } from "components/Login";
 
 const API_URLS = {
-  "intelli-farm": "https://lodicon-api.herokuapp.com/api/v1",
   "intelli-farm-qc": "https://lodicon-api-qc.herokuapp.com/api/v1",
 };
 
