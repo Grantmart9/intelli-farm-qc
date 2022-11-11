@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f5168c8e.chunk.css",
+    "main.js": "/static/js/main.f28bbfe9.chunk.js",
+    "main.js.map": "/static/js/main.f28bbfe9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.db1c1333.js",
+    "runtime-main.js.map": "/static/js/runtime-main.db1c1333.js.map",
+    "static/css/2.616523c7.chunk.css": "/static/css/2.616523c7.chunk.css",
+    "static/js/2.c3102d3d.chunk.js": "/static/js/2.c3102d3d.chunk.js",
+    "static/js/2.c3102d3d.chunk.js.map": "/static/js/2.c3102d3d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.616523c7.chunk.css.map": "/static/css/2.616523c7.chunk.css.map",
+    "static/css/main.f5168c8e.chunk.css.map": "/static/css/main.f5168c8e.chunk.css.map",
+    "static/js/2.c3102d3d.chunk.js.LICENSE.txt": "/static/js/2.c3102d3d.chunk.js.LICENSE.txt",
+    "static/media/ErrorGif.5bde96f9.gif": "/static/media/ErrorGif.5bde96f9.gif",
+    "static/media/Logo.5445be77.png": "/static/media/Logo.5445be77.png",
+    "static/media/PreloaderBar.fcec3ecb.gif": "/static/media/PreloaderBar.fcec3ecb.gif",
+    "static/media/citrus.bd758448.png": "/static/media/citrus.bd758448.png",
+    "static/media/all.css": "/static/media/fa-solid-900.eeccf4f6.woff",
+    "static/media/greendrop.d2e2a9d3.gif": "/static/media/greendrop.d2e2a9d3.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.db1c1333.js",
+    "static/css/2.616523c7.chunk.css",
+    "static/js/2.c3102d3d.chunk.js",
+    "static/css/main.f5168c8e.chunk.css",
+    "static/js/main.f28bbfe9.chunk.js"
+  ]
+}
