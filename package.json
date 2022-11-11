@@ -70,6 +70,9 @@
     "victory": "^35.9.3",
     "yarn": "^1.22.17"
   },
+  "engines": {
+    "node": "18.12.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/plugin-syntax-bigint": "^7.8.3",
